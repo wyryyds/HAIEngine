@@ -11,6 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\HAIEngine\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\HAIEngine\Events\Event.h" />
+    <ClInclude Include="src\HAIEngine\Events\KeyEvent.h" />
+    <ClInclude Include="src\HAIEngine\Events\MouseEvent.h" />
     <ClInclude Include="src\HAIEngine\Log.h" />
     <ClInclude Include="src\HAIEngine.h" />
     <ClInclude Include="src\HAIEngine\Application.h" />
@@ -69,7 +73,7 @@
       <PreprocessorDefinitions>HE_PLATFORM_WINDOWS;HE_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\C++Projects\GameEngineLearning\HAIEngine\vendor\spdlog\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)vendor\spdlog\include;$(SolutionDir)src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -85,7 +89,7 @@
       <PreprocessorDefinitions>HE_PLATFORM_WINDOWS;HE_BUILD_DLL;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\C++Projects\GameEngineLearning\HAIEngine\vendor\spdlog\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)vendor\spdlog\include;$(SolutionDir)src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -30,6 +30,18 @@
     <ClInclude Include="src\HAIEngine\Log.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\HAIEngine\Events\Event.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HAIEngine\Events\KeyEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HAIEngine\Events\ApplicationEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HAIEngine\Events\MouseEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\HAIEngine\Application.cpp">
