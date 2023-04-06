@@ -1,0 +1,3 @@
+[submodule "HAIEngine/vendor/spdlog"]
+	path = HAIEngine/vendor/spdlog
+	url = git@github.com:gabime/spdlog.git
