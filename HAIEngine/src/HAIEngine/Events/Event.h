@@ -14,7 +14,7 @@ namespace HAIEngine
 		WindowClose,WindowResize,WindowFocus,WindowLostFocus,WindowMoved,
 		AppTick,AppUpdate,AppRender,
 		KeyPressed,KeyReleased,
-		MouseButtonPressed,MouseButtonRelease,MouseMove,MouseScrolled
+		MouseButtonPressed,MouseButtonRelease,MouseMoved,MouseScrolled
 	};
 
 	enum EventCategory
