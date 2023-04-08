@@ -1,8 +1,9 @@
 #pragma once
 #include "Core.h"
 #include "spdlog/spdlog.h"
-#include <memory>
 #include "spdlog/sinks/stdout_color_sinks.h"
+
+#include <memory>
 
 #define HE_CORE_ERROR(...)  ::HAIEngine::Log::GetCoreLogger()->error(__VA_ARGS__)
 #define HE_CORE_WARN(...)   ::HAIEngine::Log::GetCoreLogger()->warn(__VA_ARGS__)
