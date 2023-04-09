@@ -42,12 +42,24 @@
     <ClInclude Include="src\HAIEngine\Events\MouseEvent.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hzpch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HAIEngine\Window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\WindowsWindow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\HAIEngine\Application.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\HAIEngine\Log.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\WindowsWindow.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
