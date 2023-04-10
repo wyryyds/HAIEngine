@@ -1,5 +1,5 @@
 #include "Application.h"
-#include "Hzpch.h"
+#include "hepch.h"
 
 #include "HAIEngine/Log.h"
 #include "HAIEngine/Events/ApplicationEvent.h"
@@ -7,7 +7,7 @@ namespace HAIEngine
 {
 	Application::Application()
 	{
-
+		m_Window = std::unique_ptr<Window>(Window::Create());
 	}
 
 	Application::~Application()
@@ -17,17 +17,10 @@ namespace HAIEngine
 
 	void Application::Run()
 	{
-		WindowResizeEvent e(1280, 720);
-		if (e.IsInCategory(EventCategoryApplication))
+		while (m_Running)
 		{
-			HE_TRACE(e);
+			m_Window->OnUpdate();
 		}
-		if (e.IsInCategory(EventCategoryInput))
-		{
-			HE_TRACE(e);
-		}
-
-		while (true);
 	}
 
 }
