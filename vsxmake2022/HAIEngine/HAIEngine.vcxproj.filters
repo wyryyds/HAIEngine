@@ -27,7 +27,6 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <Filter Include="HAIEngine\src\Platform">
       <UniqueIdentifier>{5FE740DE-3B77-4BF1-8C2A-6BE91063B999}</UniqueIdentifier>
     </Filter>
-
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildProjectDirectory)\Xmake.Custom.props">
@@ -40,9 +39,6 @@ xmake version 2.7.8+HEAD.87dff1ef4
       <Filter>Properties</Filter>
     </None>
     <None Include="$(MSBuildProjectDirectory)\Xmake.Custom.items.filters">
-      <Filter>Properties</Filter>
-    </None>
-    <None Include="$(XmakeScriptDir)\xmake.lua">
       <Filter>Properties</Filter>
     </None>
   </ItemGroup>
@@ -83,34 +79,24 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\hepch.h">
       <Filter>HAIEngine\src</Filter>
     </ClInclude>
-
-
   </ItemGroup>
   <ItemGroup>
-
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Application.cpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.cpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClCompile>
-    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\WindowsWindow.cpp">
-      <Filter>HAIEngine\src\Platform</Filter>
-    </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\hepch.cpp">
       <Filter>HAIEngine\src</Filter>
     </ClCompile>
-
-
-
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\WindowsWindow.cpp">
+      <Filter>HAIEngine\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-
   </ItemGroup>
   <ItemGroup>
-
-
   </ItemGroup>
-  <Import Condition="Exists('$(MSBuildThisFileDirectory)\Xmake.Custom.files.filters')"
-    Project="$(MSBuildThisFileDirectory)\Xmake.Custom.files.filters" />
+  <Import Condition="Exists('$(MSBuildThisFileDirectory)\Xmake.Custom.files.filters')" Project="$(MSBuildThisFileDirectory)\Xmake.Custom.files.filters" />
 </Project>

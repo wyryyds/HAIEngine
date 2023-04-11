@@ -55,6 +55,7 @@ namespace HAIEngine
 		{
 			std::stringstream ss;
 			ss << "KeyReleasedEvent:" << m_KeyCode;
+			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(KeyReleased)

@@ -9,7 +9,7 @@ namespace HAIEngine
 	class HE_API MouseMovedEvent :public Event
 	{
 	public:
-		MouseMovedEvent(float x, float y) :m_MouseX(x), m_MouseY(y) 
+		MouseMovedEvent(const float x,const float y) :m_MouseX(x), m_MouseY(y) 
 		{
 
 		}
@@ -34,7 +34,7 @@ namespace HAIEngine
 	class HE_API MouseScrolledEvent :public Event
 	{
 	public:
-		MouseScrolledEvent(float xOffset, float yOffset) :m_XOffset(xOffset), m_YOffset(yOffset)
+		MouseScrolledEvent(const float xOffset,const float yOffset) :m_XOffset(xOffset), m_YOffset(yOffset)
 		{
 
 		}
@@ -60,7 +60,7 @@ namespace HAIEngine
 	public:
 		inline int GetNouseButton()const { return m_Button; }
 
-		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput |EventCategoryMouseButton)
 	protected:
 		MouseButtonEvent(int button) :m_Button(button)
 		{
@@ -70,10 +70,10 @@ namespace HAIEngine
 		int m_Button;
 	};
 
-	class HE_API MouseButtonPressed :public MouseButtonEvent
+	class HE_API MouseButtonPressedEvent :public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressed(int button) :MouseButtonEvent(button)
+		MouseButtonPressedEvent(int button) :MouseButtonEvent(button)
 		{
 
 		}
@@ -83,6 +83,8 @@ namespace HAIEngine
 			ss << "MouseButtonPressed:" << m_Button;
 			return ss.str();
 		}
+
+		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
 	class HE_API MouseButtonReleaseEvent :public MouseButtonEvent
@@ -99,5 +101,7 @@ namespace HAIEngine
 			ss << "MouseButtonReleaseEvent:" << m_Button;
 			return ss.str();
 		}
+
+		EVENT_CLASS_TYPE(MouseButtonReleased)
 	};
 }
