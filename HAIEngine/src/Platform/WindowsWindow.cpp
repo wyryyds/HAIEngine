@@ -52,7 +52,7 @@ namespace HAIEngine
 		//设置GLFW回调
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 		{
-			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
 			data.Width = width;
 			data.Height = height;
@@ -64,14 +64,14 @@ namespace HAIEngine
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 		{
-			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 			WindowCloseEvent event;
 			data.EventCallback(event);
 		});
 
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
-				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
 				switch (action)
 				{
@@ -101,7 +101,7 @@ namespace HAIEngine
 
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 		{
-			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 			switch (action)
 			{
 				case GLFW_PRESS:
@@ -124,7 +124,7 @@ namespace HAIEngine
 
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
 		{
-			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
 			MouseScrolledEvent event((float)xOffset, (float)yOffset);
 			data.EventCallback(event);
@@ -132,7 +132,7 @@ namespace HAIEngine
 
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
 		{
-			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
 			MouseMovedEvent event((float)xPos, (float)yPos);
 			data.EventCallback(event);
