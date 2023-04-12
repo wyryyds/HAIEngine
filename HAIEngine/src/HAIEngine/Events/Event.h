@@ -37,6 +37,8 @@ namespace HAIEngine
 		friend class EventDispatcher;
 
 	public:
+
+		bool Handled = false;
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
 		virtual int GetCategoryFlags() const = 0;
@@ -47,8 +49,6 @@ namespace HAIEngine
 			return GetCategoryFlags() & category;
 		}
 
-	protected:
-		bool m_Handled = false;
 	};
 
 
@@ -68,7 +68,7 @@ namespace HAIEngine
 				T* typedEvent = dynamic_cast<T*>(&m_Event);
 				if (typedEvent)
 				{
-					m_Event.m_Handled = func(*typedEvent);
+					m_Event.Handled = func(*typedEvent);
 					return true;
 				}
 			}
