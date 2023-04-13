@@ -1,6 +1,6 @@
 add_rules("mode.debug", "mode.release","plugin.vsxmake.autoupdate")
 
-add_requires("spdlog","glfw")
+add_requires("spdlog","glfw","glad")
 
  if is_plat("windows") then
     add_defines("HE_PLATFORM_WINDOWS")
@@ -22,6 +22,6 @@ target("HAIEngine")
     set_kind("shared")
     add_includedirs("HAIEngine/src")
     add_files("HAIEngine/src/**.cpp")
-    add_packages("spdlog","glfw")
+    add_packages("spdlog","glfw","glad")
     add_defines("HE_BUILD_DLL")
     add_headerfiles("HAIEngine/src/**.h")

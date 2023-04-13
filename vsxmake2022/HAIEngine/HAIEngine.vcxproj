@@ -50,11 +50,11 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <XmakeCudaVersion><!-- nil --></XmakeCudaVersion>
     <XmakeWindowsSdkVersion><!-- nil --></XmakeWindowsSdkVersion>
     <XmakeMfcKind><!-- nil --></XmakeMfcKind>
-    <XmakeRunEnvs>PATH=C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\c\cmake\3.24.2\5430022e3acc47008f94857b498c53c6\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\o\opengl\latest\8574311f4b544fa89a3d8c3ee79d1929\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\s\spdlog\v1.11.0\9f687477cd0342a6895e163907ac0652\bin;$([System.Environment]::GetEnvironmentVariable('PATH'))</XmakeRunEnvs>
+    <XmakeRunEnvs>PATH=C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\c\cmake\3.24.2\5430022e3acc47008f94857b498c53c6\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\o\opengl\latest\8574311f4b544fa89a3d8c3ee79d1929\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\s\spdlog\v1.11.0\9f687477cd0342a6895e163907ac0652\bin;$([System.Environment]::GetEnvironmentVariable('PATH'))</XmakeRunEnvs>
     <XmakeRunArgs><!-- nil --></XmakeRunArgs>
     <XmakeConfigFlags></XmakeConfigFlags>
-    <XmakeIncludeDirs>$(XmakeProjectDir)\HAIEngine\src;C:\Users\ShuPeng\AppData\Local\.xmake\packages\s\spdlog\v1.11.0\9f687477cd0342a6895e163907ac0652\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\include</XmakeIncludeDirs>
-    <XmakeLinkDirs>C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib</XmakeLinkDirs>
+    <XmakeIncludeDirs>$(XmakeProjectDir)\HAIEngine\src;C:\Users\ShuPeng\AppData\Local\.xmake\packages\s\spdlog\v1.11.0\9f687477cd0342a6895e163907ac0652\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\include</XmakeIncludeDirs>
+    <XmakeLinkDirs>C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\lib</XmakeLinkDirs>
     <XmakeSourceDirs></XmakeSourceDirs>
     <XmakePrecompiledHeader><!-- nil --></XmakePrecompiledHeader>
   </PropertyGroup>
@@ -72,11 +72,11 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <XmakeCudaVersion><!-- nil --></XmakeCudaVersion>
     <XmakeWindowsSdkVersion><!-- nil --></XmakeWindowsSdkVersion>
     <XmakeMfcKind><!-- nil --></XmakeMfcKind>
-    <XmakeRunEnvs>PATH=C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\c\cmake\3.24.2\5430022e3acc47008f94857b498c53c6\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\o\opengl\latest\8574311f4b544fa89a3d8c3ee79d1929\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\s\spdlog\v1.11.0\9f687477cd0342a6895e163907ac0652\bin;$([System.Environment]::GetEnvironmentVariable('PATH'))</XmakeRunEnvs>
+    <XmakeRunEnvs>PATH=C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\c\cmake\3.24.2\5430022e3acc47008f94857b498c53c6\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\o\opengl\latest\8574311f4b544fa89a3d8c3ee79d1929\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\s\spdlog\v1.11.0\9f687477cd0342a6895e163907ac0652\bin;$([System.Environment]::GetEnvironmentVariable('PATH'))</XmakeRunEnvs>
     <XmakeRunArgs><!-- nil --></XmakeRunArgs>
     <XmakeConfigFlags></XmakeConfigFlags>
-    <XmakeIncludeDirs>$(XmakeProjectDir)\HAIEngine\src;C:\Users\ShuPeng\AppData\Local\.xmake\packages\s\spdlog\v1.11.0\9f687477cd0342a6895e163907ac0652\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\include</XmakeIncludeDirs>
-    <XmakeLinkDirs>C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib</XmakeLinkDirs>
+    <XmakeIncludeDirs>$(XmakeProjectDir)\HAIEngine\src;C:\Users\ShuPeng\AppData\Local\.xmake\packages\s\spdlog\v1.11.0\9f687477cd0342a6895e163907ac0652\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\include</XmakeIncludeDirs>
+    <XmakeLinkDirs>C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\lib</XmakeLinkDirs>
     <XmakeSourceDirs></XmakeSourceDirs>
     <XmakePrecompiledHeader><!-- nil --></XmakePrecompiledHeader>
   </PropertyGroup>

@@ -2,7 +2,7 @@
 #include "hepch.h"
 
 #include "HAIEngine/Log.h"
-#include <gl/GL.h>
+#include "glad/glad.h"
 namespace HAIEngine
 {
 
