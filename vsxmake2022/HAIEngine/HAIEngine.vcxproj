@@ -20,6 +20,7 @@ xmake version 2.7.8+HEAD.87dff1ef4
       <Configuration>release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9E27BA51-9FE6-4FBF-A1A9-E27058EB9517}</ProjectGuid>
@@ -27,9 +28,7 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <Platform Condition="'$(Platform)' == ''">Win32</Platform>
     <XmakeScriptDir>..\..</XmakeScriptDir>
     <XmakeProjectDir>..\..</XmakeProjectDir>
-    <XmakeProjectFile>
-      <!-- nil -->
-    </XmakeProjectFile>
+    <XmakeProjectFile><!-- nil --></XmakeProjectFile>
     <XmakeTarget>HAIEngine</XmakeTarget>
   </PropertyGroup>
   <PropertyGroup Label="XmakeProgram">
@@ -46,31 +45,18 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <XmakeKind>shared</XmakeKind>
     <XmakeDefault>true</XmakeDefault>
     <XmakeDefines>HE_PLATFORM_WINDOWS;HE_ENABLE_ASSERTS;HE_BUILD_DLL;GLFW_INCLUDE_NONE</XmakeDefines>
-    <XmakeLanguages>
-    </XmakeLanguages>
+    <XmakeLanguages></XmakeLanguages>
     <XmakeSubSystem>console</XmakeSubSystem>
-    <XmakeCudaVersion>
-      <!-- nil -->
-    </XmakeCudaVersion>
-    <XmakeWindowsSdkVersion>
-      <!-- nil -->
-    </XmakeWindowsSdkVersion>
-    <XmakeMfcKind>
-      <!-- nil -->
-    </XmakeMfcKind>
+    <XmakeCudaVersion><!-- nil --></XmakeCudaVersion>
+    <XmakeWindowsSdkVersion><!-- nil --></XmakeWindowsSdkVersion>
+    <XmakeMfcKind><!-- nil --></XmakeMfcKind>
     <XmakeRunEnvs>PATH=C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\i\imgui\v1.89.3\5a9427714d744141b232565d5e57a80e\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\c\cmake\3.24.2\5430022e3acc47008f94857b498c53c6\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\o\opengl\latest\8574311f4b544fa89a3d8c3ee79d1929\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\i\imgui\v1.89.3\5a9427714d744141b232565d5e57a80e\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\s\spdlog\v1.11.0\9f687477cd0342a6895e163907ac0652\bin;$([System.Environment]::GetEnvironmentVariable('PATH'))</XmakeRunEnvs>
-    <XmakeRunArgs>
-      <!-- nil -->
-    </XmakeRunArgs>
-    <XmakeConfigFlags>
-    </XmakeConfigFlags>
+    <XmakeRunArgs><!-- nil --></XmakeRunArgs>
+    <XmakeConfigFlags></XmakeConfigFlags>
     <XmakeIncludeDirs>$(XmakeProjectDir)\HAIEngine\src;C:\Users\ShuPeng\AppData\Local\.xmake\packages\s\spdlog\v1.11.0\9f687477cd0342a6895e163907ac0652\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\i\imgui\v1.89.3\5a9427714d744141b232565d5e57a80e\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\i\imgui\v1.89.3\5a9427714d744141b232565d5e57a80e\include\imgui;C:\Users\ShuPeng\AppData\Local\.xmake\packages\i\imgui\v1.89.3\5a9427714d744141b232565d5e57a80e\include\backends</XmakeIncludeDirs>
     <XmakeLinkDirs>C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\i\imgui\v1.89.3\5a9427714d744141b232565d5e57a80e\lib</XmakeLinkDirs>
-    <XmakeSourceDirs>
-    </XmakeSourceDirs>
-    <XmakePrecompiledHeader>
-      <!-- nil -->
-    </XmakePrecompiledHeader>
+    <XmakeSourceDirs></XmakeSourceDirs>
+    <XmakePrecompiledHeader><!-- nil --></XmakePrecompiledHeader>
   </PropertyGroup>
   <PropertyGroup Label="XmakeConfig" Condition="'$(Configuration)|$(Platform)'=='release|x64'">
     <XmakeBasename>HAIEngine</XmakeBasename>
@@ -81,52 +67,35 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <XmakeKind>shared</XmakeKind>
     <XmakeDefault>true</XmakeDefault>
     <XmakeDefines>HE_PLATFORM_WINDOWS;HE_BUILD_DLL;GLFW_INCLUDE_NONE</XmakeDefines>
-    <XmakeLanguages>
-    </XmakeLanguages>
+    <XmakeLanguages></XmakeLanguages>
     <XmakeSubSystem>console</XmakeSubSystem>
-    <XmakeCudaVersion>
-      <!-- nil -->
-    </XmakeCudaVersion>
-    <XmakeWindowsSdkVersion>
-      <!-- nil -->
-    </XmakeWindowsSdkVersion>
-    <XmakeMfcKind>
-      <!-- nil -->
-    </XmakeMfcKind>
+    <XmakeCudaVersion><!-- nil --></XmakeCudaVersion>
+    <XmakeWindowsSdkVersion><!-- nil --></XmakeWindowsSdkVersion>
+    <XmakeMfcKind><!-- nil --></XmakeMfcKind>
     <XmakeRunEnvs>PATH=C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\i\imgui\v1.89.3\5a9427714d744141b232565d5e57a80e\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\c\cmake\3.24.2\5430022e3acc47008f94857b498c53c6\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\o\opengl\latest\8574311f4b544fa89a3d8c3ee79d1929\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\i\imgui\v1.89.3\5a9427714d744141b232565d5e57a80e\bin;C:\Users\ShuPeng\AppData\Local\.xmake\packages\s\spdlog\v1.11.0\9f687477cd0342a6895e163907ac0652\bin;$([System.Environment]::GetEnvironmentVariable('PATH'))</XmakeRunEnvs>
-    <XmakeRunArgs>
-      <!-- nil -->
-    </XmakeRunArgs>
-    <XmakeConfigFlags>
-    </XmakeConfigFlags>
+    <XmakeRunArgs><!-- nil --></XmakeRunArgs>
+    <XmakeConfigFlags></XmakeConfigFlags>
     <XmakeIncludeDirs>$(XmakeProjectDir)\HAIEngine\src;C:\Users\ShuPeng\AppData\Local\.xmake\packages\s\spdlog\v1.11.0\9f687477cd0342a6895e163907ac0652\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\i\imgui\v1.89.3\5a9427714d744141b232565d5e57a80e\include;C:\Users\ShuPeng\AppData\Local\.xmake\packages\i\imgui\v1.89.3\5a9427714d744141b232565d5e57a80e\include\imgui;C:\Users\ShuPeng\AppData\Local\.xmake\packages\i\imgui\v1.89.3\5a9427714d744141b232565d5e57a80e\include\backends</XmakeIncludeDirs>
     <XmakeLinkDirs>C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glfw\3.3.8\d12e591897c9472fb7d3725fa5811388\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\g\glad\v0.1.36\d58ee23747ff411aae74b40986460499\lib;C:\Users\ShuPeng\AppData\Local\.xmake\packages\i\imgui\v1.89.3\5a9427714d744141b232565d5e57a80e\lib</XmakeLinkDirs>
-    <XmakeSourceDirs>
-    </XmakeSourceDirs>
-    <XmakePrecompiledHeader>
-      <!-- nil -->
-    </XmakePrecompiledHeader>
+    <XmakeSourceDirs></XmakeSourceDirs>
+    <XmakePrecompiledHeader><!-- nil --></XmakePrecompiledHeader>
   </PropertyGroup>
+
   <PropertyGroup Label="XmakePath" Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
     <XmakeBuilDir>$(XmakeProjectDir)\build</XmakeBuilDir>
     <XmakeConfigDir>$(XmakeProjectDir)\.</XmakeConfigDir>
-    <XmakeConfigFileDir>
-    </XmakeConfigFileDir>
-    <XmakeTargetDir>
-    </XmakeTargetDir>
-    <XmakeRunDir>
-    </XmakeRunDir>
+    <XmakeConfigFileDir></XmakeConfigFileDir>
+    <XmakeTargetDir></XmakeTargetDir>
+    <XmakeRunDir></XmakeRunDir>
   </PropertyGroup>
   <PropertyGroup Label="XmakePath" Condition="'$(Configuration)|$(Platform)'=='release|x64'">
     <XmakeBuilDir>$(XmakeProjectDir)\build</XmakeBuilDir>
     <XmakeConfigDir>$(XmakeProjectDir)\.</XmakeConfigDir>
-    <XmakeConfigFileDir>
-    </XmakeConfigFileDir>
-    <XmakeTargetDir>
-    </XmakeTargetDir>
-    <XmakeRunDir>
-    </XmakeRunDir>
+    <XmakeConfigFileDir></XmakeConfigFileDir>
+    <XmakeTargetDir></XmakeTargetDir>
+    <XmakeRunDir></XmakeRunDir>
   </PropertyGroup>
+
   <Import Project="$(XmakeProgramDir)\plugins\project\vsxmake\vsproj\Xmake.props" />
   <ItemGroup>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine.h" />
@@ -137,16 +106,23 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\Event.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\KeyEvent.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\MouseEvent.h" />
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\ImGui\ImGuiLayer.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Layer.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\LayerStack.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Window.h" />
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\WindowsWindow.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\hepch.h" />
-    <ClInclude Include="ImGuiLayer.h" />
+
+
   </ItemGroup>
   <ItemGroup>
+
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Application.cpp">
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\ImGui\ImGuiLayer.cpp">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Layer.cpp">
@@ -158,17 +134,25 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.cpp">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\WindowsWindow.cpp">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\hepch.cpp">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="ImGuiLayer.cpp" />
+
+
+
   </ItemGroup>
   <ItemGroup>
+
   </ItemGroup>
   <ItemGroup>
+
+
   </ItemGroup>
   <!-- <ItemGroup>
 

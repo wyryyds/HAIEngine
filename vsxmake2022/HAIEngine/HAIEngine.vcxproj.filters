@@ -24,12 +24,16 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <Filter Include="HAIEngine\src\HAIEngine\Events">
       <UniqueIdentifier>{81AB4020-4C3E-4C57-811E-8C25840BD5E2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HAIEngine\src\HAIEngine\ImGui">
+      <UniqueIdentifier>{BC62F084-72ED-49B1-9828-854E96191768}</UniqueIdentifier>
+    </Filter>
     <Filter Include="HAIEngine\src\Platform">
       <UniqueIdentifier>{5FE740DE-3B77-4BF1-8C2A-6BE91063B999}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HAIEngine\src\HAIEngine\ImGui">
-      <UniqueIdentifier>{3a6f79fa-4ce4-49e2-b165-988868d76e8a}</UniqueIdentifier>
+    <Filter Include="HAIEngine\src\Platform\OpenGL">
+      <UniqueIdentifier>{7DA4857A-52ED-4084-B6CD-AE844E1E9DAC}</UniqueIdentifier>
     </Filter>
+
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildProjectDirectory)\Xmake.Custom.props">
@@ -42,6 +46,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
       <Filter>Properties</Filter>
     </None>
     <None Include="$(MSBuildProjectDirectory)\Xmake.Custom.items.filters">
+      <Filter>Properties</Filter>
+    </None>
+    <None Include="$(XmakeScriptDir)\xmake.lua">
       <Filter>Properties</Filter>
     </None>
   </ItemGroup>
@@ -70,6 +77,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\MouseEvent.h">
       <Filter>HAIEngine\src\HAIEngine\Events</Filter>
     </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\ImGui\ImGuiLayer.h">
+      <Filter>HAIEngine\src\HAIEngine\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Layer.h">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
@@ -82,19 +92,25 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Window.h">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
+      <Filter>HAIEngine\src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\WindowsWindow.h">
       <Filter>HAIEngine\src\Platform</Filter>
     </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\hepch.h">
       <Filter>HAIEngine\src</Filter>
     </ClInclude>
-    <ClInclude Include="ImGuiLayer.h">
-      <Filter>HAIEngine\src\HAIEngine\ImGui</Filter>
-    </ClInclude>
+
+
   </ItemGroup>
   <ItemGroup>
+
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Application.cpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\ImGui\ImGuiLayer.cpp">
+      <Filter>HAIEngine\src\HAIEngine\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Layer.cpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
@@ -105,19 +121,26 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.cpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
+      <Filter>HAIEngine\src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\WindowsWindow.cpp">
       <Filter>HAIEngine\src\Platform</Filter>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\hepch.cpp">
       <Filter>HAIEngine\src</Filter>
     </ClCompile>
-    <ClCompile Include="ImGuiLayer.cpp">
-      <Filter>HAIEngine\src\HAIEngine\ImGui</Filter>
-    </ClCompile>
+
+
+
   </ItemGroup>
   <ItemGroup>
+
   </ItemGroup>
   <ItemGroup>
+
+
   </ItemGroup>
-  <Import Condition="Exists('$(MSBuildThisFileDirectory)\Xmake.Custom.files.filters')" Project="$(MSBuildThisFileDirectory)\Xmake.Custom.files.filters" />
+  <Import Condition="Exists('$(MSBuildThisFileDirectory)\Xmake.Custom.files.filters')"
+    Project="$(MSBuildThisFileDirectory)\Xmake.Custom.files.filters" />
 </Project>
