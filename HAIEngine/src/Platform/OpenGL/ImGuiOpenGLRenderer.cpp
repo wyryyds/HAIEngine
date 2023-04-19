@@ -153,7 +153,7 @@
 // - You can temporarily use an unstripped version. See https://github.com/dearimgui/gl3w_stripped/releases
 // Changes to this backend using new APIs should be accompanied by a regenerated stripped loader version.
 #define IMGL3W_IMPL
-//#include "imgui_impl_opengl3_loader.h"
+#include "glad/glad.h"
 #endif
 
 // Vertex arrays are not supported on ES2/WebGL1 unless Emscripten which uses an extension
@@ -261,11 +261,11 @@ bool    ImGui_ImplOpenGL3_Init(const char* glsl_version)
 
     // Initialize our loader
 #if !defined(IMGUI_IMPL_OPENGL_ES2) && !defined(IMGUI_IMPL_OPENGL_ES3) && !defined(IMGUI_IMPL_OPENGL_LOADER_CUSTOM)
-    /*if (imgl3wInit() != 0)
+    if (imgl3wInit() != 0)
     {
         fprintf(stderr, "Failed to initialize OpenGL loader!\n");
         return false;
-    }*/
+    }
 #endif
 
     // Setup backend capabilities flags
