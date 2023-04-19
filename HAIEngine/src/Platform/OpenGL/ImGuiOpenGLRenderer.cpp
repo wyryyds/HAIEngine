@@ -261,7 +261,7 @@ bool    ImGui_ImplOpenGL3_Init(const char* glsl_version)
 
     // Initialize our loader
 #if !defined(IMGUI_IMPL_OPENGL_ES2) && !defined(IMGUI_IMPL_OPENGL_ES3) && !defined(IMGUI_IMPL_OPENGL_LOADER_CUSTOM)
-    if (imgl3wInit() != 0)
+    if (!gladLoadGL())
     {
         fprintf(stderr, "Failed to initialize OpenGL loader!\n");
         return false;

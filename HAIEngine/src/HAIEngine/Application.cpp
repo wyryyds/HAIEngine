@@ -3,9 +3,9 @@
 
 #include "HAIEngine/Log.h"
 #include "glad/glad.h"
+#include "imgui.h"
 namespace HAIEngine
 {
-
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
 	Application* Application::s_Instance = nullptr;
@@ -57,12 +57,13 @@ namespace HAIEngine
 
 	void Application::Run()
 	{
+
 		while (m_Running)
 		{
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 			m_Window->OnUpdate();
-
+			
 			for (Layer* layer : m_LayerStack)
 			{
 				layer->OnUpdate();

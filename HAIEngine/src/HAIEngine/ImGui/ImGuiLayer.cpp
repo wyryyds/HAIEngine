@@ -1,6 +1,5 @@
 #include"ImGuiLayer.h"
 #include"hepch.h"
-
 #include"Platform/OpenGL/ImGuiOpenGLRenderer.h"
 #include"imgui.h"
 #include"GLFW/glfw3.h"
@@ -73,7 +72,6 @@ namespace HAIEngine
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
 
 	}
 
