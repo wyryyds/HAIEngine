@@ -60,4 +60,22 @@ namespace HAIEngine
 
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
+
+	class HE_API KeyTypeEvent :public KeyEvent
+	{
+	public:
+		KeyTypeEvent(int keycode) :KeyEvent(keycode)
+		{
+
+		}
+
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "KeyTypeEvent:" << m_KeyCode;
+			return ss.str();
+		}
+
+		EVENT_CLASS_TYPE(KeyType)
+	};
 }

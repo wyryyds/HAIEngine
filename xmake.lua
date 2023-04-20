@@ -14,7 +14,7 @@ target("Sandbox")
     set_kind("binary")
     add_files("Sandbox/src/**.cpp")
     add_includedirs("HAIEngine/src")
-    add_packages("spdlog")
+    add_packages("spdlog","glfw","glad","imgui")
     add_deps("HAIEngine")
     add_headerfiles("Sandbox/src/**.h")
 

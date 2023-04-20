@@ -103,6 +103,14 @@ namespace HAIEngine
 				}
 			});
 
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode)
+			{
+				WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+
+				KeyTypeEvent event(keycode);
+				data.EventCallback(event);
+			});
+
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 		{
 			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
