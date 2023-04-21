@@ -33,6 +33,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <Filter Include="HAIEngine\src\Platform\OpenGL">
       <UniqueIdentifier>{7DA4857A-52ED-4084-B6CD-AE844E1E9DAC}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HAIEngine\src\Platform\Windows">
+      <UniqueIdentifier>{8C4467F3-F412-451A-BAB6-8041BC206B4F}</UniqueIdentifier>
+    </Filter>
 
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +83,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\ImGui\ImGuiLayer.h">
       <Filter>HAIEngine\src\HAIEngine\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Input.h">
+      <Filter>HAIEngine\src\HAIEngine</Filter>
+    </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Layer.h">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
@@ -95,8 +101,11 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\WindowsWindow.h">
-      <Filter>HAIEngine\src\Platform</Filter>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsInput.h">
+      <Filter>HAIEngine\src\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsWindow.h">
+      <Filter>HAIEngine\src\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\hepch.h">
       <Filter>HAIEngine\src</Filter>
@@ -124,8 +133,11 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\WindowsWindow.cpp">
-      <Filter>HAIEngine\src\Platform</Filter>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsInput.cpp">
+      <Filter>HAIEngine\src\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>HAIEngine\src\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\hepch.cpp">
       <Filter>HAIEngine\src</Filter>

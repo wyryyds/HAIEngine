@@ -4,11 +4,13 @@
 #include "HAIEngine/Log.h"
 #include "glad/glad.h"
 #include "imgui.h"
+#include"Input.h"
 namespace HAIEngine
 {
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
 	Application* Application::s_Instance = nullptr;
+
 
 	Application::Application()
 	{
@@ -63,7 +65,10 @@ namespace HAIEngine
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 			m_Window->OnUpdate();
-			
+
+			auto [x, y] = Input::GetMousePosition();
+			HE_CORE_TRACE("{0},{1}", x, y);
+
 			for (Layer* layer : m_LayerStack)
 			{
 				layer->OnUpdate();

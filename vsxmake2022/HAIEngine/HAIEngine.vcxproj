@@ -45,7 +45,7 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <XmakeKind>shared</XmakeKind>
     <XmakeDefault>true</XmakeDefault>
     <XmakeDefines>HE_PLATFORM_WINDOWS;HE_ENABLE_ASSERTS;HE_BUILD_DLL;GLFW_INCLUDE_NONE</XmakeDefines>
-    <XmakeLanguages></XmakeLanguages>
+    <XmakeLanguages>c17;cxx20</XmakeLanguages>
     <XmakeSubSystem>console</XmakeSubSystem>
     <XmakeCudaVersion><!-- nil --></XmakeCudaVersion>
     <XmakeWindowsSdkVersion><!-- nil --></XmakeWindowsSdkVersion>
@@ -67,7 +67,7 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <XmakeKind>shared</XmakeKind>
     <XmakeDefault>true</XmakeDefault>
     <XmakeDefines>HE_PLATFORM_WINDOWS;HE_BUILD_DLL;GLFW_INCLUDE_NONE</XmakeDefines>
-    <XmakeLanguages></XmakeLanguages>
+    <XmakeLanguages>c17;cxx20</XmakeLanguages>
     <XmakeSubSystem>console</XmakeSubSystem>
     <XmakeCudaVersion><!-- nil --></XmakeCudaVersion>
     <XmakeWindowsSdkVersion><!-- nil --></XmakeWindowsSdkVersion>
@@ -107,12 +107,14 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\KeyEvent.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\MouseEvent.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Input.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Layer.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\LayerStack.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Window.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\WindowsWindow.h" />
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\hepch.h" />
 
 
@@ -137,7 +139,10 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\WindowsWindow.cpp">
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsInput.cpp">
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsWindow.cpp">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\hepch.cpp">

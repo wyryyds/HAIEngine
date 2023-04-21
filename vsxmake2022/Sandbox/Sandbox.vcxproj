@@ -45,7 +45,7 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <XmakeKind>binary</XmakeKind>
     <XmakeDefault>true</XmakeDefault>
     <XmakeDefines>HE_PLATFORM_WINDOWS;HE_ENABLE_ASSERTS;GLFW_INCLUDE_NONE</XmakeDefines>
-    <XmakeLanguages></XmakeLanguages>
+    <XmakeLanguages>c17;cxx20</XmakeLanguages>
     <XmakeSubSystem>console</XmakeSubSystem>
     <XmakeCudaVersion><!-- nil --></XmakeCudaVersion>
     <XmakeWindowsSdkVersion><!-- nil --></XmakeWindowsSdkVersion>
@@ -67,7 +67,7 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <XmakeKind>binary</XmakeKind>
     <XmakeDefault>true</XmakeDefault>
     <XmakeDefines>HE_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE</XmakeDefines>
-    <XmakeLanguages></XmakeLanguages>
+    <XmakeLanguages>c17;cxx20</XmakeLanguages>
     <XmakeSubSystem>console</XmakeSubSystem>
     <XmakeCudaVersion><!-- nil --></XmakeCudaVersion>
     <XmakeWindowsSdkVersion><!-- nil --></XmakeWindowsSdkVersion>
