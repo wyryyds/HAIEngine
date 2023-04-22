@@ -86,6 +86,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Input.h">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\KeyCodes.h">
+      <Filter>HAIEngine\src\HAIEngine</Filter>
+    </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Layer.h">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
@@ -93,6 +96,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.h">
+      <Filter>HAIEngine\src\HAIEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\MouseButtonCodes.h">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Window.h">

@@ -10,12 +10,10 @@ public:
 
 	void OnUpdate()
 	{
-		HE_INFO("ExampleLayer::Update");
 	}
 
 	void OnEvent(HAIEngine::Event& event) override
 	{
-		HE_TRACE(event.ToString());
 	}
 };
 

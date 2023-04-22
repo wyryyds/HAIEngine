@@ -64,15 +64,13 @@ namespace HAIEngine
 		{
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
-			m_Window->OnUpdate();
+			for(Layer* layer : m_LayerStack)
+			layer->OnUpdate();
 
 			auto [x, y] = Input::GetMousePosition();
 			HE_CORE_TRACE("{0},{1}", x, y);
 
-			for (Layer* layer : m_LayerStack)
-			{
-				layer->OnUpdate();
-			}
+			m_Window->OnUpdate();
 		}
 	}
 
