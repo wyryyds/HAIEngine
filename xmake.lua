@@ -1,6 +1,6 @@
 add_rules("mode.debug", "mode.release","plugin.vsxmake.autoupdate")
 
-add_requires("spdlog","glfw","glad","imgui")
+add_requires("spdlog","glfw","glad","imgui","glm")
 
  if is_plat("windows") then
     add_defines("HE_PLATFORM_WINDOWS")
@@ -15,7 +15,7 @@ target("Sandbox")
     set_languages("c17","cxx20")
     add_files("Sandbox/src/**.cpp")
     add_includedirs("HAIEngine/src")
-    add_packages("spdlog","glfw","glad","imgui")
+    add_packages("spdlog","glm")
     add_deps("HAIEngine")
     add_headerfiles("Sandbox/src/**.h")
 
@@ -24,6 +24,6 @@ target("HAIEngine")
     set_languages("c17","cxx20")
     add_includedirs("HAIEngine/src")
     add_files("HAIEngine/src/**.cpp")
-    add_packages("spdlog","glfw","glad","imgui")
+    add_packages("spdlog","glfw","glad","imgui","glm")
     add_defines("HE_BUILD_DLL")
     add_headerfiles("HAIEngine/src/**.h")
