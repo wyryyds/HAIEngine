@@ -30,11 +30,11 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <Filter Include="HAIEngine\src\Platform">
       <UniqueIdentifier>{5FE740DE-3B77-4BF1-8C2A-6BE91063B999}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HAIEngine\src\Platform\OpenGL">
-      <UniqueIdentifier>{7DA4857A-52ED-4084-B6CD-AE844E1E9DAC}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HAIEngine\src\Platform\Windows">
       <UniqueIdentifier>{8C4467F3-F412-451A-BAB6-8041BC206B4F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HAIEngine\src\Temp">
+      <UniqueIdentifier>{61947056-B9F6-4787-865C-586BDB9794E1}</UniqueIdentifier>
     </Filter>
 
   </ItemGroup>
@@ -104,14 +104,20 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Window.h">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
-      <Filter>HAIEngine\src\Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsInput.h">
       <Filter>HAIEngine\src\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsWindow.h">
       <Filter>HAIEngine\src\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Temp\imgui_impl_glfw.h">
+      <Filter>HAIEngine\src\Temp</Filter>
+    </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Temp\imgui_impl_opengl3.h">
+      <Filter>HAIEngine\src\Temp</Filter>
+    </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Temp\imgui_impl_opengl3_loader.h">
+      <Filter>HAIEngine\src\Temp</Filter>
     </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\hepch.h">
       <Filter>HAIEngine\src</Filter>
@@ -136,14 +142,17 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.cpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClCompile>
-    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
-      <Filter>HAIEngine\src\Platform\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsInput.cpp">
       <Filter>HAIEngine\src\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsWindow.cpp">
       <Filter>HAIEngine\src\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Temp\imgui_impl_glfw.cpp">
+      <Filter>HAIEngine\src\Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Temp\imgui_impl_opengl3.cpp">
+      <Filter>HAIEngine\src\Temp</Filter>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\hepch.cpp">
       <Filter>HAIEngine\src</Filter>
