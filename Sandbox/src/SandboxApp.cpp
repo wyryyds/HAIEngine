@@ -1,5 +1,6 @@
 #include"HAIEngine.h"
 
+#include"imgui.h"
 
 class ExampleLayer : public HAIEngine::Layer
 {
@@ -13,6 +14,11 @@ public:
 	{
 	}
 
+	void OnImGuiRender()
+	{
+		
+	}
+
 	void OnEvent(HAIEngine::Event& event) override
 	{
 	}
@@ -24,7 +30,6 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new HAIEngine::ImGuiLayer());
 	}
 
 	~Sandbox()

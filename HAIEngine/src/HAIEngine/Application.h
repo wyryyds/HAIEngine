@@ -4,6 +4,9 @@
 #include "Window.h"
 #include "Events/ApplicationEvent.h"
 #include "LayerStack.h"
+#include "ImGui/ImGuiLayer.h"
+
+class ImGuiLayer;
 
 namespace HAIEngine
 {
@@ -23,8 +26,8 @@ namespace HAIEngine
 		inline static Application& Get()  { return *s_Instance; }
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
-
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running=true;
 		LayerStack m_LayerStack;
 		static Application* s_Instance;

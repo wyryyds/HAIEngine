@@ -4,7 +4,7 @@
 #include "HAIEngine/Log.h"
 #include "glad/glad.h"
 #include "imgui.h"
-#include"Input.h"
+#include "Input.h"
 
 namespace HAIEngine
 {
@@ -15,9 +15,14 @@ namespace HAIEngine
 
 	Application::Application()
 	{
+		HE_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
+
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushLayer(m_ImGuiLayer);
 	}
 
 	Application::~Application()
@@ -69,8 +74,10 @@ namespace HAIEngine
 			for(Layer* layer : m_LayerStack)
 			layer->OnUpdate();
 
-			auto [x, y] = Input::GetMousePosition();
-			HE_CORE_TRACE("{0},{1}", x, y);
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_LayerStack)
+				layer->OnImGuiRender();
+			m_ImGuiLayer->End();
 
 			m_Window->OnUpdate();
 		}

@@ -5,7 +5,6 @@
 #include "HAIEngine/Events/MouseEvent.h"
 #include "HAIEngine/Application.h"
 
-
 namespace HAIEngine
 {
 	class HE_API ImGuiLayer :public Layer
@@ -16,8 +15,7 @@ namespace HAIEngine
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
-		virtual void OnUpdate() override;
-		virtual void OnImGuiRender();
+		virtual void OnImGuiRender() override;
 
 		void Begin();
 		void End();

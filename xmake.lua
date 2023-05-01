@@ -15,7 +15,7 @@ target("Sandbox")
     set_languages("c17","cxx20")
     add_files("Sandbox/src/**.cpp")
     add_includedirs("HAIEngine/src")
-    add_packages("spdlog","glm")
+    add_packages("spdlog","glm","imgui")
     add_deps("HAIEngine")
     add_headerfiles("Sandbox/src/**.h")
 
