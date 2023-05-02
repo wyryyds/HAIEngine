@@ -8,7 +8,6 @@ int main(int argc, char** argv)
 {
 	HAIEngine::Log::Init();
 	HE_CORE_WARN("Init Log");
-	HE_CORE_INFO("Hello");
 	auto app = HAIEngine::CreateApplication();
 	app->Run();
 	delete app;
