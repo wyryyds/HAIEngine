@@ -1,4 +1,7 @@
 {
+    files = {
+        [[C:\C++Projects\GameEngineLearning\xmake.lua]]
+    },
     values = {
         [[HAIEngine\src\HAIEngine.h]],
         [[HAIEngine\src\HAIEngine\Application.cpp]],
@@ -20,12 +23,15 @@
         [[HAIEngine\src\HAIEngine\Log.cpp]],
         [[HAIEngine\src\HAIEngine\Log.h]],
         [[HAIEngine\src\HAIEngine\MouseButtonCodes.h]],
+        [[HAIEngine\src\HAIEngine\Renderer\GraphicsContext.h]],
         [[HAIEngine\src\HAIEngine\Window.h]],
         [[HAIEngine\src\ImGuiExamples\imgui_impl_glfw.cpp]],
         [[HAIEngine\src\ImGuiExamples\imgui_impl_glfw.h]],
         [[HAIEngine\src\ImGuiExamples\imgui_impl_opengl3.cpp]],
         [[HAIEngine\src\ImGuiExamples\imgui_impl_opengl3.h]],
         [[HAIEngine\src\ImGuiExamples\imgui_impl_opengl3_loader.h]],
+        [[HAIEngine\src\Platform\OpenGL\OpenGLContext.cpp]],
+        [[HAIEngine\src\Platform\OpenGL\OpenGLContext.h]],
         [[HAIEngine\src\Platform\Windows\WindowsInput.cpp]],
         [[HAIEngine\src\Platform\Windows\WindowsInput.h]],
         [[HAIEngine\src\Platform\Windows\WindowsWindow.cpp]],
@@ -33,8 +39,5 @@
         [[HAIEngine\src\hepch.cpp]],
         [[HAIEngine\src\hepch.h]],
         [[Sandbox\src\SandboxApp.cpp]]
-    },
-    files = {
-        [[C:\C++Projects\GameEngineLearning\xmake.lua]]
     }
 }

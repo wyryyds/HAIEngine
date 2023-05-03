@@ -1,6 +1,7 @@
 #pragma once
 #include "HAIEngine/Window.h"
 #include "GLFW/glfw3.h"
+#include "HAIEngine/Renderer/GraphicsContext.h"
 
 namespace HAIEngine
 {
@@ -21,7 +22,6 @@ namespace HAIEngine
 
 		inline virtual void* GetNativeWindow() const { return m_Window; };
 	private:
-		GLFWwindow* m_Window;
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
 
@@ -33,6 +33,9 @@ namespace HAIEngine
 			EventCallbackFn EventCallback;
 		};
 
+	private:
+		GLFWwindow* m_Window;
 		WindowData m_Data;
+		GraphicsContext* m_Context;
 	};
 }
