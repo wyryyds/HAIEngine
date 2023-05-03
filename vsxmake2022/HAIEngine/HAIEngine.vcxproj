@@ -38,13 +38,13 @@ xmake version 2.7.8+HEAD.87dff1ef4
   <Import Project="$(XmakeProgramDir)\plugins\project\vsxmake\vsproj\Xmake.Defaults.props" />
   <PropertyGroup Label="XmakeConfig" Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
     <XmakeBasename>HAIEngine</XmakeBasename>
-    <XmakeFilename>HAIEngine.dll</XmakeFilename>
+    <XmakeFilename>HAIEngine.lib</XmakeFilename>
     <XmakeMode>debug</XmakeMode>
     <XmakePlat>windows</XmakePlat>
     <XmakeArch>x64</XmakeArch>
-    <XmakeKind>shared</XmakeKind>
+    <XmakeKind>static</XmakeKind>
     <XmakeDefault>true</XmakeDefault>
-    <XmakeDefines>HE_PLATFORM_WINDOWS;HE_ENABLE_ASSERTS;HE_BUILD_DLL;GLFW_INCLUDE_NONE</XmakeDefines>
+    <XmakeDefines>HE_PLATFORM_WINDOWS;HE_ENABLE_ASSERTS;GLFW_INCLUDE_NONE</XmakeDefines>
     <XmakeLanguages>c17;cxx20</XmakeLanguages>
     <XmakeSubSystem>console</XmakeSubSystem>
     <XmakeCudaVersion><!-- nil --></XmakeCudaVersion>
@@ -60,13 +60,13 @@ xmake version 2.7.8+HEAD.87dff1ef4
   </PropertyGroup>
   <PropertyGroup Label="XmakeConfig" Condition="'$(Configuration)|$(Platform)'=='release|x64'">
     <XmakeBasename>HAIEngine</XmakeBasename>
-    <XmakeFilename>HAIEngine.dll</XmakeFilename>
+    <XmakeFilename>HAIEngine.lib</XmakeFilename>
     <XmakeMode>release</XmakeMode>
     <XmakePlat>windows</XmakePlat>
     <XmakeArch>x64</XmakeArch>
-    <XmakeKind>shared</XmakeKind>
+    <XmakeKind>static</XmakeKind>
     <XmakeDefault>true</XmakeDefault>
-    <XmakeDefines>HE_PLATFORM_WINDOWS;HE_BUILD_DLL;GLFW_INCLUDE_NONE</XmakeDefines>
+    <XmakeDefines>HE_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE</XmakeDefines>
     <XmakeLanguages>c17;cxx20</XmakeLanguages>
     <XmakeSubSystem>console</XmakeSubSystem>
     <XmakeCudaVersion><!-- nil --></XmakeCudaVersion>

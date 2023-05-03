@@ -1,13 +1,16 @@
 #pragma once
 
 #ifdef HE_PLATFORM_WINDOWS
-
+#if HE_DYNAMIC_LINK
     #ifdef HE_BUILD_DLL
        #define HE_API __declspec(dllexport)
     #else
        #define HE_API __declspec(dllimport)
     #endif // HE_BUILD_DLL
-#else
+#else 
+    #define HE_API
+#endif
+#else 
     #error HAIEngine only support Windows!
 #endif // HE_PLATFORM_WINDOWS
 
