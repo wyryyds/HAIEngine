@@ -5,6 +5,7 @@
 #include<utility>
 #include<algorithm>
 #include<functional>
+#include<string.h>
 
 #include<string>
 #include<sstream>

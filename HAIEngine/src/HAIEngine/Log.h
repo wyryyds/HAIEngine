@@ -20,7 +20,7 @@
 namespace HAIEngine
 {
 
-	class HE_API Log
+	class Log
 	{
 	public:
 		Log();

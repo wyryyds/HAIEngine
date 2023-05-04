@@ -1,6 +1,6 @@
 #include"HAIEngine.h"
 
-
+#include"imgui.h"
 class ExampleLayer : public HAIEngine::Layer
 {
 public:
@@ -15,12 +15,10 @@ public:
 
 	void OnImGuiRender() override
 	{
-		//堆栈溢出，待解决bug
-		/*
 		ImGui::Begin("Test");
 		ImGui::Text("hello world");
 		ImGui::End();
-		*/
+		
 	}
 
 	void OnEvent(HAIEngine::Event& event) override

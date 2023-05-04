@@ -13,9 +13,13 @@ namespace HAIEngine
 	}
 	void OpenGLContext::Init()
 	{
+		
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		HE_CORE_ASSERT(status, "Failed to initialize Glad!");
+		std::cout<<glGetString(GL_VENDOR)<<" "<< glGetString(GL_RENDERER);
+		
+		//HE_CORE_INFO("OpenGL Renderer:{0} {1}",glGetString(GL_VENDOR), glGetString(GL_RENDERER));
 	}
 	void OpenGLContext::SwapBuffers()
 	{
