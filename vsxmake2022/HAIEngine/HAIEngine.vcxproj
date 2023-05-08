@@ -114,6 +114,7 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\MouseButtonCodes.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\GraphicsContext.h" />
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Shader.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Window.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\ImGuiExamples\imgui_impl_glfw.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\ImGuiExamples\imgui_impl_opengl3.h" />
@@ -140,6 +141,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.cpp">
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Shader.cpp">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\ImGuiExamples\imgui_impl_glfw.cpp">

@@ -110,6 +110,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\GraphicsContext.h">
       <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Shader.h">
+      <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Window.h">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
@@ -153,6 +156,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.cpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Shader.cpp">
+      <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\ImGuiExamples\imgui_impl_glfw.cpp">
       <Filter>HAIEngine\src\ImGuiExamples</Filter>

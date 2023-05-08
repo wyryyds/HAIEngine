@@ -24,6 +24,8 @@
         [[HAIEngine\src\HAIEngine\Log.h]],
         [[HAIEngine\src\HAIEngine\MouseButtonCodes.h]],
         [[HAIEngine\src\HAIEngine\Renderer\GraphicsContext.h]],
+        [[HAIEngine\src\HAIEngine\Renderer\Shader.cpp]],
+        [[HAIEngine\src\HAIEngine\Renderer\Shader.h]],
         [[HAIEngine\src\HAIEngine\Window.h]],
         [[HAIEngine\src\ImGuiExamples\imgui_impl_glfw.cpp]],
         [[HAIEngine\src\ImGuiExamples\imgui_impl_glfw.h]],
