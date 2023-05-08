@@ -47,7 +47,7 @@ namespace HAIEngine
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 		std::string vertexSrc = R"(
-           #version 330 core
+           #version 450 core
 
            layout(location = 0) in vec3 a_Position;
 
@@ -61,7 +61,7 @@ namespace HAIEngine
         )";
 
 		std::string fragmentSrc = R"(
-           #version 330 core
+           #version 450 core
 
            layout(location = 0) out vec4 color;
            
