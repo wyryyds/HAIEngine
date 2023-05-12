@@ -107,7 +107,13 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\MouseButtonCodes.h">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Buffer.h">
+      <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\GraphicsContext.h">
+      <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Renderer.h">
       <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Shader.h">
@@ -124,6 +130,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
     </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\ImGuiExamples\imgui_impl_opengl3_loader.h">
       <Filter>HAIEngine\src\ImGuiExamples</Filter>
+    </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLContext.h">
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>
@@ -157,6 +166,12 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.cpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Buffer.cpp">
+      <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Renderer.cpp">
+      <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Shader.cpp">
       <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
     </ClCompile>
@@ -165,6 +180,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\ImGuiExamples\imgui_impl_opengl3.cpp">
       <Filter>HAIEngine\src\ImGuiExamples</Filter>
+    </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>

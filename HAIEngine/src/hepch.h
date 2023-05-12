@@ -11,6 +11,8 @@
 #include<sstream>
 #include<vector>
 #include<unordered_map>
+
+#include"HAIEngine/Log.h"
 #include<unordered_set>
 
 #ifdef HE_PLATFORM_WINDOWS

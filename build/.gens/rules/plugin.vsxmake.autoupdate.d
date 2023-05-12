@@ -1,7 +1,4 @@
 {
-    files = {
-        [[C:\C++Projects\GameEngineLearning\xmake.lua]]
-    },
     values = {
         [[HAIEngine\src\HAIEngine.h]],
         [[HAIEngine\src\HAIEngine\Application.cpp]],
@@ -23,7 +20,11 @@
         [[HAIEngine\src\HAIEngine\Log.cpp]],
         [[HAIEngine\src\HAIEngine\Log.h]],
         [[HAIEngine\src\HAIEngine\MouseButtonCodes.h]],
+        [[HAIEngine\src\HAIEngine\Renderer\Buffer.cpp]],
+        [[HAIEngine\src\HAIEngine\Renderer\Buffer.h]],
         [[HAIEngine\src\HAIEngine\Renderer\GraphicsContext.h]],
+        [[HAIEngine\src\HAIEngine\Renderer\Renderer.cpp]],
+        [[HAIEngine\src\HAIEngine\Renderer\Renderer.h]],
         [[HAIEngine\src\HAIEngine\Renderer\Shader.cpp]],
         [[HAIEngine\src\HAIEngine\Renderer\Shader.h]],
         [[HAIEngine\src\HAIEngine\Window.h]],
@@ -32,6 +33,8 @@
         [[HAIEngine\src\ImGuiExamples\imgui_impl_opengl3.cpp]],
         [[HAIEngine\src\ImGuiExamples\imgui_impl_opengl3.h]],
         [[HAIEngine\src\ImGuiExamples\imgui_impl_opengl3_loader.h]],
+        [[HAIEngine\src\Platform\OpenGL\OpenGLBuffer.cpp]],
+        [[HAIEngine\src\Platform\OpenGL\OpenGLBuffer.h]],
         [[HAIEngine\src\Platform\OpenGL\OpenGLContext.cpp]],
         [[HAIEngine\src\Platform\OpenGL\OpenGLContext.h]],
         [[HAIEngine\src\Platform\Windows\WindowsInput.cpp]],
@@ -41,5 +44,8 @@
         [[HAIEngine\src\hepch.cpp]],
         [[HAIEngine\src\hepch.h]],
         [[Sandbox\src\SandboxApp.cpp]]
+    },
+    files = {
+        [[C:\C++Projects\GameEngineLearning\xmake.lua]]
     }
 }
