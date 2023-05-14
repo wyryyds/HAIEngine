@@ -1,4 +1,7 @@
 {
+    files = {
+        [[C:\C++Projects\GameEngineLearning\xmake.lua]]
+    },
     values = {
         [[HAIEngine\src\HAIEngine.h]],
         [[HAIEngine\src\HAIEngine\Application.cpp]],
@@ -44,8 +47,5 @@
         [[HAIEngine\src\hepch.cpp]],
         [[HAIEngine\src\hepch.h]],
         [[Sandbox\src\SandboxApp.cpp]]
-    },
-    files = {
-        [[C:\C++Projects\GameEngineLearning\xmake.lua]]
     }
 }

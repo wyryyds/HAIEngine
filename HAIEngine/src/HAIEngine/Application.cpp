@@ -45,9 +45,23 @@ namespace HAIEngine
 
 		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
+		BufferLayout m_layout =
+		{
+			{ShaderDataType::Float3,"a_Position"}
+		};
+		m_VertexBuffer->SetLayout(m_layout);
+		uint32_t index = 0;
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+		const auto& layout = m_VertexBuffer->GetLayout();
+		for (const auto& element : layout)
+		{
+			glEnableVertexAttribArray(index);
+			glVertexAttribPointer(index, element.GetComponentCount(), ShaderDataType2OpenGLBaseType(element.Type),
+				element.Normalized ? GL_TRUE : GL_FALSE,
+				layout.GetStride(),
+				(const void*)element.Offset);
+			index++;
+		}
 
 		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t)));
 
