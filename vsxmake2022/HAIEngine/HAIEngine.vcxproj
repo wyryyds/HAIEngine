@@ -117,12 +117,14 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\GraphicsContext.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Renderer.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Shader.h" />
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\VertexArray.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Window.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\ImGuiExamples\imgui_impl_glfw.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\ImGuiExamples\imgui_impl_opengl3.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\ImGuiExamples\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\hepch.h" />
@@ -155,6 +157,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Shader.cpp">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\VertexArray.cpp">
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\ImGuiExamples\imgui_impl_glfw.cpp">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
@@ -165,6 +170,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLContext.cpp">
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLVertexArray.cpp">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsInput.cpp">
