@@ -5,8 +5,10 @@
 #include "Events/ApplicationEvent.h"
 #include "LayerStack.h"
 #include "ImGui/ImGuiLayer.h"
+
 #include"HAIEngine//Renderer/Shader.h"
 #include"Platform/OpenGL/OpenGLBuffer.h"
+#include"HAIEngine/Renderer/VertexArray.h"
 
 class ImGuiLayer;
 
@@ -35,10 +37,10 @@ namespace HAIEngine
 		LayerStack m_LayerStack;
 		static Application* s_Instance;
 
-		unsigned int m_VertexArray;
-		std::unique_ptr<Shader> m_Shader;
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexBuffer> m_VertexBuffer;
+		std::shared_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<VertexArray> m_VertexArray;
 	};
 
 	Application* CreateApplication();

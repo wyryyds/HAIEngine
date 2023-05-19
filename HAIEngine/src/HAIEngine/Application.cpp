@@ -24,9 +24,7 @@ namespace HAIEngine
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		glGenVertexArrays(1, &m_VertexArray);
-		glBindVertexArray(m_VertexArray);
-
+		m_VertexArray.reset(VertexArray::Create());
 
 		float vertices[6 * 3] = {
 		-0.9f, -0.5f, 0.0f,  // left 
@@ -50,20 +48,10 @@ namespace HAIEngine
 			{ShaderDataType::Float3,"a_Position"}
 		};
 		m_VertexBuffer->SetLayout(m_layout);
-		uint32_t index = 0;
-
-		const auto& layout = m_VertexBuffer->GetLayout();
-		for (const auto& element : layout)
-		{
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, element.GetComponentCount(), ShaderDataType2OpenGLBaseType(element.Type),
-				element.Normalized ? GL_TRUE : GL_FALSE,
-				layout.GetStride(),
-				(const void*)element.Offset);
-			index++;
-		}
+		m_VertexArray->AddVertexBuffer(m_VertexBuffer);
 
 		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t)));
+		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
 
 		std::string vertexSrc = R"(
            #version 450 core
@@ -143,7 +131,7 @@ namespace HAIEngine
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			m_Shader->Bind();
-			glBindVertexArray(m_VertexArray);
+			m_VertexArray->Bind();
 			glDrawArrays(GL_TRIANGLES, 0,m_IndexBuffer->GetCount());
 			for(Layer* layer : m_LayerStack)
 			layer->OnUpdate();
