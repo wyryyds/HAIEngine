@@ -24,7 +24,7 @@ namespace HAIEngine
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-//------------------------------------渲染三角形部分内容-----------------------------------------
+		//------------------------------------渲染三角形部分内容开始线-----------------------------------------
 		m_VertexArray.reset(VertexArray::Create());
 
 		float vertices[6 * 3] = {
@@ -51,7 +51,7 @@ namespace HAIEngine
 		m_VertexBuffer->SetLayout(m_layout);
 		m_VertexArray->AddVertexBuffer(m_VertexBuffer);
 
-		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t)));
+		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
 
 		std::string vertexSrc = R"(
@@ -80,12 +80,63 @@ namespace HAIEngine
            }
         )";
 
-		m_Shader.reset(new Shader(vertexSrc,fragmentSrc));
-//--------------------------------------渲染三角形部分----------------------------------
+		m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
+		//--------------------------------------渲染三角形部分结束线----------------------------------
 
-//--------------------------------------渲染正方形部分----------------------------------
-// 
-//--------------------------------------渲染正方形部分----------------------------------
+		//--------------------------------------渲染正方形部分开始线----------------------------------
+		m_SquareVA.reset(VertexArray::Create());
+
+		float squareVertices[3 * 4] =
+		{
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f
+		};
+
+		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
+
+		std::shared_ptr<VertexBuffer> squareVB;
+		squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		squareVB->SetLayout(
+			{
+				{ ShaderDataType::Float3, "a_Position" }
+			});
+
+		m_SquareVA->AddVertexBuffer(squareVB);
+
+		std::shared_ptr<IndexBuffer> squareIB;
+		squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		m_SquareVA->SetIndexBuffer(squareIB);
+
+		std::string squareVertexSrc = R"(
+           #version 450 core
+
+           layout(location = 0) in vec3 a_Position;
+
+           out vec3 v_Position;
+
+           void main()
+           {
+               v_Position = a_Position;
+               gl_Position = vec4(a_Position, 1.0);
+           }
+        )";
+
+		std::string squareFragmentSrc = R"(
+           #version 450 core
+
+           layout(location = 0) out vec4 color;
+           
+           in vec3 v_Position;
+           void main()
+           {
+               color = vec4(v_Position + 0.5, 1.0);
+           }
+        )";
+
+		m_SquareShader.reset(new Shader(squareVertexSrc, squareFragmentSrc));
+		//--------------------------------------渲染正方形部分结束线----------------------------------
 	}
 
 	Application::~Application()
@@ -136,11 +187,17 @@ namespace HAIEngine
 			glClearColor(0.1f, 0.1f, 0.1f, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
+			//先绘制避免正方形覆盖三角形
+			m_SquareShader->Bind();
+			m_SquareVA->Bind();
+			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+
 			m_Shader->Bind();
 			m_VertexArray->Bind();
-			glDrawArrays(GL_TRIANGLES, 0,m_IndexBuffer->GetCount());
-			for(Layer* layer : m_LayerStack)
-			layer->OnUpdate();
+			glDrawArrays(GL_TRIANGLES, 0, m_IndexBuffer->GetCount());
+
+			for (Layer* layer : m_LayerStack)
+				layer->OnUpdate();
 
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
