@@ -24,6 +24,7 @@ namespace HAIEngine
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
+//------------------------------------渲染三角形部分内容-----------------------------------------
 		m_VertexArray.reset(VertexArray::Create());
 
 		float vertices[6 * 3] = {
@@ -80,6 +81,11 @@ namespace HAIEngine
         )";
 
 		m_Shader.reset(new Shader(vertexSrc,fragmentSrc));
+//--------------------------------------渲染三角形部分----------------------------------
+
+//--------------------------------------渲染正方形部分----------------------------------
+// 
+//--------------------------------------渲染正方形部分----------------------------------
 	}
 
 	Application::~Application()
