@@ -1,19 +1,14 @@
 #pragma once
 
+#include"RenderCommand.h"
+
 namespace HAIEngine
 {
-
-	enum class RendererAPI
-	{
-		None = 0,
-		OpenGL = 1,
-	};
 
 	class Renderer
 	{
 	public:
-		inline static RendererAPI GetRendererAPI() { return s_RendererAPI; }
+		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	private:
-		static RendererAPI s_RendererAPI;
 	};
 }

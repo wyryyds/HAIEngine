@@ -3,5 +3,4 @@
 
 namespace HAIEngine
 {
-	RendererAPI Renderer::s_RendererAPI = RendererAPI::OpenGL;
 }
