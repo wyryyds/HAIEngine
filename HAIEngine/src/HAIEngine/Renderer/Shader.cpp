@@ -1,8 +1,8 @@
-#include"HAIEngine/Renderer/Shader.h"
-#include"hepch.h"
-#include"HAIEngine/Log.h"
+#include "HAIEngine/Renderer/Shader.h"
+#include "hepch.h"
+#include "HAIEngine/Log.h"
 
-#include<glad/glad.h>
+#include <glad/glad.h>
 namespace HAIEngine
 {
 	Shader::Shader(const std::string& vertexSrc, const std::string& fragmentSrc)

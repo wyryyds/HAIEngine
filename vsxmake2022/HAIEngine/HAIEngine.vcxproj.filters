@@ -146,6 +146,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLContext.h">
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>HAIEngine\src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClInclude>
@@ -206,6 +209,9 @@ xmake version 2.7.8+HEAD.87dff1ef4
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>HAIEngine\src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLRendererAPI.cpp">
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLVertexArray.cpp">

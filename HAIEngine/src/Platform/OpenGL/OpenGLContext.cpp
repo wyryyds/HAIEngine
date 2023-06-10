@@ -1,7 +1,7 @@
-#include"hepch.h"
-#include"OpenGLContext.h"
-#include"GLFW/glfw3.h"
-#include"glad/glad.h"
+#include "hepch.h"
+#include "OpenGLContext.h"
+#include "GLFW/glfw3.h"
+#include "glad/glad.h"
 
 #include "HAIEngine/Log.h"
 

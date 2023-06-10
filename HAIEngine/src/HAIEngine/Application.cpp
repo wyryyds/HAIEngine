@@ -5,6 +5,8 @@
 #include "glad/glad.h"
 #include "imgui.h"
 #include "Input.h"
+#include "Renderer/RenderCommand.h"
+#include "Renderer/Renderer.h"
 
 namespace HAIEngine
 {
@@ -29,7 +31,7 @@ namespace HAIEngine
 
 		float vertices[6 * 3] = {
 		-0.9f, -0.5f, 0.0f,  // left 
-		-0.0f, -0.5f, 0.0f,  // right
+		 0.0f, -0.5f, 0.0f,  // right
 		-0.45f, 0.5f, 0.0f,  // top 
 		// second triangle
 		 0.0f, -0.5f, 0.0f,  // left
@@ -38,8 +40,7 @@ namespace HAIEngine
 		};
 
 		unsigned int indices[] = {
-			0, 1, 3, //第一个三角形
-			1, 2, 3  //第二个三角形
+			0, 1, 2, 3, 4, 5
 		};
 
 		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
@@ -51,6 +52,7 @@ namespace HAIEngine
 		m_VertexBuffer->SetLayout(m_layout);
 		m_VertexArray->AddVertexBuffer(m_VertexBuffer);
 
+		std::shared_ptr<IndexBuffer> m_IndexBuffer;
 		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
 
@@ -184,17 +186,17 @@ namespace HAIEngine
 
 		while (m_Running)
 		{
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::SetClearColor();
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
 
 			//先绘制避免正方形覆盖三角形
 			m_SquareShader->Bind();
-			m_SquareVA->Bind();
-			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_SquareVA);
 
 			m_Shader->Bind();
-			m_VertexArray->Bind();
-			glDrawArrays(GL_TRIANGLES, 0, m_IndexBuffer->GetCount());
+			Renderer::Submit(m_VertexArray);
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();

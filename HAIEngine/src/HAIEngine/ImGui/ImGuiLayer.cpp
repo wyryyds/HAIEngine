@@ -1,12 +1,12 @@
-#include"ImGuiLayer.h"
-#include"hepch.h"
+#include "ImGuiLayer.h"
+#include "hepch.h"
 
-#include"imgui.h"
+#include "imgui.h"
 
-#include"GLFW/glfw3.h"
-#include"glad/glad.h"
-#include"ImGuiExamples/imgui_impl_glfw.h"
-#include"ImGuiExamples/imgui_impl_opengl3.h"
+#include "GLFW/glfw3.h"
+#include "glad/glad.h"
+#include "ImGuiExamples/imgui_impl_glfw.h"
+#include "ImGuiExamples/imgui_impl_opengl3.h"
 
 namespace HAIEngine
 {

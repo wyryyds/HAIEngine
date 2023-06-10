@@ -46,6 +46,8 @@
         [[HAIEngine\src\Platform\OpenGL\OpenGLBuffer.h]],
         [[HAIEngine\src\Platform\OpenGL\OpenGLContext.cpp]],
         [[HAIEngine\src\Platform\OpenGL\OpenGLContext.h]],
+        [[HAIEngine\src\Platform\OpenGL\OpenGLRendererAPI.cpp]],
+        [[HAIEngine\src\Platform\OpenGL\OpenGLRendererAPI.h]],
         [[HAIEngine\src\Platform\OpenGL\OpenGLVertexArray.cpp]],
         [[HAIEngine\src\Platform\OpenGL\OpenGLVertexArray.h]],
         [[HAIEngine\src\Platform\Windows\WindowsInput.cpp]],

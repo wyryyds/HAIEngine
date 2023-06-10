@@ -1,8 +1,8 @@
-#include"hepch.h"
-#include"Buffer.h"
+#include "hepch.h"
+#include "Buffer.h"
 
-#include"Renderer.h"
-#include"Platform/OpenGL/OpenGLBuffer.h"
+#include "Renderer.h"
+#include "Platform/OpenGL/OpenGLBuffer.h"
 namespace HAIEngine
 {
 	VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)

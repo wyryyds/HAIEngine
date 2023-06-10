@@ -1,7 +1,7 @@
-#include"hepch.h"
-#include"HAIEngine/Renderer/VertexArray.h"
-#include"Renderer.h"
-#include"Platform/OpenGL/OpenGLVertexArray.h"
+#include "hepch.h"
+#include "HAIEngine/Renderer/VertexArray.h"
+#include "Renderer.h"
+#include "Platform/OpenGL/OpenGLVertexArray.h"
 
 namespace HAIEngine
 {

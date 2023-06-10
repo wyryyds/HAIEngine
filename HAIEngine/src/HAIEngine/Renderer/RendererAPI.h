@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-#include"HAIEngine/Renderer/VertexArray.h"
+#include "HAIEngine/Renderer/VertexArray.h"
 
 namespace HAIEngine 
 {

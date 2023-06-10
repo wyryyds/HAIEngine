@@ -1,6 +1,6 @@
-#include"HAIEngine.h"
+#include "HAIEngine.h"
 
-#include"imgui.h"
+#include "imgui.h"
 class ExampleLayer : public HAIEngine::Layer
 {
 public:
