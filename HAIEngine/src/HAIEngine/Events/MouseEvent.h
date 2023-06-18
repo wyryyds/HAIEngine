@@ -58,7 +58,7 @@ namespace HAIEngine
 	class HE_API MouseButtonEvent : public Event
 	{
 	public:
-		inline int GetMouseButton()const { return m_Button; }
+		inline constexpr int GetMouseButton()const { return m_Button; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput |EventCategoryMouseButton)
 	protected:
@@ -68,6 +68,7 @@ namespace HAIEngine
 		}
 
 		int m_Button;
+		int a = GetMouseButton();
 	};
 
 	class HE_API MouseButtonPressedEvent :public MouseButtonEvent

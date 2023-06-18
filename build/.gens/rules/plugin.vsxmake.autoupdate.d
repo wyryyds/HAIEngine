@@ -26,6 +26,8 @@
         [[HAIEngine\src\HAIEngine\Renderer\Buffer.cpp]],
         [[HAIEngine\src\HAIEngine\Renderer\Buffer.h]],
         [[HAIEngine\src\HAIEngine\Renderer\GraphicsContext.h]],
+        [[HAIEngine\src\HAIEngine\Renderer\OrthographicCamera.cpp]],
+        [[HAIEngine\src\HAIEngine\Renderer\OrthographicCamera.h]],
         [[HAIEngine\src\HAIEngine\Renderer\RenderCommand.cpp]],
         [[HAIEngine\src\HAIEngine\Renderer\RenderCommand.h]],
         [[HAIEngine\src\HAIEngine\Renderer\Renderer.cpp]],
