@@ -9,6 +9,7 @@
 #include "HAIEngine//Renderer/Shader.h"
 #include "Platform/OpenGL/OpenGLBuffer.h"
 #include "HAIEngine/Renderer/VertexArray.h"
+#include "HAIEngine/Renderer/OrthographicCamera.h"
 
 class ImGuiLayer;
 
@@ -36,6 +37,8 @@ namespace HAIEngine
 		bool m_Running=true;
 		LayerStack m_LayerStack;
 		static Application* s_Instance;
+
+		OrthographicCamera m_Camera;
 
 		std::shared_ptr<Shader> m_Shader;
 		std::shared_ptr<VertexBuffer> m_VertexBuffer;
