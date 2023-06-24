@@ -193,13 +193,12 @@ namespace HAIEngine
 			RenderCommand::SetClearColor();
 			RenderCommand::Clear();
 
-			m_Camera.SetPosition({0.5f,0.0f,0.0f});
 			Renderer::BeginScene(m_Camera);
 
 			//先绘制避免正方形覆盖三角形
-			//Renderer::Submit(m_SquareShader,m_SquareVA);
+			Renderer::Submit(m_SquareShader,m_SquareVA);
 
-			Renderer::Submit(m_Shader,m_VertexArray);
+			//Renderer::Submit(m_Shader,m_VertexArray);
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
