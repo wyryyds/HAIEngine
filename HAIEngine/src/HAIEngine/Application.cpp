@@ -68,7 +68,7 @@ namespace HAIEngine
            void main()
            {
                v_Position = a_Position;
-               gl_Position = vec4(a_Position, 1.0) * u_ViewProjection;
+               gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
            }
         )";
 
@@ -125,7 +125,7 @@ namespace HAIEngine
            void main()
            {
                v_Position = a_Position;
-               gl_Position = vec4(a_Position, 1.0) * u_ViewProjection;
+               gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
            }
         )";
 
@@ -193,13 +193,13 @@ namespace HAIEngine
 			RenderCommand::SetClearColor();
 			RenderCommand::Clear();
 
-			m_Camera.SetPosition({0.0f,0.5f,0.0f});
+			m_Camera.SetPosition({0.5f,0.0f,0.0f});
 			Renderer::BeginScene(m_Camera);
 
 			//先绘制避免正方形覆盖三角形
-			Renderer::Submit(m_SquareShader,m_SquareVA);
+			//Renderer::Submit(m_SquareShader,m_SquareVA);
 
-			//Renderer::Submit(m_Shader,m_VertexArray);
+			Renderer::Submit(m_Shader,m_VertexArray);
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();

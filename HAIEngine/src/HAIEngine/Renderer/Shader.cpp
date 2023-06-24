@@ -76,8 +76,8 @@ namespace HAIEngine
 		// Vertex and fragment shaders are successfully compiled.
 		// Now time to link them together into a program.
 		// Get a program object.
-		m_rendererID = glCreateProgram();
-		GLuint program = m_rendererID;
+		m_RendererID = glCreateProgram();
+		GLuint program = m_RendererID;
 		// Attach our shaders to our program
 		glAttachShader(program, vertexShader);
 		glAttachShader(program, fragmentShader);
@@ -116,11 +116,11 @@ namespace HAIEngine
 	}
 	Shader::~Shader()
 	{
-		glDeleteProgram(m_rendererID);
+		glDeleteProgram(m_RendererID);
 	}
 	void Shader::Bind() const
 	{
-		glUseProgram(m_rendererID);
+		glUseProgram(m_RendererID);
 	}
 	void Shader::Unbind() const
 	{
@@ -128,7 +128,7 @@ namespace HAIEngine
 	}
 	void Shader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
 	{
-		GLint location = glGetUniformLocation(m_rendererID, name.c_str());
+		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 }
