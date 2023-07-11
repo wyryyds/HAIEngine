@@ -8,6 +8,8 @@
 #include "Renderer/RenderCommand.h"
 #include "Renderer/Renderer.h"
 
+#include <glfw/glfw3.h>
+
 namespace HAIEngine
 {
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
@@ -190,6 +192,9 @@ namespace HAIEngine
 
 		while (m_Running)
 		{
+			float time = glfwGetTime();
+			TimeStep timeStep = time - m_LastFrameTime;
+			m_LastFrameTime = time;
 			RenderCommand::SetClearColor();
 			RenderCommand::Clear();
 

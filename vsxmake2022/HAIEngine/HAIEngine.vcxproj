@@ -101,6 +101,7 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Application.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Core.h" />
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Core\TimeStep.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\EntryPoint.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\ApplicationEvent.h" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\Event.h" />

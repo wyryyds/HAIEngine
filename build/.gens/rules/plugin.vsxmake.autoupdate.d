@@ -1,12 +1,10 @@
 {
-    files = {
-        [[C:\C++Projects\GameEngineLearning\xmake.lua]]
-    },
     values = {
         [[HAIEngine\src\HAIEngine.h]],
         [[HAIEngine\src\HAIEngine\Application.cpp]],
         [[HAIEngine\src\HAIEngine\Application.h]],
         [[HAIEngine\src\HAIEngine\Core.h]],
+        [[HAIEngine\src\HAIEngine\Core\TimeStep.h]],
         [[HAIEngine\src\HAIEngine\EntryPoint.h]],
         [[HAIEngine\src\HAIEngine\Events\ApplicationEvent.h]],
         [[HAIEngine\src\HAIEngine\Events\Event.h]],
@@ -59,5 +57,8 @@
         [[HAIEngine\src\hepch.cpp]],
         [[HAIEngine\src\hepch.h]],
         [[Sandbox\src\SandboxApp.cpp]]
+    },
+    files = {
+        [[C:\C++Projects\GameEngineLearning\xmake.lua]]
     }
 }
