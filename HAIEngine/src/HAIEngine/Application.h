@@ -5,12 +5,6 @@
 #include "Events/ApplicationEvent.h"
 #include "LayerStack.h"
 #include "ImGui/ImGuiLayer.h"
-#include "HAIEngine/Core/TimeStep.h"
-
-#include "HAIEngine//Renderer/Shader.h"
-#include "Platform/OpenGL/OpenGLBuffer.h"
-#include "HAIEngine/Renderer/VertexArray.h"
-#include "HAIEngine/Renderer/OrthographicCamera.h"
 
 class ImGuiLayer;
 
@@ -39,16 +33,6 @@ namespace HAIEngine
 		bool m_Running=true;
 		LayerStack m_LayerStack;
 		static Application* s_Instance;
-		float m_LastFrameTime = 0.0f;
-
-		OrthographicCamera m_Camera;
-
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexBuffer> m_VertexBuffer;
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<Shader> m_SquareShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
 	};
 
 	Application* CreateApplication();
