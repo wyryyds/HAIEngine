@@ -6,7 +6,7 @@ class ExampleLayer : public HAIEngine::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("ExampleLayer") , m_Camera(-1.0f, 1.0f, -1.0f, 1.0f)
+		: Layer("ExampleLayer"), m_Camera(-1.0f, 1.0f, -1.0f, 1.0f), m_CameraPosition(0.0f)
 	{
 		//------------------------------------渲染三角形部分内容开始线-----------------------------------------
 		m_VertexArray.reset(HAIEngine::VertexArray::Create());
@@ -125,8 +125,6 @@ public:
 
 		m_SquareShader.reset(new HAIEngine::Shader(squareVertexSrc, squareFragmentSrc));
 		//--------------------------------------渲染正方形部分结束线----------------------------------
-
-
 	}
 
 	void OnUpdate() override
@@ -134,8 +132,26 @@ public:
 		float time = glfwGetTime();
 		HAIEngine::TimeStep timeStep = time - m_LastFrameTime;
 		m_LastFrameTime = time;
+
 		HAIEngine::RenderCommand::SetClearColor();
 		HAIEngine::RenderCommand::Clear();
+
+		if (HAIEngine::Input::IsKeyPressed(HE_KEY_LEFT))
+			m_CameraPosition.x -= m_CameraMoveSpeed;
+		if (HAIEngine::Input::IsKeyPressed(HE_KEY_RIGHT))
+			m_CameraPosition.x += m_CameraMoveSpeed;
+		if (HAIEngine::Input::IsKeyPressed(HE_KEY_UP))
+			m_CameraPosition.y += m_CameraMoveSpeed;
+		if (HAIEngine::Input::IsKeyPressed(HE_KEY_DOWN))
+			m_CameraPosition.y -= m_CameraMoveSpeed;
+
+		if (HAIEngine::Input::IsKeyPressed(HE_KEY_A))
+			m_CameraRotation -= m_CameraRotationSpeed;
+		if (HAIEngine::Input::IsKeyPressed(HE_KEY_D))
+			m_CameraRotation += m_CameraRotationSpeed;
+
+		m_Camera.SetPosition(m_CameraPosition);
+		m_Camera.SetRotation(m_CameraRotation);
 
 		HAIEngine::Renderer::BeginScene(m_Camera);
 
@@ -154,10 +170,15 @@ public:
 	void OnEvent(HAIEngine::Event& event) override
 	{
 	}
+
 private:
 	float m_LastFrameTime = 0.0f;
 
 	HAIEngine::OrthographicCamera m_Camera;
+	glm::vec3 m_CameraPosition;
+	float m_CameraMoveSpeed = 0.1f;
+	float m_CameraRotation = 0.0f;
+	float m_CameraRotationSpeed = 2.0f;
 
 	std::shared_ptr<HAIEngine::Shader> m_Shader;
 	std::shared_ptr<HAIEngine::VertexBuffer> m_VertexBuffer;
