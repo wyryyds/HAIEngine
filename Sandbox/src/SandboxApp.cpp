@@ -127,28 +127,26 @@ public:
 		//--------------------------------------渲染正方形部分结束线----------------------------------
 	}
 
-	void OnUpdate() override
+	void OnUpdate(HAIEngine::TimeStep ts) override
 	{
-		float time = glfwGetTime();
-		HAIEngine::TimeStep timeStep = time - m_LastFrameTime;
-		m_LastFrameTime = time;
-
-		HAIEngine::RenderCommand::SetClearColor();
-		HAIEngine::RenderCommand::Clear();
+		HE_TRACE("update frame time : {0}s {1}ms", ts.GetSeconds(), ts.GetMilliSeconds());
 
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_LEFT))
-			m_CameraPosition.x -= m_CameraMoveSpeed;
+			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_RIGHT))
-			m_CameraPosition.x += m_CameraMoveSpeed;
+			m_CameraPosition.x += m_CameraMoveSpeed * ts;
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_UP))
-			m_CameraPosition.y += m_CameraMoveSpeed;
+			m_CameraPosition.y += m_CameraMoveSpeed * ts;
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_DOWN))
-			m_CameraPosition.y -= m_CameraMoveSpeed;
+			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
 
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_A))
-			m_CameraRotation -= m_CameraRotationSpeed;
+			m_CameraRotation -= m_CameraRotationSpeed * ts;
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_D))
-			m_CameraRotation += m_CameraRotationSpeed;
+			m_CameraRotation += m_CameraRotationSpeed * ts;
+
+		HAIEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+		HAIEngine::RenderCommand::Clear();
 
 		m_Camera.SetPosition(m_CameraPosition);
 		m_Camera.SetRotation(m_CameraRotation);
@@ -172,13 +170,12 @@ public:
 	}
 
 private:
-	float m_LastFrameTime = 0.0f;
 
 	HAIEngine::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
-	float m_CameraMoveSpeed = 0.1f;
+	float m_CameraMoveSpeed = 2.0f;
 	float m_CameraRotation = 0.0f;
-	float m_CameraRotationSpeed = 2.0f;
+	float m_CameraRotationSpeed = 20.0f;
 
 	std::shared_ptr<HAIEngine::Shader> m_Shader;
 	std::shared_ptr<HAIEngine::VertexBuffer> m_VertexBuffer;

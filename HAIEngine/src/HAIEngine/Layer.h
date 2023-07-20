@@ -1,5 +1,6 @@
 #pragma once
 #include "HAIEngine/Core.h"
+#include "HAIEngine/Core/TimeStep.h"
 #include "HAIEngine/Events/Event.h"
 
 namespace HAIEngine
@@ -12,7 +13,7 @@ namespace HAIEngine
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(TimeStep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 
