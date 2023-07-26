@@ -2,11 +2,13 @@
 
 #include "imgui.h"
 #include <glfw/glfw3.h>
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 class ExampleLayer : public HAIEngine::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("ExampleLayer"), m_Camera(-1.0f, 1.0f, -1.0f, 1.0f), m_CameraPosition(0.0f)
+		: Layer("ExampleLayer"), m_Camera(-1.0f, 1.0f, -1.0f, 1.0f), m_CameraPosition(0.0f), m_SquarePosition(0.0f)
 	{
 		//------------------------------------渲染三角形部分内容开始线-----------------------------------------
 		m_VertexArray.reset(HAIEngine::VertexArray::Create());
@@ -44,13 +46,14 @@ public:
            layout(location = 0) in vec3 a_Position;
 
 		   uniform mat4 u_ViewProjection;
+		   uniform mat4 u_Transform;
 
            out vec3 v_Position;
 
            void main()
            {
                v_Position = a_Position;
-               gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+               gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
            }
         )";
 
@@ -102,12 +105,14 @@ public:
            layout(location = 0) in vec3 a_Position;
 
 		   uniform mat4 u_ViewProjection;
+		   uniform mat4 u_Transform;
+			
            out vec3 v_Position;
 
            void main()
            {
                v_Position = a_Position;
-               gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+               gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
            }
         )";
 
@@ -129,7 +134,8 @@ public:
 
 	void OnUpdate(HAIEngine::TimeStep ts) override
 	{
-		HE_TRACE("update frame time : {0}s {1}ms", ts.GetSeconds(), ts.GetMilliSeconds());
+		// 输出更新帧率
+		//HE_TRACE("update frame time : {0}s {1}ms", ts.GetSeconds(), ts.GetMilliSeconds());
 
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_LEFT))
 			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
@@ -151,17 +157,27 @@ public:
 		m_Camera.SetPosition(m_CameraPosition);
 		m_Camera.SetRotation(m_CameraRotation);
 
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+
 		HAIEngine::Renderer::BeginScene(m_Camera);
 
-		//先绘制避免正方形覆盖三角形
-		HAIEngine::Renderer::Submit(m_SquareShader, m_SquareVA);
+		for (int i = 0; i <= 5; i++)
+		{
+			for (int j = 0; j <= 5; j++)
+			{
+				glm::vec3 pos(i * 0.12f, j * 0.12f, 0.0f);
+				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+				HAIEngine::Renderer::Submit(m_SquareShader, m_SquareVA, transform);
+			}
+		}
 
 		//Renderer::Submit(m_Shader,m_VertexArray);
+
+		HAIEngine::Renderer::EndScene();
 	}
 
 	void OnImGuiRender() override
 	{
-		
 		
 	}
 
@@ -176,6 +192,7 @@ private:
 	float m_CameraMoveSpeed = 2.0f;
 	float m_CameraRotation = 0.0f;
 	float m_CameraRotationSpeed = 20.0f;
+	glm::vec3 m_SquarePosition;
 
 	std::shared_ptr<HAIEngine::Shader> m_Shader;
 	std::shared_ptr<HAIEngine::VertexBuffer> m_VertexBuffer;
@@ -196,6 +213,7 @@ public:
 	~Sandbox()
 	{
 
+		
 	}
 
 };
