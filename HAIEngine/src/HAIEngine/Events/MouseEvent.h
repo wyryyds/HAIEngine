@@ -6,7 +6,7 @@
 
 namespace HAIEngine
 {
-	class HE_API MouseMovedEvent :public Event
+	class HE_API MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(const float x,const float y) :m_MouseX(x), m_MouseY(y) 

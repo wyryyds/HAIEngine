@@ -1,9 +1,13 @@
 #include "HAIEngine.h"
 
+#include "Platform/OpenGL/OpenGLShader.h"
+
 #include "imgui.h"
 #include <glfw/glfw3.h>
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include <glm/gtc/type_ptr.hpp>
+
 class ExampleLayer : public HAIEngine::Layer
 {
 public:
@@ -70,7 +74,7 @@ public:
            }
         )";
 
-		m_Shader.reset(new HAIEngine::Shader(vertexSrc, fragmentSrc));
+		m_Shader.reset(HAIEngine::Shader::Create(vertexSrc, fragmentSrc));
 		//--------------------------------------渲染三角形部分结束线----------------------------------
 
 		//--------------------------------------渲染正方形部分开始线----------------------------------
@@ -123,16 +127,17 @@ public:
            
            in vec3 v_Position;
 
-		   uniform vec4 u_Color;
+		   uniform vec3 u_Color;
 
            void main()
            {
-               color = vec4(u_Color);
+               color = vec4(u_Color, 1.0f);
            }
         )";
 
-		m_SquareShader.reset(new HAIEngine::Shader(squareVertexSrc, squareFragmentSrc));
-		//--------------------------------------渲染正方形部分结束线----------------------------------
+		std::shared_ptr<HAIEngine::Shader> tmpShader(HAIEngine::Shader::Create(squareVertexSrc, squareFragmentSrc));
+		m_SquareShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(tmpShader);
+	//--------------------------------------渲染正方形部分结束线----------------------------------
 	}
 
 	void OnUpdate(HAIEngine::TimeStep ts) override
@@ -164,8 +169,8 @@ public:
 
 		HAIEngine::Renderer::BeginScene(m_Camera);
 
-		glm::vec4 redColor(0.8f, 0.2f, 0.3f, 1.0f);
-		glm::vec4 blueColor(0.2f, 0.3f, 0.8f, 1.0f);
+		m_SquareShader->Bind();
+		m_SquareShader->UploadUniformFloat3("u_Color", m_SquareColor);
 
 		for (int i = 0; i <= 10; i++)
 		{
@@ -174,12 +179,6 @@ public:
 				glm::vec3 pos(i * 0.12f, j * 0.12f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
 				
-				if (i % 2 == 0)
-				{
-					m_SquareShader->UploadUniformFloat4("u_Color", redColor);
-				}
-				else
-					m_SquareShader->UploadUniformFloat4("u_Color", blueColor);
 				HAIEngine::Renderer::Submit(m_SquareShader, m_SquareVA, transform);
 			}
 		}
@@ -191,7 +190,9 @@ public:
 
 	void OnImGuiRender() override
 	{
-		
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+		ImGui::End();
 	}
 
 	void OnEvent(HAIEngine::Event& event) override
@@ -207,11 +208,13 @@ private:
 	float m_CameraRotationSpeed = 20.0f;
 	glm::vec3 m_SquarePosition;
 
+	glm::vec3 m_SquareColor = glm::vec3(0.1f, 0.2f, 0.3f);
+
 	std::shared_ptr<HAIEngine::Shader> m_Shader;
 	std::shared_ptr<HAIEngine::VertexBuffer> m_VertexBuffer;
 	std::shared_ptr<HAIEngine::VertexArray> m_VertexArray;
 
-	std::shared_ptr<HAIEngine::Shader> m_SquareShader;
+	std::shared_ptr<HAIEngine::OpenGLShader> m_SquareShader;
 	std::shared_ptr<HAIEngine::VertexArray> m_SquareVA;
 };
 
