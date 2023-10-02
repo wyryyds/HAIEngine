@@ -14,6 +14,7 @@
 #include "HAIEngine/Renderer/Renderer.h"
 #include "HAIEngine/Renderer/RenderCommand.h"
 #include "HAIEngine/Renderer/Buffer.h"
+#include "HAIEngine/Renderer/Texture.h"
 #include "HAIEngine/Renderer/Shader.h"
 // Function
 #include "HAIEngine/Renderer/OrthographicCamera.h"
