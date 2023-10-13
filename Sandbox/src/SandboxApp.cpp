@@ -179,6 +179,8 @@ public:
 		m_TextureShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(tmpTextureShader);
 
 		m_Texture = HAIEngine::Texture2D::Create("C:/C++Projects/GameEngineLearning/Sandbox/assets/d2Texture.png");
+		m_TestTexture = HAIEngine::Texture2D::Create("C:/C++Projects/GameEngineLearning/Sandbox/assets/ChernoLogo.png");
+
 		m_TextureShader->Bind();
 		m_TextureShader->UploadUniformInt("u_Texture", 0);
 
@@ -229,6 +231,8 @@ public:
 
 		m_Texture->Bind();
 		HAIEngine::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)));
+		m_TestTexture->Bind();
+		HAIEngine::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)));
 
 		// 渲染三角形
 		// Renderer::Submit(m_Shader,m_VertexArray);
@@ -262,7 +266,7 @@ private:
 	std::shared_ptr<HAIEngine::VertexBuffer> m_VertexBuffer;
 	std::shared_ptr<HAIEngine::VertexArray> m_VertexArray;
 
-	std::shared_ptr<HAIEngine::Texture2D> m_Texture;
+	std::shared_ptr<HAIEngine::Texture2D> m_Texture, m_TestTexture;
 
 	std::shared_ptr<HAIEngine::OpenGLShader> m_SquareShader, m_TextureShader;
 	std::shared_ptr<HAIEngine::VertexArray> m_SquareVA;
