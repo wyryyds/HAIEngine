@@ -141,45 +141,12 @@ public:
 		m_SquareShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(tmpShader);
 	//--------------------------------------渲染正方形部分结束线----------------------------------
 
-		// TextureShader
-		std::string textureVertexSrc = R"(
-           #version 330 core
 
-           layout(location = 0) in vec3 a_Position;
-		   layout(location = 1) in vec2 a_TexCoord;
-
-		   uniform mat4 u_ViewProjection;
-		   uniform mat4 u_Transform;
-			
-           out vec2 v_TexCoord;
-
-           void main()
-           {
-               v_TexCoord = a_TexCoord;
-               gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
-           }
-        )";
-
-		std::string textureFragmentSrc = R"(
-           #version 330 core
-
-           layout(location = 0) out vec4 color;
-           
-           in vec2 v_TexCoord;
-
-		   uniform sampler2D u_Texture;
-
-           void main()
-           {
-               color = texture(u_Texture, v_TexCoord);
-           }
-        )";
-
-		std::shared_ptr<HAIEngine::Shader> tmpTextureShader(HAIEngine::Shader::Create(textureVertexSrc, textureFragmentSrc));
+		std::shared_ptr<HAIEngine::Shader> tmpTextureShader(HAIEngine::Shader::Create("../../../../Sandbox/assets/Shaders/Texture.glsl"));
 		m_TextureShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(tmpTextureShader);
 
-		m_Texture = HAIEngine::Texture2D::Create("C:/C++Projects/GameEngineLearning/Sandbox/assets/d2Texture.png");
-		m_TestTexture = HAIEngine::Texture2D::Create("C:/C++Projects/GameEngineLearning/Sandbox/assets/ChernoLogo.png");
+		m_Texture = HAIEngine::Texture2D::Create("../../../../Sandbox/assets/Textures/d2Texture.png");
+		m_TestTexture = HAIEngine::Texture2D::Create("../../../../Sandbox/assets/Textures/ChernoLogo.png");
 
 		m_TextureShader->Bind();
 		m_TextureShader->UploadUniformInt("u_Texture", 0);
