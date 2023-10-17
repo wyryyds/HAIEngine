@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Event.h"
+#include "Event.hpp"
 
 #include <sstream>
 
 namespace HAIEngine
 {
-	class HE_API WindowResizeEvent :public Event
+	class HE_API WindowResizeEvent : public Event
 	{
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height) :m_Width(width), m_Height(height)
@@ -31,7 +31,7 @@ namespace HAIEngine
 		unsigned int m_Width, m_Height;
 	};
 
-	class HE_API WindowCloseEvent :public Event
+	class HE_API WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() 
@@ -43,7 +43,7 @@ namespace HAIEngine
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class HE_API AppTickEvent :public Event
+	class HE_API AppTickEvent : public Event
 	{
 	public:
 		AppTickEvent() 
@@ -55,7 +55,7 @@ namespace HAIEngine
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class HE_API AppUpdateEvent :public Event
+	class HE_API AppUpdateEvent : public Event
 	{
 	public:
 		AppUpdateEvent()
@@ -67,7 +67,7 @@ namespace HAIEngine
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class HE_API AppRenderEvent :public Event
+	class HE_API AppRenderEvent : public Event
 	{
 	public:
 		AppRenderEvent()

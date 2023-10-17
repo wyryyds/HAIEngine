@@ -1,9 +1,9 @@
 #pragma once
 
-#include "HAIEngine/Layer.h"
-#include "HAIEngine/Events/KeyEvent.h"
-#include "HAIEngine/Events/MouseEvent.h"
-#include "HAIEngine/Application.h"
+#include "HAIEngine/Layer.hpp"
+#include "HAIEngine/Events/KeyEvent.hpp"
+#include "HAIEngine/Events/MouseEvent.hpp"
+#include "HAIEngine/Application.hpp"
 
 namespace HAIEngine
 {

@@ -65,82 +65,82 @@ xmake version 2.7.8+HEAD.87dff1ef4
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine.hpp">
       <Filter>HAIEngine\src</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Application.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Application.hpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Core.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Core.hpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Core\TimeStep.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Core\TimeStep.hpp">
       <Filter>HAIEngine\src\HAIEngine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\EntryPoint.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\EntryPoint.hpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\ApplicationEvent.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\ApplicationEvent.hpp">
       <Filter>HAIEngine\src\HAIEngine\Events</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\Event.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\Event.hpp">
       <Filter>HAIEngine\src\HAIEngine\Events</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\KeyEvent.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\KeyEvent.hpp">
       <Filter>HAIEngine\src\HAIEngine\Events</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\MouseEvent.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Events\MouseEvent.hpp">
       <Filter>HAIEngine\src\HAIEngine\Events</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\ImGui\ImGuiLayer.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\ImGui\ImGuiLayer.hpp">
       <Filter>HAIEngine\src\HAIEngine\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Input.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Input.hpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\KeyCodes.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\KeyCodes.hpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Layer.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Layer.hpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\LayerStack.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\LayerStack.hpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.hpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\MouseButtonCodes.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\MouseButtonCodes.hpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Buffer.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Buffer.hpp">
       <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\GraphicsContext.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\GraphicsContext.hpp">
       <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\OrthographicCamera.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\OrthographicCamera.hpp">
       <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\RenderCommand.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\RenderCommand.hpp">
       <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Renderer.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Renderer.hpp">
       <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\RendererAPI.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\RendererAPI.hpp">
       <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Shader.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Shader.hpp">
       <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Texture.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Texture.hpp">
       <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\VertexArray.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\VertexArray.hpp">
       <Filter>HAIEngine\src\HAIEngine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Window.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Window.hpp">
       <Filter>HAIEngine\src\HAIEngine</Filter>
     </ClInclude>
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\ImGuiExamples\imgui_impl_glfw.h">
@@ -152,31 +152,31 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\ImGuiExamples\imgui_impl_opengl3_loader.h">
       <Filter>HAIEngine\src\ImGuiExamples</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLBuffer.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLBuffer.hpp">
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLContext.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLContext.hpp">
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLRendererAPI.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLRendererAPI.hpp">
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLShader.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLShader.hpp">
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLTexture.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLTexture.hpp">
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLVertexArray.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\OpenGL\OpenGLVertexArray.hpp">
       <Filter>HAIEngine\src\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsInput.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsInput.hpp">
       <Filter>HAIEngine\src\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsWindow.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\Platform\Windows\WindowsWindow.hpp">
       <Filter>HAIEngine\src\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\hepch.h">
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\hepch.hpp">
       <Filter>HAIEngine\src</Filter>
     </ClInclude>
 

@@ -1,7 +1,7 @@
-#include "hepch.h"
-#include "WindowsInput.h"
+#include "hepch.hpp"
+#include "WindowsInput.hpp"
 
-#include "HAIEngine/Application.h"
+#include "HAIEngine/Application.hpp"
 #include <GLFW/glfw3.h>
 
 namespace HAIEngine

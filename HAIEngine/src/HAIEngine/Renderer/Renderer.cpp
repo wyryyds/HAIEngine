@@ -1,7 +1,7 @@
-#include "hepch.h"
-#include "Renderer.h"
+#include "hepch.hpp"
+#include "Renderer.hpp"
 
-#include "Platform/OpenGL/OpenGLShader.h"
+#include "Platform/OpenGL/OpenGLShader.hpp"
 
 namespace HAIEngine
 {

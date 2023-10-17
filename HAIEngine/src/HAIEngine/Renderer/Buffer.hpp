@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "HAIEngine/Log.h"
+#include "HAIEngine/Log.hpp"
 
 namespace HAIEngine
 {

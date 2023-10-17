@@ -1,5 +1,5 @@
-#include "ImGuiLayer.h"
-#include "hepch.h"
+#include "ImGuiLayer.hpp"
+#include "hepch.hpp"
 
 #include "imgui.h"
 
@@ -10,7 +10,7 @@
 
 namespace HAIEngine
 {
-	ImGuiLayer::ImGuiLayer() :Layer("ImGuiLayer")
+	ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer")
 	{
 
 	}

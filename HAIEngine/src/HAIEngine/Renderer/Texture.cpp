@@ -1,8 +1,8 @@
-#include "hepch.h"
-#include "Texture.h"
+#include "hepch.hpp"
+#include "Texture.hpp"
 
-#include "Renderer.h"
-#include "Platform/OpenGL/OpenGLTexture.h"
+#include "Renderer.hpp"
+#include "Platform/OpenGL/OpenGLTexture.hpp"
 
 namespace HAIEngine
 {

@@ -1,8 +1,7 @@
 #pragma once
+#include "HAIEngine/Renderer/VertexArray.hpp"
 
 #include <glm/glm.hpp>
-
-#include "HAIEngine/Renderer/VertexArray.h"
 
 namespace HAIEngine 
 {

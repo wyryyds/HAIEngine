@@ -12,7 +12,7 @@
 #include <vector>
 #include <unordered_map>
 
-#include "HAIEngine/Log.h"
+#include "HAIEngine/Log.hpp"
 #include <unordered_set>
 
 #ifdef HE_PLATFORM_WINDOWS

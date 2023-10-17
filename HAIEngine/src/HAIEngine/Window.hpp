@@ -1,7 +1,7 @@
 #pragma once
-#include "hepch.h"
-#include "HAIEngine/Core.h"
-#include "HAIEngine/Events/Event.h"
+#include "hepch.hpp"
+#include "HAIEngine/Core.hpp"
+#include "HAIEngine/Events/Event.hpp"
 
 namespace HAIEngine
 {

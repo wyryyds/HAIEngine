@@ -1,5 +1,5 @@
-#include "OpenGLBuffer.h"
-#include "hepch.h"
+#include "OpenGLBuffer.hpp"
+#include "hepch.hpp"
 
 #include <glad/glad.h>
 

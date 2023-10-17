@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Core.h"
-#include "Window.h"
-#include "Events/ApplicationEvent.h"
-#include "LayerStack.h"
-#include "ImGui/ImGuiLayer.h"
+#include "Core.hpp"
+#include "Window.hpp"
+#include "Events/ApplicationEvent.hpp"
+#include "LayerStack.hpp"
+#include "ImGui/ImGuiLayer.hpp"
 
 class ImGuiLayer;
 
@@ -30,7 +30,7 @@ namespace HAIEngine
 	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
-		bool m_Running=true;
+		bool m_Running = true;
 		LayerStack m_LayerStack;
 		static Application* s_Instance;
 

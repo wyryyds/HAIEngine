@@ -1,5 +1,5 @@
 #pragma once
-#include "HAIEngine/Renderer/VertexArray.h"
+#include "HAIEngine/Renderer/VertexArray.hpp"
 
 namespace HAIEngine
 {

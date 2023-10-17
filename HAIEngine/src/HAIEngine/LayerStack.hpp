@@ -1,6 +1,6 @@
 #pragma once
-#include "HAIEngine/Core.h"
-#include "Layer.h"
+#include "HAIEngine/Core.hpp"
+#include "Layer.hpp"
 
 #include <vector>
 

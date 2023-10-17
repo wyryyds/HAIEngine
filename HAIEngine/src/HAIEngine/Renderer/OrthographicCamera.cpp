@@ -1,5 +1,5 @@
-#include "OrthographicCamera.h"
-#include "hepch.h"
+#include "OrthographicCamera.hpp"
+#include "hepch.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 namespace HAIEngine
 {

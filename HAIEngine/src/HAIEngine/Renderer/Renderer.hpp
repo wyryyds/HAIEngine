@@ -1,9 +1,9 @@
 #pragma once
 
-#include "RenderCommand.h"
+#include "RenderCommand.hpp"
 
-#include "OrthographicCamera.h"
-#include "Shader.h"
+#include "OrthographicCamera.hpp"
+#include "Shader.hpp"
 
 namespace HAIEngine
 {

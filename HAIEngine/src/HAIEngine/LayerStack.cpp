@@ -1,5 +1,6 @@
-#include "LayerStack.h"
-#include "hepch.h"
+#include "hepch.hpp"
+
+#include "LayerStack.hpp"
 
 namespace HAIEngine
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "HAIEngine//Renderer/Texture.h"
+#include "HAIEngine//Renderer/Texture.hpp"
 
 
 namespace HAIEngine {

@@ -1,5 +1,6 @@
-#include "hepch.h"
-#include "Platform/OpenGL/OpenGLVertexArray.h"
+#include "hepch.hpp"
+#include "Platform/OpenGL/OpenGLVertexArray.hpp"
+
 #include "glad/glad.h"
 
 namespace HAIEngine

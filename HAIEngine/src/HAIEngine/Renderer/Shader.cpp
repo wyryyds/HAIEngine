@@ -1,8 +1,8 @@
-#include "hepch.h"
-#include "HAIEngine/Renderer/Shader.h"
+#include "hepch.hpp"
+#include "HAIEngine/Renderer/Shader.hpp"
 
-#include "Renderer.h"
-#include "Platform/OpenGL/OpenGLShader.h"
+#include "Renderer.hpp"
+#include "Platform/OpenGL/OpenGLShader.hpp"
 namespace HAIEngine
 {
 	Shader* Shader::Create(const std::string& filePath)

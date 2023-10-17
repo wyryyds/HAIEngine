@@ -1,10 +1,10 @@
 #pragma once
 
-#include "HAIEngine/Renderer/RendererAPI.h"
+#include "HAIEngine/Renderer/RendererAPI.hpp"
 
 namespace HAIEngine
 {
-	class OpenGLRendererAPI:public RendererAPI
+	class OpenGLRendererAPI : public RendererAPI
 	{
 	public:
 		virtual void Init() override;

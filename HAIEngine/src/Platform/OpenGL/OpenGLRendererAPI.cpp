@@ -1,5 +1,5 @@
-#include "hepch.h"
-#include "OpenGLRendererAPI.h"
+#include "hepch.hpp"
+#include "OpenGLRendererAPI.hpp"
 
 #include <glad/glad.h>
 

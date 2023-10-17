@@ -1,5 +1,6 @@
 #pragma once
-#include "HAIEngine/Renderer/Buffer.h"
+#include "HAIEngine/Renderer/Buffer.hpp"
+
 #include "glad/glad.h"
 
 namespace HAIEngine

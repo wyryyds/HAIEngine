@@ -1,15 +1,15 @@
-#include "Application.h"
-#include "hepch.h"
+#include "hepch.hpp"
 
-#include "HAIEngine/Log.h"
-#include "glad/glad.h"
-#include "HAIEngine//Core/TimeStep.h"
+#include "Application.hpp"
+#include "HAIEngine/Log.hpp"
+#include "HAIEngine//Core/TimeStep.hpp"
+#include "Input.hpp"
+
+#include "Renderer/Renderer.hpp"
+
 #include "imgui.h"
-#include "Input.h"
-
-#include "Renderer/Renderer.h"
-
 #include "GLFW/glfw3.h"
+#include "glad/glad.h"
 
 
 namespace HAIEngine

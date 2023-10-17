@@ -1,5 +1,5 @@
-#include "Layer.h"
-#include "hepch.h"
+#include "Layer.hpp"
+#include "hepch.hpp"
 
 namespace HAIEngine
 {

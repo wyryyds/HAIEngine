@@ -1,7 +1,7 @@
-#include "HAIEngine.h"
+#include "HAIEngine.hpp"
 
-#include "Platform/OpenGL/OpenGLShader.h"
-#include "Platform/OpenGL/OpenGLTexture.h"
+#include "Platform/OpenGL/OpenGLShader.hpp"
+#include "Platform/OpenGL/OpenGLTexture.hpp"
 
 #include "imgui.h"
 #include <glfw/glfw3.h>

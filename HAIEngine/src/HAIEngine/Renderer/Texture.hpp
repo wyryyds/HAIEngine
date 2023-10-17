@@ -3,7 +3,7 @@
 #include <string>
 #include <memory>
 
-#include "HAIEngine/Core.h"
+#include "HAIEngine/Core.hpp"
 
 namespace HAIEngine {
 

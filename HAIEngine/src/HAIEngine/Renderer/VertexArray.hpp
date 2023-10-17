@@ -1,5 +1,5 @@
 #pragma once
-#include "HAIEngine/Renderer/Buffer.h"
+#include "HAIEngine/Renderer/Buffer.hpp"
 
 namespace HAIEngine
 {

@@ -1,9 +1,10 @@
-#include "hepch.h"
-#include "OpenGLContext.h"
+#include "hepch.hpp"
+#include "OpenGLContext.hpp"
+#include "HAIEngine/Log.hpp"
+
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
 
-#include "HAIEngine/Log.h"
 
 namespace HAIEngine
 {

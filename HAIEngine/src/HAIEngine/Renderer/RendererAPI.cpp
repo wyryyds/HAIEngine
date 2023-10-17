@@ -1,6 +1,6 @@
-#include "hepch.h"
+#include "hepch.hpp"
 
-#include "RendererAPI.h"
+#include "RendererAPI.hpp"
 
 namespace HAIEngine
 {

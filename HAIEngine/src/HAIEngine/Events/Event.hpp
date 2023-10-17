@@ -1,5 +1,5 @@
 #pragma once
-#include "HAIEngine/Core.h"
+#include "HAIEngine/Core.hpp"
 
 #include <string>
 #include <functional>

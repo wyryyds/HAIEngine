@@ -1,5 +1,5 @@
-#include "hepch.h"
-#include "OpenGLShader.h"
+#include "hepch.hpp"
+#include "OpenGLShader.hpp"
 
 
 #include <fstream>

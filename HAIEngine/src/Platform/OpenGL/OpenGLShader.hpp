@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "HAIEngine/Renderer/Shader.h"
+#include "HAIEngine/Renderer/Shader.hpp"
 
 // TODO Remove
 typedef unsigned int GLenum;

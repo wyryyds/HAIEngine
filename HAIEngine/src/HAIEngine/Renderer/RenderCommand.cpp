@@ -1,7 +1,7 @@
-#include "hepch.h"
+#include "hepch.hpp"
 
-#include "RenderCommand.h"
-#include "Platform/OpenGL/OpenGLRendererAPI.h"
+#include "RenderCommand.hpp"
+#include "Platform/OpenGL/OpenGLRendererAPI.hpp"
 namespace HAIEngine
 {
 	RendererAPI* RenderCommand::s_RendererAPI = new OpenGLRendererAPI();

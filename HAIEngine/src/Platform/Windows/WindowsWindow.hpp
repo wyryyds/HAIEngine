@@ -1,7 +1,8 @@
 #pragma once
-#include "HAIEngine/Window.h"
+#include "HAIEngine/Window.hpp"
+#include "HAIEngine/Renderer/GraphicsContext.hpp"
+
 #include "GLFW/glfw3.h"
-#include "HAIEngine/Renderer/GraphicsContext.h"
 
 namespace HAIEngine
 {

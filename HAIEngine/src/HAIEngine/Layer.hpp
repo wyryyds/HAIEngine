@@ -1,7 +1,7 @@
 #pragma once
-#include "HAIEngine/Core.h"
-#include "HAIEngine/Core/TimeStep.h"
-#include "HAIEngine/Events/Event.h"
+#include "HAIEngine/Core.hpp"
+#include "HAIEngine/Core/TimeStep.hpp"
+#include "HAIEngine/Events/Event.hpp"
 
 namespace HAIEngine
 {
