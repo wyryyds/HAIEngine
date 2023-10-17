@@ -140,7 +140,8 @@ namespace HAIEngine
 	{
 		auto program = glCreateProgram();
 
-		std::vector<GLenum> glShaders(shaderSources.size());
+		std::vector<GLenum> glShaders;
+		glShaders.reserve(shaderSources.size());
 		for (auto& [shaderType, shaderSource] : shaderSources)
 		{
 			GLuint shader = glCreateShader(shaderType);
