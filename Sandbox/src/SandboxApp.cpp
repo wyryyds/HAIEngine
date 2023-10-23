@@ -75,7 +75,7 @@ public:
            }
         )";
 
-		m_Shader.reset(HAIEngine::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = HAIEngine::Shader::Create("m_TestShader", vertexSrc, fragmentSrc);
 		//--------------------------------------渲染三角形部分结束线----------------------------------
 
 		//--------------------------------------渲染正方形部分开始线----------------------------------
@@ -137,19 +137,19 @@ public:
            }
         )";
 
-		std::shared_ptr<HAIEngine::Shader> tmpShader(HAIEngine::Shader::Create(squareVertexSrc, squareFragmentSrc));
+		std::shared_ptr<HAIEngine::Shader> tmpShader = 
+			HAIEngine::Shader::Create("m_SquareShader", squareVertexSrc, squareFragmentSrc);
 		m_SquareShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(tmpShader);
+
 	//--------------------------------------渲染正方形部分结束线----------------------------------
 
-
-		std::shared_ptr<HAIEngine::Shader> tmpTextureShader(HAIEngine::Shader::Create("../../../../Sandbox/assets/Shaders/Texture.glsl"));
-		m_TextureShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(tmpTextureShader);
+		auto textureShader = m_ShaderLibrary.Load("TextureShader", "../../../../Sandbox/assets/Shaders/Texture.glsl");
 
 		m_Texture = HAIEngine::Texture2D::Create("../../../../Sandbox/assets/Textures/d2Texture.png");
 		m_TestTexture = HAIEngine::Texture2D::Create("../../../../Sandbox/assets/Textures/ChernoLogo.png");
 
-		m_TextureShader->Bind();
-		m_TextureShader->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 
 	}
 
@@ -196,10 +196,11 @@ public:
 			}
 		}
 
+		auto textureShader = m_ShaderLibrary.Get("TextureShader");
 		m_Texture->Bind();
-		HAIEngine::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)));
+		HAIEngine::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)));
 		m_TestTexture->Bind();
-		HAIEngine::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)));
+		HAIEngine::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)));
 
 		// 渲染三角形
 		// Renderer::Submit(m_Shader,m_VertexArray);
@@ -219,7 +220,7 @@ public:
 	}
 
 private:
-
+	HAIEngine::ShaderLibrary m_ShaderLibrary;
 	HAIEngine::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
 	float m_CameraMoveSpeed = 2.0f;
@@ -230,13 +231,14 @@ private:
 	glm::vec3 m_SquareColor = glm::vec3(0.1f, 0.2f, 0.3f);
 
 	std::shared_ptr<HAIEngine::Shader> m_Shader;
+
 	std::shared_ptr<HAIEngine::VertexBuffer> m_VertexBuffer;
 	std::shared_ptr<HAIEngine::VertexArray> m_VertexArray;
+	std::shared_ptr<HAIEngine::VertexArray> m_SquareVA;
 
 	std::shared_ptr<HAIEngine::Texture2D> m_Texture, m_TestTexture;
 
-	std::shared_ptr<HAIEngine::OpenGLShader> m_SquareShader, m_TextureShader;
-	std::shared_ptr<HAIEngine::VertexArray> m_SquareVA;
+	std::shared_ptr<HAIEngine::OpenGLShader> m_SquareShader;
 };
 
 class Sandbox : public HAIEngine::Application

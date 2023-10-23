@@ -19,9 +19,12 @@ namespace HAIEngine
 		std::string sourceStr = ReadFile(filePath);
 		auto shaderSources = PreProcess(sourceStr);
 		ShaderCompile(shaderSources);
+		// TODO change init Name;
+		m_Name = filePath;
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+		: m_Name(name)
 	{
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSrc;
