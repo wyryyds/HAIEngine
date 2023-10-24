@@ -118,6 +118,8 @@ namespace HAIEngine
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 
 		static VertexBuffer* Create(float* vertices, uint32_t size);
+
+		virtual uint32_t GetSize() const = 0;
 	};
 
 	class IndexBuffer

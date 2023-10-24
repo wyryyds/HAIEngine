@@ -31,6 +31,9 @@ namespace HAIEngine
 		m_OpenGLShader->UploadUniformMat4("u_Transform", transform);
 
 		vertexArray->Bind();
-		RenderCommand::DrawIndexed(vertexArray);
+		// 根据顶点索引绘制
+		//RenderCommand::DrawIndexed(vertexArray);
+		//RenderCommand::DrawIndirctByVertices(vertexArray);
+		RenderCommand::Draw(vertexArray);
 	}
 }

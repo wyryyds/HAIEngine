@@ -22,11 +22,20 @@ namespace HAIEngine
 			s_RendererAPI->Clear();
 		}
 
-		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& vertexarray)
+		inline static void Draw(const std::shared_ptr<VertexArray>& vertexArray)
 		{
-			s_RendererAPI->DrawIndexed(vertexarray);
+			s_RendererAPI->Draw(vertexArray);
 		}
 
+		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+		{
+			s_RendererAPI->DrawIndexed(vertexArray);
+		}
+
+		inline static void DrawIndirctByVertices(const std::shared_ptr<VertexArray>& vertexArray)
+		{
+			s_RendererAPI->DrawIndirctByVertices(vertexArray);
+		}
 	private:
 		static RendererAPI* s_RendererAPI;
 	};

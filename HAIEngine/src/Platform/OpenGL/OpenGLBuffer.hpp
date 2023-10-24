@@ -18,8 +18,11 @@ namespace HAIEngine
 		virtual const BufferLayout& GetLayout() const override { return m_Layerout; };
 		virtual void SetLayout(const BufferLayout& layout) override { m_Layerout = layout; };
 
+		inline virtual uint32_t GetSize() const override { return m_Size; };
+
 	private:
 		uint32_t m_RendererID;
+		uint32_t m_Size;
 		BufferLayout m_Layerout;
 	};
 
@@ -32,7 +35,7 @@ namespace HAIEngine
 		virtual void Bind() const;
 		virtual void UnBind() const;
 
-		inline virtual uint32_t GetCount() const { return m_Count; }
+		inline virtual uint32_t GetCount() const override { return m_Count; };
 	private:
 		uint32_t m_RendererID;
 		uint32_t m_Count;

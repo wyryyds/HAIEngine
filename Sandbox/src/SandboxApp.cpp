@@ -81,15 +81,51 @@ public:
 		//--------------------------------------渲染正方形部分开始线----------------------------------
 		m_SquareVA.reset(HAIEngine::VertexArray::Create());
 
-		float squareVertices[5 * 4] =
+		float squareVertices[] =
 		{
-			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
-			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+			-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+			0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+			0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+			0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+			-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+			-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+			-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+			 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+			 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+			 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+			-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+			-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+			-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+			-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+			-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+			-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+			-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+			-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+			 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+			 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+			 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+			 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+			 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+			 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+			-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+			 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+			 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+			 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+			-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+			-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+			-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+			 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+			 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+			 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+			-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+			-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 		};
 
-		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
 
 		std::shared_ptr<HAIEngine::VertexBuffer> squareVB;
 		squareVB.reset(HAIEngine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
@@ -101,9 +137,6 @@ public:
 
 		m_SquareVA->AddVertexBuffer(squareVB);
 
-		std::shared_ptr<HAIEngine::IndexBuffer> squareIB;
-		squareIB.reset(HAIEngine::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
-		m_SquareVA->SetIndexBuffer(squareIB);
 
 		std::string squareVertexSrc = R"(
            #version 450 core
@@ -185,25 +218,17 @@ public:
 		m_SquareShader->Bind();
 		m_SquareShader->UploadUniformFloat3("u_Color", m_SquareColor);
 
-		for (int i = 0; i <= 10; i++)
-		{
-			for (int j = 0; j <= 10; j++)
-			{
-				glm::vec3 pos(i * 0.12f, j * 0.12f, 0.0f);
-				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-				
-				HAIEngine::Renderer::Submit(m_SquareShader, m_SquareVA, transform);
-			}
-		}
+		HAIEngine::Renderer::Submit(m_SquareShader, m_SquareVA);
 
-		auto textureShader = m_ShaderLibrary.Get("TextureShader");
+
+		/*auto textureShader = m_ShaderLibrary.Get("TextureShader");
 		m_Texture->Bind();
 		HAIEngine::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)));
 		m_TestTexture->Bind();
-		HAIEngine::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)));
+		HAIEngine::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)));*/
 
 		// 渲染三角形
-		// Renderer::Submit(m_Shader,m_VertexArray);
+		// HAIEngine::Renderer::Submit(m_Shader,m_VertexArray);
 
 		HAIEngine::Renderer::EndScene();
 	}
@@ -256,6 +281,7 @@ public:
 	}
 
 };
+
 HAIEngine::Application* HAIEngine::CreateApplication()
 {
 	return new Sandbox();
