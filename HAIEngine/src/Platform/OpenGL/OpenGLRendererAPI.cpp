@@ -8,6 +8,7 @@ namespace HAIEngine
 	void OpenGLRendererAPI::Init()
 	{
 		glEnable(GL_BLEND);
+		glEnable(GL_DEPTH_TEST);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
@@ -40,6 +41,6 @@ namespace HAIEngine
 
 	void OpenGLRendererAPI::DrawIndirctByVertices(const std::shared_ptr<VertexArray>& vertexArray)
 	{
-		glDrawArrays(GL_TRIANGLES, 0, vertexArray->GetVertexBuffers()[0]->GetSize());
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
 }

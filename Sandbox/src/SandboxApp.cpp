@@ -15,6 +15,10 @@ public:
 	ExampleLayer()
 		: Layer("ExampleLayer"), m_Camera(-1.0f, 1.0f, -1.0f, 1.0f), m_CameraPosition(0.0f), m_SquarePosition(0.0f)
 	{
+		m_PerspectiveCamera = HAIEngine::CameraController::CreatePerspectiveCamera(HAIEngine::CameraType::PERSPECTIVE,
+			1920.0f / 1080.0f, 60.0f, 0.1f, 60.0f);
+		m_CameraController = HAIEngine::CameraController::Create(m_PerspectiveCamera);
+
 		//------------------------------------渲染三角形部分内容开始线-----------------------------------------
 		m_VertexArray.reset(HAIEngine::VertexArray::Create());
 
@@ -208,17 +212,31 @@ public:
 		HAIEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		HAIEngine::RenderCommand::Clear();
 
+		glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
+		glm::mat4 view = glm::mat4(1.0f);
+		glm::mat4 projection = glm::mat4(1.0f);
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+		projection = glm::perspective(glm::radians(45.0f), (float)1920 / (float)1080, 0.1f, 100.0f);
+
+		m_CameraController->translate(m_CameraPosition);
 		m_Camera.SetPosition(m_CameraPosition);
 		m_Camera.SetRotation(m_CameraRotation);
+		m_CameraController->update(ts);
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-		HAIEngine::Renderer::BeginScene(m_Camera);
+		m_PerspectiveCamera->m_projection = projection;
+		m_PerspectiveCamera->m_view = view;
+
+		HAIEngine::Renderer::BeginScene(m_PerspectiveCamera);
 
 		m_SquareShader->Bind();
 		m_SquareShader->UploadUniformFloat3("u_Color", m_SquareColor);
 
-		HAIEngine::Renderer::Submit(m_SquareShader, m_SquareVA);
+		auto textureShader = m_ShaderLibrary.Get("TextureShader");
+		m_Texture->Bind();
+		HAIEngine::Renderer::Submit(textureShader, m_SquareVA);
+
 
 
 		/*auto textureShader = m_ShaderLibrary.Get("TextureShader");
@@ -247,6 +265,10 @@ public:
 private:
 	HAIEngine::ShaderLibrary m_ShaderLibrary;
 	HAIEngine::OrthographicCamera m_Camera;
+
+	std::unique_ptr<HAIEngine::CameraController> m_CameraController;
+	HAIEngine::Camera* m_PerspectiveCamera;
+
 	glm::vec3 m_CameraPosition;
 	float m_CameraMoveSpeed = 2.0f;
 	float m_CameraRotation = 0.0f;

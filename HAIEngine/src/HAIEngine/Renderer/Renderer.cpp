@@ -2,6 +2,9 @@
 #include "Renderer.hpp"
 
 #include "Platform/OpenGL/OpenGLShader.hpp"
+#include <glm/ext/matrix_transform.hpp>
+#include <GLFW/glfw3.h>
+#include <glm/ext/matrix_clip_space.hpp>
 
 namespace HAIEngine
 {
@@ -12,9 +15,11 @@ namespace HAIEngine
 		RenderCommand::Init();
 	}
 
-	void Renderer::BeginScene(OrthographicCamera& camera)
+	void Renderer::BeginScene(Camera* camera)
 	{
-		m_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
+		m_SceneData->ViewProjectionMatrix = camera->m_projection * camera->m_view * model;
 	}
 
 	void Renderer::EndScene()
@@ -27,8 +32,11 @@ namespace HAIEngine
 
 		auto m_OpenGLShader = std::dynamic_pointer_cast<OpenGLShader>(shader);
 
+		
+
 		m_OpenGLShader->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
 		m_OpenGLShader->UploadUniformMat4("u_Transform", transform);
+
 
 		vertexArray->Bind();
 		// 根据顶点索引绘制
