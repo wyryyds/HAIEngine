@@ -17,7 +17,7 @@
 #include "HAIEngine/Renderer/Texture.hpp"
 #include "HAIEngine/Renderer/Shader.hpp"
 // Function
-#include "HAIEngine/Renderer/OrthographicCamera.hpp"
+#include "HAIEngine/Renderer/Camera.hpp"
 #include "HAIEngine/Core/TimeStep.hpp"
 // Entry Point
 #include "HAIEngine/EntryPoint.hpp"

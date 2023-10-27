@@ -6,6 +6,8 @@
 #include <GLFW/glfw3.h>
 #include <glm/ext/matrix_clip_space.hpp>
 
+#include <glm/gtx/string_cast.hpp>
+
 namespace HAIEngine
 {
 	Renderer::SceneData* Renderer::m_SceneData = new Renderer::SceneData;
@@ -17,9 +19,10 @@ namespace HAIEngine
 
 	void Renderer::BeginScene(Camera* camera)
 	{
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
-		m_SceneData->ViewProjectionMatrix = camera->m_projection * camera->m_view * model;
+		// glm::mat4 model = glm::mat4(1.0f);
+		// model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
+		std::cout << "viewMat:" << glm::to_string(camera->m_view) << std::endl;
+		m_SceneData->ViewProjectionMatrix = camera->m_projection * camera->m_view;
 	}
 
 	void Renderer::EndScene()
@@ -31,8 +34,6 @@ namespace HAIEngine
 		shader->Bind();
 
 		auto m_OpenGLShader = std::dynamic_pointer_cast<OpenGLShader>(shader);
-
-		
 
 		m_OpenGLShader->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
 		m_OpenGLShader->UploadUniformMat4("u_Transform", transform);

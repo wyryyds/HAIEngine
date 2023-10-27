@@ -2,7 +2,7 @@
 
 #include "RenderCommand.hpp"
 
-#include "OrthographicCamera.hpp"
+#include "Camera.hpp"
 #include "Shader.hpp"
 
 namespace HAIEngine

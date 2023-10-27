@@ -115,8 +115,8 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Log.hpp" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\MouseButtonCodes.hpp" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Buffer.hpp" />
+    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Camera.hpp" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\GraphicsContext.hpp" />
-    <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\OrthographicCamera.hpp" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\RenderCommand.hpp" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Renderer.hpp" />
     <ClInclude Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\RendererAPI.hpp" />
@@ -159,7 +159,7 @@ xmake version 2.7.8+HEAD.87dff1ef4
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Buffer.cpp">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\OrthographicCamera.cpp">
+    <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\Camera.cpp">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="$(XmakeProjectDir)\HAIEngine\src\HAIEngine\Renderer\RenderCommand.cpp">

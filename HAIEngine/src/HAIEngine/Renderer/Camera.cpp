@@ -1,6 +1,7 @@
-#include "OrthographicCamera.hpp"
+#include "Camera.hpp"
 #include "hepch.hpp"
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/string_cast.hpp>
 namespace HAIEngine
 {
 
@@ -37,7 +38,10 @@ namespace HAIEngine
             {
                 translation.y *= -1.0f;
             }
+            //std::cout << "compute result:" << glm::to_string(glm::translate(transM, translation)) << std::endl;
             transM = glm::translate(transM, translation);
+            //std::cout << "transM:" << glm::to_string(transM) << std::endl;
+
         }
 
         if (m_camera->m_cameraType == CameraType::PERSPECTIVE)

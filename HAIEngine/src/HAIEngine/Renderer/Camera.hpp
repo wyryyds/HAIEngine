@@ -6,39 +6,13 @@
 
 namespace HAIEngine
 {
-	class OrthographicCamera
-	{
-	public:
-		OrthographicCamera(float left, float right, float bottom, float top);
 
-		const glm::vec3& GetPosition() const { return m_Position; }
-		void SetPosition(const glm::vec3& position) { m_Position = position; RecalculateViewMatrix(); }
-
-		float GetRotation() const { return m_Rotation; }
-		void SetRotation(float rotation) { m_Rotation = rotation; RecalculateViewMatrix(); }
-
-		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
-		const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
-		const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
-	private:
-		void RecalculateViewMatrix();
-	private:
-		glm::mat4 m_ProjectionMatrix;
-		glm::mat4 m_ViewMatrix;
-		glm::mat4 m_ViewProjectionMatrix;
-
-		glm::vec3 m_Position = { 0.0f, 0.0f, 0.0f };
-		float m_Rotation = 0.0f;
-	};
-
-
-
-	enum class CameraType
-	{
-		UNDEFINED,
-		ORTHO,
-		PERSPECTIVE,
-	};
+    enum class CameraType
+    {
+        UNDEFINED,
+        ORTHO,
+        PERSPECTIVE,
+    };
 
     struct Camera
     {
@@ -99,6 +73,8 @@ namespace HAIEngine
             return camera;
         }
 
+        inline glm::vec3 GetCameraPosition(){ return m_position; }
+
         void move(Direction direction, bool flag) { m_directions[direction] = flag; }
 
         void rotate(glm::vec3 delta)
@@ -120,15 +96,41 @@ namespace HAIEngine
 
         Camera* m_camera{};
 
-        bool      m_flipY{ true };
+        bool      m_flipY{ false };
         glm::vec3 m_direction{ 0.0f, 180.0f, 0.0f };
         glm::vec3 m_position{ 0.0f, 0.0f, -3.0f };
         float     m_rotationSpeed{ 0.1f };
-        float     m_movementSpeed{ 2.5f };
+        float     m_movementSpeed{ 5.0f };
 
         std::unordered_map<Direction, bool> m_directions{
             {Direction::LEFT, false}, {Direction::RIGHT, false}, {Direction::UP, false}, {Direction::DOWN, false} };
 
         bool enabled = false;
     };
+
+	class OrthographicCamera
+	{
+	public:
+		OrthographicCamera(float left, float right, float bottom, float top);
+
+		const glm::vec3& GetPosition() const { return m_Position; }
+		void SetPosition(const glm::vec3& position) { m_Position = position; RecalculateViewMatrix(); }
+
+		float GetRotation() const { return m_Rotation; }
+		void SetRotation(float rotation) { m_Rotation = rotation; RecalculateViewMatrix(); }
+
+		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
+		const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
+		const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
+	private:
+		void RecalculateViewMatrix();
+	private:
+		glm::mat4 m_ProjectionMatrix;
+		glm::mat4 m_ViewMatrix;
+		glm::mat4 m_ViewProjectionMatrix;
+
+		glm::vec3 m_Position = { 0.0f, 0.0f, 0.0f };
+		float m_Rotation = 0.0f;
+	};
+
 }

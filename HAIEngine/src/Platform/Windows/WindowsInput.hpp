@@ -8,6 +8,7 @@ namespace HAIEngine
 	{
 	protected:
 		virtual bool IsKeyPressedImpl(int keycode) override;
+		virtual bool IsKeyReleasedImpl(int keycode) override;
 		virtual bool IsMouseButtonPressedImpl(int button) override;
 		virtual std::pair<float, float> GetMousePositionImpl() override;
 		virtual float GetMouseXImpl() override;

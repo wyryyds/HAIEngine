@@ -196,13 +196,42 @@ public:
 		//HE_TRACE("update frame time : {0}s {1}ms", ts.GetSeconds(), ts.GetMilliSeconds());
 
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_LEFT))
+		{
 			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
+			m_CameraController->move(HAIEngine::Direction::LEFT, true);
+		}
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_RIGHT))
+		{
 			m_CameraPosition.x += m_CameraMoveSpeed * ts;
+			m_CameraController->move(HAIEngine::Direction::RIGHT, true);
+		}
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_UP))
+		{
 			m_CameraPosition.y += m_CameraMoveSpeed * ts;
+			m_CameraController->move(HAIEngine::Direction::UP, true);
+		}
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_DOWN))
+		{
 			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
+			m_CameraController->move(HAIEngine::Direction::DOWN, true);
+		}
+
+		if (HAIEngine::Input::IsKeyReleased(HE_KEY_LEFT))
+		{
+			m_CameraController->move(HAIEngine::Direction::LEFT, false);
+		}
+		if (HAIEngine::Input::IsKeyReleased(HE_KEY_RIGHT))
+		{
+			m_CameraController->move(HAIEngine::Direction::RIGHT, false);
+		}
+		if (HAIEngine::Input::IsKeyReleased(HE_KEY_UP))
+		{
+			m_CameraController->move(HAIEngine::Direction::UP, false);
+		}
+		if (HAIEngine::Input::IsKeyReleased(HE_KEY_DOWN))
+		{
+			m_CameraController->move(HAIEngine::Direction::DOWN, false);
+		}
 
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_A))
 			m_CameraRotation -= m_CameraRotationSpeed * ts;
@@ -218,15 +247,19 @@ public:
 		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 		projection = glm::perspective(glm::radians(45.0f), (float)1920 / (float)1080, 0.1f, 100.0f);
 
-		m_CameraController->translate(m_CameraPosition);
+		//m_CameraController->translate(m_CameraPosition);
+
 		m_Camera.SetPosition(m_CameraPosition);
 		m_Camera.SetRotation(m_CameraRotation);
 		m_CameraController->update(ts);
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-		m_PerspectiveCamera->m_projection = projection;
-		m_PerspectiveCamera->m_view = view;
+
+		// Test
+		/*HE_CORE_INFO("Camera Position:{}, {}, {}", m_CameraController->GetCameraPosition().x, 
+			m_CameraController->GetCameraPosition().y, m_CameraController->GetCameraPosition().z);*/
+		//
 
 		HAIEngine::Renderer::BeginScene(m_PerspectiveCamera);
 
@@ -237,7 +270,23 @@ public:
 		m_Texture->Bind();
 		HAIEngine::Renderer::Submit(textureShader, m_SquareVA);
 
+		glm::vec3 cubePositions[] = {
+			glm::vec3(0.0f,  0.0f,  0.0f),
+			glm::vec3(2.0f,  5.0f, -15.0f),
+			glm::vec3(-1.5f, -2.2f, -2.5f),
+			glm::vec3(-3.8f, -2.0f, -12.3f),
+			glm::vec3(2.4f, -0.4f, -3.5f),
+			glm::vec3(-1.7f,  3.0f, -7.5f),
+			glm::vec3(1.3f, -2.0f, -2.5f),
+			glm::vec3(1.5f,  2.0f, -2.5f),
+			glm::vec3(1.5f,  0.2f, -1.5f),
+			glm::vec3(-1.3f,  1.0f, -1.5f)
+		};
 
+		for (unsigned int i = 0; i < 10; ++i)
+		{
+			HAIEngine::Renderer::Submit(textureShader, m_SquareVA, glm::translate(glm::mat4(1.0f), cubePositions[i]));
+		}
 
 		/*auto textureShader = m_ShaderLibrary.Get("TextureShader");
 		m_Texture->Bind();
