@@ -20,6 +20,9 @@ public:
 			1920.0f / 1080.0f, 60.0f, 0.1f, 60.0f);
 		m_CameraController = HAIEngine::CameraController::Create(m_PerspectiveCamera);
 
+		lastMouseX = HAIEngine::Input::GetMouseX();
+		lastMouseY = HAIEngine::Input::GetMouseY();
+
 		// set vertex data
 		m_SquareVA.reset(HAIEngine::VertexArray::Create());
 		float squareVertices[] =
@@ -90,6 +93,7 @@ public:
 		
 		// check inputSystme
 		CheckInput(ts);
+
 		// update camera
 		m_CameraController->update(ts);
 
@@ -135,6 +139,16 @@ public:
 
 	void CheckInput(HAIEngine::TimeStep ts)
 	{
+		if (HAIEngine::Input::IsMouseButtonPressed(HE_MOUSE_BUTTON_RIGHT))
+		{
+			float curMouseX = HAIEngine::Input::GetMouseX();
+			float curMouseY = HAIEngine::Input::GetMouseY();
+
+			m_CameraController->ProcessMouseMovement(curMouseX - lastMouseX, lastMouseY - curMouseY);
+			lastMouseX = curMouseX;
+			lastMouseY = curMouseY;
+		}
+
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_LEFT))
 		{
 			m_CameraController->move(HAIEngine::Direction::LEFT, true);
@@ -171,11 +185,9 @@ public:
 
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_A))
 		{
-
 		}
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_D))
 		{
-
 		}
 
 	}
@@ -191,6 +203,8 @@ private:
 	std::shared_ptr<HAIEngine::VertexArray> m_SquareVA;
 
 	std::shared_ptr<HAIEngine::Texture2D> m_Texture;
+
+	float lastMouseX, lastMouseY;
 };
 
 class Sandbox : public HAIEngine::Application
@@ -202,9 +216,7 @@ public:
 	}
 
 	~Sandbox()
-	{
-
-		
+	{	
 	}
 
 };

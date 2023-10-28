@@ -85,6 +85,7 @@ namespace HAIEngine
             }
             m_direction += delta * m_rotationSpeed;
         }
+        void ProcessMouseMovement(float xoffset, float yoffset);
         void translate(glm::vec3 delta) { m_position += delta * m_movementSpeed; }
         void update(float deltaTime);
         void setCursorEnabled(bool flag) { enabled = flag; }
@@ -97,8 +98,16 @@ namespace HAIEngine
         Camera* m_camera{};
 
         bool      m_flipY{ false };
-        glm::vec3 m_direction{ 0.0f, 180.0f, 0.0f };
-        glm::vec3 m_position{ 0.0f, 0.0f, -3.0f };
+        glm::vec3 m_direction{ 0.0f, 0.0f, 0.0f };
+        glm::vec3 m_position{ 0.0f, 0.0f, 3.0f };
+        glm::vec3 m_Front{ 0.0f, 0.0f, -1.0f };
+        glm::vec3 m_Up{ 0.0f, 1.0f, 0.0f };
+        glm::vec3 m_Right;
+        glm::vec3 worldUp{ 0.0f, 1.0f, 0.0f };
+        float     yaw = -90.0f;
+        float     pitch = 0.0f;
+        float     sensitivity = 0.1f;
+        float     zoom = 45.0f;
         float     m_rotationSpeed{ 0.1f };
         float     m_movementSpeed{ 5.0f };
 
@@ -106,6 +115,8 @@ namespace HAIEngine
             {Direction::LEFT, false}, {Direction::RIGHT, false}, {Direction::UP, false}, {Direction::DOWN, false} };
 
         bool enabled = false;
+
+        void UpdateCameraVec();
     };
 
 	class OrthographicCamera
@@ -132,5 +143,4 @@ namespace HAIEngine
 		glm::vec3 m_Position = { 0.0f, 0.0f, 0.0f };
 		float m_Rotation = 0.0f;
 	};
-
 }
