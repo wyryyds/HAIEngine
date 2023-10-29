@@ -38,7 +38,6 @@ namespace HAIEngine
 		m_OpenGLShader->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
 		m_OpenGLShader->UploadUniformMat4("u_Transform", transform);
 
-
 		vertexArray->Bind();
 		// 根据顶点索引绘制
 		//RenderCommand::DrawIndexed(vertexArray);

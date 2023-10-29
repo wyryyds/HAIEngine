@@ -25,58 +25,68 @@ public:
 
 		// set vertex data
 		m_SquareVA.reset(HAIEngine::VertexArray::Create());
+
 		float squareVertices[] =
 		{
-			-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-			0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-			0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-			-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+			-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-			-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-			 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-			 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-			 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-			-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-			-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
 
-			-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-			-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-			-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-			 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-			 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-			 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-			-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-			 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-			 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-			 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-			-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-			-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 
-			-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-			 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-			 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-			 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-			-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-			-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 		};
 
 		m_SuareVB.reset(HAIEngine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		m_SuareVB->SetLayout(
 			{
 				{ HAIEngine::ShaderDataType::Float3, "a_Position" },
-				{ HAIEngine::ShaderDataType::Float2, "a_TexCoord"}
+				{ HAIEngine::ShaderDataType::Float3, "aNormal"}
 			});
 		m_SquareVA->AddVertexBuffer(m_SuareVB);
+
+		m_LightVA.reset(HAIEngine::VertexArray::Create());
+		m_LightVB.reset(HAIEngine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		m_LightVB->SetLayout(
+			{
+				{ HAIEngine::ShaderDataType::Float3, "a_Position" },
+				{ HAIEngine::ShaderDataType::Float3, "aNormal"}
+			});
+		m_LightVA->AddVertexBuffer(m_LightVB);
 
 		// add test shader
 		auto sampleShader = m_ShaderLibrary.Load("sample", "../../../../Sandbox/assets/Shaders/sample.glsl");
@@ -111,14 +121,22 @@ public:
 		auto textureShader = m_ShaderLibrary.Get("TextureShader");
 		//m_Texture->Bind();
 		// sample shader
+		auto lightingShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(m_ShaderLibrary.Get("lighting"));
+		lightingShader->Bind();
+		lightingShader->UploadUniformFloat3("lightColor", m_LightCorlor);
+
 		auto sampleShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(m_ShaderLibrary.Get("sample"));
-		sampleShader->UploadUniformFloat3("objectColor", glm::vec3(1.0f, 0.5f, 0.31f));
-		sampleShader->UploadUniformFloat3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+		sampleShader->Bind();
+		sampleShader->UploadUniformFloat3("objectColor", m_CubeColor);
+		sampleShader->UploadUniformFloat3("lightColor", m_LightCorlor);
+		sampleShader->UploadUniformFloat3("lightPos", lightPos);
+		sampleShader->UploadUniformFloat3("viewPos", m_CameraController->GetCameraPosition());
+		sampleShader->UploadUniformInt("sepcness", m_Specuness);
 
-		auto lightingShader =m_ShaderLibrary.Get("lighting");
+		HAIEngine::Renderer::Submit(lightingShader, m_LightVA, glm::scale(glm::translate(glm::mat4(1.0f), lightPos), glm::vec3(0.2f)));
 
-		HAIEngine::Renderer::Submit(lightingShader, m_SquareVA, glm::scale(glm::translate(glm::mat4(1.0f), lightPos), glm::vec3(0.2f)));
 		HAIEngine::Renderer::Submit(sampleShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)));
+		HAIEngine::Renderer::Submit(sampleShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f)));
 
 		HAIEngine::Renderer::EndScene();
 	}
@@ -126,7 +144,9 @@ public:
 	void OnImGuiRender() override
 	{
 		ImGui::Begin("Settings");
-		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+		ImGui::ColorEdit3("Light Color", glm::value_ptr(m_LightCorlor));
+		ImGui::ColorEdit3("Cube Color", glm::value_ptr(m_CubeColor));
+		ImGui::InputInt("Specular ness", &m_Specuness);
 		ImGui::End();
 	}
 
@@ -141,9 +161,21 @@ public:
 			float curMouseX = HAIEngine::Input::GetMouseX();
 			float curMouseY = HAIEngine::Input::GetMouseY();
 
+			if (!IsReControlMouse)
+			{
+				lastMouseX = curMouseX;
+				lastMouseY = curMouseY;
+			}
+
 			m_CameraController->ProcessMouseMovement(curMouseX - lastMouseX, lastMouseY - curMouseY);
 			lastMouseX = curMouseX;
 			lastMouseY = curMouseY;
+			IsReControlMouse = true;
+		}
+
+		if (HAIEngine::Input::IsMouseButtonReleased(HE_MOUSE_BUTTON_RIGHT))
+		{
+			IsReControlMouse = false;
 		}
 
 		if (HAIEngine::Input::IsKeyPressed(HE_KEY_LEFT))
@@ -194,15 +226,18 @@ private:
 	HAIEngine::Camera* m_PerspectiveCamera;
 	std::unique_ptr<HAIEngine::CameraController> m_CameraController;
 
-	glm::vec3 m_SquareColor{ 0.1f, 0.2f, 0.3f };
-	glm::vec3 lightPos{ 1.2f, 2.0f, -2.0f };
+	glm::vec3 m_LightCorlor{ 0.9f, 0.9f, 0.9f };
+	glm::vec3 m_CubeColor{ 1.0f, 0.5f, 0.31f };
+	glm::vec3 lightPos{ 1.2f, 2.0f, 2.0f };
+	int m_Specuness = 64;
 
-	std::shared_ptr<HAIEngine::VertexBuffer> m_SuareVB;
-	std::shared_ptr<HAIEngine::VertexArray> m_SquareVA;
+	std::shared_ptr<HAIEngine::VertexBuffer> m_SuareVB, m_LightVB;
+	std::shared_ptr<HAIEngine::VertexArray> m_SquareVA, m_LightVA;
 
 	std::shared_ptr<HAIEngine::Texture2D> m_Texture;
 
 	float lastMouseX, lastMouseY;
+	bool IsReControlMouse = false;
 };
 
 class Sandbox : public HAIEngine::Application

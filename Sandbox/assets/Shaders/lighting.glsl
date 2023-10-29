@@ -1,11 +1,11 @@
 #type vertex
-#version 330 core
+#version 440 core
 
 layout(location = 0) in vec3 a_Position;
+layout(location = 1) in vec3 aNormal;
 
 uniform mat4 u_ViewProjection;
 uniform mat4 u_Transform;
-
 
 void main()
 {
@@ -13,11 +13,13 @@ void main()
 }
 
 #type fragment
-#version 330 core
+#version 440 core
 
 out vec4 FragColor;
 
+uniform vec3 lightColor;
+
 void main()
 {
-    FragColor = vec4(1.0); // set all 4 vector values to 1.0
+    FragColor = vec4(lightColor, 1.0);
 }
