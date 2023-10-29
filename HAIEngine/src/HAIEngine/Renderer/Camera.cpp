@@ -4,40 +4,6 @@
 #include <glm/gtx/string_cast.hpp>
 namespace HAIEngine
 {
-
-	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)
-		: m_ProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), m_ViewMatrix(1.0f)
-	{
-		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
-	}
-
-	void OrthographicCamera::RecalculateViewMatrix()
-	{
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_Position) *
-			glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation), glm::vec3(0, 0, 1));
-
-		m_ViewMatrix = glm::inverse(transform);
-		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
-	}
-
-    void CameraController::ProcessMouseMovement(float xoffset, float yoffset)
-    {
-        xoffset *= sensitivity;
-        yoffset *= sensitivity;
-
-        yaw += xoffset;
-        pitch += yoffset;
-
-        // make sure that when pitch is out of bounds, screen doesn't get flipped
-            if (pitch > 89.0f)
-                pitch = 89.0f;
-            if (pitch < -89.0f)
-                pitch = -89.0f;
-
-        // update Front, Right and Up Vectors using the updated Euler angles
-        UpdateCameraVec();
-    }
-
     void CameraController::updateView()
     {
         // rotation
@@ -123,5 +89,23 @@ namespace HAIEngine
         // also re-calculate the Right and Up vector
         m_Right = glm::normalize(glm::cross(m_Front, worldUp));  // normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
         m_Up = glm::normalize(glm::cross(m_Right, m_Front));
+    }
+
+    void CameraController::ProcessMouseMovement(float xoffset, float yoffset)
+    {
+        xoffset *= sensitivity;
+        yoffset *= sensitivity;
+
+        yaw += xoffset;
+        pitch += yoffset;
+
+        // make sure that when pitch is out of bounds, screen doesn't get flipped
+        if (pitch > 89.0f)
+            pitch = 89.0f;
+        if (pitch < -89.0f)
+            pitch = -89.0f;
+
+        // update Front, Right and Up Vectors using the updated Euler angles
+        UpdateCameraVec();
     }
 }
