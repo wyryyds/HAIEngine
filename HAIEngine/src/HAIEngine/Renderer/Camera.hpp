@@ -99,7 +99,7 @@ namespace HAIEngine
 
         bool      m_flipY{ false };
         glm::vec3 m_direction{ 0.0f, 0.0f, 0.0f };
-        glm::vec3 m_position{ 0.0f, 0.0f, 3.0f };
+        glm::vec3 m_position{ 0.0f, 0.0f, 6.0f };
         glm::vec3 m_Front{ 0.0f, 0.0f, -1.0f };
         glm::vec3 m_Up{ 0.0f, 1.0f, 0.0f };
         glm::vec3 m_Right{1.0f, 0.0f, 0.0f };

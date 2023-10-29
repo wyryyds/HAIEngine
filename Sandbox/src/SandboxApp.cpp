@@ -78,10 +78,16 @@ public:
 			});
 		m_SquareVA->AddVertexBuffer(m_SuareVB);
 
+		// add test shader
+		auto sampleShader = m_ShaderLibrary.Load("sample", "../../../../Sandbox/assets/Shaders/sample.glsl");
+		std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(sampleShader)->Bind();
+
+		auto lightingShader = m_ShaderLibrary.Load("lighting", "../../../../Sandbox/assets/Shaders/lighting.glsl");
+		std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(lightingShader)->Bind();
+
 		// add shader & texture
 		auto textureShader = m_ShaderLibrary.Load("TextureShader", "../../../../Sandbox/assets/Shaders/Texture.glsl");
 		m_Texture = HAIEngine::Texture2D::Create("../../../../Sandbox/assets/Textures/d2Texture.png");
-
 		std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(textureShader)->Bind();
 		std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 	}
@@ -103,25 +109,16 @@ public:
 		HAIEngine::Renderer::BeginScene(m_PerspectiveCamera);
 
 		auto textureShader = m_ShaderLibrary.Get("TextureShader");
-		m_Texture->Bind();
+		//m_Texture->Bind();
+		// sample shader
+		auto sampleShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(m_ShaderLibrary.Get("sample"));
+		sampleShader->UploadUniformFloat3("objectColor", glm::vec3(1.0f, 0.5f, 0.31f));
+		sampleShader->UploadUniformFloat3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
 
-		glm::vec3 cubePositions[] = {
-			glm::vec3(0.0f,  0.0f,  0.0f),
-			glm::vec3(2.0f,  5.0f, -15.0f),
-			glm::vec3(-1.5f, -2.2f, -2.5f),
-			glm::vec3(-3.8f, -2.0f, -12.3f),
-			glm::vec3(2.4f, -0.4f, -3.5f),
-			glm::vec3(-1.7f,  3.0f, -7.5f),
-			glm::vec3(1.3f, -2.0f, -2.5f),
-			glm::vec3(1.5f,  2.0f, -2.5f),
-			glm::vec3(1.5f,  0.2f, -1.5f),
-			glm::vec3(-1.3f,  1.0f, -1.5f)
-		};
+		auto lightingShader =m_ShaderLibrary.Get("lighting");
 
-		for (unsigned int i = 0; i < 10; ++i)
-		{
-			HAIEngine::Renderer::Submit(textureShader, m_SquareVA, glm::translate(glm::mat4(1.0f), cubePositions[i]));
-		}
+		HAIEngine::Renderer::Submit(lightingShader, m_SquareVA, glm::scale(glm::translate(glm::mat4(1.0f), lightPos), glm::vec3(0.2f)));
+		HAIEngine::Renderer::Submit(sampleShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)));
 
 		HAIEngine::Renderer::EndScene();
 	}
@@ -197,7 +194,8 @@ private:
 	HAIEngine::Camera* m_PerspectiveCamera;
 	std::unique_ptr<HAIEngine::CameraController> m_CameraController;
 
-	glm::vec3 m_SquareColor = glm::vec3(0.1f, 0.2f, 0.3f);
+	glm::vec3 m_SquareColor{ 0.1f, 0.2f, 0.3f };
+	glm::vec3 lightPos{ 1.2f, 2.0f, -2.0f };
 
 	std::shared_ptr<HAIEngine::VertexBuffer> m_SuareVB;
 	std::shared_ptr<HAIEngine::VertexArray> m_SquareVA;
