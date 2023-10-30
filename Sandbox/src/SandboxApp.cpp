@@ -28,54 +28,55 @@ public:
 
 		float squareVertices[] =
 		{
-			-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+			 -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
 
-		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-		 0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
 
-		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
 
-		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
 
-		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-		 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  1.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
 
-		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-		 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  1.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f
 		};
 
 		m_SuareVB.reset(HAIEngine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		m_SuareVB->SetLayout(
 			{
 				{ HAIEngine::ShaderDataType::Float3, "a_Position" },
-				{ HAIEngine::ShaderDataType::Float3, "aNormal"}
+				{ HAIEngine::ShaderDataType::Float3, "aNormal"},
+				{HAIEngine::ShaderDataType::Float2, "aTexCoords"}
 			});
 		m_SquareVA->AddVertexBuffer(m_SuareVB);
 
@@ -84,22 +85,32 @@ public:
 		m_LightVB->SetLayout(
 			{
 				{ HAIEngine::ShaderDataType::Float3, "a_Position" },
-				{ HAIEngine::ShaderDataType::Float3, "aNormal"}
+				{ HAIEngine::ShaderDataType::Float3, "aNormal"},
+				{HAIEngine::ShaderDataType::Float2, "aTexCoords"}
 			});
 		m_LightVA->AddVertexBuffer(m_LightVB);
 
+		// add texture
+		m_Texture = HAIEngine::Texture2D::Create("../../../../Sandbox/assets/Textures/container2.png");
+		m_Texture->Bind(0);
+		m_specularTexture = HAIEngine::Texture2D::Create("../../../../Sandbox/assets/Textures/container2_specular.png");
+		m_specularTexture->Bind(1);
+
 		// add test shader
-		auto sampleShader = m_ShaderLibrary.Load("sample", "../../../../Sandbox/assets/Shaders/sample.glsl");
-		std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(sampleShader)->Bind();
+		auto lightingShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(m_ShaderLibrary.Load("lighting", "../../../../Sandbox/assets/Shaders/lighting.glsl"));
+		lightingShader->Bind();
+		lightingShader->UploadUniformFloat3("lightColor", m_LightCorlor);
 
-		auto lightingShader = m_ShaderLibrary.Load("lighting", "../../../../Sandbox/assets/Shaders/lighting.glsl");
-		std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(lightingShader)->Bind();
-
-		// add shader & texture
-		auto textureShader = m_ShaderLibrary.Load("TextureShader", "../../../../Sandbox/assets/Shaders/Texture.glsl");
-		m_Texture = HAIEngine::Texture2D::Create("../../../../Sandbox/assets/Textures/d2Texture.png");
-		std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(textureShader)->Bind();
-		std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
+		auto sampleShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>( m_ShaderLibrary.Load("phong", "../../../../Sandbox/assets/Shaders/phong.glsl"));
+		sampleShader->Bind();
+		sampleShader->UploadUniformInt("material.diffuse", 0);
+		sampleShader->UploadUniformInt("material.specular", 1);
+		sampleShader->UploadUniformFloat("material.shininess", m_Specuness);
+		sampleShader->UploadUniformFloat3("light.position", lightPos);
+		sampleShader->UploadUniformFloat3("viewPos", m_CameraController->GetCameraPosition());
+		sampleShader->UploadUniformFloat3("light.ambient", glm::vec3{ 0.2f, 0.2f, 0.2f });
+		sampleShader->UploadUniformFloat3("light.specular", m_LightCorlor);
+		sampleShader->UploadUniformFloat3("light.diffuse", m_LightCorlor * 0.5f);
 	}
 
 	void OnUpdate(HAIEngine::TimeStep ts) override
@@ -118,20 +129,10 @@ public:
 		HAIEngine::RenderCommand::Clear();
 		HAIEngine::Renderer::BeginScene(m_PerspectiveCamera);
 
-		auto textureShader = m_ShaderLibrary.Get("TextureShader");
-		//m_Texture->Bind();
 		// sample shader
 		auto lightingShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(m_ShaderLibrary.Get("lighting"));
-		lightingShader->Bind();
-		lightingShader->UploadUniformFloat3("lightColor", m_LightCorlor);
 
-		auto sampleShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(m_ShaderLibrary.Get("sample"));
-		sampleShader->Bind();
-		sampleShader->UploadUniformFloat3("objectColor", m_CubeColor);
-		sampleShader->UploadUniformFloat3("lightColor", m_LightCorlor);
-		sampleShader->UploadUniformFloat3("lightPos", lightPos);
-		sampleShader->UploadUniformFloat3("viewPos", m_CameraController->GetCameraPosition());
-		sampleShader->UploadUniformInt("sepcness", m_Specuness);
+		auto sampleShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(m_ShaderLibrary.Get("phong"));
 
 		HAIEngine::Renderer::Submit(lightingShader, m_LightVA, glm::scale(glm::translate(glm::mat4(1.0f), lightPos), glm::vec3(0.2f)));
 
@@ -234,7 +235,7 @@ private:
 	std::shared_ptr<HAIEngine::VertexBuffer> m_SuareVB, m_LightVB;
 	std::shared_ptr<HAIEngine::VertexArray> m_SquareVA, m_LightVA;
 
-	std::shared_ptr<HAIEngine::Texture2D> m_Texture;
+	std::shared_ptr<HAIEngine::Texture2D> m_Texture, m_specularTexture;
 
 	float lastMouseX, lastMouseY;
 	bool IsReControlMouse = false;

@@ -3,7 +3,7 @@
 
 layout(location = 0) in vec3 a_Position;
 layout(location = 1) in vec3 aNormal;
-layout(location = 3) in vec2 aTexCoords;
+layout(location = 2) in vec2 aTexCoords;
 
 out vec3 FragPos;  
 out vec3 Normal;
@@ -23,19 +23,21 @@ void main()
 
 #type fragment
 #version 440 core
+out vec4 FragColor;
 
 struct Material{
-    sampler2D diffus;
-    vec3 specular;
+    sampler2D diffuse;
+    sampler2D specular;
     float shininess;
-}
+};
 
 struct Light{
-    vec3 Pos;
+    vec3 position;
+
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
-}
+};
 
 in vec3 FragPos;  
 in vec3 Normal;  
@@ -60,7 +62,7 @@ void main()
     vec3 viewDir = normalize(viewPos - FragPos);
     vec3 reflectDir = reflect(-lightDir, norm);  
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-    vec3 specular = light.specular * (spec * material.specular);  
+    vec3 specular = light.specular * spec * texture(material.specular, TexCoords).rgb;  
         
     vec3 result = ambient + diffuse + specular;
     FragColor = vec4(result, 1.0);
