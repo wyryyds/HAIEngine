@@ -1,4 +1,5 @@
 #include "HAIEngine.hpp"
+#include "HAIEngine/Core.hpp"
 
 #include "Platform/OpenGL/OpenGLShader.hpp"
 #include "Platform/OpenGL/OpenGLTexture.hpp"
@@ -8,6 +9,11 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include <glm/gtc/type_ptr.hpp>
+
+#include "HAIEngine/Core/ISerialize.hpp"
+
+
+using json = nlohmann::json;
 
 class ExampleLayer : public HAIEngine::Layer
 {
@@ -103,6 +109,11 @@ public:
 		sampleShader->Bind();
 		sampleShader->UploadUniformInt("material.diffuse", 0);
 		sampleShader->UploadUniformInt("material.specular", 1);
+		//test json
+		HAIEngine::HESerializeFile testfile(ASSTESPATH"Jsons/data.json");
+		auto& jsondata = testfile.GetJsonData();
+		jsondata["scene_name"] = "TestScene";
+		testfile.Save();
 	}
 
 	void OnUpdate(HAIEngine::TimeStep ts) override

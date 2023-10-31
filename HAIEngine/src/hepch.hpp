@@ -9,11 +9,13 @@
 
 #include <string>
 #include <sstream>
+#include <fstream>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 
 #include "HAIEngine/Log.hpp"
-#include <unordered_set>
+#include "HAIEngine/Core.hpp"
 
 #ifdef HE_PLATFORM_WINDOWS
 #include <Windows.h>
