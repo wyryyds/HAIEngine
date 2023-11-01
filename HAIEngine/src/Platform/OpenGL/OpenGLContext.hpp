@@ -1,6 +1,6 @@
 #pragma once
 #include "HAIEngine/Renderer/GraphicsContext.hpp"
-#include "HAIEngine/Core.hpp"
+#include "Core/Core.hpp"
 
 struct GLFWwindow;
 

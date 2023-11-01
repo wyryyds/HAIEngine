@@ -8,14 +8,14 @@ namespace HAIEngine
 		: m_filepath(filepath)
 	{
 		std::ifstream readfile(m_filepath);
-		readfile >> m_jsondata;
+		readfile >> m_jsonData;
 		readfile.close();
 	}
 
 	void HESerializeFile::Save()
 	{
 		std::ofstream file(m_filepath);
-		file << m_jsondata.dump(4);
+		file << m_jsonData.dump(4);
 		file.close();
 	}
 }

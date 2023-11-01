@@ -1,5 +1,6 @@
 #include "HAIEngine.hpp"
-#include "HAIEngine/Core.hpp"
+#include "Core/Core.hpp"
+#include "Core/ISerialize.hpp"
 
 #include "Platform/OpenGL/OpenGLShader.hpp"
 #include "Platform/OpenGL/OpenGLTexture.hpp"
@@ -9,8 +10,6 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include <glm/gtc/type_ptr.hpp>
-
-#include "HAIEngine/Core/ISerialize.hpp"
 
 
 using json = nlohmann::json;

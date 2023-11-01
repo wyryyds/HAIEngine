@@ -1,6 +1,6 @@
 #pragma once
-#include "HAIEngine/Core.hpp"
-#include "HAIEngine/Core/TimeStep.hpp"
+#include "Core/Core.hpp"
+#include "Core/TimeStep.hpp"
 #include "HAIEngine/Events/Event.hpp"
 
 namespace HAIEngine

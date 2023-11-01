@@ -1,5 +1,5 @@
 #pragma once
-#include "HAIEngine/Window.hpp"
+#include "Core/Window.hpp"
 #include "HAIEngine/Renderer/GraphicsContext.hpp"
 
 #include "GLFW/glfw3.h"

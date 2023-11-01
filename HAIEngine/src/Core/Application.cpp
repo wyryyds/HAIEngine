@@ -1,11 +1,8 @@
-#include "hepch.hpp"
-
 #include "Application.hpp"
-#include "HAIEngine/Log.hpp"
-#include "HAIEngine//Core/TimeStep.hpp"
+#include "Log.hpp"
+#include "TimeStep.hpp"
 #include "Input.hpp"
-
-#include "Renderer/Renderer.hpp"
+#include "HAIEngine/Renderer/Renderer.hpp"
 
 #include "imgui.h"
 #include "GLFW/glfw3.h"

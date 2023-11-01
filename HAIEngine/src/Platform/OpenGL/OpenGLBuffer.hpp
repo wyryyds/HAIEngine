@@ -1,11 +1,11 @@
 #pragma once
+
 #include "HAIEngine/Renderer/Buffer.hpp"
 
 #include "glad/glad.h"
 
 namespace HAIEngine
 {
-
 	class OpenGLVertexBuffer : public VertexBuffer
 	{
 	public:

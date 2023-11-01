@@ -1,13 +1,13 @@
 #pragma once
 
 // For Use HAIEngine applications
-#include "HAIEngine/Application.hpp"
-#include "HAIEngine/Log.hpp"
-#include "HAIEngine/Layer.hpp"
+#include "Core/Application.hpp"
+#include "Core/Log.hpp"
+#include "Core/Layer.hpp"
 // Input system
-#include "HAIEngine/Input.hpp"
-#include "HAIEngine/KeyCodes.hpp"
-#include "HAIEngine/MouseButtonCodes.hpp"
+#include "Core/Input.hpp"
+#include "Core/KeyCodes.hpp"
+#include "Core/MouseButtonCodes.hpp"
 // GUI
 #include "HAIEngine/ImGui/ImGuiLayer.hpp"
 // Rendering
@@ -18,7 +18,7 @@
 #include "HAIEngine/Renderer/Shader.hpp"
 // Function
 #include "HAIEngine/Renderer/Camera.hpp"
-#include "HAIEngine/Core/TimeStep.hpp"
+#include "Core/TimeStep.hpp"
 // Entry Point
-#include "HAIEngine/EntryPoint.hpp"
+#include "Core/EntryPoint.hpp"
 

@@ -1,6 +1,6 @@
 #pragma once
-#include "hepch.hpp"
-#include "HAIEngine/Core.hpp"
+
+#include "Core.hpp"
 #include "HAIEngine/Events/Event.hpp"
 
 namespace HAIEngine

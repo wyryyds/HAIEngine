@@ -1,8 +1,5 @@
-#include "hepch.hpp"
 #include "OpenGLShader.hpp"
-
-
-#include <fstream>
+#include "hepch.hpp"
 
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>

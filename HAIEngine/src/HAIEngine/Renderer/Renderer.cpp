@@ -1,11 +1,11 @@
-#include "hepch.hpp"
 #include "Renderer.hpp"
+#include "hepch.hpp"
 
 #include "Platform/OpenGL/OpenGLShader.hpp"
-#include <glm/ext/matrix_transform.hpp>
-#include <GLFW/glfw3.h>
-#include <glm/ext/matrix_clip_space.hpp>
 
+#include <GLFW/glfw3.h>
+#include <glm/ext/matrix_transform.hpp>
+#include <glm/ext/matrix_clip_space.hpp>
 #include <glm/gtx/string_cast.hpp>
 
 namespace HAIEngine

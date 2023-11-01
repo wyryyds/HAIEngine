@@ -14,8 +14,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "HAIEngine/Log.hpp"
-#include "HAIEngine/Core.hpp"
+#include "Core/Log.hpp"
+#include "Core/Core.hpp"
 
 #ifdef HE_PLATFORM_WINDOWS
 #include <Windows.h>

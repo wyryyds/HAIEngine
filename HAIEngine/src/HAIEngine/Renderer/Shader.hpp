@@ -2,7 +2,10 @@
 
 #include <string>
 #include <unordered_map>
+#include <memory>
+
 #include <glm/glm.hpp>
+
 namespace HAIEngine
 {
 	class Shader

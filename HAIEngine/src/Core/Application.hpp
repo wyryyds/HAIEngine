@@ -2,14 +2,14 @@
 
 #include "Core.hpp"
 #include "Window.hpp"
-#include "Events/ApplicationEvent.hpp"
 #include "LayerStack.hpp"
-#include "ImGui/ImGuiLayer.hpp"
-
-class ImGuiLayer;
+#include "HAIEngine/Events/ApplicationEvent.hpp"
+#include "HAIEngine/ImGui/ImGuiLayer.hpp"
 
 namespace HAIEngine
 {
+	class ImGuiLayer;
+
 	class HE_API Application
 	{
 	public:

@@ -1,13 +1,11 @@
 #pragma once
 
 #include "RenderCommand.hpp"
-
 #include "Camera.hpp"
 #include "Shader.hpp"
 
 namespace HAIEngine
 {
-
 	class Renderer
 	{
 	public:

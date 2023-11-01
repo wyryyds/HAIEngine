@@ -1,6 +1,6 @@
 #pragma once
 
-#include "HAIEngine/Input.hpp"
+#include "Core/Input.hpp"
 
 namespace HAIEngine
 {

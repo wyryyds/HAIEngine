@@ -1,10 +1,8 @@
 #include "WindowsWindow.hpp"
-#include "HAIEngine/Log.hpp"
-
+#include "Core/Log.hpp"
 #include "HAIEngine/Events/ApplicationEvent.hpp"
 #include "HAIEngine/Events/MouseEvent.hpp"
 #include "HAIEngine/Events/KeyEvent.hpp"
-
 #include "Platform/OpenGL/OpenGLContext.hpp"
 
 namespace HAIEngine

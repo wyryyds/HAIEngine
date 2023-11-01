@@ -1,11 +1,11 @@
 #pragma once
+
 #include "HAIEngine/Renderer/VertexArray.hpp"
 
 #include <glm/glm.hpp>
 
 namespace HAIEngine 
 {
-
 	class RendererAPI 
 	{
 	public:

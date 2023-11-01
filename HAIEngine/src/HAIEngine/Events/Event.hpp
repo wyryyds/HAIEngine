@@ -1,9 +1,8 @@
 #pragma once
-#include "HAIEngine/Core.hpp"
+#include "Core/Core.hpp"
 
 #include <string>
 #include <functional>
-
 
 namespace HAIEngine
 {

@@ -1,10 +1,11 @@
 #pragma once
 
 #include "Core.hpp"
+#include <utility>
 
 namespace HAIEngine
 {
-	class HE_API Input
+	class Input
 	{
 	public:
 		inline static bool IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); }

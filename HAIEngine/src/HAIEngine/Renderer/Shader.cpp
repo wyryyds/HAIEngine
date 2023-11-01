@@ -1,8 +1,8 @@
-#include "hepch.hpp"
 #include "HAIEngine/Renderer/Shader.hpp"
-
+#include "hepch.hpp"
 #include "Renderer.hpp"
 #include "Platform/OpenGL/OpenGLShader.hpp"
+
 namespace HAIEngine
 {
 	std::shared_ptr<Shader> Shader::Create(const std::string& filePath)
