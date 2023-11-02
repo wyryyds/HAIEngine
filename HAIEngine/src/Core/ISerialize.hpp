@@ -5,7 +5,7 @@
 
 namespace HAIEngine
 {
-	using json = nlohmann::json;
+	using json = nlohmann::ordered_json;
 
 	class HESerializeFile
 	{
@@ -25,12 +25,12 @@ namespace HAIEngine
 	class ISerializeable
 	{
 	public:
-		virtual void Serialize(std::string& name) = 0;
-		virtual void DeSerialize() = 0;
+		virtual void Serialize(std::string name = "Default") = 0;
+		virtual void DeSerialize(const json& jsondata) = 0;
 
-		virtual json& GetJsonData() = 0;
+		inline virtual json& GetJsonData() { return m_jsonData; }
 
-	private:
+	protected:
 		json m_jsonData;
 	};
 }

@@ -11,8 +11,11 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include <glm/gtc/type_ptr.hpp>
 
+//test
+#include"HAIEngine/ECS/Components/Transform.hpp"
 
-using json = nlohmann::json;
+
+using json = nlohmann::ordered_json;
 
 class ExampleLayer : public HAIEngine::Layer
 {
@@ -108,11 +111,22 @@ public:
 		sampleShader->Bind();
 		sampleShader->UploadUniformInt("material.diffuse", 0);
 		sampleShader->UploadUniformInt("material.specular", 1);
+
 		//test json
 		HAIEngine::HESerializeFile testfile(ASSTESPATH"Jsons/data.json");
 		auto& jsondata = testfile.GetJsonData();
+
+		HAIEngine::Transform* testTransform = new HAIEngine::Transform();
+		testTransform->Serialize();
+
+		json components = json::array();
+		components.push_back(testTransform->GetJsonData());
+
 		jsondata["scene_name"] = "TestScene";
+		jsondata["components"] = components;
 		testfile.Save();
+
+		testTransform->DeSerialize(jsondata["components"][0]);
 	}
 
 	void OnUpdate(HAIEngine::TimeStep ts) override
