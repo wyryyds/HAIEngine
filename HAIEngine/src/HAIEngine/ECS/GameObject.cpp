@@ -39,7 +39,7 @@ namespace HAIEngine
 			resjson["components"].emplace_back(iter->second->Serialize(iter->second->m_typeName));
 		}
 
-		return std::move(resjson);
+		return resjson;
 	}
 
 	void HAIEngine::GameObject::DeSerialize(const json& data)

@@ -74,7 +74,7 @@ namespace HAIEngine
 		resjson["rotation"] = rotationStr;
 		resjson["scale"] = scaleStr;
 
-		return std::move(resjson);
+		return resjson;
 	}
 
 	void HAIEngine::Transform::DeSerialize(const json& jsondata)
