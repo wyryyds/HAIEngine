@@ -5,6 +5,8 @@
 
 namespace HAIEngine
 {
+	class Transform;
+
 	class GameObject : public ISerializeable
 	{
 	public:
@@ -13,7 +15,7 @@ namespace HAIEngine
 
 		void Update();
 
-		virtual void Serialize(std::string name = "GameObject") override;
+		virtual json Serialize(const std::string& name) override;
 		virtual void DeSerialize(const json& data) override;
 
 		void AddComponent(Component* component);
@@ -35,7 +37,7 @@ namespace HAIEngine
 		std::string m_name;
 		size_t m_guid;
 
-		Transform* m_transfrom;
+		Transform* m_transform;
 	private:
 		std::unordered_map<std::string, Component*> m_components;
 	};

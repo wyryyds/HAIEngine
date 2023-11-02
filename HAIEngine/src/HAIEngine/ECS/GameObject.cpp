@@ -8,9 +8,9 @@ namespace HAIEngine
 	{
 		m_guid = GenerateGUID(this);
 		m_name = "GameObject";
-		m_transfrom = new Transform();
-		m_transfrom->m_parent = this;
-		m_components.insert({ m_transfrom->m_typeName, m_transfrom });
+		m_transform = new Transform();
+		m_transform->m_parent = this;
+		m_components.insert({ m_transform->m_typeName, m_transform });
 	}
 
 	HAIEngine::GameObject::~GameObject()
@@ -28,17 +28,18 @@ namespace HAIEngine
 			component.second->Update();
 	}
 
-	void HAIEngine::GameObject::Serialize(std::string name)
+	json HAIEngine::GameObject::Serialize(const std::string& name)
 	{
-		name = m_name;
-		m_jsonData["name"] = name;
-		m_jsonData["components"] = json::array();
+		json resjson;
+		resjson["name"] = name;
+		resjson["components"] = json::array();
 
 		for (auto iter = m_components.begin(); iter != m_components.end(); ++iter)
 		{
-			iter->second->Serialize();
-			m_jsonData["components"].emplace_back(iter->second->GetJsonData());
+			resjson["components"].emplace_back(iter->second->Serialize(iter->second->m_typeName));
 		}
+
+		return std::move(resjson);
 	}
 
 	void HAIEngine::GameObject::DeSerialize(const json& data)
@@ -60,7 +61,7 @@ namespace HAIEngine
 	template <class T>
 	T* HAIEngine::GameObject::GetComponent()
 	{
-		for (auto iter = components.begin(); iter != components.end(); iter++)
+		for (auto iter = m_components.begin(); iter != m_components.end(); iter++)
 		{
 			auto com = dynamic_cast<T*>(*iter);
 			if (com)
@@ -75,7 +76,7 @@ namespace HAIEngine
 	template <class T>
 	void HAIEngine::GameObject::RemoveComponent()
 	{
-		for (auto iter = components.begin(); iter != components.end(); iter++)
+		for (auto iter = m_components.begin(); iter != m_components.end(); iter++)
 		{
 			auto com = dynamic_cast<T*>(*iter);
 			if (com)

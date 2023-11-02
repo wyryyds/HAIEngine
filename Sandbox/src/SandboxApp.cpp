@@ -117,10 +117,9 @@ public:
 		auto& jsondata = testfile.GetJsonData();
 
 		HAIEngine::Transform* testTransform = new HAIEngine::Transform();
-		testTransform->Serialize();
 
 		json components = json::array();
-		components.push_back(testTransform->GetJsonData());
+		components.push_back(testTransform->Serialize(testTransform->m_typeName));
 
 		jsondata["scene_name"] = "TestScene";
 		jsondata["components"] = components;

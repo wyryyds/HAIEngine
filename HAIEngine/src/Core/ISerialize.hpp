@@ -25,12 +25,9 @@ namespace HAIEngine
 	class ISerializeable
 	{
 	public:
-		virtual void Serialize(std::string name = "Default") = 0;
+		ISerializeable() {}
+		virtual ~ISerializeable() = default;
+		virtual json Serialize(const std::string& name) = 0;
 		virtual void DeSerialize(const json& jsondata) = 0;
-
-		inline virtual json& GetJsonData() { return m_jsonData; }
-
-	protected:
-		json m_jsonData;
 	};
 }

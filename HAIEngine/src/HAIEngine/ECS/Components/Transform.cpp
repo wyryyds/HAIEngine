@@ -10,6 +10,7 @@ namespace HAIEngine
 {
 	HAIEngine::Transform::Transform()
 	{
+		m_typeName = "Transform";
 		m_position = glm::vec3(1.2, 1.3, 1.5);
 		m_rotation = glm::vec3(2.1, 3.4, 4.6);
 		m_scale	   = glm::vec3(2.66, 2.77, 3.88);
@@ -17,6 +18,7 @@ namespace HAIEngine
 
 	HAIEngine::Transform::Transform(glm::vec3 position)
 	{
+		m_typeName = "Transform";
 		m_position = position;
 		m_rotation = glm::vec3(0, 0, 0);
 		m_scale    = glm::vec3(0, 0, 0);
@@ -55,10 +57,11 @@ namespace HAIEngine
 		m_position += dis * dir;
 	}
 
-	void HAIEngine::Transform::Serialize(std::string name)
+	json HAIEngine::Transform::Serialize(const std::string& name)
 	{
-		m_jsonData["type"] = "Transform";
-		m_jsonData["guid"] = GetGUID();
+		json resjson;
+		resjson["type"] = name;
+		resjson["guid"] = GetGUID();
 		// floatdata save as string
 		std::string positionStr = std::to_string(m_position.x) + "," + std::to_string(m_position.y) + "," 
 			+ std::to_string(m_position.z);
@@ -67,9 +70,11 @@ namespace HAIEngine
 		std::string scaleStr = std::to_string(m_scale.x) + "," + std::to_string(m_scale.y) + ","
 			+ std::to_string(m_scale.z);
 
-		m_jsonData["position"] = positionStr;
-		m_jsonData["rotation"] = rotationStr;
-		m_jsonData["scale"] = scaleStr;
+		resjson["position"] = positionStr;
+		resjson["rotation"] = rotationStr;
+		resjson["scale"] = scaleStr;
+
+		return std::move(resjson);
 	}
 
 	void HAIEngine::Transform::DeSerialize(const json& jsondata)

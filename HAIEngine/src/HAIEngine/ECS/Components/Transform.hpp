@@ -6,6 +6,8 @@
 
 namespace HAIEngine
 {
+	class GameObject;
+
 	class Transform : public Component
 	{
 	public:
@@ -28,7 +30,7 @@ namespace HAIEngine
 		void translate(glm::vec3 dir, float dis);
 		// TODO maybe?
 		//virtual void Update() override;
-		virtual void Serialize(std::string name = "Transform") override;
+		virtual json Serialize(const std::string& name) override;
 		virtual void DeSerialize(const json& jsondata) override;
 	public:
 		glm::vec3 m_position;
@@ -36,6 +38,5 @@ namespace HAIEngine
 		glm::vec3 m_scale;
 
 		GameObject* m_parent;
-		std::string m_typeName;
 	};
 }

@@ -14,19 +14,16 @@ namespace HAIEngine
 		WindowProps(const std::string& title = "HAIEngine", unsigned int width = 1920, unsigned int height = 1080)
 			:Title(title), Width(width), Height(height)
 		{
-
 		}
 	};
 
-	class HE_API Window
+	class Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event(&))>;
 
-		virtual ~Window() 
-		{
-
-		};
+		Window() {}
+		virtual ~Window() = default;
 
 		virtual void OnUpdate() = 0;
 
@@ -40,7 +37,6 @@ namespace HAIEngine
 		virtual void* GetNativeWindow() const = 0;
 
 		static Window* Create(const WindowProps& props = WindowProps());
-
 
 	};
 }

@@ -6,7 +6,7 @@ namespace HAIEngine
 	class Component : public ISerializeable
 	{
 	public:
-		Component() : m_guid(GenerateGUID(this)) {};
+		Component() : m_guid(GenerateGUID(this)), m_typeName("Base") {};
 		virtual ~Component() = default;
 		virtual void OnAwake() {}
 		virtual void Update() {}
@@ -16,11 +16,13 @@ namespace HAIEngine
 			return std::hash<const Component*>{}(obj);
 		}
 
-		size_t GetGUID() const {
+		const size_t GetGUID() const {
 			return m_guid;
 		}
-		// TODO OnGUI
-	private:
+		
+	public:
+		std::string m_typeName;
+	protected:
 		size_t m_guid;
 
 	};

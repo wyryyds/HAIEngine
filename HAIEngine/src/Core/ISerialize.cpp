@@ -15,7 +15,7 @@ namespace HAIEngine
 	void HESerializeFile::Save()
 	{
 		std::ofstream file(m_filepath);
-		file << m_jsonData.dump(4);
+		file << m_jsonData.dump(2);
 		file.close();
 	}
 }
