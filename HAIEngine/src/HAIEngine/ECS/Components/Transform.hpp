@@ -1,5 +1,6 @@
 #pragma once
 #include "HAIEngine/ECS/Component.hpp"
+#include "HAIEngine/ECS/GameObject.hpp"
 
 #include <glm/glm.hpp>
 
@@ -25,7 +26,8 @@ namespace HAIEngine
 		glm::mat4 GetModelMatrix();
 
 		void translate(glm::vec3 dir, float dis);
-
+		// TODO maybe?
+		//virtual void Update() override;
 		virtual void Serialize(std::string name = "Transform") override;
 		virtual void DeSerialize(const json& jsondata) override;
 	public:
@@ -33,5 +35,7 @@ namespace HAIEngine
 		glm::vec3 m_rotation;
 		glm::vec3 m_scale;
 
+		GameObject* m_parent;
+		std::string m_typeName;
 	};
 }
