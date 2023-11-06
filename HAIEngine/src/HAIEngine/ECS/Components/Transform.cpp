@@ -1,6 +1,6 @@
 #include "Transform.hpp"
 #include "hepch.hpp"
-
+#include "Core/Reflection.hpp"
 #include <glm/glm.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtx/euler_angles.hpp>
@@ -8,6 +8,8 @@
 
 namespace HAIEngine
 {
+	REFLECTION(Transform, Component);
+
 	HAIEngine::Transform::Transform()
 	{
 		m_typeName = "Transform";

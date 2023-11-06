@@ -118,14 +118,16 @@ public:
 
 		HAIEngine::Transform* testTransform = new HAIEngine::Transform();
 
-		json components = json::array();
-		components.push_back(testTransform->Serialize(testTransform->m_typeName));
+		HAIEngine::GameObject* testGO = new HAIEngine::GameObject();
+		testGO->DeSerialize(jsondata["gameobjects"][0]);
+
+		json gameobjects = json::array();
+		gameobjects.push_back(testGO->Serialize(testGO->m_name));
 
 		jsondata["scene_name"] = "TestScene";
-		jsondata["components"] = components;
-		testfile.Save();
+		jsondata["gameobjects"] = gameobjects;
 
-		testTransform->DeSerialize(jsondata["components"][0]);
+		testfile.Save();
 	}
 
 	void OnUpdate(HAIEngine::TimeStep ts) override

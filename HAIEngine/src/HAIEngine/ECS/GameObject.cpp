@@ -1,8 +1,10 @@
 #include "GameObject.hpp"
 #include "hepch.hpp"
+#include "Core/Reflection.hpp"
 
 namespace HAIEngine
 {
+	REFLECTION(GameObject, GameObject);
 
 	HAIEngine::GameObject::GameObject()
 	{
@@ -44,7 +46,16 @@ namespace HAIEngine
 
 	void HAIEngine::GameObject::DeSerialize(const json& data)
 	{
-		// todo
+		m_name = data["name"];
+		auto& componentsData = data["components"];
+		for (int i = 0; i < componentsData.size(); ++i)
+		{
+			auto& componentData = componentsData[i];
+			auto gComponent = static_cast<Component*>(HAIEngine::ReflectionManager::GetInstance().CreateClassByName
+				(componentData["type"].get<std::string>()));
+			gComponent->DeSerialize(componentData);
+			m_components.insert({ gComponent->m_typeName, gComponent });
+		}
 
 	}
 
