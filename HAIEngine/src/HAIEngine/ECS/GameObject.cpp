@@ -7,9 +7,24 @@ namespace HAIEngine
 	REFLECTION(GameObject, GameObject);
 
 	HAIEngine::GameObject::GameObject()
+		: m_guid(GenerateGUID(this)), m_name("GameObject")
 	{
-		m_guid = GenerateGUID(this);
-		m_name = "GameObject";
+		m_transform = new Transform();
+		m_transform->m_parent = this;
+		m_components.insert({ m_transform->m_typeName, m_transform });
+	}
+
+	HAIEngine::GameObject::GameObject(std::string name)
+		: m_guid(GenerateGUID(this)), m_name(name)
+	{
+		m_transform = new Transform();
+		m_transform->m_parent = this;
+		m_components.insert({ m_transform->m_typeName, m_transform });
+	}
+
+	HAIEngine::GameObject::GameObject(std::string name, size_t guid)
+		: m_guid(guid), m_name(name)
+	{
 		m_transform = new Transform();
 		m_transform->m_parent = this;
 		m_components.insert({ m_transform->m_typeName, m_transform });
@@ -53,7 +68,9 @@ namespace HAIEngine
 			auto& componentData = componentsData[i];
 			auto gComponent = static_cast<Component*>(HAIEngine::ReflectionManager::GetInstance().CreateClassByName
 				(componentData["type"].get<std::string>()));
+
 			gComponent->DeSerialize(componentData);
+
 			m_components.insert({ gComponent->m_typeName, gComponent });
 		}
 
@@ -69,33 +86,4 @@ namespace HAIEngine
 		m_components.insert({ component->m_typeName, component });
 	}
 
-	template <class T>
-	T* HAIEngine::GameObject::GetComponent()
-	{
-		for (auto iter = m_components.begin(); iter != m_components.end(); iter++)
-		{
-			auto com = dynamic_cast<T*>(*iter);
-			if (com)
-			{
-				return com;
-			}
-		}
-		LOG_Error("No such component!");
-		return nullptr;
-	}
-
-	template <class T>
-	void HAIEngine::GameObject::RemoveComponent()
-	{
-		for (auto iter = m_components.begin(); iter != m_components.end(); iter++)
-		{
-			auto com = dynamic_cast<T*>(*iter);
-			if (com)
-			{
-				return com;
-			}
-		}
-		LOG_Error("No such component at this gameobejct!");
-		return nullptr;
-	}
 }
