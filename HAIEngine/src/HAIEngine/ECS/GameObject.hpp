@@ -24,8 +24,10 @@ namespace HAIEngine
 		void AddComponent(Component* component);
 
 		template <class T>
-		T* GetComponent()
+		T& GetComponent()
 		{
+			static_assert(std::is_base_of<Component, T>::value);
+
 			for (auto iter = m_components.begin(); iter != m_components.end(); ++iter)
 			{
 				auto com = dynamic_cast<T*>(*iter);
@@ -34,13 +36,16 @@ namespace HAIEngine
 					return *com;
 				}
 			}
-			LOG_Error("No such component!");
-			return nullptr;
+			LOG_Error("No such component at this gameobejct!");
+			static T invalidComponent;
+			return invalidComponent;
 		}
 
 		template <class T>
 		bool RemoveComponent()
 		{
+			static_assert(std::is_base_of<Component, T>::value);
+
 			for (auto iter = m_components.begin(); iter != m_components.end();)
 			{
 				auto com = dynamic_cast<T*>(*iter);
@@ -61,6 +66,8 @@ namespace HAIEngine
 		template <class T>
 		bool HasComponent()
 		{
+			static_assert(std::is_base_of<Component, T>::value);
+
 			for (auto iter = m_components.begin(); iter != m_components.end(); ++iter)
 			{
 				auto com = dynamic_cast<T*>(*iter);
