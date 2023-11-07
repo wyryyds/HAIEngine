@@ -71,18 +71,10 @@ namespace HAIEngine
 			return false;
 		}
 
-		static size_t GenerateGUID(const GameObject* obj) {
-			return std::hash<const GameObject*>{}(obj);
-		}
-
-		size_t GetGUID() const {
-			return m_guid;
-		}
 	public:
 		std::string m_name;
-		size_t m_guid;
-
 		Transform* m_transform;
+
 	private:
 		std::unordered_map<std::string, Component*> m_components;
 	};

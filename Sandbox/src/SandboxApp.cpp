@@ -116,8 +116,6 @@ public:
 		HAIEngine::HESerializeFile testfile(ASSTESPATH"Jsons/data.json");
 		auto& jsondata = testfile.GetJsonData();
 
-		HAIEngine::Transform* testTransform = new HAIEngine::Transform();
-
 		HAIEngine::GameObject* testGO = new HAIEngine::GameObject();
 		testGO->DeSerialize(jsondata["gameobjects"][0]);
 

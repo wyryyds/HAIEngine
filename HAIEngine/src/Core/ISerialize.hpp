@@ -25,9 +25,20 @@ namespace HAIEngine
 	class ISerializeable
 	{
 	public:
-		ISerializeable() {}
+		ISerializeable() : m_guid(GenerateGUID(this)) {}
 		virtual ~ISerializeable() = default;
 		virtual json Serialize(const std::string& name) = 0;
 		virtual void DeSerialize(const json& jsondata) = 0;
+
+		static size_t GenerateGUID(const ISerializeable* obj) {
+			return std::hash<const ISerializeable*>{}(obj);
+		}
+
+		size_t GetGUID() const {
+			return m_guid;
+		}
+
+	protected:
+		size_t m_guid;
 	};
 }

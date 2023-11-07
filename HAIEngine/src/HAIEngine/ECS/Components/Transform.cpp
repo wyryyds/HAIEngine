@@ -63,7 +63,7 @@ namespace HAIEngine
 	{
 		json resjson;
 		resjson["type"] = name;
-		resjson["guid"] = GetGUID();
+		resjson["guid"] = m_guid;
 		// floatdata save as string
 		std::string positionStr = std::to_string(m_position.x) + "," + std::to_string(m_position.y) + "," 
 			+ std::to_string(m_position.z);
@@ -86,6 +86,7 @@ namespace HAIEngine
 			LOG_Error("Component type is not match!");
 			return;
 		}
+		m_guid = jsondata["guid"].get<size_t>();
 
 		std::vector<std::string > stringdata;
 
