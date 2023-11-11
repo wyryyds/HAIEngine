@@ -1,13 +1,10 @@
 #pragma once
 #include "HAIEngine/ECS/Component.hpp"
-#include "HAIEngine/ECS/GameObject.hpp"
 
 #include <glm/glm.hpp>
 
 namespace HAIEngine
 {
-	class GameObject;
-
 	class Transform : public Component
 	{
 	public:
@@ -30,13 +27,12 @@ namespace HAIEngine
 		void translate(glm::vec3 dir, float dis);
 		// TODO maybe?
 		//virtual void Update() override;
-		virtual json Serialize(const std::string& name) override;
-		virtual void DeSerialize(const json& jsondata) override;
+		json Serialize(const std::string& name) override;
+		void DeSerialize(const json& jsondata) override;
+
 	public:
 		glm::vec3 m_position;
 		glm::vec3 m_rotation;
 		glm::vec3 m_scale;
-
-		GameObject* m_parent;
 	};
 }

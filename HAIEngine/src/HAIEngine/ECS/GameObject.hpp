@@ -1,7 +1,6 @@
 #pragma once
 #include "Core/ISerialize.hpp"
 #include "Component.hpp"
-#include "Components/Transform.hpp"
 #include "Core/Log.hpp"
 
 namespace HAIEngine

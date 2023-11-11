@@ -12,7 +12,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 //test
-#include"HAIEngine/ECS/Components/Transform.hpp"
+#include "HAIEngine/ECS/GameObject.hpp"
 
 
 using json = nlohmann::ordered_json;

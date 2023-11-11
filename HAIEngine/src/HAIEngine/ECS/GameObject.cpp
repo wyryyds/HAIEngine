@@ -1,5 +1,6 @@
 #include "GameObject.hpp"
 #include "hepch.hpp"
+#include "Components/Transform.hpp"
 #include "Core/Reflection.hpp"
 
 namespace HAIEngine
@@ -10,7 +11,6 @@ namespace HAIEngine
 		: m_name("GameObject")
 	{
 		m_transform = new Transform();
-		m_transform->m_parent = this;
 		AddComponent(m_transform);
 	}
 
@@ -18,7 +18,6 @@ namespace HAIEngine
 		: m_name(name)
 	{
 		m_transform = new Transform();
-		m_transform->m_parent = this;
 		AddComponent(m_transform);
 	}
 
@@ -27,7 +26,6 @@ namespace HAIEngine
 	{
 		m_guid = guid;
 		m_transform = new Transform();
-		m_transform->m_parent = this;
 		AddComponent(m_transform);
 	}
 
@@ -81,7 +79,7 @@ namespace HAIEngine
 			
 			gComponent->DeSerialize(componentData);
 
-			AddComponent(m_transform);
+			AddComponent(gComponent);
 		}
 
 	}
@@ -93,6 +91,7 @@ namespace HAIEngine
 			LOG_Error("Gameobject had a same type component, can not add again!");
 			return;
 		}
+		component->m_fatherGO = this;
 		m_components.insert({ component->m_typeName, component });
 	}
 

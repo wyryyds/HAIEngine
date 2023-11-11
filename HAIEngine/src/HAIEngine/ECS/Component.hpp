@@ -3,6 +3,8 @@
 
 namespace HAIEngine
 {
+	class GameObject;
+
 	class Component : public ISerializeable
 	{
 	public:
@@ -14,6 +16,6 @@ namespace HAIEngine
 		
 	public:
 		std::string m_typeName;
-
+		GameObject* m_fatherGO;
 	};
 }
