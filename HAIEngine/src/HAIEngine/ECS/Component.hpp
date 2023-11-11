@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/ISerialize.hpp"
+#include "Core/TimeStep.hpp"
 
 namespace HAIEngine
 {
@@ -11,7 +12,7 @@ namespace HAIEngine
 		Component() : m_typeName("Component") {};
 		virtual ~Component() = default;
 		virtual void OnAwake() {}
-		virtual void Update() {}
+		virtual void Update(TimeStep ts) {}
 		virtual void OnRemove() {}
 		
 	public:

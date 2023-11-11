@@ -28,7 +28,7 @@ namespace HAIEngine
         inline glm::mat4 GetViewMatrix() { return m_view; }
         inline glm::mat4 GetProjectionMatrix() { return m_projection; }
 
-        void Update() override;
+        void Update(TimeStep ts) override;
         json Serialize(const std::string& name) override;
         void DeSerialize(const json& jsondata) override;
     public:
