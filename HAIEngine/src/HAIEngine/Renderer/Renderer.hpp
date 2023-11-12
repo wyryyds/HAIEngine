@@ -1,7 +1,7 @@
 #pragma once
 
 #include "RenderCommand.hpp"
-#include "Camera.hpp"
+#include "EditorCamera.hpp"
 #include "Shader.hpp"
 
 namespace HAIEngine

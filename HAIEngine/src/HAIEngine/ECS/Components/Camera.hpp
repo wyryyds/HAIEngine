@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include <memory>
 #include <unordered_map>
+#include <variant>
 
 namespace HAIEngine
 {
@@ -33,24 +34,23 @@ namespace HAIEngine
         void DeSerialize(const json& jsondata) override;
     public:
         CameraType m_cameraType{ CameraType::UNDEFINED };
-        union
+
+        struct orthoParams
         {
-            struct
-            {
-                float left{};
-                float right{};
-                float bottom{};
-                float top{};
-                float front{};
-                float back{};
-            } m_ortho;
-            struct
-            {
-                float fov{ 60.0f };
-                float znear{ 96.0f };
-                float zfar{ 0.01f };
-            } m_perspective;
+            float left{};
+            float right{};
+            float bottom{};
+            float top{};
+            float front{};
+            float back{};
         };
+        struct perspectiveParams
+        {
+            float fov{ 60.0f };
+            float znear{ 96.0f };
+            float zfar{ 0.01f };
+        };      
+        std::variant<orthoParams, perspectiveParams> m_cameraParams;
 
     private:
         void UpdateView();

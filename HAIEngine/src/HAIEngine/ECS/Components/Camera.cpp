@@ -12,9 +12,7 @@ namespace HAIEngine
     HAIEngine::Camera::Camera(CameraType cameraType, float aspectRatio, float fov, float znear, float zfar)
         : m_cameraType(cameraType), m_aspect(aspectRatio)
     {
-        m_perspective.fov = fov;
-        m_perspective.znear = znear;
-        m_perspective.zfar = zfar;
+        m_cameraParams = perspectiveParams{fov, znear, zfar};
     }
 
     void HAIEngine::Camera::Update(TimeStep ts)
@@ -52,13 +50,15 @@ namespace HAIEngine
     {
         if (m_cameraType == CameraType::PERSPECTIVE)
         {
-            m_projection = glm::perspective(glm::radians(m_perspective.fov), m_aspect,
-                m_perspective.znear, m_perspective.zfar);
+            m_projection = glm::perspective(glm::radians(std::get<perspectiveParams>(m_cameraParams).fov), m_aspect,
+                std::get<perspectiveParams>(m_cameraParams).znear, std::get<perspectiveParams>(m_cameraParams).zfar);
         }
         else if (m_cameraType == CameraType::ORTHO)
         {
-            m_projection = glm::ortho(m_ortho.left, m_ortho.right, m_ortho.bottom,
-                m_ortho.top, m_ortho.front, m_ortho.back);
+            m_projection = glm::ortho(
+                std::get<orthoParams>(m_cameraParams).left, std::get<orthoParams>(m_cameraParams).right,
+                std::get<orthoParams>(m_cameraParams).bottom, std::get<orthoParams>(m_cameraParams).top, 
+                std::get<orthoParams>(m_cameraParams).front, std::get<orthoParams>(m_cameraParams).back);
         }
     }
 }

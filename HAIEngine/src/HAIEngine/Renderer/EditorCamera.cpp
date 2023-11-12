@@ -1,11 +1,8 @@
-#include "Camera.hpp"
+#include "EditorCamera.hpp"
 #include "hepch.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/string_cast.hpp>
-#include "Camera.hpp"
-#include "Camera.hpp"
-#include "Camera.hpp"
 
 namespace HAIEngine
 {
@@ -43,14 +40,13 @@ namespace HAIEngine
 
     void CameraController::update(float deltaTime)
     {
+        UpdateCameraVec();
         updateView();
         updateProj();
         if (m_camera->m_cameraType == CameraType::PERSPECTIVE)
         {
             if (std::any_of(m_directions.begin(), m_directions.end(), [](const auto& key) -> bool { return key.second; }))
             {
-                UpdateCameraVec();
-
                 float moveSpeed{ deltaTime * m_movementSpeed };
 
                 if (m_directions[Direction::UP])
@@ -69,17 +65,16 @@ namespace HAIEngine
     {
         if (m_camera->m_cameraType == CameraType::PERSPECTIVE)
         {
-            m_camera->m_projection = glm::perspective(glm::radians(m_camera->m_perspective.fov), m_camera->m_aspect,
-                m_camera->m_perspective.znear, m_camera->m_perspective.zfar);
-            if (m_flipY)
-            {
-                m_camera->m_projection[1][1] *= -1.0f;
-            }
+            m_camera->m_projection = glm::perspective(glm::radians(std::get<perspectiveParams>(m_camera->m_cameraParams).fov), 
+                m_camera->m_aspect, std::get<perspectiveParams>(m_camera->m_cameraParams).znear, 
+                std::get<perspectiveParams>(m_camera->m_cameraParams).zfar);
         }
         else if (m_camera->m_cameraType == CameraType::ORTHO)
         {
-            m_camera->m_projection = glm::ortho(m_camera->m_ortho.left, m_camera->m_ortho.right, m_camera->m_ortho.bottom,
-                m_camera->m_ortho.top, m_camera->m_ortho.front, m_camera->m_ortho.back);
+            m_camera->m_projection = glm::ortho(
+                std::get<orthoParams>(m_camera->m_cameraParams).left, std::get<orthoParams>(m_camera->m_cameraParams).right, 
+                std::get<orthoParams>(m_camera->m_cameraParams).bottom, std::get<orthoParams>(m_camera->m_cameraParams).top, 
+                std::get<orthoParams>(m_camera->m_cameraParams).front, std::get<orthoParams>(m_camera->m_cameraParams).back);
         }
     }
 

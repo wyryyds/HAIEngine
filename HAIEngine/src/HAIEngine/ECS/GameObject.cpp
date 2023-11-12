@@ -38,10 +38,10 @@ namespace HAIEngine
 		}
 	}
 
-	void HAIEngine::GameObject::Update()
+	void HAIEngine::GameObject::Update(TimeStep ts)
 	{
 		for (const auto& component : m_components)
-			component.second->Update();
+			component.second->Update(ts);
 	}
 
 	json HAIEngine::GameObject::Serialize(const std::string& name)

@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <memory>
 #include <unordered_map>
+#include <variant>
 
 namespace HAIEngine
 {
@@ -12,6 +13,22 @@ namespace HAIEngine
         UNDEFINED,
         ORTHO,
         PERSPECTIVE,
+    };
+
+    struct orthoParams
+    {
+        float left{};
+        float right{};
+        float bottom{};
+        float top{};
+        float front{};
+        float back{};
+    };
+    struct perspectiveParams
+    {
+        float fov{ 60.0f };
+        float znear{ 96.0f };
+        float zfar{ 0.01f };
     };
 
     struct Camera
@@ -25,25 +42,7 @@ namespace HAIEngine
         glm::mat4 m_projection{ 1.0f };
         glm::mat4 m_view{ 1.0f };
 
-        union
-        {
-            struct
-            {
-                float left{};
-                float right{};
-                float bottom{};
-                float top{};
-                float front{};
-                float back{};
-            } m_ortho;
-
-            struct
-            {
-                float fov{ 60.0f };
-                float znear{ 96.0f };
-                float zfar{ 0.01f };
-            } m_perspective;
-        };
+        std::variant<orthoParams, perspectiveParams> m_cameraParams;
     };
 
     enum class Direction
@@ -67,9 +66,7 @@ namespace HAIEngine
         {
             Camera* camera = new Camera(type);
             camera->m_aspect = aspectRatio;
-            camera->m_perspective.zfar = zfar;
-            camera->m_perspective.znear = znear;
-            camera->m_perspective.fov = fov;
+            camera->m_cameraParams = perspectiveParams{fov, znear, zfar};
             return camera;
         }
 
@@ -118,29 +115,4 @@ namespace HAIEngine
 
         void UpdateCameraVec();
     };
-
-	class OrthographicCamera
-	{
-	public:
-		OrthographicCamera(float left, float right, float bottom, float top);
-
-		const glm::vec3& GetPosition() const { return m_Position; }
-		void SetPosition(const glm::vec3& position) { m_Position = position; RecalculateViewMatrix(); }
-
-		float GetRotation() const { return m_Rotation; }
-		void SetRotation(float rotation) { m_Rotation = rotation; RecalculateViewMatrix(); }
-
-		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
-		const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
-		const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
-	private:
-		void RecalculateViewMatrix();
-	private:
-		glm::mat4 m_ProjectionMatrix;
-		glm::mat4 m_ViewMatrix;
-		glm::mat4 m_ViewProjectionMatrix;
-
-		glm::vec3 m_Position = { 0.0f, 0.0f, 0.0f };
-		float m_Rotation = 0.0f;
-	};
 }

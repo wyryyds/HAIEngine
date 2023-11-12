@@ -2,6 +2,7 @@
 #include "Core/ISerialize.hpp"
 #include "Component.hpp"
 #include "Core/Log.hpp"
+#include "Core/TimeStep.hpp"
 
 namespace HAIEngine
 {
@@ -15,7 +16,7 @@ namespace HAIEngine
 		GameObject(std::string name, size_t guid);
 		virtual ~GameObject();
 
-		void Update();
+		void Update(TimeStep ts);
 
 		virtual json Serialize(const std::string& name) override;
 		virtual void DeSerialize(const json& data) override;
