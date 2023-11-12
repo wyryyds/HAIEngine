@@ -2,15 +2,24 @@
   "scene_name": "TestScene",
   "gameobjects": [
     {
-      "name": "TGameObject",
-      "guid": 15420940484397602498,
+      "name": "GameObject",
+      "guid": 765990982028132834,
       "components": [
         {
           "type": "Transform",
-          "guid": 7069392770714623028,
+          "guid": 3983375013596319354,
           "position": "1.200000,1.300000,1.500000",
           "rotation": "2.100000,3.400000,4.600000",
           "scale": "2.100000,3.400000,4.600000"
+        },
+        {
+          "type": "Camera",
+          "guid": 12306462841868333670,
+          "cameraType": "PERSPECTIVE",
+          "aspectRatio": "1.777778",
+          "fov": "60.000000",
+          "znear": "0.100000",
+          "zfar": "60.000000"
         }
       ]
     }

@@ -11,16 +11,16 @@ namespace HAIEngine
 	REFLECTION(Transform, Component);
 
 	HAIEngine::Transform::Transform()
+		: Component("Transform")
 	{
-		m_typeName = "Transform";
 		m_position = glm::vec3(1.2, 1.3, 1.5);
 		m_rotation = glm::vec3(2.1, 3.4, 4.6);
 		m_scale	   = glm::vec3(2.66, 2.77, 3.88);
 	}
 
 	HAIEngine::Transform::Transform(glm::vec3 position)
+		: Component("Transform")
 	{
-		m_typeName = "Transform";
 		m_position = position;
 		m_rotation = glm::vec3(0, 0, 0);
 		m_scale    = glm::vec3(0, 0, 0);

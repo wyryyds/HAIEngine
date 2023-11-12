@@ -9,7 +9,7 @@ namespace HAIEngine
 	class Component : public ISerializeable
 	{
 	public:
-		Component() : m_typeName("Component") {};
+		Component(std::string typeName) : m_typeName(typeName) {};
 		virtual ~Component() = default;
 		virtual void OnAwake() {}
 		virtual void Update(TimeStep ts) {}

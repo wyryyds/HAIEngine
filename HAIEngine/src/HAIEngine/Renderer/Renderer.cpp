@@ -17,7 +17,7 @@ namespace HAIEngine
 		RenderCommand::Init();
 	}
 
-	void Renderer::BeginScene(Camera* camera)
+	void Renderer::BeginScene(EditorCamera* camera)
 	{
 		// glm::mat4 model = glm::mat4(1.0f);
 		// model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));

@@ -1,5 +1,5 @@
 #pragma once
-
+#include "HAIEngine/ECS/Components/Camera.hpp"
 #include <glm/glm.hpp>
 #include <memory>
 #include <unordered_map>
@@ -7,14 +7,6 @@
 
 namespace HAIEngine
 {
-
-    enum class CameraType
-    {
-        UNDEFINED,
-        ORTHO,
-        PERSPECTIVE,
-    };
-
     struct orthoParams
     {
         float left{};
@@ -31,10 +23,10 @@ namespace HAIEngine
         float zfar{ 0.01f };
     };
 
-    struct Camera
+    struct EditorCamera
     {
-        Camera(CameraType cameraType) : m_cameraType(cameraType) {};
-        ~Camera() = default;
+        EditorCamera(CameraType cameraType) : m_cameraType(cameraType) {};
+        ~EditorCamera() = default;
 
         CameraType m_cameraType{ CameraType::UNDEFINED };
 
@@ -56,15 +48,15 @@ namespace HAIEngine
     class CameraController
     {
     public:
-        static std::unique_ptr<CameraController> Create(Camera* camera)
+        static std::unique_ptr<CameraController> Create(EditorCamera* camera)
         {
             auto instance = std::unique_ptr<CameraController>(new CameraController(camera));
             return instance;
         }
 
-        static Camera* CreatePerspectiveCamera(CameraType type, float aspectRatio, float fov, float znear, float zfar)
+        static EditorCamera* CreatePerspectiveCamera(CameraType type, float aspectRatio, float fov, float znear, float zfar)
         {
-            Camera* camera = new Camera(type);
+            EditorCamera* camera = new EditorCamera(type);
             camera->m_aspect = aspectRatio;
             camera->m_cameraParams = perspectiveParams{fov, znear, zfar};
             return camera;
@@ -88,11 +80,11 @@ namespace HAIEngine
         void setCursorEnabled(bool flag) { enabled = flag; }
 
     private:
-        CameraController(Camera* camera) : m_camera{ camera } {}
+        CameraController(EditorCamera* camera) : m_camera{ camera } {}
         void updateProj();
         void updateView();
 
-        Camera* m_camera{};
+        EditorCamera* m_camera{};
 
         bool      m_flipY{ false };
         glm::vec3 m_direction{ 0.0f, 0.0f, 0.0f };

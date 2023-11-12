@@ -13,6 +13,7 @@
 
 //test
 #include "HAIEngine/ECS/GameObject.hpp"
+#include "HAIEngine/ECS/Components/Camera.hpp"
 
 
 using json = nlohmann::ordered_json;
@@ -249,7 +250,7 @@ public:
 private:
 	HAIEngine::ShaderLibrary m_ShaderLibrary;
 
-	HAIEngine::Camera* m_PerspectiveCamera;
+	HAIEngine::EditorCamera* m_PerspectiveCamera;
 	std::unique_ptr<HAIEngine::CameraController> m_CameraController;
 
 	glm::vec3 m_LightCorlor{ 1.0f, 1.0f, 1.0f };
