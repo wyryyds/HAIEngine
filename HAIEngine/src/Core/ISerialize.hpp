@@ -14,6 +14,7 @@ namespace HAIEngine
 	public:
 		HESerializeFile(const std::string& filepath);
 		~HESerializeFile() = default;
+
 		inline json& GetJsonData(){ return m_jsonData; }
 		void Save();
 
@@ -27,13 +28,13 @@ namespace HAIEngine
 	public:
 		ISerializeable() : m_guid(GenerateGUID(this)) {}
 		virtual ~ISerializeable() = default;
+
 		virtual json Serialize(const std::string& name) = 0;
 		virtual void DeSerialize(const json& jsondata) = 0;
 
 		static size_t GenerateGUID(const ISerializeable* obj) {
 			return std::hash<const ISerializeable*>{}(obj);
 		}
-
 		size_t GetGUID() const {
 			return m_guid;
 		}

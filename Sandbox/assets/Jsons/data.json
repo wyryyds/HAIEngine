@@ -2,7 +2,7 @@
   "scene_name": "TestScene",
   "gameobjects": [
     {
-      "name": "GameObject",
+      "name": "testGameobject",
       "guid": 765990982028132834,
       "components": [
         {

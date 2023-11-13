@@ -121,7 +121,7 @@ public:
 		testGO->DeSerialize(jsondata["gameobjects"][0]);
 
 		json gameobjects = json::array();
-		gameobjects.push_back(testGO->Serialize(testGO->m_name));
+		gameobjects.push_back(testGO->Serialize("testGameobject"));
 
 		jsondata["scene_name"] = "TestScene";
 		jsondata["gameobjects"] = gameobjects;
