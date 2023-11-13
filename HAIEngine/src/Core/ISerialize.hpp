@@ -16,6 +16,8 @@ namespace HAIEngine
 		~HESerializeFile() = default;
 
 		inline json& GetJsonData(){ return m_jsonData; }
+		inline void SetJsonData(const json& jsondata) { m_jsonData = jsondata; }
+		void Load();
 		void Save();
 
 	private:

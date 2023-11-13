@@ -7,6 +7,10 @@ namespace HAIEngine
 	HESerializeFile::HESerializeFile(const std::string& filepath)
 		: m_filepath(filepath)
 	{
+	}
+
+	void HESerializeFile::Load()
+	{
 		std::ifstream readfile(m_filepath);
 		readfile >> m_jsonData;
 		readfile.close();

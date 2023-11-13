@@ -1,25 +1,35 @@
 {
-  "scene_name": "TestScene",
-  "gameobjects": [
+  "sceneName": "Scene",
+  "guid": 12867828747389609655,
+  "gameObjects": [
     {
-      "name": "testGameobject",
-      "guid": 765990982028132834,
+      "name": "GameObject",
+      "guid": 5530451135633132446,
       "components": [
         {
           "type": "Transform",
-          "guid": 3983375013596319354,
+          "guid": 15685378619864814370,
           "position": "1.200000,1.300000,1.500000",
           "rotation": "2.100000,3.400000,4.600000",
-          "scale": "2.100000,3.400000,4.600000"
+          "scale": "2.660000,2.770000,3.880000"
         },
         {
           "type": "Camera",
-          "guid": 12306462841868333670,
-          "cameraType": "PERSPECTIVE",
-          "aspectRatio": "1.777778",
-          "fov": "60.000000",
-          "znear": "0.100000",
-          "zfar": "60.000000"
+          "guid": 10523602868598982546,
+          "cameraType": "UNDEFINED"
+        }
+      ]
+    },
+    {
+      "name": "GameObject",
+      "guid": 6852723939573328044,
+      "components": [
+        {
+          "type": "Transform",
+          "guid": 14932612733584886283,
+          "position": "1.200000,1.300000,1.500000",
+          "rotation": "2.100000,3.400000,4.600000",
+          "scale": "2.660000,2.770000,3.880000"
         }
       ]
     }

@@ -11,6 +11,7 @@ namespace HAIEngine
 		Scene(std::string sceneName, const std::string& filepath);
 		~Scene() = default;
 
+		void Load();
 		void Save();
 
 		inline void AddGameObject(std::shared_ptr<GameObject> go)

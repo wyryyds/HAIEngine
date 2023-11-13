@@ -12,19 +12,19 @@ namespace HAIEngine
 {
     REFLECTION(Camera, Component);
 
-    HAIEngine::Camera::Camera(CameraType cameraType, float aspectRatio, float fov, float znear, float zfar)
+    Camera::Camera(CameraType cameraType, float aspectRatio, float fov, float znear, float zfar)
         : Component("Camera"), m_cameraType(cameraType), m_aspect(aspectRatio)
     {
         m_cameraParams = perspectiveParams{fov, znear, zfar};
     }
 
-    void HAIEngine::Camera::Update(TimeStep ts)
+    void Camera::Update(TimeStep ts)
     {
         UpdateView();
         UpdateProjection();
     }
 
-    void HAIEngine::Camera::UpdateView()
+    void Camera::UpdateView()
     {
         if (m_cameraType == CameraType::PERSPECTIVE)
         {
@@ -40,7 +40,7 @@ namespace HAIEngine
         }
     }
 
-    void HAIEngine::Camera::UpdateProjection()
+    void Camera::UpdateProjection()
     {
         if (m_cameraType == CameraType::PERSPECTIVE)
         {
@@ -56,7 +56,7 @@ namespace HAIEngine
         }
     }
 
-    json HAIEngine::Camera::Serialize(const std::string& name)
+    json Camera::Serialize(const std::string& name)
     {
         json resjson;
         resjson["type"] = name;
@@ -85,7 +85,7 @@ namespace HAIEngine
         return resjson;
     }
 
-    void HAIEngine::Camera::DeSerialize(const json& jsondata)
+    void Camera::DeSerialize(const json& jsondata)
     {
         if (jsondata["type"].get<std::string>() != m_typeName)
         {

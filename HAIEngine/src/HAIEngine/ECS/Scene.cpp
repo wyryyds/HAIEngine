@@ -5,21 +5,26 @@ namespace HAIEngine
     Scene::Scene(const std::string& filepath)
         : m_sceneName("Scene"), m_serializeFile(filepath)
     {
-        DeSerialize(m_serializeFile.GetJsonData());
     }
 
     Scene::Scene(std::string sceneName, const std::string& filepath)
         : m_sceneName(sceneName), m_serializeFile(filepath)
     {
+    }
+
+    void Scene::Load()
+    {
+        m_serializeFile.Load();
         DeSerialize(m_serializeFile.GetJsonData());
     }
 
-    void HAIEngine::Scene::Save()
+    void Scene::Save()
     {
-        Serialize(m_sceneName);
+        m_serializeFile.SetJsonData(Serialize(m_sceneName));
+        m_serializeFile.Save();
     }
 
-    std::shared_ptr<GameObject> HAIEngine::Scene::Find(const std::string& name)
+    std::shared_ptr<GameObject> Scene::Find(const std::string& name)
     {
         for (auto& go : m_gameObjects)
         {
@@ -32,7 +37,7 @@ namespace HAIEngine
         return nullptr;
     }
 
-    json HAIEngine::Scene::Serialize(const std::string& name)
+    json Scene::Serialize(const std::string& name)
     {
         json sceneData;
         sceneData["sceneName"] = m_sceneName;
@@ -46,7 +51,7 @@ namespace HAIEngine
         return sceneData;
     }
 
-    void HAIEngine::Scene::DeSerialize(const json& jsondata)
+    void Scene::DeSerialize(const json& jsondata)
     {
         m_sceneName = jsondata["sceneName"];
         m_guid = jsondata["guid"];

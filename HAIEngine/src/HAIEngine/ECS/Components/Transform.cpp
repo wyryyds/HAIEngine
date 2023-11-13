@@ -10,7 +10,7 @@ namespace HAIEngine
 {
 	REFLECTION(Transform, Component);
 
-	HAIEngine::Transform::Transform()
+	Transform::Transform()
 		: Component("Transform")
 	{
 		m_position = glm::vec3(1.2, 1.3, 1.5);
@@ -18,7 +18,7 @@ namespace HAIEngine
 		m_scale	   = glm::vec3(2.66, 2.77, 3.88);
 	}
 
-	HAIEngine::Transform::Transform(glm::vec3 position)
+	Transform::Transform(glm::vec3 position)
 		: Component("Transform")
 	{
 		m_position = position;
@@ -26,7 +26,7 @@ namespace HAIEngine
 		m_scale    = glm::vec3(0, 0, 0);
 	}
 
-	glm::vec3 HAIEngine::Transform::GetFront()
+	glm::vec3 Transform::GetFront()
 	{
 		glm::vec3 front;
 		front.x = cos(glm::radians(m_rotation.x)) * cos(glm::radians(m_rotation.z));
@@ -35,17 +35,17 @@ namespace HAIEngine
 		return glm::normalize(front);
 	}
 
-	glm::vec3 HAIEngine::Transform::GetRight()
+	glm::vec3 Transform::GetRight()
 	{
 		return glm::normalize(glm::cross(GetFront(), Transform::up));
 	}
 
-	glm::vec3 HAIEngine::Transform::GetUp()
+	glm::vec3 Transform::GetUp()
 	{
 		return glm::normalize(glm::cross(GetRight(), GetFront()));
 	}
 
-	glm::mat4 HAIEngine::Transform::GetModelMatrix()
+	glm::mat4 Transform::GetModelMatrix()
 	{
 		glm::mat4 translationMatrix = glm::translate(glm::identity<glm::mat4>(), m_position);
 		glm::mat4 rotationMatrix    = glm::eulerAngleYXZ(glm::radians(m_rotation.y), glm::radians(m_rotation.x), glm::radians(m_rotation.z));
@@ -54,12 +54,12 @@ namespace HAIEngine
 		return translationMatrix * rotationMatrix * scaleMatrix;
 	}
 
-	void HAIEngine::Transform::translate(glm::vec3 dir, float dis)
+	void Transform::translate(glm::vec3 dir, float dis)
 	{
 		m_position += dis * dir;
 	}
 
-	json HAIEngine::Transform::Serialize(const std::string& name)
+	json Transform::Serialize(const std::string& name)
 	{
 		json resjson;
 		resjson["type"] = name;
@@ -79,7 +79,7 @@ namespace HAIEngine
 		return resjson;
 	}
 
-	void HAIEngine::Transform::DeSerialize(const json& jsondata)
+	void Transform::DeSerialize(const json& jsondata)
 	{
 		if (jsondata["type"].get<std::string>() != "Transform")
 		{

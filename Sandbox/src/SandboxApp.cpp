@@ -14,6 +14,7 @@
 //test
 #include "HAIEngine/ECS/GameObject.hpp"
 #include "HAIEngine/ECS/Components/Camera.hpp"
+#include "HAIEngine/ECS/Scene.hpp"
 
 
 using json = nlohmann::ordered_json;
@@ -114,19 +115,19 @@ public:
 		sampleShader->UploadUniformInt("material.specular", 1);
 
 		//test json
-		HAIEngine::HESerializeFile testfile(ASSTESPATH"Jsons/data.json");
-		auto& jsondata = testfile.GetJsonData();
+		HAIEngine::Scene myScene(ASSTESPATH"Jsons/data.json");
 
-		HAIEngine::GameObject* testGO = new HAIEngine::GameObject();
-		testGO->DeSerialize(jsondata["gameobjects"][0]);
+		std::shared_ptr<HAIEngine::GameObject> testGO1 = std::make_shared<HAIEngine::GameObject>();
 
-		json gameobjects = json::array();
-		gameobjects.push_back(testGO->Serialize("testGameobject"));
+		std::shared_ptr<HAIEngine::GameObject> testGO2 = std::make_shared<HAIEngine::GameObject>();
 
-		jsondata["scene_name"] = "TestScene";
-		jsondata["gameobjects"] = gameobjects;
+		HAIEngine::Camera* testCamera = new HAIEngine::Camera();
+		testGO1->AddComponent(testCamera);
 
-		testfile.Save();
+		myScene.AddGameObject(testGO1);
+		myScene.AddGameObject(testGO2);
+
+		myScene.Save();
 	}
 
 	void OnUpdate(HAIEngine::TimeStep ts) override

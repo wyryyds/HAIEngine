@@ -7,21 +7,21 @@ namespace HAIEngine
 {
 	REFLECTION(GameObject, GameObject);
 
-	HAIEngine::GameObject::GameObject()
+	GameObject::GameObject()
 		: m_name("GameObject")
 	{
 		m_transform = new Transform();
 		AddComponent(m_transform);
 	}
 
-	HAIEngine::GameObject::GameObject(std::string name)
+	GameObject::GameObject(std::string name)
 		: m_name(name)
 	{
 		m_transform = new Transform();
 		AddComponent(m_transform);
 	}
 
-	HAIEngine::GameObject::GameObject(std::string name, size_t guid)
+	GameObject::GameObject(std::string name, size_t guid)
 		: m_name(name)
 	{
 		m_guid = guid;
@@ -29,7 +29,7 @@ namespace HAIEngine
 		AddComponent(m_transform);
 	}
 
-	HAIEngine::GameObject::~GameObject()
+	GameObject::~GameObject()
 	{
 		for (auto iter = m_components.begin(); iter != m_components.end(); ++iter)
 		{
@@ -38,13 +38,13 @@ namespace HAIEngine
 		}
 	}
 
-	void HAIEngine::GameObject::Update(TimeStep ts)
+	void GameObject::Update(TimeStep ts)
 	{
 		for (const auto& component : m_components)
 			component.second->Update(ts);
 	}
 
-	json HAIEngine::GameObject::Serialize(const std::string& name)
+	json GameObject::Serialize(const std::string& name)
 	{
 		json resjson;
 		resjson["name"] = name;
@@ -59,7 +59,7 @@ namespace HAIEngine
 		return resjson;
 	}
 
-	void HAIEngine::GameObject::DeSerialize(const json& data)
+	void GameObject::DeSerialize(const json& data)
 	{
 		m_name = data["name"].get<std::string>();
 		m_guid = data["guid"].get<size_t>();
@@ -84,7 +84,7 @@ namespace HAIEngine
 
 	}
 
-	void HAIEngine::GameObject::AddComponent(Component* component)
+	void GameObject::AddComponent(Component* component)
 	{
 		if (m_components.find(component->m_typeName) != m_components.end())
 		{
