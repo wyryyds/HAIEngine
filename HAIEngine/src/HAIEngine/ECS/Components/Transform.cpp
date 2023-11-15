@@ -62,56 +62,26 @@ namespace HAIEngine
 	json Transform::Serialize(const std::string& name)
 	{
 		json resjson;
-		resjson["type"] = name;
-		resjson["guid"] = m_guid;
-		// floatdata save as string
-		std::string positionStr = std::to_string(m_position.x) + "," + std::to_string(m_position.y) + "," 
-			+ std::to_string(m_position.z);
-		std::string rotationStr = std::to_string(m_rotation.x) + "," + std::to_string(m_rotation.y) + "," 
-			+ std::to_string(m_rotation.z);
-		std::string scaleStr = std::to_string(m_scale.x) + "," + std::to_string(m_scale.y) + ","
-			+ std::to_string(m_scale.z);
-
-		resjson["position"] = positionStr;
-		resjson["rotation"] = rotationStr;
-		resjson["scale"] = scaleStr;
+		resjson["type"] = SerializeHelper::SerializeData(name);
+		resjson["guid"] = SerializeHelper::SerializeData(m_guid);
+		resjson["position"] = SerializeHelper::SerializeData(m_position);
+		resjson["rotation"] = SerializeHelper::SerializeData(m_rotation);
+		resjson["scale"] = SerializeHelper::SerializeData(m_scale);
 
 		return resjson;
 	}
 
 	void Transform::DeSerialize(const json& jsondata)
 	{
-		if (jsondata["type"].get<std::string>() != "Transform")
+		if (SerializeHelper::DeSerializeData<std::string>(jsondata["type"]) != m_typeName)
 		{
 			LOG_Error("Component type is not match!");
 			return;
 		}
-		m_guid = jsondata["guid"].get<size_t>();
 
-		std::vector<std::string > stringdata;
-
-		stringdata.push_back(jsondata["position"].get<std::string>());
-		stringdata.push_back(jsondata["rotation"].get<std::string>());
-		stringdata.push_back(jsondata["rotation"].get<std::string>());
-
-		std::vector<std::vector<float> > floatValues;
-
-		for (int i = 0; i < stringdata.size(); ++ i)
-		{
-			std::istringstream iss(stringdata[i]);
-			std::string token;
-			std::vector<float> subFloatValues;
-
-			while (std::getline(iss, token, ',')) {
-				float value = std::stof(token);
-				subFloatValues.push_back(value);
-			}
-
-			floatValues.push_back(subFloatValues);
-		}
-
-		m_position = glm::vec3{ floatValues[0][0], floatValues[0][1], floatValues[0][2] };
-		m_rotation = glm::vec3{ floatValues[1][0], floatValues[1][1], floatValues[1][2] };
-		m_scale    = glm::vec3{ floatValues[2][0], floatValues[2][1], floatValues[2][2] };
+		m_guid = SerializeHelper::DeSerializeData<size_t>(jsondata["guid"]);
+		m_position = SerializeHelper::DeSerializeData<glm::vec3>(jsondata["position"]);
+		m_rotation = SerializeHelper::DeSerializeData<glm::vec3>(jsondata["rotation"]);
+		m_scale    = SerializeHelper::DeSerializeData<glm::vec3>(jsondata["scale"]);
 	}
 }

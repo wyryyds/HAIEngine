@@ -40,21 +40,23 @@ namespace HAIEngine
     json Scene::Serialize(const std::string& name)
     {
         json sceneData;
-        sceneData["sceneName"] = m_sceneName;
-        sceneData["guid"] = m_guid;
+        sceneData["sceneName"] = SerializeHelper::SerializeData(name);
+        sceneData["guid"] = SerializeHelper::SerializeData(m_guid);
+
         json gosData = json::array();
         for (auto& go : m_gameObjects)
         {
             gosData.push_back(go->Serialize(go->m_name));
         }
         sceneData["gameObjects"] = gosData;
+
         return sceneData;
     }
 
     void Scene::DeSerialize(const json& jsondata)
     {
-        m_sceneName = jsondata["sceneName"];
-        m_guid = jsondata["guid"];
+        m_sceneName = SerializeHelper::DeSerializeData<std::string>(jsondata["sceneName"]);
+        m_guid = SerializeHelper::DeSerializeData<size_t>(jsondata["guid"]);
 
         json gameObjects = jsondata["gameObjects"];
         for (int i = 0; i < gameObjects.size(); ++i)

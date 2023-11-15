@@ -59,23 +59,23 @@ namespace HAIEngine
     json Camera::Serialize(const std::string& name)
     {
         json resjson;
-        resjson["type"] = name;
-        resjson["guid"] = m_guid;
+        resjson["type"] = SerializeHelper::SerializeData(name);
+        resjson["guid"] = SerializeHelper::SerializeData(m_guid);
 
         switch (m_cameraType) 
         {
             case CameraType::UNDEFINED:
-                resjson["cameraType"] = "UNDEFINED";
+                resjson["cameraType"] = SerializeHelper::SerializeData("UNDEFINED");
                 break;
             case CameraType::ORTHO:
-                resjson["cameraType"] = "ORTHO";
+                resjson["cameraType"] = SerializeHelper::SerializeData("ORTHO");
                 break;
             case CameraType::PERSPECTIVE:
-                resjson["cameraType"] = "PERSPECTIVE";
-                resjson["aspectRatio"] = std::to_string(m_aspect);
-                resjson["fov"] = std::to_string(std::get<perspectiveParams>(m_cameraParams).fov);
-                resjson["znear"] = std::to_string(std::get<perspectiveParams>(m_cameraParams).znear);
-                resjson["zfar"] = std::to_string(std::get<perspectiveParams>(m_cameraParams).zfar);
+                resjson["cameraType"] = SerializeHelper::SerializeData("PERSPECTIVE");
+                resjson["aspectRatio"] = SerializeHelper::SerializeData(m_aspect);
+                resjson["fov"] = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraParams).fov);
+                resjson["znear"] = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraParams).znear);
+                resjson["zfar"] = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraParams).zfar);
                 break;
             default:
                 resjson["cameraType"] = "UNDEFINED";
@@ -85,32 +85,33 @@ namespace HAIEngine
         return resjson;
     }
 
-    void Camera::DeSerialize(const json& jsondata)
+    void Camera::DeSerialize(const json& jsonData)
     {
-        if (jsondata["type"].get<std::string>() != m_typeName)
+        if (SerializeHelper::DeSerializeData<std::string>(jsonData["type"]) != m_typeName)
         {
             LOG_Error("type not match!");
             return;
         }
-        m_guid = jsondata["guid"];
 
-        if (jsondata["cameraType"].get<std::string>() == "UNDEFINED")
+        m_guid = SerializeHelper::DeSerializeData<size_t>(jsonData["guid"]);
+
+        if (SerializeHelper::DeSerializeData<std::string>(jsonData["cameraType"]) == "UNDEFINED")
             return;
 
-        if (jsondata["cameraType"].get<std::string>() == "PERSPECTIVE")
+        if (SerializeHelper::DeSerializeData<std::string>(jsonData["cameraType"]) == "PERSPECTIVE")
         {
             m_cameraType = CameraType::PERSPECTIVE;
 
-            m_aspect = std::stof(jsondata["aspectRatio"].get<std::string>());
-            float fov = std::stof(jsondata["fov"].get<std::string>());
-            float znear = std::stof(jsondata["znear"].get<std::string>());
-            float zfar = std::stof(jsondata["zfar"].get<std::string>());
+            m_aspect = SerializeHelper::DeSerializeData<float>(jsonData["aspectRatio"]);
+            float fov = SerializeHelper::DeSerializeData<float>(jsonData["fov"]);
+            float znear = SerializeHelper::DeSerializeData<float>(jsonData["znear"]);
+            float zfar = SerializeHelper::DeSerializeData<float>(jsonData["zfar"]);
 
             m_cameraParams = perspectiveParams{ fov, znear, zfar };
             return;
         }
 
-        if(jsondata["cameraType"].get<std::string>() == "ORTHO")
+        if(SerializeHelper::DeSerializeData<std::string>(jsonData["cameraType"]) == "ORTHO")
         {
             // TODO
             return;

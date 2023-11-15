@@ -47,8 +47,8 @@ namespace HAIEngine
 	json GameObject::Serialize(const std::string& name)
 	{
 		json resjson;
-		resjson["name"] = name;
-		resjson["guid"] = m_guid;
+		resjson["name"] = SerializeHelper::SerializeData(name);
+		resjson["guid"] = SerializeHelper::SerializeData(m_guid);
 		resjson["components"] = json::array();
 
 		for (auto iter = m_components.begin(); iter != m_components.end(); ++iter)
@@ -59,23 +59,24 @@ namespace HAIEngine
 		return resjson;
 	}
 
-	void GameObject::DeSerialize(const json& data)
+	void GameObject::DeSerialize(const json& jsonData)
 	{
-		m_name = data["name"].get<std::string>();
-		m_guid = data["guid"].get<size_t>();
+		m_name = SerializeHelper::DeSerializeData<std::string>(jsonData["name"]);
+		m_guid = SerializeHelper::DeSerializeData<size_t>(jsonData["guid"]);
 
-		auto& componentsData = data["components"];
+		auto& componentsData = jsonData["components"];
 		for (int i = 0; i < componentsData.size(); ++i)
 		{
 			auto& componentData = componentsData[i];
-			// transform init longly
-			if (componentData["type"].get<std::string>() == "Transform")
+
+			if (SerializeHelper::DeSerializeData<std::string>(componentData["type"]) == "Transform")
 			{
 				m_transform->DeSerialize(componentData);
 				continue;
 			}
+
 			auto gComponent = static_cast<Component*>(HAIEngine::ReflectionManager::GetInstance().CreateClassByName
-				(componentData["type"].get<std::string>()));
+				(SerializeHelper::DeSerializeData<std::string>(componentData["type"])));
 			
 			gComponent->DeSerialize(componentData);
 

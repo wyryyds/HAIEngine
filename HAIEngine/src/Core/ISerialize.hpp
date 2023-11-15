@@ -1,11 +1,70 @@
 #pragma once
 #include "Core/Core.hpp"
-
+#include "Core/Log.hpp"
 #include "nlohmann/json.hpp"
+#include "glm/glm.hpp"
 
 namespace HAIEngine
 {
 	using json = nlohmann::ordered_json;
+
+	class SerializeHelper
+	{
+	public:
+		SerializeHelper() = default;
+		~SerializeHelper() = default;
+
+		static int SerializeData(const int value);
+		static std::string SerializeData(const float value);
+		static double SerializeData(const double value);
+		static size_t SerializeData(const size_t value);
+		static std::string SerializeData(const std::string& value);
+		static std::string SerializeData(const glm::vec3 value);
+
+		template <typename T>
+		static T DeSerializeData(const json& jsonData, const std::string& key)
+		{
+			if (jsonData.contains(key))
+			{
+				try
+				{
+					return jsonData[key].get<T>();
+				}
+				catch (const json::exception& e)
+				{
+					LOG_Error("Error reading JSON key!{0}", e.what());
+				}
+			}
+
+			return T();
+		}
+
+		template <typename T>
+		static T DeSerializeData(const json& jsonData)
+		{
+			return jsonData.get<T>();
+		}
+
+		template <>
+		static float DeSerializeData(const json& jsonData)
+		{
+			return std::stof(jsonData.get<std::string>());
+		}
+
+		template <>
+		static glm::vec3 DeSerializeData(const json& jsonData)
+		{
+			std::istringstream iss(jsonData.get<std::string>());
+			std::string token;
+			std::vector<float> floatValues;
+
+			while (std::getline(iss, token, ','))
+				floatValues.push_back(std::stof(token));
+
+			return glm::vec3{ floatValues[0], floatValues[1], floatValues[2] };
+		}
+
+	};
 
 	class HESerializeFile
 	{

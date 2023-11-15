@@ -117,11 +117,14 @@ public:
 		//test json
 		HAIEngine::Scene myScene(ASSTESPATH"Jsons/data.json");
 
-		std::shared_ptr<HAIEngine::GameObject> testGO1 = std::make_shared<HAIEngine::GameObject>();
+		myScene.Load();
 
-		std::shared_ptr<HAIEngine::GameObject> testGO2 = std::make_shared<HAIEngine::GameObject>();
+		std::shared_ptr<HAIEngine::GameObject> testGO1 = std::make_shared<HAIEngine::GameObject>("TestGO1");
 
-		HAIEngine::Camera* testCamera = new HAIEngine::Camera();
+		std::shared_ptr<HAIEngine::GameObject> testGO2 = std::make_shared<HAIEngine::GameObject>("TestGO2");
+
+		HAIEngine::Camera* testCamera = new HAIEngine::Camera(HAIEngine::CameraType::PERSPECTIVE,
+			1920.0f / 1080.0f, 60.0f, 0.1f, 60.0f);
 		testGO1->AddComponent(testCamera);
 
 		myScene.AddGameObject(testGO1);
