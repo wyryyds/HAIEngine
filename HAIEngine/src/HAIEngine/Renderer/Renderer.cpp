@@ -1,6 +1,5 @@
 #include "Renderer.hpp"
 #include "hepch.hpp"
-
 #include "Platform/OpenGL/OpenGLShader.hpp"
 
 #include <GLFW/glfw3.h>
@@ -17,12 +16,12 @@ namespace HAIEngine
 		RenderCommand::Init();
 	}
 
-	void Renderer::BeginScene(EditorCamera* camera)
+	void Renderer::BeginScene(glm::mat4 viewProjectionMatrix)
 	{
 		// glm::mat4 model = glm::mat4(1.0f);
 		// model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
 
-		m_SceneData->ViewProjectionMatrix = camera->m_projection * camera->m_view;
+		m_SceneData->ViewProjectionMatrix = viewProjectionMatrix;
 	}
 
 	void Renderer::EndScene()

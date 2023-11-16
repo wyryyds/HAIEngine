@@ -1,56 +1,21 @@
 {
   "sceneName": "Scene",
-  "guid": 17714723400327212028,
+  "guid": 13591582865101248064,
   "gameObjects": [
     {
-      "name": "GameObject",
-      "guid": 9319686325325576559,
-      "components": [
-        {
-          "type": "Transform",
-          "guid": 15311836270131671139,
-          "position": "1.2,1.3,1.5",
-          "rotation": "2.1,3.4,4.6",
-          "scale": "2.66,2.77,3.88"
-        },
-        {
-          "type": "Camera",
-          "guid": 12791549994985878115,
-          "cameraType": "PERSPECTIVE",
-          "aspectRatio": "1.777778",
-          "fov": "60.000000",
-          "znear": "0.100000",
-          "zfar": "60.000000"
-        }
-      ]
-    },
-    {
-      "name": "GameObject",
-      "guid": 9268690186997789422,
-      "components": [
-        {
-          "type": "Transform",
-          "guid": 3665880379558171717,
-          "position": "1.2,1.3,1.5",
-          "rotation": "2.1,3.4,4.6",
-          "scale": "2.66,2.77,3.88"
-        }
-      ]
-    },
-    {
       "name": "TestGO1",
-      "guid": 11857792014963375179,
+      "guid": 13406709055887773165,
       "components": [
         {
           "type": "Transform",
-          "guid": 17261703079002476339,
-          "position": "1.2,1.3,1.5",
-          "rotation": "2.1,3.4,4.6",
-          "scale": "2.66,2.77,3.88"
+          "guid": 11465675768285727920,
+          "position": "0,0,6",
+          "rotation": "-90,0,0",
+          "scale": "1,1,1"
         },
         {
           "type": "Camera",
-          "guid": 11587717238841692186,
+          "guid": 14286005995947794878,
           "cameraType": "PERSPECTIVE",
           "aspectRatio": "1.777778",
           "fov": "60.000000",
@@ -61,14 +26,14 @@
     },
     {
       "name": "TestGO2",
-      "guid": 10256778264023527230,
+      "guid": 17552940518127791720,
       "components": [
         {
           "type": "Transform",
-          "guid": 4241359840947987044,
-          "position": "1.2,1.3,1.5",
-          "rotation": "2.1,3.4,4.6",
-          "scale": "2.66,2.77,3.88"
+          "guid": 5349639506596937556,
+          "position": "0,0,6",
+          "rotation": "-90,0,0",
+          "scale": "1,1,1"
         }
       ]
     }

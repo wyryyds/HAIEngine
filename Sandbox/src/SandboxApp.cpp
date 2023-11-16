@@ -1,19 +1,19 @@
-#include "HAIEngine.hpp"
 #include "Core/Core.hpp"
 #include "Core/ISerialize.hpp"
+#include "HAIEngine.hpp"
 
 #include "Platform/OpenGL/OpenGLShader.hpp"
 #include "Platform/OpenGL/OpenGLTexture.hpp"
 
-#include "imgui.h"
-#include <glfw/glfw3.h>
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "imgui.h"
+#include <glfw/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 
 //test
-#include "HAIEngine/ECS/GameObject.hpp"
 #include "HAIEngine/ECS/Components/Camera.hpp"
+#include "HAIEngine/ECS/GameObject.hpp"
 #include "HAIEngine/ECS/Scene.hpp"
 
 
@@ -85,8 +85,8 @@ public:
 		m_SuareVB->SetLayout(
 			{
 				{ HAIEngine::ShaderDataType::Float3, "a_Position" },
-				{ HAIEngine::ShaderDataType::Float3, "aNormal"},
-				{HAIEngine::ShaderDataType::Float2, "aTexCoords"}
+				{ HAIEngine::ShaderDataType::Float3, "aNormal" },
+				{ HAIEngine::ShaderDataType::Float2, "aTexCoords"}
 			});
 		m_SquareVA->AddVertexBuffer(m_SuareVB);
 
@@ -115,9 +115,9 @@ public:
 		sampleShader->UploadUniformInt("material.specular", 1);
 
 		//test json
-		HAIEngine::Scene myScene(ASSTESPATH"Jsons/data.json");
-
-		myScene.Load();
+		//HAIEngine::Scene myScene(ASSTESPATH"Jsons/data.json");
+		
+		scene = std::make_shared<HAIEngine::Scene>(ASSTESPATH"Jsons/data.json");
 
 		std::shared_ptr<HAIEngine::GameObject> testGO1 = std::make_shared<HAIEngine::GameObject>("TestGO1");
 
@@ -127,10 +127,11 @@ public:
 			1920.0f / 1080.0f, 60.0f, 0.1f, 60.0f);
 		testGO1->AddComponent(testCamera);
 
-		myScene.AddGameObject(testGO1);
-		myScene.AddGameObject(testGO2);
+		scene->SetMainCamera(testCamera);
+		scene->AddGameObject(testGO1);
+		scene->AddGameObject(testGO2);
 
-		myScene.Save();
+		scene->Save();
 	}
 
 	void OnUpdate(HAIEngine::TimeStep ts) override
@@ -147,7 +148,14 @@ public:
 		// rendering
 		HAIEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		HAIEngine::RenderCommand::Clear();
-		HAIEngine::Renderer::BeginScene(m_PerspectiveCamera);
+
+		for (int i = 0; i < scene->m_gameObjects.size(); ++i)
+		{
+			scene->m_gameObjects[i]->Update(ts);
+		}
+
+		HAIEngine::Renderer::BeginScene(m_PerspectiveCamera->m_projection * m_PerspectiveCamera->m_view);
+		//HAIEngine::Renderer::BeginScene(scene->m_mainCamera->GetViewProjection());
 
 		// sample shader
 		auto lightingShader = std::dynamic_pointer_cast<HAIEngine::OpenGLShader>(m_ShaderLibrary.Get("lighting"));
@@ -269,6 +277,9 @@ private:
 
 	float lastMouseX, lastMouseY;
 	bool IsReControlMouse = false;
+
+	//sample ECS
+	std::shared_ptr<HAIEngine::Scene> scene;
 };
 
 class Sandbox : public HAIEngine::Application

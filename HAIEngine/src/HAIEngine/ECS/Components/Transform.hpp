@@ -31,8 +31,8 @@ namespace HAIEngine
 		void DeSerialize(const json& jsondata) override;
 
 	public:
-		glm::vec3 m_position;
-		glm::vec3 m_rotation;
-		glm::vec3 m_scale;
+		glm::vec3 m_position{ 0.0f, 0.0f, 6.0f };
+		glm::vec3 m_rotation{ -90.0f, 0.0f, 0.0f};
+		glm::vec3 m_scale{ 1.0f, 1.0f, 1.0f };
 	};
 }

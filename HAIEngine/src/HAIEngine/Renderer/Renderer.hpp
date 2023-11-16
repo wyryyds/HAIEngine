@@ -3,6 +3,7 @@
 #include "RenderCommand.hpp"
 #include "EditorCamera.hpp"
 #include "Shader.hpp"
+#include "HAIEngine/ECS/Scene.hpp"
 
 namespace HAIEngine
 {
@@ -11,7 +12,7 @@ namespace HAIEngine
 	public:
 
 		static void Init();
-		static void BeginScene(EditorCamera* camera);
+		static void BeginScene(glm::mat4 viewProjectionMatrix);
 		static void EndScene();
 
 		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));

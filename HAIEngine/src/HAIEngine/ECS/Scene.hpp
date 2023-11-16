@@ -18,7 +18,10 @@ namespace HAIEngine
 		{
 			m_gameObjects.push_back(go);
 		}
-
+		inline void SetMainCamera(Camera* camera)
+		{
+			m_mainCamera = camera;
+		}
 		std::shared_ptr<GameObject> Find(const std::string& name);
 	public:
 		std::string m_sceneName;
