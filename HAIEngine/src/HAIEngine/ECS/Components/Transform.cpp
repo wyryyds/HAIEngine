@@ -54,10 +54,10 @@ namespace HAIEngine
 		m_position += dis * dir;
 	}
 
-	json Transform::Serialize(const std::string& name)
+	json Transform::Serialize()
 	{
 		json resjson;
-		resjson["type"] = SerializeHelper::SerializeData(name);
+		resjson["type"] = SerializeHelper::SerializeData(m_typeName);
 		resjson["guid"] = SerializeHelper::SerializeData(m_guid);
 		resjson["position"] = SerializeHelper::SerializeData(m_position);
 		resjson["rotation"] = SerializeHelper::SerializeData(m_rotation);
@@ -66,17 +66,17 @@ namespace HAIEngine
 		return resjson;
 	}
 
-	void Transform::DeSerialize(const json& jsondata)
+	void Transform::DeSerialize(const json& jsonData)
 	{
-		if (SerializeHelper::DeSerializeData<std::string>(jsondata["type"]) != m_typeName)
+		if (SerializeHelper::DeSerializeData<std::string>(jsonData["type"]) != m_typeName)
 		{
 			LOG_Error("Component type is not match!");
 			return;
 		}
 
-		m_guid = SerializeHelper::DeSerializeData<size_t>(jsondata["guid"]);
-		m_position = SerializeHelper::DeSerializeData<glm::vec3>(jsondata["position"]);
-		m_rotation = SerializeHelper::DeSerializeData<glm::vec3>(jsondata["rotation"]);
-		m_scale    = SerializeHelper::DeSerializeData<glm::vec3>(jsondata["scale"]);
+		m_guid = SerializeHelper::DeSerializeData<size_t>(jsonData["guid"]);
+		m_position = SerializeHelper::DeSerializeData<glm::vec3>(jsonData["position"]);
+		m_rotation = SerializeHelper::DeSerializeData<glm::vec3>(jsonData["rotation"]);
+		m_scale    = SerializeHelper::DeSerializeData<glm::vec3>(jsonData["scale"]);
 	}
 }

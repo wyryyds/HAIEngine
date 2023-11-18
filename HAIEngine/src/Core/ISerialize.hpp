@@ -90,8 +90,8 @@ namespace HAIEngine
 		ISerializeable() : m_guid(GenerateGUID(this)) {}
 		virtual ~ISerializeable() = default;
 
-		virtual json Serialize(const std::string& name) = 0;
-		virtual void DeSerialize(const json& jsondata) = 0;
+		virtual json Serialize() = 0;
+		virtual void DeSerialize(const json& jsonData) = 0;
 
 		static size_t GenerateGUID(const ISerializeable* obj) {
 			return std::hash<const ISerializeable*>{}(obj);

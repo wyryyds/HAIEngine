@@ -29,7 +29,7 @@ namespace HAIEngine
 		std::vector<std::shared_ptr<GameObject> > m_gameObjects;
 
 	private:
-		json Serialize(const std::string& name) override;
+		json Serialize() override;
 		void DeSerialize(const json& jsondata) override;
 	private:
 		HESerializeFile m_serializeFile;

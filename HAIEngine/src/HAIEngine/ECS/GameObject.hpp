@@ -14,11 +14,11 @@ namespace HAIEngine
 		GameObject();
 		GameObject(std::string name);
 		GameObject(std::string name, size_t guid);
-		virtual ~GameObject();
+		~GameObject() override;
 
 		void Update(TimeStep ts);
 
-		virtual json Serialize(const std::string& name) override;
+		virtual json Serialize() override;
 		virtual void DeSerialize(const json& data) override;
 
 		void AddComponent(Component* component);

@@ -27,8 +27,8 @@ namespace HAIEngine
 		void translate(glm::vec3 dir, float dis);
 		// TODO maybe?
 		//virtual void Update() override;
-		json Serialize(const std::string& name) override;
-		void DeSerialize(const json& jsondata) override;
+		json Serialize() override;
+		void DeSerialize(const json& jsonData) override;
 
 	public:
 		glm::vec3 m_position{ 0.0f, 0.0f, 6.0f };

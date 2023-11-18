@@ -34,7 +34,7 @@ namespace HAIEngine
         glm::mat4 m_projection{ 1.0f };
         glm::mat4 m_view{ 1.0f };
 
-        std::variant<orthoParams, perspectiveParams> m_cameraParams;
+        std::variant<orthoParams, perspectiveParams> m_cameraDatas;
     };
 
     enum class Direction
@@ -58,7 +58,7 @@ namespace HAIEngine
         {
             EditorCamera* camera = new EditorCamera(type);
             camera->m_aspect = aspectRatio;
-            camera->m_cameraParams = perspectiveParams{fov, znear, zfar};
+            camera->m_cameraDatas = perspectiveParams{fov, znear, zfar};
             return camera;
         }
 

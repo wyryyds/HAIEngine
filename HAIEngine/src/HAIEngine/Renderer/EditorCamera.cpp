@@ -67,16 +67,16 @@ namespace HAIEngine
     {
         if (m_camera->m_cameraType == CameraType::PERSPECTIVE)
         {
-            m_camera->m_projection = glm::perspective(glm::radians(std::get<perspectiveParams>(m_camera->m_cameraParams).fov), 
-                m_camera->m_aspect, std::get<perspectiveParams>(m_camera->m_cameraParams).znear, 
-                std::get<perspectiveParams>(m_camera->m_cameraParams).zfar);
+            m_camera->m_projection = glm::perspective(glm::radians(std::get<perspectiveParams>(m_camera->m_cameraDatas).fov), 
+                m_camera->m_aspect, std::get<perspectiveParams>(m_camera->m_cameraDatas).znear, 
+                std::get<perspectiveParams>(m_camera->m_cameraDatas).zfar);
         }
         else if (m_camera->m_cameraType == CameraType::ORTHO)
         {
             m_camera->m_projection = glm::ortho(
-                std::get<orthoParams>(m_camera->m_cameraParams).left, std::get<orthoParams>(m_camera->m_cameraParams).right, 
-                std::get<orthoParams>(m_camera->m_cameraParams).bottom, std::get<orthoParams>(m_camera->m_cameraParams).top, 
-                std::get<orthoParams>(m_camera->m_cameraParams).front, std::get<orthoParams>(m_camera->m_cameraParams).back);
+                std::get<orthoParams>(m_camera->m_cameraDatas).left, std::get<orthoParams>(m_camera->m_cameraDatas).right, 
+                std::get<orthoParams>(m_camera->m_cameraDatas).bottom, std::get<orthoParams>(m_camera->m_cameraDatas).top, 
+                std::get<orthoParams>(m_camera->m_cameraDatas).front, std::get<orthoParams>(m_camera->m_cameraDatas).back);
         }
     }
 

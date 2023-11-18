@@ -20,7 +20,7 @@ namespace HAIEngine
 
     void Scene::Save()
     {
-        m_serializeFile.SetJsonData(Serialize(m_sceneName));
+        m_serializeFile.SetJsonData(Serialize());
         m_serializeFile.Save();
     }
 
@@ -37,16 +37,16 @@ namespace HAIEngine
         return nullptr;
     }
 
-    json Scene::Serialize(const std::string& name)
+    json Scene::Serialize()
     {
         json sceneData;
-        sceneData["sceneName"] = SerializeHelper::SerializeData(name);
+        sceneData["sceneName"] = SerializeHelper::SerializeData(m_sceneName);
         sceneData["guid"] = SerializeHelper::SerializeData(m_guid);
 
         json gosData = json::array();
         for (auto& go : m_gameObjects)
         {
-            gosData.push_back(go->Serialize(go->m_name));
+            gosData.push_back(go->Serialize());
         }
         sceneData["gameObjects"] = gosData;
 

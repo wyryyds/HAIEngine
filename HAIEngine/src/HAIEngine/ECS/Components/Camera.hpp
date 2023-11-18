@@ -47,12 +47,12 @@ namespace HAIEngine
         inline glm::mat4 GetViewProjection() { return m_projection * m_view; }
 
         void Update(TimeStep ts) override;
-        json Serialize(const std::string& name) override;
+        json Serialize() override;
         void DeSerialize(const json& jsondata) override;
     public:
         CameraType m_cameraType{ CameraType::UNDEFINED };
      
-        std::variant<orthoParams, perspectiveParams> m_cameraParams;
+        std::variant<orthoParams, perspectiveParams> m_cameraDatas;
 
     private:
         void UpdateView();

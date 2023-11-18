@@ -15,7 +15,7 @@ namespace HAIEngine
     Camera::Camera(CameraType cameraType, float aspectRatio, float fov, float znear, float zfar)
         : Component("Camera"), m_cameraType(cameraType), m_aspect(aspectRatio)
     {
-        m_cameraParams = perspectiveParams{fov, znear, zfar};
+        m_cameraDatas = perspectiveParams{fov, znear, zfar};
     }
 
     void Camera::Update(TimeStep ts)
@@ -44,22 +44,22 @@ namespace HAIEngine
     {
         if (m_cameraType == CameraType::PERSPECTIVE)
         {
-            m_projection = glm::perspective(glm::radians(std::get<perspectiveParams>(m_cameraParams).fov), m_aspect,
-                std::get<perspectiveParams>(m_cameraParams).znear, std::get<perspectiveParams>(m_cameraParams).zfar);
+            m_projection = glm::perspective(glm::radians(std::get<perspectiveParams>(m_cameraDatas).fov), m_aspect,
+                std::get<perspectiveParams>(m_cameraDatas).znear, std::get<perspectiveParams>(m_cameraDatas).zfar);
         }
         else if (m_cameraType == CameraType::ORTHO)
         {
             m_projection = glm::ortho(
-                std::get<orthoParams>(m_cameraParams).left, std::get<orthoParams>(m_cameraParams).right,
-                std::get<orthoParams>(m_cameraParams).bottom, std::get<orthoParams>(m_cameraParams).top, 
-                std::get<orthoParams>(m_cameraParams).front, std::get<orthoParams>(m_cameraParams).back);
+                std::get<orthoParams>(m_cameraDatas).left, std::get<orthoParams>(m_cameraDatas).right,
+                std::get<orthoParams>(m_cameraDatas).bottom, std::get<orthoParams>(m_cameraDatas).top, 
+                std::get<orthoParams>(m_cameraDatas).front, std::get<orthoParams>(m_cameraDatas).back);
         }
     }
 
-    json Camera::Serialize(const std::string& name)
+    json Camera::Serialize()
     {
         json resjson;
-        resjson["type"] = SerializeHelper::SerializeData(name);
+        resjson["type"] = SerializeHelper::SerializeData(m_typeName);
         resjson["guid"] = SerializeHelper::SerializeData(m_guid);
 
         switch (m_cameraType) 
@@ -73,9 +73,9 @@ namespace HAIEngine
             case CameraType::PERSPECTIVE:
                 resjson["cameraType"] = SerializeHelper::SerializeData("PERSPECTIVE");
                 resjson["aspectRatio"] = SerializeHelper::SerializeData(m_aspect);
-                resjson["fov"] = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraParams).fov);
-                resjson["znear"] = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraParams).znear);
-                resjson["zfar"] = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraParams).zfar);
+                resjson["fov"] = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraDatas).fov);
+                resjson["znear"] = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraDatas).znear);
+                resjson["zfar"] = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraDatas).zfar);
                 break;
             default:
                 resjson["cameraType"] = "UNDEFINED";
@@ -107,7 +107,7 @@ namespace HAIEngine
             float znear = SerializeHelper::DeSerializeData<float>(jsonData["znear"]);
             float zfar = SerializeHelper::DeSerializeData<float>(jsonData["zfar"]);
 
-            m_cameraParams = perspectiveParams{ fov, znear, zfar };
+            m_cameraDatas = perspectiveParams{ fov, znear, zfar };
             return;
         }
 

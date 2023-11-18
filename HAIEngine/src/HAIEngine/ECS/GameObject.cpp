@@ -44,16 +44,16 @@ namespace HAIEngine
 			component.second->Update(ts);
 	}
 
-	json GameObject::Serialize(const std::string& name)
+	json GameObject::Serialize()
 	{
 		json resjson;
-		resjson["name"] = SerializeHelper::SerializeData(name);
+		resjson["name"] = SerializeHelper::SerializeData(m_name);
 		resjson["guid"] = SerializeHelper::SerializeData(m_guid);
 		resjson["components"] = json::array();
 
 		for (auto iter = m_components.begin(); iter != m_components.end(); ++iter)
 		{
-			resjson["components"].emplace_back(iter->second->Serialize(iter->second->m_typeName));
+			resjson["components"].emplace_back(iter->second->Serialize());
 		}
 
 		return resjson;
