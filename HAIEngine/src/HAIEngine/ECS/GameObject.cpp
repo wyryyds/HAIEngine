@@ -68,7 +68,6 @@ namespace HAIEngine
 		for (int i = 0; i < componentsData.size(); ++i)
 		{
 			auto& componentData = componentsData[i];
-
 			if (SerializeHelper::DeSerializeData<std::string>(componentData["type"]) == "Transform")
 			{
 				m_transform->DeSerialize(componentData);
@@ -76,10 +75,8 @@ namespace HAIEngine
 			}
 
 			auto gComponent = static_cast<Component*>(HAIEngine::ReflectionManager::GetInstance().CreateClassByName
-				(SerializeHelper::DeSerializeData<std::string>(componentData["type"])));
-			
+				(SerializeHelper::DeSerializeData<std::string>(componentData["type"])));			
 			gComponent->DeSerialize(componentData);
-
 			AddComponent(gComponent);
 		}
 

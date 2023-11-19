@@ -121,7 +121,7 @@ public:
 		
 		scene = std::make_shared<HAIEngine::Scene>(ASSTESPATH"Jsons/data.json");
 
-		std::shared_ptr<HAIEngine::GameObject> testGO1 = std::make_shared<HAIEngine::GameObject>("TestGO1");
+		/*std::shared_ptr<HAIEngine::GameObject> testGO1 = std::make_shared<HAIEngine::GameObject>("TestGO1");
 
 		std::shared_ptr<HAIEngine::GameObject> testGO2 = std::make_shared<HAIEngine::GameObject>("TestGO2");
 
@@ -131,7 +131,11 @@ public:
 
 		scene->SetMainCamera(testCamera);
 		scene->AddGameObject(testGO1);
-		scene->AddGameObject(testGO2);
+		scene->AddGameObject(testGO2);*/
+		HAIEngine::Camera* testCamera = new HAIEngine::Camera(HAIEngine::CameraType::PERSPECTIVE,
+			1920.0f / 1080.0f, 60.0f, 0.1f, 60.0f);
+
+		scene->Load();
 
 		scene->Save();
 	}
@@ -181,6 +185,8 @@ public:
 
 		HAIEngine::Renderer::EndScene();
 		m_frameBuffer->UnBind();
+		HAIEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+		HAIEngine::RenderCommand::Clear();
 	}
 
 	void OnImGuiRender() override
