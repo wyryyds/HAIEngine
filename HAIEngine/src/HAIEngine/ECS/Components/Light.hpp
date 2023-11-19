@@ -1,11 +1,13 @@
 #pragma once
 #include "HAIEngine/ECS/Component.hpp"
+
 #include <variant>
 
 namespace HAIEngine
 {
 	enum class LightType
 	{
+		UNDEFINED,
 		DIRECTION,
 		POINT,
 		SPOT
@@ -25,6 +27,9 @@ namespace HAIEngine
 			float m_intensity = 0.5f;
 			glm::vec3 m_color{ 1.0f };
 			float range = 1.0f;
+			float constant = 1.0f;
+			float linear = 0.09f;
+			float quadratic = 0.032f;
 		};
 		struct spotParams
 		{
@@ -37,27 +42,26 @@ namespace HAIEngine
 
 	public:
 		Light() : Component("Light") {}
+		Light(const std::variant<directionParams, pointParams, spotParams>& params);
 		virtual ~Light() override = default;
 
-		inline void SetAmbientIntensity(float intensity) { m_ambientIntensity = std::clamp(intensity, 0.0f, 1.0f); }
-		inline void SetIntensity(float intensity) { m_intensity = std::max(intensity, 0.0f); }
-		inline void SetColor(glm::vec3 color) { m_color = color; }
+		void SetAmbientIntensity(float intensity);
+		void SetIntensity(float intensity);
+		void SetColor(glm::vec3 color);
 		
-		inline float GetAmbientIntensity() const { return m_ambientIntensity; }
-		inline float GetIntensity() const { return m_intensity; }
-		inline glm::vec3 GetColor() const { return m_color; }
+		float GetAmbientIntensity();
+		float GetIntensity();
+		glm::vec3 GetColor();
+
+		const glm::vec3 GetDirectionNormal();
+		const float GetAttenuation(glm::vec3 position) const;
 
 		json Serialize() override;
 		void DeSerialize(const json& jsonData) override;
 
 	public:
-		LightType m_lightType;
+		LightType m_lightType = LightType::UNDEFINED;
 		std::variant<directionParams, pointParams, spotParams> m_lightDatas;
-
-	private:
-		float m_ambientIntensity = 0.1f;
-		float m_intensity = 0.5f;
-		glm::vec3 m_color{ 1.0f };
 	};
 
 }
