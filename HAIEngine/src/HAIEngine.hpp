@@ -16,6 +16,7 @@
 #include "HAIEngine/Renderer/Buffer.hpp"
 #include "HAIEngine/Renderer/Texture.hpp"
 #include "HAIEngine/Renderer/Shader.hpp"
+#include "HAIEngine/Renderer/FrameBuffer.hpp"
 // Function
 #include "HAIEngine/Renderer/EditorCamera.hpp"
 #include "Core/TimeStep.hpp"

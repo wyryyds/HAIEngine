@@ -4,6 +4,7 @@
 
 #include "Platform/OpenGL/OpenGLShader.hpp"
 #include "Platform/OpenGL/OpenGLTexture.hpp"
+#include "Platform/OpenGL/OpenGLFrameBuffer.hpp"
 
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -100,6 +101,7 @@ public:
 			});
 		m_LightVA->AddVertexBuffer(m_LightVB);
 
+		m_frameBuffer = HAIEngine::FrameBuffer::Create(1920.0f, 1080.0f);
 		// add texture
 		m_Texture = HAIEngine::Texture2D::Create("../../../../Sandbox/assets/Textures/container2.png");
 		m_Texture->Bind(0);
@@ -145,6 +147,7 @@ public:
 		// update camera
 		m_CameraController->update(ts);
 
+		m_frameBuffer->Bind();
 		// rendering
 		HAIEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		HAIEngine::RenderCommand::Clear();
@@ -177,6 +180,7 @@ public:
 		HAIEngine::Renderer::Submit(sampleShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f)));
 
 		HAIEngine::Renderer::EndScene();
+		m_frameBuffer->UnBind();
 	}
 
 	void OnImGuiRender() override
@@ -186,6 +190,10 @@ public:
 		ImGui::ColorEdit3("Cube Color", glm::value_ptr(m_CubeColor));
 		ImGui::InputInt("Specular ness", &m_Specuness);
 		ImGui::InputFloat3("Light Position", glm::value_ptr(lightPos));
+		ImGui::Text("Scene:");
+		uint32_t textureID = std::dynamic_pointer_cast<HAIEngine::OpenGLFrameBuffer>(m_frameBuffer)->GetTextureID();
+		ImGui::Image((void*)textureID, ImVec2{ 1920, 1080 }, ImVec2{ 0, 1 }, ImVec2{1, 0});
+		ImGui::Text("End Scene");
 		ImGui::End();
 	}
 
@@ -274,6 +282,8 @@ private:
 	std::shared_ptr<HAIEngine::VertexArray> m_SquareVA, m_LightVA;
 
 	std::shared_ptr<HAIEngine::Texture2D> m_Texture, m_specularTexture;
+
+	std::shared_ptr<HAIEngine::FrameBuffer> m_frameBuffer;
 
 	float lastMouseX, lastMouseY;
 	bool IsReControlMouse = false;

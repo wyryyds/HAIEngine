@@ -40,7 +40,6 @@ namespace HAIEngine
 	{
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
-
 	}
 
 	void Application::PushOverlay(Layer* layer)
