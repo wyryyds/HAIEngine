@@ -5,7 +5,7 @@
 
 namespace HAIEngine
 {
-	REFLECTION(GameObject, GameObject);
+	//REFLECTION(GameObject, GameObject);
 
 	GameObject::GameObject()
 		: m_name("GameObject")

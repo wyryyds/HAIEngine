@@ -3,6 +3,11 @@
 
 namespace HAIEngine
 {
+    Component::Component(std::string typeName, GameObject* father)
+        : m_typeName(typeName)
+    {
+        father->AddComponent(this);
+    }
     Transform* Component::GetTransform() const
     {
         return m_fatherGO->GetTransform();
@@ -10,6 +15,6 @@ namespace HAIEngine
 
     void Component::SetFatherGO(GameObject* go)
     {
-        go->AddComponent(this);
+        m_fatherGO = go;
     }
 }

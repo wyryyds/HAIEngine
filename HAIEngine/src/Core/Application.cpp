@@ -15,7 +15,6 @@ namespace HAIEngine
 
 	Application* Application::s_Instance = nullptr;
 
-
 	Application::Application()
 	{
 		HE_CORE_ASSERT(!s_Instance, "Application already exists!");

@@ -1,6 +1,7 @@
 #include "Core/Core.hpp"
 #include "Core/ISerialize.hpp"
 #include "HAIEngine.hpp"
+#include "Core/Reflection.hpp"
 
 #include "Platform/OpenGL/OpenGLShader.hpp"
 #include "Platform/OpenGL/OpenGLTexture.hpp"
@@ -183,7 +184,6 @@ public:
 
 		HAIEngine::Renderer::EndScene();
 		m_frameBuffer->UnBind();
-		HAIEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		HAIEngine::RenderCommand::Clear();
 	}
 
@@ -270,6 +270,15 @@ public:
 		{
 		}
 
+	}
+
+	void TestCode()
+	{
+
+	}
+
+	void AddReflection()
+	{
 	}
 private:
 	HAIEngine::ShaderLibrary m_ShaderLibrary;

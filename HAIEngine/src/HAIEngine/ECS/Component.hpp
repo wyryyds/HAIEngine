@@ -10,7 +10,7 @@ namespace HAIEngine
 	{
 	public:
 		Component(std::string typeName) : m_typeName(typeName) {};
-		Component(std::string typeName, GameObject* father) : m_typeName(typeName) { SetFatherGO(father); };
+		Component(std::string typeName, GameObject* father);
 		virtual ~Component() = default;
 		virtual void OnAwake() {}
 		virtual void Update(TimeStep ts) {}

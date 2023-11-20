@@ -1,7 +1,20 @@
 #include "Reflection.hpp"
 
+#include "HAIEngine/ECS/Component.hpp"
+#include "HAIEngine/ECS/Components/Camera.hpp"
+#include "HAIEngine/ECS/Components/Light.hpp"
+#include "HAIEngine/ECS/Components/MeshFilter.hpp"
+#include "HAIEngine/ECS/Components/MeshRenderer.hpp"
+#include "HAIEngine/ECS/Components/Transform.hpp"
+#include "HAIEngine/ECS/GameObject.hpp"
+
 namespace HAIEngine
 {
+	REFLECTION(GameObject, GameObject);
+	REFLECTION(Transform, Component);
+	REFLECTION(Light, Component);
+	REFLECTION(Camera, Component);
+
 	void* ReflectionManager::CreateClassByName(std::string className)
 	{
 		auto iter = classMap.find(className);

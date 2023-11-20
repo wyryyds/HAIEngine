@@ -8,7 +8,7 @@
 
 namespace HAIEngine
 {
-	REFLECTION(Transform, Component);
+	//REFLECTION(Transform, Component);
 
 	Transform::Transform()
 		: Component("Transform")

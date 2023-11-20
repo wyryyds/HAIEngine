@@ -11,7 +11,7 @@
 
 namespace HAIEngine
 {
-    REFLECTION(Camera, Component);
+    //REFLECTION(Camera, Component);
 
     Camera::Camera(CameraType type, const std::variant<orthoParams, perspectiveParams>& params)
         : Component("Camera"), m_cameraType(type), m_cameraDatas(params)
