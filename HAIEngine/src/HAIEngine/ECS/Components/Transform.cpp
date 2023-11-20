@@ -15,10 +15,14 @@ namespace HAIEngine
 	{
 	}
 
-	Transform::Transform(glm::vec3 position)
-		: Component("Transform")
+	Transform::Transform(GameObject* father)
+		: Component("Transform", father)
 	{
-		m_position = position;
+	}
+
+	Transform::Transform(glm::vec3 position, GameObject* father)
+		: Component("Transform", father), m_position(position)
+	{
 	}
 
 	glm::vec3 Transform::GetFront()

@@ -89,7 +89,7 @@ namespace HAIEngine
 			LOG_Error("Gameobject had a same type component, can not add again!");
 			return;
 		}
-		component->m_fatherGO = this;
+		component->SetFatherGO(this);
 		m_components.insert({ component->m_typeName, component });
 	}
 

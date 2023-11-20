@@ -21,6 +21,7 @@ namespace HAIEngine
 		virtual json Serialize() override;
 		virtual void DeSerialize(const json& data) override;
 
+		inline Transform* GetTransform() const { return m_transform; }
 		void AddComponent(Component* component);
 
 		template <class T>

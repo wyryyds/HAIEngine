@@ -16,9 +16,11 @@ namespace HAIEngine
 		const glm::vec3 down = glm::vec3(0.0f, -1.0f, 0.0f);
 
 		Transform();
-		Transform(glm::vec3 position);
+		Transform(GameObject* father);
+		Transform(glm::vec3 position, GameObject* father);
 		~Transform() = default;
 
+		inline glm::vec3 GetPosition() const { return m_position; }
 		glm::vec3 GetFront();
 		glm::vec3 GetRight();
 		glm::vec3 GetUp();

@@ -42,7 +42,7 @@ namespace HAIEngine
 
 	public:
 		Light() : Component("Light") {}
-		Light(const std::variant<directionParams, pointParams, spotParams>& params);
+		Light(LightType type, const std::variant<directionParams, pointParams, spotParams>& params);
 		virtual ~Light() override = default;
 
 		void SetAmbientIntensity(float intensity);

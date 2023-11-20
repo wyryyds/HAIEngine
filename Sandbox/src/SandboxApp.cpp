@@ -132,8 +132,6 @@ public:
 		scene->SetMainCamera(testCamera);
 		scene->AddGameObject(testGO1);
 		scene->AddGameObject(testGO2);*/
-		HAIEngine::Camera* testCamera = new HAIEngine::Camera(HAIEngine::CameraType::PERSPECTIVE,
-			1920.0f / 1080.0f, 60.0f, 0.1f, 60.0f);
 
 		scene->Load();
 

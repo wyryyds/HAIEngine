@@ -30,6 +30,7 @@ namespace HAIEngine
         };
         struct perspectiveParams
         {
+            float m_aspect{ 0.0f };
             float fov{ 60.0f };
             float znear{ 96.0f };
             float zfar{ 0.01f };
@@ -37,9 +38,7 @@ namespace HAIEngine
 
     public:
         Camera() : Component("Camera") {}
-        // TODO: init as ortho camera
-        //Camera(CameraType cameraType, float left, float right, float bottom, float top);
-        Camera(CameraType cameraType, float aspectRatio, float fov, float znear, float zfar);
+        Camera(CameraType type, const std::variant<orthoParams, perspectiveParams>& params);
         ~Camera() = default;
 
         inline glm::mat4 GetViewMatrix() { return m_view; }
@@ -58,7 +57,6 @@ namespace HAIEngine
         void UpdateView();
         void UpdateProjection();
     private:
-        float m_aspect{ 0.0f };
         glm::vec3 m_position{ 0.0f, 0.0f, 6.0f };
         glm::vec3 m_Front{ 0.0f, 0.0f, -1.0f };
         glm::vec3 m_Up{ 0.0f, 1.0f, 0.0f };

@@ -8,8 +8,8 @@ namespace HAIEngine
 {
 	REFLECTION(Light, Component);
 
-	Light::Light(const std::variant<directionParams, pointParams, spotParams>& params)
-		: Component("Light"), m_lightDatas(params)
+	Light::Light(LightType type, const std::variant<directionParams, pointParams, spotParams>& params)
+		: m_lightType(type), Component("Light"), m_lightDatas(params)
 	{
 	}
 
