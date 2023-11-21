@@ -1,0 +1,41 @@
+{
+  "sceneName": "Scene",
+  "guid": 10370996858430953350,
+  "gameObjects": [
+    {
+      "name": "TestGO1",
+      "guid": 15737037866529702207,
+      "components": [
+        {
+          "type": "Transform",
+          "guid": 13359919798808427763,
+          "position": "0,0,6",
+          "rotation": "-90,0,0",
+          "scale": "1,1,1"
+        },
+        {
+          "type": "Camera",
+          "guid": 9660988878551483374,
+          "cameraType": "PERSPECTIVE",
+          "aspectRatio": "1.777778",
+          "fov": "60.000000",
+          "znear": "0.100000",
+          "zfar": "60.000000"
+        }
+      ]
+    },
+    {
+      "name": "TestGO2",
+      "guid": 10722962023933622994,
+      "components": [
+        {
+          "type": "Transform",
+          "guid": 3412371390121376578,
+          "position": "0,0,6",
+          "rotation": "-90,0,0",
+          "scale": "1,1,1"
+        }
+      ]
+    }
+  ]
+}

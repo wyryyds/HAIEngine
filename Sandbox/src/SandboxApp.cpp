@@ -14,10 +14,9 @@
 #include <glm/gtc/type_ptr.hpp>
 
 //test
-#include "HAIEngine/ECS/Components/Camera.hpp"
-#include "HAIEngine/ECS/GameObject.hpp"
-#include "HAIEngine/ECS/Scene.hpp"
-
+#include "ECS/Components/Camera.hpp"
+#include "ECS/GameObject.hpp"
+#include "ECS/Scene.hpp"
 
 using json = nlohmann::ordered_json;
 
