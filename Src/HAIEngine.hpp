@@ -7,6 +7,7 @@
 #include "Core/Input.hpp"
 #include "Core/KeyCodes.hpp"
 #include "Core/MouseButtonCodes.hpp"
+#include "Core/TimeStep.hpp"
 // GUI
 #include "ImGui/ImGuiLayer.hpp"
 // Rendering
@@ -17,8 +18,8 @@
 #include "Renderer/Shader.hpp"
 #include "Renderer/FrameBuffer.hpp"
 #include "Renderer/EditorCamera.hpp"
-// Function
-#include "Core/TimeStep.hpp"
-// Entry Point
-#include "Core/EntryPoint.hpp"
+// ECS
+#include "ECS/Scene.hpp"
+#include "ECS/GameObject.hpp"
+#include "ECS/Component.hpp"
 

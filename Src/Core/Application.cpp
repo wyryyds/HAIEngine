@@ -1,14 +1,11 @@
 #include "Application.hpp"
-#include "Input.hpp"
-#include "Log.hpp"
-#include "Window.hpp"
-#include "Renderer/Renderer.hpp"
-#include "TimeStep.hpp"
+#include "Core/Input.hpp"
+#include "Core/Log.hpp"
+#include "Core/TimeStep.hpp"
 #include "ImGui/ImGuiLayer.hpp"
+#include "Renderer/Renderer.hpp"
 
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-#include "imgui.h"
+#include <GLFW/glfw3.h>
 
 
 namespace HAIEngine
@@ -17,12 +14,12 @@ namespace HAIEngine
 
 	Application* Application::s_instance = nullptr;
 
-	Application::Application()
+	Application::Application(const std::string& name)
 	{
 		HE_CORE_ASSERT(!s_instance, "Application already exists!");
 		s_instance = this;
 
-		m_window = std::unique_ptr<Window>(Window::Create());
+		m_window = std::unique_ptr<Window>(Window::Create(WindowProps(name)));
 		m_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 		m_window->SetVSync(false);
 
@@ -55,7 +52,6 @@ namespace HAIEngine
 
 		//输出事件信息
 		//HE_CORE_INFO(e.ToString());
-
 		for (auto it = m_layerStack.end();it != m_layerStack.begin();)
 		{
 			(*--it)->OnEvent(e);
