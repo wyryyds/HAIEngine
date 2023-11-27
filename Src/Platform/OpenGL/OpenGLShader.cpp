@@ -11,7 +11,7 @@ namespace HAIEngine
 		{"fragment", GL_FRAGMENT_SHADER}
 	};
 
-	OpenGLShader::OpenGLShader(const std::string& filePath)
+	OpenGLShader::OpenGLShader(std::string_view filePath)
 	{
 		std::string sourceStr = ReadFile(filePath);
 		auto shaderSources = PreProcess(sourceStr);
@@ -20,7 +20,7 @@ namespace HAIEngine
 		m_name = filePath;
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+	OpenGLShader::OpenGLShader(std::string_view name, std::string_view vertexSrc, std::string_view fragmentSrc)
 		: m_name(name)
 	{
 		std::unordered_map<GLenum, std::string> sources;
@@ -45,52 +45,52 @@ namespace HAIEngine
 		glUseProgram(0);
 	}
 
-	void OpenGLShader::UploadUniformInt(const std::string& name, const int value)
+	void OpenGLShader::UploadUniformInt(std::string_view name, const int value)
 	{
-		GLint location = glGetUniformLocation(m_rendererID, name.c_str());
+		GLint location = glGetUniformLocation(m_rendererID, name.data());
 		glUniform1i(location, value);
 	}
 
-	void OpenGLShader::UploadUniformFloat(const std::string& name, const float value)
+	void OpenGLShader::UploadUniformFloat(std::string_view name, const float value)
 	{
-		GLint location = glGetUniformLocation(m_rendererID, name.c_str());
+		GLint location = glGetUniformLocation(m_rendererID, name.data());
 		glUniform1f(location, value);
 	}
 
-	void OpenGLShader::UploadUniformFloat2(const std::string& name, const glm::vec2& value)
+	void OpenGLShader::UploadUniformFloat2(std::string_view name, const glm::vec2& value)
 	{
-		GLint location = glGetUniformLocation(m_rendererID, name.c_str());
+		GLint location = glGetUniformLocation(m_rendererID, name.data());
 		glUniform2f(location, value.x, value.y);
 	}
 
-	void OpenGLShader::UploadUniformFloat3(const std::string& name, const glm::vec3& value)
+	void OpenGLShader::UploadUniformFloat3(std::string_view name, const glm::vec3& value)
 	{
-		GLint location = glGetUniformLocation(m_rendererID, name.c_str());
+		GLint location = glGetUniformLocation(m_rendererID, name.data());
 		glUniform3f(location, value.x, value.y, value.z);
 	}
 
-	void OpenGLShader::UploadUniformFloat4(const std::string& name, const glm::vec4& value)
+	void OpenGLShader::UploadUniformFloat4(std::string_view name, const glm::vec4& value)
 	{
-		GLint location = glGetUniformLocation(m_rendererID, name.c_str());
+		GLint location = glGetUniformLocation(m_rendererID, name.data());
 		glUniform4f(location, value.x, value.y, value.z, value.w);
 	}
 
-	void OpenGLShader::UploadUniformMat3(const std::string& name, const glm::mat3& matrix)
+	void OpenGLShader::UploadUniformMat3(std::string_view name, const glm::mat3& matrix)
 	{
-		GLint location = glGetUniformLocation(m_rendererID, name.c_str());
+		GLint location = glGetUniformLocation(m_rendererID, name.data());
 		glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
-	void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
+	void OpenGLShader::UploadUniformMat4(std::string_view name, const glm::mat4& matrix)
 	{
-		GLint location = glGetUniformLocation(m_rendererID, name.c_str());
+		GLint location = glGetUniformLocation(m_rendererID, name.data());
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
-	std::string OpenGLShader::ReadFile(const std::string& filePath)
+	std::string OpenGLShader::ReadFile(std::string_view filePath)
 	{
 		std::string result;
-		std::ifstream in(filePath, std::ios::in | std::ios::binary);
+		std::ifstream in(filePath.data(), std::ios::in | std::ios::binary);
 
 		if (in)
 		{
@@ -110,7 +110,7 @@ namespace HAIEngine
 		return result;
 	}
 
-	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source)
+	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(std::string_view source)
 	{
 		std::unordered_map<GLenum, std::string> shaderSources;
 
@@ -124,7 +124,7 @@ namespace HAIEngine
 			size_t eol = source.find_first_of("\r\n", pos);
 			HE_CORE_ASSERT(eol != std::string::npos, "Syntax error");
 			size_t begin = pos + typeTokenLength + 1;
-			std::string type = source.substr(begin, eol - begin);
+			std::string type{ source.substr(begin, eol - begin) };
 			HE_CORE_ASSERT(type == "vertex" || type == "fragment", "Invalid shader type specified");
 
 			size_t nextLinePos = source.find_first_not_of("\r\n", eol);
@@ -146,7 +146,7 @@ namespace HAIEngine
 		{
 			GLuint shader = glCreateShader(shaderType);
 
-			const GLchar* source = (const GLchar*)shaderSource.c_str();
+			const GLchar* source = (const GLchar*)shaderSource.data();
 			glShaderSource(shader, 1, &source, 0);
 
 			glCompileShader(shader);

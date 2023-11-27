@@ -18,11 +18,11 @@ namespace HAIEngine
 		static std::string SerializeData(const float value);
 		static double SerializeData(const double value);
 		static size_t SerializeData(const size_t value);
-		static std::string SerializeData(const std::string& value);
+		static std::string SerializeData(std::string_view value);
 		static std::string SerializeData(const glm::vec3 value);
 
 		template <typename T>
-		static T DeSerializeData(const json& jsonData, const std::string& key)
+		static T DeSerializeData(const json& jsonData, std::string_view key)
 		{
 			if (jsonData.contains(key))
 			{
@@ -71,7 +71,7 @@ namespace HAIEngine
 		// TODO add default path
 		const std::string DefaultPath = ASSTESPATH;
 	public:
-		HESerializeFile(const std::string& filepath);
+		HESerializeFile(std::string_view filepath);
 		~HESerializeFile() = default;
 
 		inline json& GetJsonData(){ return m_jsonData; }

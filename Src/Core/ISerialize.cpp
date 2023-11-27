@@ -4,7 +4,7 @@
 
 namespace HAIEngine
 {
-	HESerializeFile::HESerializeFile(const std::string& filepath)
+	HESerializeFile::HESerializeFile(std::string_view filepath)
 		: m_filepath(filepath)
 	{
 	}
@@ -39,9 +39,9 @@ namespace HAIEngine
 	{
 		return value;
 	}
-	std::string SerializeHelper::SerializeData(const std::string& value)
+	std::string SerializeHelper::SerializeData(std::string_view value)
 	{
-		return value;
+		return value.data();
 	}
 	std::string SerializeHelper::SerializeData(const glm::vec3 value)
 	{

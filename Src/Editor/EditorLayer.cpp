@@ -93,7 +93,8 @@ namespace HAIEngine
 		m_frameBuffer = FrameBuffer::Create(1920.0f, 1080.0f);
 		// add texture
 		m_Texture = Texture2D::Create("../../../../Sandbox/assets/Textures/container2.png");
-		m_Texture->Bind(0);
+		// 绑定1 ， 2避免干扰
+		m_Texture->Bind(2);
 		m_specularTexture = Texture2D::Create("../../../../Sandbox/assets/Textures/container2_specular.png");
 		m_specularTexture->Bind(1);
 
@@ -102,7 +103,7 @@ namespace HAIEngine
 
 		auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("phong", "../../../../Sandbox/assets/Shaders/phong.glsl"));
 		sampleShader->Bind();
-		sampleShader->UploadUniformInt("material.diffuse", 0);
+		sampleShader->UploadUniformInt("material.diffuse", 2);
 		sampleShader->UploadUniformInt("material.specular", 1);
 
 		//test json
@@ -236,8 +237,14 @@ namespace HAIEngine
 		ImGui::InputInt("Specular ness", &m_Specuness);
 		ImGui::InputFloat3("Light Position", glm::value_ptr(lightPos));
 		ImGui::Text("Scene:");
+		ImVec2 viewportSize = ImGui::GetContentRegionAvail();
+		if (m_viewportSize != *((glm::vec2*)&viewportSize))
+		{
+			m_frameBuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
+			m_viewportSize = { viewportSize.x, viewportSize.y };
+		}
 		uint32_t textureID = std::dynamic_pointer_cast<OpenGLFrameBuffer>(m_frameBuffer)->GetTextureID();
-		ImGui::Image((void*)textureID, ImVec2{ 1920, 1080 }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+		ImGui::Image((void*)textureID, ImVec2{ m_viewportSize.x, m_viewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 		ImGui::Text("End Scene");
 		ImGui::End();
 	}

@@ -34,7 +34,7 @@ namespace HAIEngine
 
 	void ReflectionManager::RegistClass(std::string name, Reflection* method)
 	{
-		members.push_back(name.c_str());
+		members.push_back(name.data());
 		memberByTag.insert(std::pair<ReflectionTag, std::string>(method->tag, method->className));
 		classMap.insert(std::pair<std::string, Reflection*>(name, method));
 	}

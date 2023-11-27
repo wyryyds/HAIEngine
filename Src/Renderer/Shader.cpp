@@ -5,7 +5,7 @@
 
 namespace HAIEngine
 {
-	std::shared_ptr<Shader> Shader::Create(const std::string& filePath)
+	std::shared_ptr<Shader> Shader::Create(std::string_view filePath)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -19,7 +19,7 @@ namespace HAIEngine
 		return nullptr;
 	}
 
-	std::shared_ptr<Shader> Shader::Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+	std::shared_ptr<Shader> Shader::Create(std::string_view name, std::string_view vertexSrc, std::string_view fragmentSrc)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -33,40 +33,40 @@ namespace HAIEngine
 		return nullptr;
 	}
 
-	void ShaderLibrary::AddShaderWithName(const std::string& name, const std::shared_ptr<Shader>& shader)
+	void ShaderLibrary::AddShaderWithName(std::string_view name, const std::shared_ptr<Shader>& shader)
 	{
 		HE_CORE_ASSERT(!Exists(name), "Shader already exists!");
-		m_Shaders[name] = shader;
+		m_Shaders[name.data()] = shader;
 	}
 
 	void ShaderLibrary::AddShader(const std::shared_ptr<Shader>& shader)
 	{
-		auto& name = shader->GetName();
+		auto name = shader->GetName();
 		AddShaderWithName(name, shader);
 	}
 
-	std::shared_ptr<Shader> ShaderLibrary::Load(const std::string& filePath)
+	std::shared_ptr<Shader> ShaderLibrary::Load(std::string_view filePath)
 	{
 		auto shader = Shader::Create(filePath);
 		AddShader(shader);
 		return shader;
 	}
 
-	std::shared_ptr<Shader> ShaderLibrary::Load(const std::string& name, const std::string& filePath)
+	std::shared_ptr<Shader> ShaderLibrary::Load(std::string_view name, std::string_view filePath)
 	{
 		auto shader = Shader::Create(filePath);
 		AddShaderWithName(name, shader);
 		return shader;
 	}
 
-	std::shared_ptr<Shader> ShaderLibrary::Get(const std::string& name)
+	std::shared_ptr<Shader> ShaderLibrary::Get(std::string_view name)
 	{
 		HE_CORE_ASSERT(Exists(name), "Shader not found!");
-		return m_Shaders[name];
+		return m_Shaders[name.data()];
 	}
 
-	bool ShaderLibrary::Exists(const std::string& name) const
+	bool ShaderLibrary::Exists(std::string_view name) const
 	{
-		return m_Shaders.find(name) != m_Shaders.end();
+		return m_Shaders.find(name.data()) != m_Shaders.end();
 	}
 }

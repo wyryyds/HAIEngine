@@ -11,7 +11,7 @@ namespace HAIEngine
 	class Application
 	{
 	public:
-		Application(const std::string& name = "HAIEngine App");
+		Application(std::string_view name = "HAIEngine App");
 		virtual ~Application();
 		void Run();
 

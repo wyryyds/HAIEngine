@@ -9,8 +9,8 @@ namespace HAIEngine
 	class Scene : ISerializeable
 	{
 	public:
-		Scene(const std::string& filepath);
-		Scene(std::string sceneName, const std::string& filepath);
+		Scene(std::string_view filepath);
+		Scene(std::string sceneName, std::string_view filepath);
 		~Scene() = default;
 
 		void Load();
@@ -19,7 +19,7 @@ namespace HAIEngine
 		inline void AddGameObject(std::shared_ptr<GameObject> go){ m_gameObjects.push_back(go); }
 		inline void SetMainCamera(Camera* camera){ m_mainCamera = camera; }
 
-		std::shared_ptr<GameObject> Find(const std::string& name);
+		std::shared_ptr<GameObject> Find(std::string_view name);
 	public:
 		std::string m_sceneName;
 		Camera* m_mainCamera;

@@ -3,12 +3,12 @@
 
 namespace HAIEngine
 {
-    Scene::Scene(const std::string& filepath)
+    Scene::Scene(std::string_view filepath)
         : m_sceneName("Scene"), m_serializeFile(filepath)
     {
     }
 
-    Scene::Scene(std::string sceneName, const std::string& filepath)
+    Scene::Scene(std::string sceneName, std::string_view filepath)
         : m_sceneName(sceneName), m_serializeFile(filepath)
     {
     }
@@ -25,7 +25,7 @@ namespace HAIEngine
         m_serializeFile.Save();
     }
 
-    std::shared_ptr<GameObject> Scene::Find(const std::string& name)
+    std::shared_ptr<GameObject> Scene::Find(std::string_view name)
     {
         for (auto& go : m_gameObjects)
         {

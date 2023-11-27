@@ -39,6 +39,7 @@ namespace HAIEngine
 
 		float lastMouseX, lastMouseY;
 		bool IsReControlMouse = false;
+		glm::vec2 m_viewportSize = { 1920, 1080 };
 
 		//sample ECS
 		std::shared_ptr<Scene> scene;

@@ -14,7 +14,7 @@ namespace HAIEngine
 		uint32_t Width;
 		uint32_t Height;
 
-		WindowProps(const std::string& title = "HAIEngine", uint32_t width = 1920, uint32_t height = 1080)
+		WindowProps(std::string_view title = "HAIEngine", uint32_t width = 1920, uint32_t height = 1080)
 			:Title(title), Width(width), Height(height)
 		{
 		}

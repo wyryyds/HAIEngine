@@ -49,7 +49,7 @@ namespace HAIEngine
 		bool Normalized;
 
 		BufferElement() {}
-		BufferElement(ShaderDataType type, const std::string& name,bool normalized = false) 
+		BufferElement(ShaderDataType type, std::string_view name,bool normalized = false) 
 			: Name(name), Type(type), Offset(0), Size(ShaderDataTypeSize(type)) ,Normalized(normalized)
 		{
 		}

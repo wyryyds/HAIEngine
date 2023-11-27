@@ -10,7 +10,7 @@ namespace HAIEngine
 	class Layer
 	{
 	public:
-		Layer(const std::string& name = "Layer") : m_debugName(name) {}
+		Layer(std::string_view name = "Layer") : m_debugName(name) {}
 		virtual ~Layer() = default;
 
 		virtual void OnAttach() {}
@@ -19,7 +19,7 @@ namespace HAIEngine
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 
-		inline const std::string& GetName() const { return m_debugName; }
+		inline std::string_view GetName() const { return m_debugName; }
 
 	protected:
 		std::string m_debugName;
