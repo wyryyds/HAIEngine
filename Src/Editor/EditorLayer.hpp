@@ -2,6 +2,8 @@
 #include "HAIEngine.hpp"
 #include "Core/Layer.hpp"
 
+#include "SceneHierarchyPanel.hpp"
+
 namespace HAIEngine
 {
 	class EditorLayer : public Layer
@@ -43,5 +45,6 @@ namespace HAIEngine
 
 		//sample ECS
 		std::shared_ptr<Scene> scene;
+		SceneHierarchyPanel m_panel;
 	};
 }

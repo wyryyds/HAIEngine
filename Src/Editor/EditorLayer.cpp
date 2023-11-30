@@ -126,6 +126,8 @@ namespace HAIEngine
 		scene->Load();
 
 		scene->Save();
+
+		m_panel.SetContexts(scene);
 	}
 
 	void EditorLayer::OnAttach()
@@ -230,6 +232,8 @@ namespace HAIEngine
 			ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
 			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 		}
+
+		m_panel.OnImguiRender();
 
 		ImGui::Begin("Settings");
 		ImGui::ColorEdit3("Light Color", glm::value_ptr(m_LightCorlor));
