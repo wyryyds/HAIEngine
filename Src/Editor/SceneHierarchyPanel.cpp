@@ -2,6 +2,7 @@
 #include "ECS/GameObject.hpp"
 
 #include <imgui.h>
+
 namespace HAIEngine
 {
 	SceneHierarchyPanel::SceneHierarchyPanel(const std::shared_ptr<Scene>& scene)
@@ -30,9 +31,26 @@ namespace HAIEngine
 				ImGui::TreePop();
 		}
 
-		
-
 		ImGui::End();
-
+		ShowProperties();
 	}
+
+	void SceneHierarchyPanel::ShowProperties()
+	{
+		ImGui::Begin("Properties");
+		
+		if (m_selectedContext != nullptr)
+		{
+			for (const auto& component : m_selectedContext->m_components)
+			{
+				if (ImGui::TreeNodeEx(component.second->m_typeName.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
+				{
+					component.second->GuiDisplay();
+					ImGui::TreePop();
+				}
+			}
+		}
+		ImGui::End();
+	}
+
 }

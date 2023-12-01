@@ -27,18 +27,19 @@ namespace HAIEngine
 		template <class T>
 		T& GetComponent()
 		{
-			static_assert(std::is_base_of<Component, T>::value);
+			static_assert(std::is_base_of<Component, T>::value, "T must be derived from Component");
 
-			for (auto iter = m_components.begin(); iter != m_components.end(); ++iter)
+			for (const auto& pair : m_components)
 			{
-				auto com = dynamic_cast<T*>(*iter);
+				auto com = dynamic_cast<T*>(pair.second);
 				if (com)
 				{
 					return *com;
 				}
 			}
-			LOG_Error("No such component at this gameobejct!");
-			static T invalidComponent;
+
+			LOG_Error("No such component at this gameobject!");
+			static T invalidComponent;  // 这里可能不是你想要的效果，因为每次调用该函数都会返回同一个 invalidComponent
 			return invalidComponent;
 		}
 
@@ -49,7 +50,7 @@ namespace HAIEngine
 
 			for (auto iter = m_components.begin(); iter != m_components.end();)
 			{
-				auto com = dynamic_cast<T*>(*iter);
+				auto com = dynamic_cast<T*>(iter->second);
 				if (com)
 				{
 					m_components.erase(iter);
@@ -82,8 +83,8 @@ namespace HAIEngine
 	public:
 		std::string m_name;
 		Transform* m_transform;
-
-	private:
+	// TODO private
+	public:
 		std::unordered_map<std::string, Component*> m_components;
 	};
 }

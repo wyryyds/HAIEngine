@@ -15,6 +15,7 @@ namespace HAIEngine
         UNDEFINED,
         ORTHO,
         PERSPECTIVE,
+        Count,
     };
 
     class Camera : public Component
@@ -41,13 +42,14 @@ namespace HAIEngine
         Camera(CameraType type, const std::variant<orthoParams, perspectiveParams>& params);
         ~Camera() = default;
 
-        inline glm::mat4 GetViewMatrix() { return m_view; }
-        inline glm::mat4 GetProjectionMatrix() { return m_projection; }
-        inline glm::mat4 GetViewProjection() { return m_projection * m_view; }
+        inline glm::mat4 GetViewMatrix() const { return m_view; }
+        inline glm::mat4 GetProjectionMatrix() const { return m_projection; }
+        inline glm::mat4 GetViewProjection() const { return m_projection * m_view; }
 
         void Update(TimeStep ts) override;
-        json Serialize() override;
-        void DeSerialize(const json& jsondata) override;
+        virtual json Serialize() override;
+        virtual void DeSerialize(const json& jsondata) override;
+        virtual void GuiDisplay() override;
     public:
         CameraType m_cameraType{ CameraType::UNDEFINED };
      
@@ -56,6 +58,7 @@ namespace HAIEngine
     private:
         void UpdateView();
         void UpdateProjection();
+
     private:
         glm::vec3 m_position{ 0.0f, 0.0f, 6.0f };
         glm::vec3 m_Front{ 0.0f, 0.0f, -1.0f };

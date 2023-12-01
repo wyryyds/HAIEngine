@@ -56,8 +56,9 @@ namespace HAIEngine
 		const glm::vec3 GetDirectionNormal();
 		const float GetAttenuation(glm::vec3 position) const;
 
-		json Serialize() override;
-		void DeSerialize(const json& jsonData) override;
+		virtual json Serialize() override;
+		virtual void DeSerialize(const json& jsonData) override;
+		virtual void GuiDisplay() override;
 
 	public:
 		LightType m_lightType = LightType::UNDEFINED;

@@ -1,6 +1,7 @@
 #include "Transform.hpp"
 #include "hepch.hpp"
 #include "Core/Reflection.hpp"
+#include "Editor/GuiHelper.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/ext/matrix_transform.hpp>
@@ -83,5 +84,12 @@ namespace HAIEngine
 		m_position = SerializeHelper::DeSerializeData<glm::vec3>(jsonData["position"]);
 		m_rotation = SerializeHelper::DeSerializeData<glm::vec3>(jsonData["rotation"]);
 		m_scale    = SerializeHelper::DeSerializeData<glm::vec3>(jsonData["scale"]);
+	}
+
+	void Transform::GuiDisplay()
+	{
+		GuiHelper::DrawVec3Control("Position", m_position);
+		GuiHelper::DrawVec3Control("Rotation", m_rotation);
+		GuiHelper::DrawVec3Control("Scale", m_scale);
 	}
 }

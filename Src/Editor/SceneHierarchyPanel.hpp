@@ -12,6 +12,8 @@ namespace HAIEngine
 
 		void SetContexts(const std::shared_ptr<Scene> scene);
 		void OnImguiRender();
+		void ShowProperties();
+
 	private:
 		std::shared_ptr<Scene> m_contexts;
 		std::shared_ptr<GameObject> m_selectedContext;

@@ -1,5 +1,7 @@
 #pragma once
 #include "Core/ISerialize.hpp"
+#include "Editor/OnGui.hpp"
+
 #include "Core/TimeStep.hpp"
 
 namespace HAIEngine
@@ -7,7 +9,7 @@ namespace HAIEngine
 	class GameObject;
 	class Transform;
 
-	class Component : public ISerializeable
+	class Component : public ISerializeable, public IGuiDisplay
 	{
 	public:
 		Component(std::string typeName) : m_typeName(typeName) {};

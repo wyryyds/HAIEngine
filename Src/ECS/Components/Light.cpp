@@ -65,7 +65,14 @@ namespace HAIEngine
 	{
 		return json();
 	}
+
 	void Light::DeSerialize(const json& jsonData)
 	{
+
+	}
+
+	void Light::GuiDisplay()
+	{
+
 	}
 }

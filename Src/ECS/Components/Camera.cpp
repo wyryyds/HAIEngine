@@ -2,11 +2,14 @@
 #include "hepch.hpp"
 #include "Core/Log.hpp"
 #include "Core/Reflection.hpp"
+#include "Editor/GuiHelper.hpp"
 #include "ECS/Components/Transform.hpp"
 #include "ECS/GameObject.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/string_cast.hpp>
+
+#include <imgui.h>
 
 namespace HAIEngine
 {
@@ -116,5 +119,25 @@ namespace HAIEngine
             return;
         }
 
+    }
+
+    void Camera::GuiDisplay()
+    {
+        GuiHelper::DrawEnumControl(m_cameraType);
+        switch (m_cameraType)
+        {
+        case CameraType::UNDEFINED:
+            break;
+        case CameraType::ORTHO:
+            // TODO
+            break;
+        case CameraType::PERSPECTIVE:
+            ImGui::SliderFloat("Fov", &std::get<perspectiveParams>(m_cameraDatas).fov, 0.0f, 90.0f);
+            ImGui::InputFloat("ZNear", &std::get<perspectiveParams>(m_cameraDatas).znear);
+            ImGui::InputFloat("ZFar", &std::get<perspectiveParams>(m_cameraDatas).zfar);
+            break;
+        default:
+            break;
+        }
     }
 }
