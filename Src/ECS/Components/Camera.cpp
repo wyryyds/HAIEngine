@@ -9,8 +9,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/string_cast.hpp>
 
-#include <imgui.h>
-
 namespace HAIEngine
 {
     //REFLECTION(Camera, Component);
@@ -73,11 +71,11 @@ namespace HAIEngine
                 resjson["cameraType"] = SerializeHelper::SerializeData("ORTHO");
                 break;
             case CameraType::PERSPECTIVE:
-                resjson["cameraType"] = SerializeHelper::SerializeData("PERSPECTIVE");
+                resjson["cameraType"]  = SerializeHelper::SerializeData("PERSPECTIVE");
                 resjson["aspectRatio"] = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraDatas).m_aspect);
-                resjson["fov"] = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraDatas).fov);
-                resjson["znear"] = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraDatas).znear);
-                resjson["zfar"] = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraDatas).zfar);
+                resjson["fov"]         = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraDatas).fov);
+                resjson["znear"]       = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraDatas).znear);
+                resjson["zfar"]        = SerializeHelper::SerializeData(std::get<perspectiveParams>(m_cameraDatas).zfar);
                 break;
             default:
                 resjson["cameraType"] = "UNDEFINED";
@@ -105,9 +103,9 @@ namespace HAIEngine
             m_cameraType = CameraType::PERSPECTIVE;
 
             float aspect = SerializeHelper::DeSerializeData<float>(jsonData["aspectRatio"]);
-            float fov = SerializeHelper::DeSerializeData<float>(jsonData["fov"]);
-            float znear = SerializeHelper::DeSerializeData<float>(jsonData["znear"]);
-            float zfar = SerializeHelper::DeSerializeData<float>(jsonData["zfar"]);
+            float fov    = SerializeHelper::DeSerializeData<float>(jsonData["fov"]);
+            float znear  = SerializeHelper::DeSerializeData<float>(jsonData["znear"]);
+            float zfar   = SerializeHelper::DeSerializeData<float>(jsonData["zfar"]);
 
             m_cameraDatas = perspectiveParams{ aspect, fov, znear, zfar };
             return;
@@ -132,9 +130,9 @@ namespace HAIEngine
             // TODO
             break;
         case CameraType::PERSPECTIVE:
-            ImGui::SliderFloat("Fov", &std::get<perspectiveParams>(m_cameraDatas).fov, 0.0f, 90.0f);
-            ImGui::InputFloat("ZNear", &std::get<perspectiveParams>(m_cameraDatas).znear);
-            ImGui::InputFloat("ZFar", &std::get<perspectiveParams>(m_cameraDatas).zfar);
+            GuiHelper::DrawFloatSlider("Fov", &std::get<perspectiveParams>(m_cameraDatas).fov, 0.0f, 90.0f);
+            GuiHelper::DrawFloatInput("ZNear", &std::get<perspectiveParams>(m_cameraDatas).znear);
+            GuiHelper::DrawFloatInput("ZFar", &std::get<perspectiveParams>(m_cameraDatas).zfar);
             break;
         default:
             break;

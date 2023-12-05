@@ -1,16 +1,26 @@
 #include "GuiHelper.hpp"
+
 #include <imgui.h>
 #include <imgui_internal.h>
 
 namespace HAIEngine
 {
-	const char* GuiHelper::CameraTypeString[] = {
+	const char* GuiHelper::CameraTypeString[] = 
+	{
 		"Undefined",
 		"OrthoCamera",
 		"PerspectiveCamera"
 	};
 
-	void HAIEngine::GuiHelper::DrawVec3Control(const std::string& label, glm::vec3& values, float resetValue, float columnWidth)
+	const char* GuiHelper::LightTypeString[] =
+	{
+		"Undefined",
+		"Direction Light",
+		"Point Light",
+		"Spot Light"
+	};
+
+	void GuiHelper::DrawVec3Control(const std::string& label, glm::vec3& values, float resetValue, float columnWidth)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		auto boldFont = io.Fonts->Fonts[0];
@@ -79,6 +89,16 @@ namespace HAIEngine
 		ImGui::PopID();
 	}
 
+	void GuiHelper::DrawFloatSlider(const char* label, float* v, float v_min, float v_max)
+	{
+		ImGui::SliderFloat(label, v, v_min, v_max);
+	}
+
+	void GuiHelper::DrawFloatInput(const char* label, float* v)
+	{
+		ImGui::InputFloat(label, v);
+	}
+
 	void HAIEngine::GuiHelper::DrawEnumControl(CameraType& type)
 	{
 		const char* currentItem = CameraType2String(type);
@@ -89,7 +109,24 @@ namespace HAIEngine
 					type = static_cast<CameraType>(i);
 				}
 				if (isSelected) {
-					ImGui::SetItemDefaultFocus(); // 设置默认焦点
+					ImGui::SetItemDefaultFocus();
+				}
+			}
+			ImGui::EndCombo();
+		}
+	}
+
+	void GuiHelper::DrawEnumControl(LightType& type)
+	{
+		const char* currentItem = LightType2String(type);
+		if (ImGui::BeginCombo("Camera Type", currentItem)) {
+			for (int i = 0; i < static_cast<int>(LightType::Count); ++i) {
+				bool isSelected = (currentItem == LightTypeString[i]);
+				if (ImGui::Selectable(LightTypeString[i], isSelected)) {
+					type = static_cast<LightType>(i);
+				}
+				if (isSelected) {
+					ImGui::SetItemDefaultFocus();
 				}
 			}
 			ImGui::EndCombo();
@@ -104,5 +141,15 @@ namespace HAIEngine
 			}
 		}
 		return CameraType::UNDEFINED;
+	}
+
+	LightType GuiHelper::String2LightType(const char* typeString)
+	{
+		for (int i = 0; i < static_cast<int>(LightType::Count); ++i) {
+			if (strcmp(typeString, LightTypeString[i]) == 0) {
+				return static_cast<LightType>(i);
+			}
+		}
+		return LightType::UNDEFINED;
 	}
 }

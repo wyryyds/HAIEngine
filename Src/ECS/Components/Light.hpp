@@ -10,22 +10,23 @@ namespace HAIEngine
 		UNDEFINED,
 		DIRECTION,
 		POINT,
-		SPOT
+		SPOT,
+		Count
 	};
 
 	class Light : public Component
 	{
 		struct directionParams
 		{
-			float m_ambientIntensity = 0.1f;
-			float m_intensity = 0.5f;
-			glm::vec3 m_color{ 1.0f };
+			float ambientIntensity = 0.1f;
+			float intensity = 0.5f;
+			glm::vec3 color{ 1.0f };
 		};
 		struct pointParams
 		{
-			float m_ambientIntensity = 0.1f;
-			float m_intensity = 0.5f;
-			glm::vec3 m_color{ 1.0f };
+			float ambientIntensity = 0.1f;
+			float intensity = 0.5f;
+			glm::vec3 color{ 1.0f };
 			float range = 1.0f;
 			float constant = 1.0f;
 			float linear = 0.09f;
@@ -33,9 +34,9 @@ namespace HAIEngine
 		};
 		struct spotParams
 		{
-			float m_ambientIntensity = 0.1f;
-			float m_intensity = 0.5f;
-			glm::vec3 m_color{ 1.0f };
+			float ambientIntensity = 0.1f;
+			float intensity = 0.5f;
+			glm::vec3 color{ 1.0f };
 			float range = 1.0f;
 			float spotRange = 1.0f;
 		};
@@ -53,7 +54,7 @@ namespace HAIEngine
 		float GetIntensity();
 		glm::vec3 GetColor();
 
-		const glm::vec3 GetDirectionNormal();
+		const glm::vec3 GetDirectionNormal() const;
 		const float GetAttenuation(glm::vec3 position) const;
 
 		virtual json Serialize() override;
