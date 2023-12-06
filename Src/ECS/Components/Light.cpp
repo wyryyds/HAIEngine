@@ -5,6 +5,8 @@
 #include "Core/Reflection.hpp"
 #include "Editor/GuiHelper.hpp"
 
+#include <glm/gtc/type_ptr.hpp>
+
 namespace HAIEngine
 {
 	Light::Light(LightType type, const std::variant<directionParams, pointParams, spotParams>& params)
@@ -102,12 +104,81 @@ namespace HAIEngine
 
 	void Light::DeSerialize(const json& jsonData)
 	{
+		if (SerializeHelper::DeSerializeData<std::string>(jsonData["type"]) != m_typeName)
+		{
+			LOG_Error("type not match!");
+			return;
+		}
 
+		m_guid = SerializeHelper::DeSerializeData<size_t>(jsonData["guid"]);
+
+		if (SerializeHelper::DeSerializeData<std::string>(jsonData["lightType"]) == "UNDEFINED")
+			return;
+
+		if (SerializeHelper::DeSerializeData<std::string>(jsonData["lightType"]) == "DIRECTION")
+		{
+			m_lightType = LightType::DIRECTION;
+			auto ambientIntensity = SerializeHelper::DeSerializeData<float>(jsonData["ambientIntensity"]);
+			auto intensity        = SerializeHelper::DeSerializeData<float>(jsonData["intensity"]);
+			auto color			  = SerializeHelper::DeSerializeData<glm::vec3>(jsonData["color"]);
+
+			m_lightDatas = directionParams{ ambientIntensity, intensity, color };
+			return;
+		}
+
+		if (SerializeHelper::DeSerializeData<std::string>(jsonData["lightType"]) == "POINT")
+		{
+			m_lightType = LightType::POINT;
+			auto ambientIntensity = SerializeHelper::DeSerializeData<float>(jsonData["ambientIntensity"]);
+			auto intensity		  = SerializeHelper::DeSerializeData<float>(jsonData["intensity"]);
+			auto color			  = SerializeHelper::DeSerializeData<glm::vec3>(jsonData["color"]);
+			auto range			  = SerializeHelper::DeSerializeData<float>(jsonData["range"]);
+
+			m_lightDatas = pointParams{ ambientIntensity, intensity, color, range };
+			return;
+		}
+
+		if (SerializeHelper::DeSerializeData<std::string>(jsonData["lightType"]) == "SPOT")
+		{
+			m_lightType = LightType::SPOT;
+			auto ambientIntensity = SerializeHelper::DeSerializeData<float>(jsonData["ambientIntensity"]);
+			auto intensity		  = SerializeHelper::DeSerializeData<float>(jsonData["intensity"]);
+			auto color			  = SerializeHelper::DeSerializeData<glm::vec3>(jsonData["color"]);
+			auto range			  = SerializeHelper::DeSerializeData<float>(jsonData["range"]);
+
+			m_lightDatas = spotParams{ ambientIntensity, intensity, color, range };
+			return;
+		}
 	}
 
 	void Light::GuiDisplay()
 	{
 		GuiHelper::DrawEnumControl(m_lightType);
-
+		switch (m_lightType)
+		{
+		case HAIEngine::LightType::UNDEFINED:
+			break;
+		case HAIEngine::LightType::DIRECTION:
+			GuiHelper::DrawColorEditor3("Color", glm::value_ptr(std::get<directionParams>(m_lightDatas).color));
+			GuiHelper::DrawFloatInput("AmbientIntensity", &std::get<directionParams>(m_lightDatas).ambientIntensity);
+			GuiHelper::DrawFloatInput("Intensity", &std::get<directionParams>(m_lightDatas).intensity);
+			break;
+		case HAIEngine::LightType::POINT:
+			GuiHelper::DrawColorEditor3("Color", glm::value_ptr(std::get<pointParams>(m_lightDatas).color));
+			GuiHelper::DrawFloatInput("AmbientIntensity", &std::get<pointParams>(m_lightDatas).ambientIntensity);
+			GuiHelper::DrawFloatInput("Intensity", &std::get<pointParams>(m_lightDatas).intensity);
+			GuiHelper::DrawFloatInput("Range", &std::get<pointParams>(m_lightDatas).range);
+			break;
+		case HAIEngine::LightType::SPOT:
+			GuiHelper::DrawColorEditor3("Color", glm::value_ptr(std::get<spotParams>(m_lightDatas).color));
+			GuiHelper::DrawFloatInput("AmbientIntensity", &std::get<spotParams>(m_lightDatas).ambientIntensity);
+			GuiHelper::DrawFloatInput("Intensity", &std::get<spotParams>(m_lightDatas).intensity);
+			GuiHelper::DrawFloatInput("Range", &std::get<spotParams>(m_lightDatas).range);
+			break;
+		case HAIEngine::LightType::Count:
+			break;
+		default:
+			break;
+		}
 	}
 }

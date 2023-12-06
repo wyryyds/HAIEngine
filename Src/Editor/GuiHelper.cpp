@@ -133,6 +133,11 @@ namespace HAIEngine
 		}
 	}
 
+	void GuiHelper::DrawColorEditor3(const char* label, float col[3])
+	{
+		ImGui::ColorEdit3(label, col);
+	}
+
 	CameraType HAIEngine::GuiHelper::String2CameraType(const char* typeString)
 	{
 		for (int i = 0; i < static_cast<int>(CameraType::Count); ++i) {

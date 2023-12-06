@@ -22,4 +22,7 @@
 #include "ECS/Scene.hpp"
 #include "ECS/GameObject.hpp"
 #include "ECS/Component.hpp"
+#include "ECS/Components/Transform.hpp"
+#include "ECS/Components/Camera.hpp"
+#include "ECS/Components/Light.hpp"
 

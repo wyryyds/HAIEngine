@@ -18,9 +18,9 @@
           "guid": 9660988878551483374,
           "cameraType": "PERSPECTIVE",
           "aspectRatio": "1.777778",
-          "fov": "60.000000",
-          "znear": "0.100000",
-          "zfar": "60.000000"
+          "fov": "60",
+          "znear": "0.1",
+          "zfar": "60"
         }
       ]
     },
@@ -36,6 +36,27 @@
           "scale": "1,1,1"
         }
       ]
-    }
+    },
+    {
+      "name": "DirectionLight",
+      "guid": 16125228732749749184,
+      "components": [
+        {
+          "type": "Transform",
+          "guid": 14908716752133474589,
+          "position": "0,0,6",
+          "rotation": "-90,0,0",
+          "scale": "1,1,1"
+        },
+        {
+          "type": "Light",
+          "guid": 16305122017340330300,
+          "lightType": "DIRECTION",
+          "ambientIntensity": "0.1",
+          "intensity": "0.5",
+          "color": "1,1,1"
+        }
+      ]
+    }  
   ]
 }

@@ -125,6 +125,11 @@ namespace HAIEngine
 
 		scene->Load();
 
+		/*std::shared_ptr<HAIEngine::GameObject> directionLightGO = std::make_shared<HAIEngine::GameObject>("DirectionLight");
+		Light* directionLightComponent = new Light(LightType::DIRECTION, Light::directionParams{ 0.1f, 0.5f, glm::vec3(1.0f) });
+		directionLightGO->AddComponent(directionLightComponent);
+		scene->AddGameObject(directionLightGO);*/
+
 		scene->Save();
 
 		m_panel.SetContexts(scene);

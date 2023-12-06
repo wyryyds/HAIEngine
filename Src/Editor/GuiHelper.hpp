@@ -11,8 +11,11 @@ namespace HAIEngine
 
 		static void DrawFloatSlider(const char* label, float* v, float v_min, float v_max);
 		static void DrawFloatInput(const char* label, float* v);
+
 		static void DrawEnumControl(CameraType& type);
 		static void DrawEnumControl(LightType& type);
+
+		static void DrawColorEditor3(const char* label, float col[3]);
 	private:
 		static const char* CameraTypeString[];
 		static inline const char* CameraType2String(CameraType type) { return CameraTypeString[static_cast<int>(type)]; }

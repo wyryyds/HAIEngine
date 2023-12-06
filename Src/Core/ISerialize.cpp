@@ -27,27 +27,40 @@ namespace HAIEngine
 	{
 		return value;
 	}
+
 	std::string SerializeHelper::SerializeData(const float value)
 	{
-		return std::to_string(value);
+		return  RemoveTrailingZeros(std::to_string(value));
 	}
+
 	double SerializeHelper::SerializeData(const double value)
 	{
 		return value;
 	}
+
 	size_t SerializeHelper::SerializeData(const size_t value)
 	{
 		return value;
 	}
+
 	std::string SerializeHelper::SerializeData(std::string_view value)
 	{
 		return value.data();
 	}
+
 	std::string SerializeHelper::SerializeData(const glm::vec3 value)
 	{
 		std::stringstream ss;
 		ss << value.x << "," << value.y << "," << value.z;
 
 		return ss.str();
+	}
+
+	std::string SerializeHelper::RemoveTrailingZeros(std::string_view str) {
+		size_t dotPos = str.find_last_not_of('0');
+		if (dotPos != std::string_view::npos && str[dotPos] == '.') {
+			return std::string(str.substr(0, dotPos));
+		}
+		return std::string(str.substr(0, dotPos + 1));
 	}
 }

@@ -16,6 +16,7 @@ namespace HAIEngine
 
 	class Light : public Component
 	{
+	public:
 		struct directionParams
 		{
 			float ambientIntensity = 0.1f;

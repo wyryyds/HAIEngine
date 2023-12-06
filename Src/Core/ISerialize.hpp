@@ -64,6 +64,8 @@ namespace HAIEngine
 			return glm::vec3{ floatValues[0], floatValues[1], floatValues[2] };
 		}
 
+	private:
+		static std::string RemoveTrailingZeros(std::string_view str);
 	};
 
 	class HESerializeFile
