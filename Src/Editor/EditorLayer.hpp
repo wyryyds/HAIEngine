@@ -21,7 +21,9 @@ namespace HAIEngine
 
 	private:
 		void CheckInput(TimeStep ts);
-	private:
+		struct ImVec3 { float x, y, z; ImVec3(float _x = 0.0f, float _y = 0.0f, float _z = 0.0f) { x = _x; y = _y; z = _z; } };
+		void SetupImGuiStyle2();
+		void imgui_easy_theming();
 		ShaderLibrary m_ShaderLibrary;
 
 		EditorCamera* m_PerspectiveCamera;
