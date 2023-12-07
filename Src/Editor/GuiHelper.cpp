@@ -91,12 +91,18 @@ namespace HAIEngine
 
 	void GuiHelper::DrawFloatSlider(const char* label, float* v, float v_min, float v_max)
 	{
-		ImGui::SliderFloat(label, v, v_min, v_max);
+		//ImGui::SliderFloat(label, v, v_min, v_max);
+		ImGui::Text(label);
+		ImGui::SameLine(); 
+		ImGui::SliderFloat("", v, v_min, v_max);
+
 	}
 
 	void GuiHelper::DrawFloatInput(const char* label, float* v)
 	{
-		ImGui::InputFloat(label, v);
+		ImGui::Text(label);
+		ImGui::SameLine();
+		ImGui::InputFloat("", v);
 	}
 
 	void HAIEngine::GuiHelper::DrawEnumControl(CameraType& type)

@@ -71,7 +71,7 @@ namespace HAIEngine
 	class HESerializeFile
 	{
 		// TODO add default path
-		const std::string DefaultPath = ASSTESPATH;
+		const std::string DefaultPath = ASSETSPATH;
 	public:
 		HESerializeFile(std::string_view filepath);
 		~HESerializeFile() = default;

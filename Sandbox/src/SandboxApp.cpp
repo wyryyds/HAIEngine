@@ -119,7 +119,7 @@ public:
 		//test json
 		//HAIEngine::Scene myScene(ASSTESPATH"Jsons/data.json");
 		
-		scene = std::make_shared<HAIEngine::Scene>(ASSTESPATH"Jsons/data.json");
+		scene = std::make_shared<HAIEngine::Scene>(ASSETSPATH"Jsons/data.json");
 
 		/*std::shared_ptr<HAIEngine::GameObject> testGO1 = std::make_shared<HAIEngine::GameObject>("TestGO1");
 

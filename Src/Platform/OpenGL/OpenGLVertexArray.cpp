@@ -55,7 +55,7 @@ namespace HAIEngine
 				ShaderDataType2OpenGLBaseType(element.Type),
 				element.Normalized ? GL_TRUE : GL_FALSE,
 				layout.GetStride(),
-				(const void*)element.Offset);
+				reinterpret_cast<const void*>(static_cast<std::uintptr_t>(element.Offset)));
 			index++;
 		}
 

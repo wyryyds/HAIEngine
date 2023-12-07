@@ -39,7 +39,7 @@ namespace HAIEngine
 			}
 
 			LOG_Error("No such component at this gameobject!");
-			static T invalidComponent;  // 这里可能不是你想要的效果，因为每次调用该函数都会返回同一个 invalidComponent
+			static T invalidComponent;
 			return invalidComponent;
 		}
 

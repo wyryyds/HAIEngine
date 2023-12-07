@@ -27,5 +27,5 @@
 #define HE_BIND_EVENT_FN(fn) std::bind(&fn,this,std::placeholders::_1)
 
 #define ROOTPATH "../../../../"
-#define SHADERPATH "../../../../Sandbox/assets/Shaders/"
-#define ASSTESPATH "../../../../Sandbox/assets/"
+#define SHADERPATH "../../../../Assets/Shaders/"
+#define ASSETSPATH "../../../../Assets/"
