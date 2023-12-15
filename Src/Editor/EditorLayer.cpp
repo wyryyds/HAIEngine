@@ -95,17 +95,21 @@ namespace HAIEngine
 		// add texture
 		m_Texture = Texture2D::Create(ASSETSPATH"Textures/container2.png");
 		// bind 1 ， 2 to avoid slot conflict
-		m_Texture->Bind(2);
+		//m_Texture->Bind(2);
 		m_specularTexture = Texture2D::Create(ASSETSPATH"Textures/container2_specular.png");
-		m_specularTexture->Bind(1);
+		//m_specularTexture->Bind(1);
 
 		// add test shader
-		auto lightingShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("lighting", ASSETSPATH"Shaders/lighting.glsl"));
+		//auto lightingShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("lighting", ASSETSPATH"Shaders/lighting.glsl"));
+		auto ModelShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("Model", ASSETSPATH"Shaders/Model.glsl"));
 
-		auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("phong", ASSETSPATH"Shaders/phong.glsl"));
+		/*auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("phong", ASSETSPATH"Shaders/phong.glsl"));
 		sampleShader->Bind();
 		sampleShader->UploadUniformInt("material.diffuse", 2);
-		sampleShader->UploadUniformInt("material.specular", 1);
+		sampleShader->UploadUniformInt("material.specular", 1);*/
+
+		const char* modelStr = ASSETSPATH"/Models/kunai/kunai_LOD0.obj";
+		m_model = Model(const_cast<char*>(modelStr));
 
 		scene = std::make_shared<Scene>(ASSETSPATH"Jsons/data.json");
 
@@ -160,26 +164,33 @@ namespace HAIEngine
 		//HAIEngine::Renderer::BeginScene(scene->m_mainCamera->GetViewProjection());
 
 		// sample shader
-		auto lightingShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("lighting"));
+		/*auto lightingShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("lighting"));
 		lightingShader->Bind();
-		lightingShader->UploadUniformFloat3("lightColor", m_LightCorlor);
+		lightingShader->UploadUniformFloat3("lightColor", m_LightCorlor);*/
 
-		auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("phong"));
+		/*auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("phong"));
 		sampleShader->Bind();
 		sampleShader->UploadUniformFloat("material.shininess", m_Specuness);
 		sampleShader->UploadUniformFloat3("light.position", lightPos);
 		sampleShader->UploadUniformFloat3("viewPos", m_CameraController->GetCameraPosition());
 		sampleShader->UploadUniformFloat3("light.ambient", glm::vec3{ 0.2f, 0.2f, 0.2f });
 		sampleShader->UploadUniformFloat3("light.specular", m_LightCorlor);
-		sampleShader->UploadUniformFloat3("light.diffuse", m_LightCorlor * 0.5f);
+		sampleShader->UploadUniformFloat3("light.diffuse", m_LightCorlor * 0.5f);*/
 
-		Renderer::Submit(lightingShader, m_LightVA, glm::scale(glm::translate(glm::mat4(1.0f), lightPos), glm::vec3(0.2f)));
+		auto modelShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("Model"));
+		modelShader->Bind();
+		modelShader->UploadUniformMat4("u_ViewProjection", m_PerspectiveCamera->m_projection * m_PerspectiveCamera->m_view);
+		modelShader->UploadUniformMat4("u_Transform", glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)));
 
-		Renderer::Submit(sampleShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)));
-		Renderer::Submit(sampleShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f)));
+		//Renderer::Submit(lightingShader, m_LightVA, glm::scale(glm::translate(glm::mat4(1.0f), lightPos), glm::vec3(0.2f)));
+
+		/*Renderer::Submit(sampleShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)));
+		Renderer::Submit(sampleShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f)));*/
+		m_model.Draw(modelShader);
 
 		Renderer::EndScene();
 		m_frameBuffer->UnBind();
+	
 		RenderCommand::Clear();
 	}
 

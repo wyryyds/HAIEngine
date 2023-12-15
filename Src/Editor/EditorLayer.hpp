@@ -3,6 +3,7 @@
 #include "Core/Layer.hpp"
 
 #include "SceneHierarchyPanel.hpp"
+#include "ECS/Components/MeshFilter.hpp"
 
 namespace HAIEngine
 {
@@ -47,5 +48,7 @@ namespace HAIEngine
 		//sample ECS
 		std::shared_ptr<Scene> scene;
 		SceneHierarchyPanel m_panel;
+
+		Model m_model;
 	};
 }
