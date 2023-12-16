@@ -66,7 +66,7 @@ namespace HAIEngine
 		std::vector<MeshFilter> meshes;
 		std::string directory;
 		/*  函数   */
-		void loadModel(std::string path);
+		void loadModel(std::string const  &path);
 		void processNode(aiNode* node, const aiScene* scene);
 		MeshFilter processMesh(aiMesh* mesh, const aiScene* scene);
 		std::vector<TTexture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);

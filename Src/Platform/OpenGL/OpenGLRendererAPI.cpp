@@ -7,10 +7,10 @@ namespace HAIEngine
 {
 	void OpenGLRendererAPI::Init()
 	{
-		glEnable(GL_BLEND);
+		//glEnable(GL_BLEND);
 		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LEQUAL);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		//glDepthFunc(GL_LEQUAL);
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
 	void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)

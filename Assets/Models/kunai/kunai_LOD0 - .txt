@@ -1,0 +1,8 @@
+newmtl throwing_knife
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Ks 0.50 0.50 0.50
+map_Kd _images\0xcc8e6fab22c01e3e.png
+map_bump _images\0xc34df917d05046c0.png
+map_Ks _images\0x321b95dec3c8a32f.png

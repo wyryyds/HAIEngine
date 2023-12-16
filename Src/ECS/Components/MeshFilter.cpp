@@ -47,6 +47,7 @@ namespace HAIEngine
 					number = std::to_string(heightNr++); // transfer unsigned int to string
 
 				// now set the sampler to the correct texture unit
+				shader->Bind();
 				shader->UploadUniformInt((name + number).c_str(), i);
 				// and finally bind the texture
 				glBindTexture(GL_TEXTURE_2D, m_textures[i].id);
@@ -119,18 +120,21 @@ namespace HAIEngine
 			meshes[i].Draw(shader);
 	}
 
-	void Model::loadModel(std::string path)
+	void Model::loadModel(std::string const& path)
 	{
-		Assimp::Importer import;
-		const aiScene * scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
-
-		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+		// read file via ASSIMP
+		Assimp::Importer importer;
+		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+		// check for errors
+		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
 		{
-			std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
+			std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
 			return;
 		}
+		// retrieve the directory path of the filepath
 		directory = path.substr(0, path.find_last_of('/'));
 
+		// process ASSIMP's root node recursively
 		processNode(scene->mRootNode, scene);
 	}
 
@@ -181,16 +185,19 @@ namespace HAIEngine
 				vec.x = mesh->mTextureCoords[0][i].x;
 				vec.y = mesh->mTextureCoords[0][i].y;
 				vertex.TexCoords = vec;
-				// tangent
-				//vector.x = mesh->mTangents[i].x;
-				//vector.y = mesh->mTangents[i].y;
-				//vector.z = mesh->mTangents[i].z;
-				//vertex.Tangent = vector;
-				//// bitangent
-				//vector.x = mesh->mBitangents[i].x;
-				//vector.y = mesh->mBitangents[i].y;
-				//vector.z = mesh->mBitangents[i].z;
-				//vertex.Bitangent = vector;
+				if (mesh->HasTangentsAndBitangents())
+				{
+					//tangent
+					vector.x = mesh->mTangents[i].x;
+					vector.y = mesh->mTangents[i].y;
+					vector.z = mesh->mTangents[i].z;
+					vertex.Tangent = vector;
+					// bitangent
+					vector.x = mesh->mBitangents[i].x;
+					vector.y = mesh->mBitangents[i].y;
+					vector.z = mesh->mBitangents[i].z;
+					vertex.Bitangent = vector;
+				}
 			}
 			else
 				vertex.TexCoords = glm::vec2(0.0f, 0.0f);
@@ -268,12 +275,12 @@ namespace HAIEngine
 
 		unsigned int textureID;
 		glGenTextures(1, &textureID);
-
+		stbi_set_flip_vertically_on_load(0);
 		int width, height, nrComponents;
 		unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
 		if (data)
 		{
-			GLenum format;
+			GLenum format{};
 			if (nrComponents == 1)
 				format = GL_RED;
 			else if (nrComponents == 3)
