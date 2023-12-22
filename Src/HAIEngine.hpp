@@ -22,7 +22,10 @@
 #include "ECS/Scene.hpp"
 #include "ECS/GameObject.hpp"
 #include "ECS/Component.hpp"
+#include "ECS/Mesh.h"
 #include "ECS/Components/Transform.hpp"
 #include "ECS/Components/Camera.hpp"
 #include "ECS/Components/Light.hpp"
+#include "ECS/Components/MeshFilter.hpp"
+#include "ECS/Components/MeshRenderer.hpp"
 

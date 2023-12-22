@@ -109,7 +109,9 @@ namespace HAIEngine
 		sampleShader->UploadUniformInt("material.specular", 1);*/
 
 		const char* modelStr = ASSETSPATH"/Models/kunai/kunai_LOD0.obj";
-		m_model = Model(const_cast<char*>(modelStr));
+		m_meshFilter.m_mesh = std::make_shared<Mesh>(modelStr);
+
+		m_meshRenderer.m_meshFilter = std::make_unique<MeshFilter>(m_meshFilter);
 
 		scene = std::make_shared<Scene>(ASSETSPATH"Jsons/data.json");
 
@@ -183,7 +185,7 @@ namespace HAIEngine
 		modelShader->UploadUniformMat4("u_Transform", glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f)));
 
 		Renderer::Submit(lightingShader, m_LightVA, glm::scale(glm::translate(glm::mat4(1.0f), lightPos), glm::vec3(0.2f)));
-		m_model.Draw(modelShader);
+		m_meshRenderer.Draw(modelShader);
 		/*Renderer::Submit(sampleShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)));
 		Renderer::Submit(sampleShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f)));*/
 
