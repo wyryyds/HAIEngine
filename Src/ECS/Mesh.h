@@ -20,7 +20,7 @@ namespace HAIEngine
 
 	struct MeshTexture
 	{
-		unsigned int id;
+		unsigned int id = 0;
 		std::string type;
 		std::string path;
 	};
@@ -30,6 +30,10 @@ namespace HAIEngine
 	public:
 		MeshData(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<MeshTexture>& textures);
 		~MeshData() = default;
+
+		inline const std::vector<Vertex>& GetMeshVertices() const { return m_vertices; }
+		inline const std::vector<unsigned int>& GetMeshIndices() const { return m_indices; }
+		inline const std::vector<MeshTexture>& GetMeshTextures() const { return m_textures; }
 
 	public:
 		std::vector<Vertex> m_vertices;

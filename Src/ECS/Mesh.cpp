@@ -10,6 +10,7 @@
 namespace HAIEngine
 {
 	MeshData::MeshData(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<MeshTexture>& textures)
+		: VAO(0), VBO(0), EBO(0)
 	{
 		m_vertices = vertices;
 		m_indices = indices;

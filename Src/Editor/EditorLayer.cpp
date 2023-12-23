@@ -1,4 +1,4 @@
-#include "EditorLayer.hpp"
+﻿#include "EditorLayer.hpp"
 
 #include "Platform/OpenGL/OpenGLShader.hpp"
 #include "Platform/OpenGL/OpenGLTexture.hpp"
@@ -110,7 +110,6 @@ namespace HAIEngine
 
 		const char* modelStr = ASSETSPATH"/Models/kunai/kunai_LOD0.obj";
 		m_meshFilter.m_mesh = std::make_shared<Mesh>(modelStr);
-
 		m_meshRenderer.m_meshFilter = std::make_unique<MeshFilter>(m_meshFilter);
 
 		scene = std::make_shared<Scene>(ASSETSPATH"Jsons/data.json");
