@@ -4,9 +4,31 @@
 
 #include "SceneHierarchyPanel.hpp"
 #include "ECS/Components/MeshFilter.hpp"
+#include <iostream>
+#include <string>
+#include <chrono>
 
 namespace HAIEngine
 {
+
+	struct Timer
+	{
+		std::string name;
+		std::chrono::high_resolution_clock::time_point start;
+
+		Timer(const std::string& name) : name(name), start(std::chrono::high_resolution_clock::now()) {}
+		~Timer()
+		{
+			auto end = std::chrono::high_resolution_clock::now();
+			std::cout << name << ": " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << " milliseconds" << std::endl;
+		}
+		void Log() const
+		{
+			auto end = std::chrono::high_resolution_clock::now();
+			std::cout << name << ": " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << " milliseconds" << std::endl;
+		}
+	};
+
 	class EditorLayer : public Layer
 	{
 	public:

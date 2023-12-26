@@ -7,6 +7,8 @@
 #include <iostream>
 #include <stb_image.h>
 
+#include "Core/JobSystem.hpp"
+
 namespace HAIEngine
 {
 	MeshData::MeshData(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<MeshTexture>& textures)

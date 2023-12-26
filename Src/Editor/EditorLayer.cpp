@@ -11,6 +11,8 @@
 #include <imgui.h>
 #include <iostream>
 
+#include "Core/JobSystem.hpp"
+
 namespace HAIEngine
 {
 	EditorLayer::EditorLayer()
@@ -107,8 +109,9 @@ namespace HAIEngine
 		sampleShader->Bind();
 		sampleShader->UploadUniformInt("material.diffuse", 2);
 		sampleShader->UploadUniformInt("material.specular", 1);*/
-
-		const char* modelStr = ASSETSPATH"/Models/kunai/kunai_LOD0.obj";
+		//JobSystem::Initialize();
+		
+		const char* modelStr = ASSETSPATH"/Models/nanosuit/nanosuit.obj";
 		m_meshFilter.m_mesh = std::make_shared<Mesh>(modelStr);
 		m_meshRenderer.m_meshFilter = std::make_unique<MeshFilter>(m_meshFilter);
 
