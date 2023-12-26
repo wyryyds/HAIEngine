@@ -56,6 +56,8 @@ namespace HAIEngine
 		std::vector<MeshTexture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
 		unsigned int TextureFromFile(const char* path, const std::string& directory, bool gamma);
 
+		inline std::vector<MeshData>& GetMeshData() { return m_meshDatas; }
+
 	public:
 		std::vector<MeshData> m_meshDatas;
 		std::vector<MeshTexture> textures_loaded;

@@ -109,10 +109,13 @@ namespace HAIEngine
 		sampleShader->Bind();
 		sampleShader->UploadUniformInt("material.diffuse", 2);
 		sampleShader->UploadUniformInt("material.specular", 1);*/
-		//JobSystem::Initialize();
+		JobSystem::Initialize();
 		
-		const char* modelStr = ASSETSPATH"/Models/nanosuit/nanosuit.obj";
-		m_meshFilter.m_mesh = std::make_shared<Mesh>(modelStr);
+		const char* model1Str = ASSETSPATH"/Models/nanosuit/nanosuit.obj";
+		const char* model2Str = ASSETSPATH"/Models/kunai/kunai_LOD0.obj";
+		auto timer = Timer("Load Models");
+
+		m_meshFilter.SetMesh(std::make_shared<Mesh>(model1Str));
 		m_meshRenderer.m_meshFilter = std::make_unique<MeshFilter>(m_meshFilter);
 
 		scene = std::make_shared<Scene>(ASSETSPATH"Jsons/data.json");

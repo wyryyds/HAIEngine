@@ -71,7 +71,7 @@ namespace HAIEngine
 		std::shared_ptr<Scene> scene;
 		SceneHierarchyPanel m_panel;
 
-		 MeshFilter m_meshFilter;
-		 MeshRenderer m_meshRenderer;
+		MeshFilter m_meshFilter;
+		MeshRenderer m_meshRenderer;
 	};
 }

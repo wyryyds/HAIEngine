@@ -22,7 +22,7 @@ namespace HAIEngine
 	Mesh::Mesh(std::string_view filepath)
 	{
 		LoadMesh(filepath);
-		SetMesh();
+		//SetMesh();
 	}
 
 	void Mesh::SetMesh()
