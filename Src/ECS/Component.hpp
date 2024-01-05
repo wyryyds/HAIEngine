@@ -19,9 +19,11 @@ namespace HAIEngine
 		virtual void Update(TimeStep ts) {}
 		virtual void OnRemove() {}
 		
-		Transform* GetTransform() const;
+		Transform& GetTransform() const;
+		inline GameObject& GetFatherGO() const { return *m_fatherGO; }
+
 		void SetFatherGO(GameObject* go);
-		inline GameObject* GetFatherGO() const { return m_fatherGO; }
+
 	public:
 		std::string m_typeName = "Component";
 		GameObject* m_fatherGO = nullptr;

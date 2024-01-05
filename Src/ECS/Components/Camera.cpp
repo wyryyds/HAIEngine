@@ -28,9 +28,10 @@ namespace HAIEngine
     {
         if (m_cameraType == CameraType::PERSPECTIVE)
         {
-            m_position = GetTransform()->GetPosition();
-            m_Front = GetTransform()->GetFront();
-            m_Up = GetTransform()->GetUp();
+            auto& transform = this->GetTransform();
+            m_position = transform.GetPosition();
+            m_Front = transform.GetFront();
+            m_Up = transform.GetUp();
 
             m_view = glm::lookAt(m_position, m_position + m_Front, m_Up);
         }

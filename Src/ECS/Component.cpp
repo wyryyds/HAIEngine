@@ -9,9 +9,9 @@ namespace HAIEngine
         father->AddComponent(this);
     }
 
-    Transform* Component::GetTransform() const
+    Transform& Component::GetTransform() const
     {
-        return m_fatherGO->GetTransform();
+        return *m_fatherGO->GetTransform();
     }
 
     void Component::SetFatherGO(GameObject* go)

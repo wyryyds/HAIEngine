@@ -1,4 +1,4 @@
-#include "JobSystem.hpp"    // include our interface
+﻿#include "JobSystem.hpp"    // include our interface
 
 #include <algorithm>    // std::max
 #include <atomic>    // to use std::atomic<uint64_t>
