@@ -10,6 +10,7 @@
 
 #include <imgui.h>
 #include <iostream>
+#include <bitset>
 
 #include "Core/JobSystem.hpp"
 
@@ -104,6 +105,7 @@ namespace HAIEngine
 		// add test shader
 		auto lightingShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("lighting", ASSETSPATH"Shaders/lighting.glsl"));
 		auto ModelShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("Model", ASSETSPATH"Shaders/Model.glsl"));
+		auto sampleColor = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("sampleColor", ASSETSPATH"Shaders/sampleColor.glsl"));
 
 		/*auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("phong", ASSETSPATH"Shaders/phong.glsl"));
 		sampleShader->Bind();
@@ -113,12 +115,14 @@ namespace HAIEngine
 		
 		const char* model1Str = ASSETSPATH"/Models/nanosuit/nanosuit.obj";
 		const char* model2Str = ASSETSPATH"/Models/kunai/kunai_LOD0.obj";
-		auto timer = Timer("Load Models");
+		{
+			auto timer = Timer("Load Models");
 
-		m_meshFilter.SetMesh(std::make_shared<Mesh>(model1Str));
-		m_meshRenderer.m_meshFilter = std::make_unique<MeshFilter>(m_meshFilter);
+			m_meshFilter.SetMesh(std::make_shared<Mesh>(model1Str));
+			m_meshRenderer.m_meshFilter = std::make_unique<MeshFilter>(m_meshFilter);
 
-		scene = std::make_shared<Scene>(ASSETSPATH"Jsons/data.json");
+			scene = std::make_shared<Scene>(ASSETSPATH"Jsons/data.json");
+		}
 
 		/*std::shared_ptr<HAIEngine::GameObject> testGO1 = std::make_shared<HAIEngine::GameObject>("TestGO1");
 
@@ -157,15 +161,16 @@ namespace HAIEngine
 		// update camera
 		m_CameraController->update(ts);
 
-		m_frameBuffer->Bind();
-		// rendering
-		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
-		RenderCommand::Clear();
-
+		// update gameobjects
 		for (int i = 0; i < scene->m_gameObjects.size(); ++i)
 		{
 			scene->m_gameObjects[i]->Update(ts);
 		}
+
+		// rendering
+		m_frameBuffer->Bind();
+		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+		RenderCommand::Clear();
 
 		Renderer::BeginScene(m_PerspectiveCamera->m_projection * m_PerspectiveCamera->m_view);
 		//HAIEngine::Renderer::BeginScene(scene->m_mainCamera->GetViewProjection());
@@ -174,7 +179,7 @@ namespace HAIEngine
 		auto lightingShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("lighting"));
 		lightingShader->Bind();
 		lightingShader->UploadUniformFloat3("lightColor", m_LightCorlor);
-
+		Renderer::Submit(lightingShader, m_LightVA, glm::scale(glm::translate(glm::mat4(1.0f), lightPos), glm::vec3(0.2f)));
 		/*auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("phong"));
 		sampleShader->Bind();
 		sampleShader->UploadUniformFloat("material.shininess", m_Specuness);
@@ -188,16 +193,29 @@ namespace HAIEngine
 		modelShader->Bind();
 		modelShader->UploadUniformMat4("u_ViewProjection", m_PerspectiveCamera->m_projection * m_PerspectiveCamera->m_view);
 		modelShader->UploadUniformMat4("u_Transform", glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f)));
+		// 1 pass
+		RenderCommand::EnableStencilTest();
+		RenderCommand::SetStencilFunc(RenderingSetting::EStencilFunc::ALWAYS, 1, 0xFF);
 
-		Renderer::Submit(lightingShader, m_LightVA, glm::scale(glm::translate(glm::mat4(1.0f), lightPos), glm::vec3(0.2f)));
 		m_meshRenderer.Draw(modelShader);
-		/*Renderer::Submit(sampleShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)));
-		Renderer::Submit(sampleShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f)));*/
+
+		auto modelColorShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("sampleColor"));
+		modelColorShader->Bind();
+		modelColorShader->UploadUniformMat4("u_ViewProjection", m_PerspectiveCamera->m_projection * m_PerspectiveCamera->m_view);
+		modelColorShader->UploadUniformMat4("u_Transform", glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f)));
+		// 2 pass
+		RenderCommand::SetStencilFunc(RenderingSetting::EStencilFunc::NOTEQUAL, 1, 0xFF);
+		RenderCommand::DisableStencilTest();
+		RenderCommand::DisableDepthTest();
+
+		m_meshRenderer.Draw(modelColorShader);
+
+		RenderCommand::SetStencilFunc(RenderingSetting::EStencilFunc::ALWAYS, 1, 0xFF);
+		RenderCommand::EnableStencilTest();
+		RenderCommand::EnableDepthTest();
 
 		Renderer::EndScene();
-
 		m_frameBuffer->UnBind();
-		RenderCommand::Clear();
 	}
 
 	void EditorLayer::OnImGuiRender()

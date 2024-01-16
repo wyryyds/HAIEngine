@@ -7,10 +7,11 @@ namespace HAIEngine
 {
 	void OpenGLRendererAPI::Init()
 	{
-		//glEnable(GL_BLEND);
 		glEnable(GL_DEPTH_TEST);
-		//glDepthFunc(GL_LEQUAL);
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glDepthFunc(GL_LESS);
+		glEnable(GL_STENCIL_TEST);
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	}
 
 	void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
@@ -20,7 +21,7 @@ namespace HAIEngine
 
 	void OpenGLRendererAPI::Clear()
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	}
 
 	void OpenGLRendererAPI::Draw(const std::shared_ptr<VertexArray>& vertexArray)
@@ -43,5 +44,30 @@ namespace HAIEngine
 	void OpenGLRendererAPI::DrawIndirctByVertices(const std::shared_ptr<VertexArray>& vertexArray)
 	{
 		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
+
+	void OpenGLRendererAPI::EnableStencilTest()
+	{
+		glStencilMask(0xFF);
+	}
+
+	void OpenGLRendererAPI::DisableStencilTest()
+	{
+		glStencilMask(0x00);
+	}
+
+	void OpenGLRendererAPI::EnableDepthTest()
+	{
+		glEnable(GL_DEPTH_TEST);
+	}
+
+	void OpenGLRendererAPI::DisableDepthTest()
+	{
+		glDisable(GL_DEPTH_TEST);
+	}
+
+	void OpenGLRendererAPI::SetStencilFunc(RenderingSetting::EStencilFunc func, int32_t ref, uint32_t mask)
+	{
+		glStencilFunc(static_cast<GLenum>(func), ref, mask);
 	}
 }

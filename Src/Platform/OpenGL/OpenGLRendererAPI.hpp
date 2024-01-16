@@ -12,5 +12,12 @@ namespace HAIEngine
 		virtual void Draw(const std::shared_ptr<VertexArray>& vertexArray) override;
 		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) override;
 		virtual void DrawIndirctByVertices(const std::shared_ptr<VertexArray>& vertexArray) override;
+
+		virtual void EnableStencilTest() override;
+		virtual void DisableStencilTest() override;
+		virtual void EnableDepthTest() override;
+		virtual void DisableDepthTest() override;
+
+		virtual void SetStencilFunc(RenderingSetting::EStencilFunc func, int32_t ref, uint32_t mask) override;
 	};
 }

@@ -36,6 +36,32 @@ namespace HAIEngine
 		{
 			s_rendererAPI->DrawIndirctByVertices(vertexArray);
 		}
+
+		inline static void EnableStencilTest()
+		{
+			s_rendererAPI->EnableStencilTest();
+		}
+
+		inline static void DisableStencilTest()
+		{
+			s_rendererAPI->DisableStencilTest();
+		}
+
+		inline static void EnableDepthTest()
+		{
+			s_rendererAPI->EnableDepthTest();
+		}
+
+		inline static void DisableDepthTest()
+		{
+			s_rendererAPI->DisableDepthTest();
+		}
+
+		inline static void SetStencilFunc(RenderingSetting::EStencilFunc func, int32_t ref, uint32_t mask)
+		{
+			s_rendererAPI->SetStencilFunc(func, ref, mask);
+		}
+
 	private:
 		static RendererAPI* s_rendererAPI;
 	};
