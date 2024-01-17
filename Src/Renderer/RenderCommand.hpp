@@ -47,6 +47,11 @@ namespace HAIEngine
 			s_rendererAPI->DisableStencilTest();
 		}
 
+		inline static void SetStencilFunc(RenderingSetting::EStencilFunc func, int32_t ref, uint32_t mask)
+		{
+			s_rendererAPI->SetStencilFunc(func, ref, mask);
+		}
+
 		inline static void EnableDepthTest()
 		{
 			s_rendererAPI->EnableDepthTest();
@@ -57,9 +62,14 @@ namespace HAIEngine
 			s_rendererAPI->DisableDepthTest();
 		}
 
-		inline static void SetStencilFunc(RenderingSetting::EStencilFunc func, int32_t ref, uint32_t mask)
+		inline static void EnableBlend()
 		{
-			s_rendererAPI->SetStencilFunc(func, ref, mask);
+			s_rendererAPI->EnableBlend();
+		}
+
+		inline static void SetBlendFunc(RenderingSetting::EBlendFunc sfactor, RenderingSetting::EBlendFunc dfactor)
+		{
+			s_rendererAPI->SetBlendFunc(sfactor, dfactor);
 		}
 
 	private:

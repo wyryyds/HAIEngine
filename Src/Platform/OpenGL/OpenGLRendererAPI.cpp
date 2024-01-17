@@ -8,6 +8,7 @@ namespace HAIEngine
 	void OpenGLRendererAPI::Init()
 	{
 		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_CULL_FACE);
 		glDepthFunc(GL_LESS);
 		glEnable(GL_STENCIL_TEST);
 		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
@@ -56,6 +57,11 @@ namespace HAIEngine
 		glStencilMask(0x00);
 	}
 
+	void OpenGLRendererAPI::SetStencilFunc(RenderingSetting::EStencilFunc func, int32_t ref, uint32_t mask)
+	{
+		glStencilFunc(static_cast<GLenum>(func), ref, mask);
+	}
+
 	void OpenGLRendererAPI::EnableDepthTest()
 	{
 		glEnable(GL_DEPTH_TEST);
@@ -66,8 +72,14 @@ namespace HAIEngine
 		glDisable(GL_DEPTH_TEST);
 	}
 
-	void OpenGLRendererAPI::SetStencilFunc(RenderingSetting::EStencilFunc func, int32_t ref, uint32_t mask)
+	void OpenGLRendererAPI::EnableBlend()
 	{
-		glStencilFunc(static_cast<GLenum>(func), ref, mask);
+		glEnable(GL_BLEND);
 	}
+
+	void OpenGLRendererAPI::SetBlendFunc(RenderingSetting::EBlendFunc sfactor, RenderingSetting::EBlendFunc dfactor)
+	{
+		glBlendFunc(static_cast<GLenum>(sfactor), static_cast<GLenum>(dfactor));
+	}
+
 }

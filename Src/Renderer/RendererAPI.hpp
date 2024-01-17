@@ -17,6 +17,21 @@ namespace HAIEngine::RenderingSetting
 		GREATER_EQUAL = 0x0206,
 		ALWAYS        = 0x0207
 	};
+
+	enum class EBlendFunc
+	{
+		GL_ZERO                = 0,
+        GL_ONE                 = 1,
+        GL_SRC_COLOR           = 0x0300,
+        GL_ONE_MINUS_SRC_COLOR = 0x0301,
+        GL_SRC_ALPHA           = 0x0302,
+        GL_ONE_MINUS_SRC_ALPHA = 0x0303,
+        GL_DST_ALPHA           = 0x0304,
+        GL_ONE_MINUS_DST_ALPHA = 0x0305,
+        GL_DST_COLOR           = 0x0306,
+        GL_ONE_MINUS_DST_COLOR = 0x0307,
+        GL_SRC_ALPHA_SATURATE  = 0x0308
+	};
 }
 
 namespace HAIEngine 
@@ -40,10 +55,13 @@ namespace HAIEngine
 
 		virtual void EnableStencilTest() = 0;
 		virtual void DisableStencilTest() = 0;
+		virtual void SetStencilFunc(RenderingSetting::EStencilFunc func, int32_t ref, uint32_t mask) = 0;
+
 		virtual void EnableDepthTest() = 0;
 		virtual void DisableDepthTest() = 0;
 
-		virtual void SetStencilFunc(RenderingSetting::EStencilFunc func, int32_t ref, uint32_t mask) = 0;
+		virtual void EnableBlend() = 0;
+		virtual void SetBlendFunc(RenderingSetting::EBlendFunc sfactor, RenderingSetting::EBlendFunc dfactor) = 0;
 
 		inline static API GetAPI() { return s_API; }
 
