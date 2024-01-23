@@ -67,6 +67,11 @@ namespace HAIEngine
 			s_rendererAPI->EnableBlend();
 		}
 
+		inline static void DisableBlend()
+		{
+			s_rendererAPI->DisableBlend();
+		}
+
 		inline static void SetBlendFunc(RenderingSetting::EBlendFunc sfactor, RenderingSetting::EBlendFunc dfactor)
 		{
 			s_rendererAPI->SetBlendFunc(sfactor, dfactor);

@@ -94,11 +94,30 @@ namespace HAIEngine
 			});
 		m_LightVA->AddVertexBuffer(m_LightVB);
 
+		float transparentVertices[] = {
+			// positions         // texture Coords (swapped y coordinates because texture is flipped upside down)
+			0.0f,  0.5f,  0.0f,  0.0f,  0.0f,
+			0.0f, -0.5f,  0.0f,  0.0f,  1.0f,
+			1.0f, -0.5f,  0.0f,  1.0f,  1.0f,
+
+			0.0f,  0.5f,  0.0f,  0.0f,  0.0f,
+			1.0f, -0.5f,  0.0f,  1.0f,  1.0f,
+			1.0f,  0.5f,  0.0f,  1.0f,  0.0f
+		};
+		m_testVA.reset(VertexArray::Create());
+		m_testVB.reset(VertexBuffer::Create(transparentVertices, sizeof(transparentVertices)));
+		m_testVB->SetLayout(
+			{
+				{ ShaderDataType::Float3, "a_Position" },
+				{ ShaderDataType::Float2, "aTexCoords"}
+			});
+		m_testVA->AddVertexBuffer(m_testVB);
+
 		m_frameBuffer = FrameBuffer::Create(1920.0f, 1080.0f);
 		// add texture
-		m_Texture = Texture2D::Create(ASSETSPATH"Textures/container2.png");
+		m_Texture = Texture2D::Create(ASSETSPATH"Textures/window.png");
 		// bind 1 ， 2 to avoid slot conflict
-		//m_Texture->Bind(2);
+		m_Texture->Bind(10);
 		m_specularTexture = Texture2D::Create(ASSETSPATH"Textures/container2_specular.png");
 		//m_specularTexture->Bind(1);
 
@@ -106,23 +125,21 @@ namespace HAIEngine
 		auto lightingShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("lighting", ASSETSPATH"Shaders/lighting.glsl"));
 		auto ModelShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("Model", ASSETSPATH"Shaders/Model.glsl"));
 		auto sampleColor = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("sampleColor", ASSETSPATH"Shaders/sampleColor.glsl"));
-
+		auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("sampleShader", ASSETSPATH"Shaders/sample.glsl"));
+		sampleShader->Bind();
+		sampleShader->UploadUniformInt("texturel", 10);
 		/*auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("phong", ASSETSPATH"Shaders/phong.glsl"));
 		sampleShader->Bind();
 		sampleShader->UploadUniformInt("material.diffuse", 2);
 		sampleShader->UploadUniformInt("material.specular", 1);*/
-		JobSystem::Initialize();
+		// JobSystem::Initialize();
 		
 		const char* model1Str = ASSETSPATH"/Models/nanosuit/nanosuit.obj";
-		const char* model2Str = ASSETSPATH"/Models/kunai/kunai_LOD0.obj";
-		{
-			auto timer = Timer("Load Models");
 
-			m_meshFilter.SetMesh(std::make_shared<Mesh>(model1Str));
-			m_meshRenderer.m_meshFilter = std::make_unique<MeshFilter>(m_meshFilter);
+		m_meshFilter.SetMesh(std::make_shared<Mesh>(model1Str));
+		m_meshRenderer.m_meshFilter = std::make_unique<MeshFilter>(m_meshFilter);
 
-			scene = std::make_shared<Scene>(ASSETSPATH"Jsons/data.json");
-		}
+		scene = std::make_shared<Scene>(ASSETSPATH"Jsons/data.json");
 
 		/*std::shared_ptr<HAIEngine::GameObject> testGO1 = std::make_shared<HAIEngine::GameObject>("TestGO1");
 
@@ -193,28 +210,15 @@ namespace HAIEngine
 		modelShader->Bind();
 		modelShader->UploadUniformMat4("u_ViewProjection", m_PerspectiveCamera->m_projection * m_PerspectiveCamera->m_view);
 		modelShader->UploadUniformMat4("u_Transform", glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f)));
-		// 1 pass
-		RenderCommand::EnableStencilTest();
-		RenderCommand::SetStencilFunc(RenderingSetting::EStencilFunc::ALWAYS, 1, 0xFF);
-
 		m_meshRenderer.Draw(modelShader);
 
-		auto modelColorShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("sampleColor"));
-		modelColorShader->Bind();
-		modelColorShader->UploadUniformMat4("u_ViewProjection", m_PerspectiveCamera->m_projection * m_PerspectiveCamera->m_view);
-		modelColorShader->UploadUniformMat4("u_Transform", glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f)));
-		// 2 pass
-		RenderCommand::SetStencilFunc(RenderingSetting::EStencilFunc::NOTEQUAL, 1, 0xFF);
-		RenderCommand::DisableStencilTest();
-		RenderCommand::DisableDepthTest();
+		RenderCommand::EnableBlend();
+		RenderCommand::SetBlendFunc(RenderingSetting::EBlendFunc::GL_SRC_ALPHA, RenderingSetting::EBlendFunc::GL_ONE_MINUS_SRC_ALPHA);
+		auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("sampleShader"));
+		sampleShader->Bind();
+		Renderer::Submit(sampleShader, m_testVA, glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(1.2f, 2.0f, 5.0f)), glm::vec3(1.0f)));
+		RenderCommand::DisableBlend();
 
-		m_meshRenderer.Draw(modelColorShader);
-
-		RenderCommand::SetStencilFunc(RenderingSetting::EStencilFunc::ALWAYS, 1, 0xFF);
-		RenderCommand::EnableStencilTest();
-		RenderCommand::EnableDepthTest();
-
-		Renderer::EndScene();
 		m_frameBuffer->UnBind();
 		}
 	}

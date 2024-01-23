@@ -21,6 +21,7 @@ namespace HAIEngine
 		void DisableDepthTest() override;
 
 		void EnableBlend() override;
+		void DisableBlend() override;
 		void SetBlendFunc(RenderingSetting::EBlendFunc sfactor, RenderingSetting::EBlendFunc dfactor) override;
 	};
 }

@@ -61,6 +61,7 @@ namespace HAIEngine
 		virtual void DisableDepthTest() = 0;
 
 		virtual void EnableBlend() = 0;
+		virtual void DisableBlend() = 0;
 		virtual void SetBlendFunc(RenderingSetting::EBlendFunc sfactor, RenderingSetting::EBlendFunc dfactor) = 0;
 
 		inline static API GetAPI() { return s_API; }
