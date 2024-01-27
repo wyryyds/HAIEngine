@@ -19,7 +19,12 @@ namespace HAIEngine {
 	class Texture2D : public Texture
 	{
 	public:
-		static std::shared_ptr<Texture2D> Create(std::string_view path);
+		static std::shared_ptr<Texture2D> Create(std::string path);
+	};
 
+	class Texture3D : public Texture
+	{
+	public:
+		static std::shared_ptr<Texture3D> Create(std::string rtPath, std::string ltPath, std::string ttPath, std::string btPath, std::string backtPath, std::string ftPath);
 	};
 }

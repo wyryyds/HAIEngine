@@ -116,18 +116,13 @@ namespace HAIEngine
 		m_frameBuffer = FrameBuffer::Create(1920.0f, 1080.0f);
 		// add texture
 		m_Texture = Texture2D::Create(ASSETSPATH"Textures/window.png");
-		// bind 1 ， 2 to avoid slot conflict
-		m_Texture->Bind(10);
 		m_specularTexture = Texture2D::Create(ASSETSPATH"Textures/container2_specular.png");
-		//m_specularTexture->Bind(1);
 
 		// add test shader
 		auto lightingShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("lighting", ASSETSPATH"Shaders/lighting.glsl"));
 		auto ModelShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("Model", ASSETSPATH"Shaders/Model.glsl"));
 		auto sampleColor = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("sampleColor", ASSETSPATH"Shaders/sampleColor.glsl"));
 		auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("sampleShader", ASSETSPATH"Shaders/sample.glsl"));
-		sampleShader->Bind();
-		sampleShader->UploadUniformInt("texturel", 10);
 		/*auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("phong", ASSETSPATH"Shaders/phong.glsl"));
 		sampleShader->Bind();
 		sampleShader->UploadUniformInt("material.diffuse", 2);
@@ -215,7 +210,9 @@ namespace HAIEngine
 		RenderCommand::EnableBlend();
 		RenderCommand::SetBlendFunc(RenderingSetting::EBlendFunc::GL_SRC_ALPHA, RenderingSetting::EBlendFunc::GL_ONE_MINUS_SRC_ALPHA);
 		auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("sampleShader"));
+		m_Texture->Bind(0);
 		sampleShader->Bind();
+		sampleShader->UploadUniformInt("texturel", 0);
 		Renderer::Submit(sampleShader, m_testVA, glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(1.2f, 2.0f, 5.0f)), glm::vec3(1.0f)));
 		RenderCommand::DisableBlend();
 
