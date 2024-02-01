@@ -169,7 +169,7 @@ namespace HAIEngine
 		m_specularTexture = Texture2D::Create(ASSETSPATH"Textures/container2_specular.png");
 		m_skybox = Texture3D::Create(ASSETSPATH"Textures/skybox/right.jpg", ASSETSPATH"Textures/skybox/left.jpg",
 			ASSETSPATH"Textures/skybox/top.jpg", ASSETSPATH"Textures/skybox/bottom.jpg",
-			ASSETSPATH"Textures/skybox/back.jpg", ASSETSPATH"Textures/skybox/front.jpg");
+			ASSETSPATH"Textures/skybox/front.jpg", ASSETSPATH"Textures/skybox/back.jpg");
 
 		// add test shader
 		m_ShaderLibrary.Load("lighting", ASSETSPATH"Shaders/lighting.glsl");
@@ -221,6 +221,17 @@ namespace HAIEngine
 		Renderer::BeginScene(m_PerspectiveCamera->m_projection * m_PerspectiveCamera->m_view);
 		//HAIEngine::Renderer::BeginScene(scene->m_mainCamera->GetViewProjection());
 
+		// skybox
+		RenderCommand::SetDepthFunc(RenderingSetting::EDepthFunc::LESS_EQUAL);
+		auto skyboxshader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("skybox"));
+		skyboxshader->Bind();
+		auto view = glm::mat4(glm::mat3(m_PerspectiveCamera->m_view));
+		skyboxshader->UploadUniformMat4("u_viewProjection", m_PerspectiveCamera->m_projection * view);
+		m_skybox->Bind(0);
+		skyboxshader->UploadUniformInt("skybox", 0);
+		Renderer::Submit(m_skyboxVA);
+		RenderCommand::SetDepthFunc(RenderingSetting::EDepthFunc::LESS);
+
 		// sample shader
 		auto lightingShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("lighting"));
 		lightingShader->Bind();
@@ -242,7 +253,7 @@ namespace HAIEngine
 		m_meshRenderer.Draw(modelShader);
 
 		RenderCommand::EnableBlend();
-		RenderCommand::SetBlendFunc(RenderingSetting::EBlendFunc::GL_SRC_ALPHA, RenderingSetting::EBlendFunc::GL_ONE_MINUS_SRC_ALPHA);
+		RenderCommand::SetBlendFunc(RenderingSetting::EBlendFunc::SRC_ALPHA, RenderingSetting::EBlendFunc::ONE_MINUS_SRC_ALPHA);
 		auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("sampleShader"));
 		m_Texture->Bind(0);
 		sampleShader->Bind();

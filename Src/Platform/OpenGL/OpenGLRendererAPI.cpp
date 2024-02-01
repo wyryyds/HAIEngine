@@ -8,8 +8,8 @@ namespace HAIEngine
 	void OpenGLRendererAPI::Init()
 	{
 		glEnable(GL_DEPTH_TEST);
-		//glEnable(GL_CULL_FACE);
-		//glDepthFunc(GL_LESS);
+		glEnable(GL_CULL_FACE);
+		glDepthFunc(GL_LESS);
 		//glEnable(GL_BLEND);
 		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		//glEnable(GL_STENCIL_TEST);
@@ -37,6 +37,7 @@ namespace HAIEngine
 		{
 			DrawIndirctByVertices(vertexArray);
 		}
+		glBindVertexArray(0);
 	}
 
 	void OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
@@ -75,6 +76,11 @@ namespace HAIEngine
 	void OpenGLRendererAPI::DisableDepthTest()
 	{
 		glDisable(GL_DEPTH_TEST);
+	}
+
+	void OpenGLRendererAPI::SetDepthFunc(RenderingSetting::EDepthFunc func)
+	{
+		glDepthFunc(static_cast<GLenum>(func));
 	}
 
 	void OpenGLRendererAPI::EnableBlend()

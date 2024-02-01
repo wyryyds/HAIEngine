@@ -58,7 +58,7 @@ namespace HAIEngine
 	{
 		int width, height, channels;
 		stbi_uc* data;
-		stbi_set_flip_vertically_on_load(1);
+		stbi_set_flip_vertically_on_load(0);
 
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_rendererID);
 		glBindTexture(GL_TEXTURE_2D, m_rendererID);

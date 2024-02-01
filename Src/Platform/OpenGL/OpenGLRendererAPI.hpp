@@ -19,6 +19,7 @@ namespace HAIEngine
 
 		void EnableDepthTest() override;
 		void DisableDepthTest() override;
+		void SetDepthFunc(RenderingSetting::EDepthFunc func) override;
 
 		void EnableBlend() override;
 		void DisableBlend() override;

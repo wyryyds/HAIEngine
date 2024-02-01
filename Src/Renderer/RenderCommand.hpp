@@ -62,6 +62,11 @@ namespace HAIEngine
 			s_rendererAPI->DisableDepthTest();
 		}
 
+		inline static void SetDepthFunc(RenderingSetting::EDepthFunc func)
+		{
+			s_rendererAPI->SetDepthFunc(func);
+		}
+
 		inline static void EnableBlend()
 		{
 			s_rendererAPI->EnableBlend();

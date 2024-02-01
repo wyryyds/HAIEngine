@@ -18,19 +18,31 @@ namespace HAIEngine::RenderingSetting
 		ALWAYS        = 0x0207
 	};
 
+	enum class EDepthFunc
+	{
+		NEVER = 0x0200,
+		LESS = 0x0201,
+		EQUAL = 0x0202,
+		LESS_EQUAL = 0x0203,
+		GREATER = 0x0204,
+		NOTEQUAL = 0x0205,
+		GREATER_EQUAL = 0x0206,
+		ALWAYS = 0x0207
+	};
+
 	enum class EBlendFunc
 	{
-		GL_ZERO                = 0,
-        GL_ONE                 = 1,
-        GL_SRC_COLOR           = 0x0300,
-        GL_ONE_MINUS_SRC_COLOR = 0x0301,
-        GL_SRC_ALPHA           = 0x0302,
-        GL_ONE_MINUS_SRC_ALPHA = 0x0303,
-        GL_DST_ALPHA           = 0x0304,
-        GL_ONE_MINUS_DST_ALPHA = 0x0305,
-        GL_DST_COLOR           = 0x0306,
-        GL_ONE_MINUS_DST_COLOR = 0x0307,
-        GL_SRC_ALPHA_SATURATE  = 0x0308
+		ZERO                = 0,
+        ONE                 = 1,
+        SRC_COLOR           = 0x0300,
+        ONE_MINUS_SRC_COLOR = 0x0301,
+        SRC_ALPHA           = 0x0302,
+        ONE_MINUS_SRC_ALPHA = 0x0303,
+        DST_ALPHA           = 0x0304,
+        ONE_MINUS_DST_ALPHA = 0x0305,
+        DST_COLOR           = 0x0306,
+        ONE_MINUS_DST_COLOR = 0x0307,
+        SRC_ALPHA_SATURATE  = 0x0308
 	};
 }
 
@@ -59,6 +71,7 @@ namespace HAIEngine
 
 		virtual void EnableDepthTest() = 0;
 		virtual void DisableDepthTest() = 0;
+		virtual void SetDepthFunc(RenderingSetting::EDepthFunc func) = 0;
 
 		virtual void EnableBlend() = 0;
 		virtual void DisableBlend() = 0;
