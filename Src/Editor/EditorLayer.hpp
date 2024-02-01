@@ -56,10 +56,11 @@ namespace HAIEngine
 		glm::vec3 lightPos{ 1.2f, 2.0f, 2.0f };
 		int m_Specuness = 64;
 
-		std::shared_ptr<VertexBuffer> m_SuareVB, m_LightVB, m_testVB;
-		std::shared_ptr<VertexArray> m_SquareVA, m_LightVA, m_testVA;
+		std::shared_ptr<VertexBuffer> m_SuareVB, m_LightVB, m_testVB, m_skyboxVB;
+		std::shared_ptr<VertexArray> m_SquareVA, m_LightVA, m_testVA, m_skyboxVA;
 
 		std::shared_ptr<Texture2D> m_Texture, m_specularTexture;
+		std::shared_ptr<Texture3D> m_skybox;
 
 		std::shared_ptr<FrameBuffer> m_frameBuffer;
 

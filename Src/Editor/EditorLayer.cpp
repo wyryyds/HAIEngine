@@ -113,44 +113,78 @@ namespace HAIEngine
 			});
 		m_testVA->AddVertexBuffer(m_testVB);
 
+		// skybox data
+		float skyboxVertices[] = {
+			// positions          
+			-1.0f,  1.0f, -1.0f,
+			-1.0f, -1.0f, -1.0f,
+			 1.0f, -1.0f, -1.0f,
+			 1.0f, -1.0f, -1.0f,
+			 1.0f,  1.0f, -1.0f,
+			-1.0f,  1.0f, -1.0f,
+
+			-1.0f, -1.0f,  1.0f,
+			-1.0f, -1.0f, -1.0f,
+			-1.0f,  1.0f, -1.0f,
+			-1.0f,  1.0f, -1.0f,
+			-1.0f,  1.0f,  1.0f,
+			-1.0f, -1.0f,  1.0f,
+
+			 1.0f, -1.0f, -1.0f,
+			 1.0f, -1.0f,  1.0f,
+			 1.0f,  1.0f,  1.0f,
+			 1.0f,  1.0f,  1.0f,
+			 1.0f,  1.0f, -1.0f,
+			 1.0f, -1.0f, -1.0f,
+
+			-1.0f, -1.0f,  1.0f,
+			-1.0f,  1.0f,  1.0f,
+			 1.0f,  1.0f,  1.0f,
+			 1.0f,  1.0f,  1.0f,
+			 1.0f, -1.0f,  1.0f,
+			-1.0f, -1.0f,  1.0f,
+
+			-1.0f,  1.0f, -1.0f,
+			 1.0f,  1.0f, -1.0f,
+			 1.0f,  1.0f,  1.0f,
+			 1.0f,  1.0f,  1.0f,
+			-1.0f,  1.0f,  1.0f,
+			-1.0f,  1.0f, -1.0f,
+
+			-1.0f, -1.0f, -1.0f,
+			-1.0f, -1.0f,  1.0f,
+			 1.0f, -1.0f, -1.0f,
+			 1.0f, -1.0f, -1.0f,
+			-1.0f, -1.0f,  1.0f,
+			 1.0f, -1.0f,  1.0f
+		};
+		m_skyboxVA.reset(VertexArray::Create());
+		m_skyboxVB.reset(VertexBuffer::Create(skyboxVertices, sizeof(skyboxVertices)));
+		m_skyboxVB->SetLayout({ {ShaderDataType::Float3, "a_position" } });
+		m_skyboxVA->AddVertexBuffer(m_skyboxVB);
+
 		m_frameBuffer = FrameBuffer::Create(1920.0f, 1080.0f);
 		// add texture
 		m_Texture = Texture2D::Create(ASSETSPATH"Textures/window.png");
 		m_specularTexture = Texture2D::Create(ASSETSPATH"Textures/container2_specular.png");
+		m_skybox = Texture3D::Create(ASSETSPATH"Textures/skybox/right.jpg", ASSETSPATH"Textures/skybox/left.jpg",
+			ASSETSPATH"Textures/skybox/top.jpg", ASSETSPATH"Textures/skybox/bottom.jpg",
+			ASSETSPATH"Textures/skybox/back.jpg", ASSETSPATH"Textures/skybox/front.jpg");
 
 		// add test shader
-		auto lightingShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("lighting", ASSETSPATH"Shaders/lighting.glsl"));
-		auto ModelShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("Model", ASSETSPATH"Shaders/Model.glsl"));
-		auto sampleColor = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("sampleColor", ASSETSPATH"Shaders/sampleColor.glsl"));
-		auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("sampleShader", ASSETSPATH"Shaders/sample.glsl"));
-		/*auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Load("phong", ASSETSPATH"Shaders/phong.glsl"));
-		sampleShader->Bind();
-		sampleShader->UploadUniformInt("material.diffuse", 2);
-		sampleShader->UploadUniformInt("material.specular", 1);*/
-		// JobSystem::Initialize();
+		m_ShaderLibrary.Load("lighting", ASSETSPATH"Shaders/lighting.glsl");
+		m_ShaderLibrary.Load("Model", ASSETSPATH"Shaders/Model.glsl");
+		m_ShaderLibrary.Load("sampleColor", ASSETSPATH"Shaders/sampleColor.glsl");
+		m_ShaderLibrary.Load("sampleShader", ASSETSPATH"Shaders/sample.glsl");
+		m_ShaderLibrary.Load("skybox", ASSETSPATH"Shaders/skybox.glsl");
 		
 		const char* model1Str = ASSETSPATH"/Models/nanosuit/nanosuit.obj";
-
 		m_meshFilter.SetMesh(std::make_shared<Mesh>(model1Str));
+
 		m_meshRenderer.m_meshFilter = std::make_unique<MeshFilter>(m_meshFilter);
 
 		scene = std::make_shared<Scene>(ASSETSPATH"Jsons/data.json");
-
-		/*std::shared_ptr<HAIEngine::GameObject> testGO1 = std::make_shared<HAIEngine::GameObject>("TestGO1");
-
-		std::shared_ptr<HAIEngine::GameObject> testGO2 = std::make_shared<HAIEngine::GameObject>("TestGO2");
-
-		HAIEngine::Camera* testCamera = new HAIEngine::Camera(HAIEngine::CameraType::PERSPECTIVE,
-			1920.0f / 1080.0f, 60.0f, 0.1f, 60.0f);
-		testGO1->AddComponent(testCamera);
-
-		scene->SetMainCamera(testCamera);
-		scene->AddGameObject(testGO1);
-		scene->AddGameObject(testGO2);*/
-
 		scene->Load();
-
-		scene->Save();
 
 		m_panel.SetContexts(scene);
 	}
