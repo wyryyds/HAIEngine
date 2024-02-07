@@ -13,7 +13,7 @@ namespace HAIEngine
 	{
 		int width, height, channels;
 		stbi_set_flip_vertically_on_load(1);
-		stbi_uc* data = stbi_load(path.data(), &width, &height, &channels, 0);
+		stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
 		HE_CORE_ASSERT(data, "Faild To Load Image!");
 		m_width = width;
 		m_height = height;

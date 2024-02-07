@@ -27,6 +27,11 @@ namespace HAIEngine
 			s_rendererAPI->Draw(vertexArray);
 		}
 
+		inline static void DrawInstanced(const std::shared_ptr<VertexArray>& vertexArray, unsigned int count)
+		{
+			
+		}
+
 		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
 		{
 			s_rendererAPI->DrawIndexed(vertexArray);
@@ -80,6 +85,11 @@ namespace HAIEngine
 		inline static void SetBlendFunc(RenderingSetting::EBlendFunc sfactor, RenderingSetting::EBlendFunc dfactor)
 		{
 			s_rendererAPI->SetBlendFunc(sfactor, dfactor);
+		}
+
+		inline static void BlitFrameBuffer(std::shared_ptr<FrameBuffer> sFrameBuffer, std::shared_ptr<FrameBuffer> tFrameBuffer)
+		{
+			s_rendererAPI->BlitFrameBuffer(sFrameBuffer, tFrameBuffer);
 		}
 
 	private:

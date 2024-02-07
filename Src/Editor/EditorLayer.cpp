@@ -13,6 +13,7 @@
 #include <bitset>
 
 #include "Core/JobSystem.hpp"
+#include "FileSystem/AssetsPipeline.hpp"
 
 namespace HAIEngine
 {
@@ -163,7 +164,10 @@ namespace HAIEngine
 		m_skyboxVB->SetLayout({ {ShaderDataType::Float3, "a_position" } });
 		m_skyboxVA->AddVertexBuffer(m_skyboxVB);
 
-		m_frameBuffer = FrameBuffer::Create(1920.0f, 1080.0f);
+		m_MSAAFrameBuffer = FrameBuffer::CreateMSAAFrameBuffer(1920.0f, 1080.0f);
+		m_screenFrameBuffer = FrameBuffer::Create(1920.0f, 1080.0f);
+
+		AssetsPipeline::LoadAllTextures();
 		// add texture
 		m_Texture = Texture2D::Create(ASSETSPATH"Textures/window.png");
 		m_specularTexture = Texture2D::Create(ASSETSPATH"Textures/container2_specular.png");
@@ -212,9 +216,9 @@ namespace HAIEngine
 		{
 			scene->m_gameObjects[i]->Update(ts);
 		}
-		{
+
 		// rendering
-		m_frameBuffer->Bind();
+		m_MSAAFrameBuffer->Bind();
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		RenderCommand::Clear();
 
@@ -261,8 +265,8 @@ namespace HAIEngine
 		Renderer::Submit(sampleShader, m_testVA, glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(1.2f, 2.0f, 5.0f)), glm::vec3(1.0f)));
 		RenderCommand::DisableBlend();
 
-		m_frameBuffer->UnBind();
-		}
+		RenderCommand::BlitFrameBuffer(m_MSAAFrameBuffer, m_screenFrameBuffer);
+		m_MSAAFrameBuffer->UnBind();
 	}
 
 	void EditorLayer::OnImGuiRender()
@@ -323,10 +327,11 @@ namespace HAIEngine
 		ImVec2 viewportSize = ImGui::GetContentRegionAvail();
 		if (m_viewportSize != *((glm::vec2*)&viewportSize))
 		{
-			m_frameBuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
+			//m_MSAAFrameBuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
+			m_screenFrameBuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
 			m_viewportSize = { viewportSize.x, viewportSize.y };
 		}
-		uint32_t textureID = std::dynamic_pointer_cast<OpenGLFrameBuffer>(m_frameBuffer)->GetTextureID();
+		uint32_t textureID = std::dynamic_pointer_cast<OpenGLFrameBuffer>(m_screenFrameBuffer)->GetTextureID();
 		ImGui::Image(reinterpret_cast<void*>(static_cast<uintptr_t>(textureID)), ImVec2{ m_viewportSize.x, m_viewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
 		ImGui::End();

@@ -48,6 +48,8 @@ namespace HAIEngine::RenderingSetting
 
 namespace HAIEngine 
 {
+	class FrameBuffer;
+
 	class RendererAPI 
 	{
 	public:
@@ -56,7 +58,7 @@ namespace HAIEngine
 			None = 0,
 			OpenGL = 1,
 		};
-
+		
 	public:
 		virtual void Init() = 0;
 		virtual void SetClearColor(const glm::vec4& color) = 0;
@@ -64,6 +66,9 @@ namespace HAIEngine
 		virtual void Draw(const std::shared_ptr<VertexArray>& vertexArray) = 0;
 		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) = 0;
 		virtual void DrawIndirctByVertices(const std::shared_ptr<VertexArray>& vertexArray) = 0;
+
+		virtual void DrawInstanced(const std::shared_ptr<VertexArray>& vertexArray, unsigned int count) = 0;
+
 
 		virtual void EnableStencilTest() = 0;
 		virtual void DisableStencilTest() = 0;
@@ -76,6 +81,8 @@ namespace HAIEngine
 		virtual void EnableBlend() = 0;
 		virtual void DisableBlend() = 0;
 		virtual void SetBlendFunc(RenderingSetting::EBlendFunc sfactor, RenderingSetting::EBlendFunc dfactor) = 0;
+
+		virtual void BlitFrameBuffer(std::shared_ptr<FrameBuffer> sFrameBuffer, std::shared_ptr<FrameBuffer> tFrameBuffer) = 0;
 
 		inline static API GetAPI() { return s_API; }
 

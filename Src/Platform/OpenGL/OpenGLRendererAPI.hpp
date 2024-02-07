@@ -13,6 +13,8 @@ namespace HAIEngine
 		void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) override;
 		void DrawIndirctByVertices(const std::shared_ptr<VertexArray>& vertexArray) override;
 
+		void DrawInstanced(const std::shared_ptr<VertexArray>& vertexArray, uint32_t count) override;
+
 		void EnableStencilTest() override;
 		void DisableStencilTest() override;
 		void SetStencilFunc(RenderingSetting::EStencilFunc func, int32_t ref, uint32_t mask) override;
@@ -24,5 +26,7 @@ namespace HAIEngine
 		void EnableBlend() override;
 		void DisableBlend() override;
 		void SetBlendFunc(RenderingSetting::EBlendFunc sfactor, RenderingSetting::EBlendFunc dfactor) override;
+
+		void BlitFrameBuffer(std::shared_ptr<FrameBuffer> sFrameBuffer, std::shared_ptr<FrameBuffer> tFrameBuffer);
 	};
 }

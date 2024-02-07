@@ -62,7 +62,7 @@ namespace HAIEngine
 		std::shared_ptr<Texture2D> m_Texture, m_specularTexture;
 		std::shared_ptr<Texture3D> m_skybox;
 
-		std::shared_ptr<FrameBuffer> m_frameBuffer;
+		std::shared_ptr<FrameBuffer> m_MSAAFrameBuffer, m_screenFrameBuffer;
 
 		float lastMouseX, lastMouseY;
 		bool IsReControlMouse = false;

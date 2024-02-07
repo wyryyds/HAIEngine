@@ -1,5 +1,6 @@
 #include "OpenGLRendererAPI.hpp"
 #include "hepch.hpp"
+#include "OpenGLFrameBuffer.hpp"
 
 #include <glad/glad.h>
 
@@ -47,10 +48,19 @@ namespace HAIEngine
 
 	void OpenGLRendererAPI::DrawIndirctByVertices(const std::shared_ptr<VertexArray>& vertexArray)
 	{
-		unsigned int count = 0;
-		for (unsigned int i = 0; i < vertexArray->GetVertexBuffers().size(); ++i)
-			count += vertexArray->GetVertexBuffers()[i]->GetSize();
-		glDrawArrays(GL_TRIANGLES, 0, count);
+		uint32_t size = 0;
+		for (uint32_t i = 0; i < vertexArray->GetVertexBuffers().size(); ++i)
+			size += vertexArray->GetVertexBuffers()[i]->GetSize();
+		glDrawArrays(GL_TRIANGLES, 0, size);
+	}
+
+	void OpenGLRendererAPI::DrawInstanced(const std::shared_ptr<VertexArray>& vertexArray, uint32_t count)
+	{
+		uint32_t size = 0;
+		for (uint32_t i = 0; i < vertexArray->GetVertexBuffers().size(); ++i)
+			size += vertexArray->GetVertexBuffers()[i]->GetSize();
+		// TODO
+		glDrawArraysInstanced(GL_TRIANGLES, 0, size, count);
 	}
 
 	void OpenGLRendererAPI::EnableStencilTest()
@@ -96,6 +106,20 @@ namespace HAIEngine
 	void OpenGLRendererAPI::SetBlendFunc(RenderingSetting::EBlendFunc sfactor, RenderingSetting::EBlendFunc dfactor)
 	{
 		glBlendFunc(static_cast<GLenum>(sfactor), static_cast<GLenum>(dfactor));
+	}
+
+	void OpenGLRendererAPI::BlitFrameBuffer(std::shared_ptr<FrameBuffer> sFrameBuffer, std::shared_ptr<FrameBuffer> tFrameBuffer)
+	{
+		uint32_t sourceID = std::dynamic_pointer_cast<OpenGLMSAAFramebuffer>(sFrameBuffer)->GetRenderID();
+		uint32_t targetID = std::dynamic_pointer_cast<OpenGLFrameBuffer>(tFrameBuffer)->GetRenderID();
+		auto [width, height] = std::dynamic_pointer_cast<OpenGLMSAAFramebuffer>(sFrameBuffer)->GetSize();
+
+		glBindFramebuffer(GL_READ_FRAMEBUFFER, sourceID);
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, targetID);
+		glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		
 	}
 
 }
