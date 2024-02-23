@@ -28,7 +28,7 @@ namespace HAIEngine
     {
         if (m_cameraType == CameraType::PERSPECTIVE)
         {
-            auto& transform = this->GetTransform();
+            auto transform = this->GetTransform();
             m_position = transform.GetPosition();
             m_Front = transform.GetFront();
             m_Up = transform.GetUp();

@@ -79,9 +79,9 @@ namespace HAIEngine
 		m_SuareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		m_SuareVB->SetLayout(
 			{
-				{ ShaderDataType::Float3, "a_Position" },
-				{ ShaderDataType::Float3, "aNormal" },
-				{ ShaderDataType::Float2, "aTexCoords"}
+				{ ShaderDataType::Float3, "a_position" },
+				{ ShaderDataType::Float3, "a_normal" },
+				{ ShaderDataType::Float2, "a_texCoords"}
 			});
 		m_SquareVA->AddVertexBuffer(m_SuareVB);
 
@@ -89,28 +89,29 @@ namespace HAIEngine
 		m_LightVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		m_LightVB->SetLayout(
 			{
-				{ ShaderDataType::Float3, "a_Position" },
-				{ ShaderDataType::Float3, "aNormal"},
-				{ ShaderDataType::Float2, "aTexCoords"}
+				{ ShaderDataType::Float3, "a_position" },
+				{ ShaderDataType::Float3, "a_normal"},
+				{ ShaderDataType::Float2, "a_texCoords"}
 			});
 		m_LightVA->AddVertexBuffer(m_LightVB);
 
-		float transparentVertices[] = {
-			// positions         // texture Coords (swapped y coordinates because texture is flipped upside down)
-			0.0f,  0.5f,  0.0f,  0.0f,  0.0f,
-			0.0f, -0.5f,  0.0f,  0.0f,  1.0f,
-			1.0f, -0.5f,  0.0f,  1.0f,  1.0f,
+		float testVertices[] = {
+			// positions            // normals         // texcoords
+		25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
+	   -25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,   0.0f,  0.0f,
+	   -25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,   0.0f, 25.0f,
 
-			0.0f,  0.5f,  0.0f,  0.0f,  0.0f,
-			1.0f, -0.5f,  0.0f,  1.0f,  1.0f,
-			1.0f,  0.5f,  0.0f,  1.0f,  0.0f
+		25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
+	   -25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,   0.0f, 25.0f,
+		25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,  25.0f, 25.0f
 		};
 		m_testVA.reset(VertexArray::Create());
-		m_testVB.reset(VertexBuffer::Create(transparentVertices, sizeof(transparentVertices)));
+		m_testVB.reset(VertexBuffer::Create(testVertices, sizeof(testVertices)));
 		m_testVB->SetLayout(
 			{
-				{ ShaderDataType::Float3, "a_Position" },
-				{ ShaderDataType::Float2, "aTexCoords"}
+				{ ShaderDataType::Float3, "a_position" },
+				{ ShaderDataType::Float3, "a_normal"},
+				{ ShaderDataType::Float2, "a_texCoords"}
 			});
 		m_testVA->AddVertexBuffer(m_testVB);
 
@@ -166,6 +167,7 @@ namespace HAIEngine
 
 		m_MSAAFrameBuffer = FrameBuffer::CreateMSAAFrameBuffer(1920.0f, 1080.0f);
 		m_screenFrameBuffer = FrameBuffer::Create(1920.0f, 1080.0f);
+		m_depthMap = FrameBuffer::CreateDepthMap();
 
 		AssetsPipeline::LoadAllTextures();
 		// add texture
@@ -176,11 +178,13 @@ namespace HAIEngine
 			ASSETSPATH"Textures/skybox/front.jpg", ASSETSPATH"Textures/skybox/back.jpg");
 
 		// add test shader
-		m_ShaderLibrary.Load("lighting", ASSETSPATH"Shaders/lighting.glsl");
-		m_ShaderLibrary.Load("Model", ASSETSPATH"Shaders/Model.glsl");
-		m_ShaderLibrary.Load("sampleColor", ASSETSPATH"Shaders/sampleColor.glsl");
-		m_ShaderLibrary.Load("sampleShader", ASSETSPATH"Shaders/sample.glsl");
-		m_ShaderLibrary.Load("skybox", ASSETSPATH"Shaders/skybox.glsl");
+		m_ShaderLibrary.Load("lighting", SHADERPATH"lighting.glsl");
+		m_ShaderLibrary.Load("Model", SHADERPATH"Model.glsl");
+		m_ShaderLibrary.Load("sampleColor", SHADERPATH"sampleColor.glsl");
+		m_ShaderLibrary.Load("sampleShader", SHADERPATH"sample.glsl");
+		m_ShaderLibrary.Load("skybox", SHADERPATH"skybox.glsl");
+		m_ShaderLibrary.Load("shadowMapCaster", SHADERPATH"shadowMapCaster.glsl");
+		m_ShaderLibrary.Load("standard", SHADERPATH"standard.glsl");
 		
 		const char* model1Str = ASSETSPATH"/Models/nanosuit/nanosuit.obj";
 		m_meshFilter.SetMesh(std::make_shared<Mesh>(model1Str));
@@ -218,6 +222,28 @@ namespace HAIEngine
 		}
 
 		// rendering
+		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+		RenderCommand::Clear();
+
+		// render shadowmap
+		// test data
+		glm::mat4 lightProjection, lightView;
+		glm::mat4 lightSpaceMatrix;
+		float near_plane = -100.0f, far_plane = 7.5f;
+		lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
+		lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
+		lightSpaceMatrix = lightProjection * lightView;
+
+		auto shadowMapShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("shadowMapCaster"));
+		shadowMapShader->Bind();
+		shadowMapShader->UploadUniformMat4("u_lightSpaceMatrix", lightSpaceMatrix);
+
+		m_depthMap->Bind();
+		RenderCommand::Clear();
+		Renderer::GenerateShadow(shadowMapShader, m_testVA, glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(1.2f, 2.0f, 5.0f)), glm::vec3(1.0f)));
+		m_meshRenderer.Draw(shadowMapShader);
+		m_depthMap->UnBind();
+
 		m_MSAAFrameBuffer->Bind();
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		RenderCommand::Clear();
@@ -319,15 +345,11 @@ namespace HAIEngine
 		m_panel.OnImguiRender();
 
 		ImGui::Begin("Scene");
-		/*ImGui::ColorEdit3("Light Color", glm::value_ptr(m_LightCorlor));
-		ImGui::ColorEdit3("Cube Color", glm::value_ptr(m_CubeColor));
-		ImGui::InputInt("Specular ness", &m_Specuness);
-		ImGui::InputFloat3("Light Position", glm::value_ptr(lightPos));*/
 
 		ImVec2 viewportSize = ImGui::GetContentRegionAvail();
 		if (m_viewportSize != *((glm::vec2*)&viewportSize))
 		{
-			//m_MSAAFrameBuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
+			m_MSAAFrameBuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
 			m_screenFrameBuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
 			m_viewportSize = { viewportSize.x, viewportSize.y };
 		}

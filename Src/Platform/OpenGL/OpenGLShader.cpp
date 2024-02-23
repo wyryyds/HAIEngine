@@ -180,8 +180,7 @@ namespace HAIEngine
 		{
 			GLint maxLength = 0;
 			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
-
-			std::vector<GLchar> infoLog(maxLength);
+			std::vector<GLchar> infoLog(maxLength > 0 ? maxLength : 512);
 			glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
 
 			glDeleteProgram(program);

@@ -64,7 +64,8 @@ namespace HAIEngine
 		UnBind();
 	}
 
-	// TODO Test
+	// MSAA framebuffer
+	// TODO merge
 	OpenGLMSAAFramebuffer::OpenGLMSAAFramebuffer(uint32_t width, uint32_t height)
 	{
 		/* Generate OpenGL objects */
@@ -74,7 +75,7 @@ namespace HAIEngine
 
 		/* Setup texture */
 		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, m_colorSampledAttachnet);
-		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGB, m_width, m_height, GL_TRUE);
+		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, m_samples, GL_RGB, m_width, m_height, GL_TRUE);
 		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
 
 		/* Setup framebuffer */
@@ -107,19 +108,74 @@ namespace HAIEngine
 	{
 		m_width = width;
 		m_height = height;
-		/* Resize texture */
+
+		glDeleteTextures(1, &m_colorSampledAttachnet);
+
+		glGenTextures(1, &m_colorSampledAttachnet);
 		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, m_colorSampledAttachnet);
-		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGB, m_width, m_height, GL_TRUE);
+		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, m_samples, GL_RGB, m_width, m_height, GL_TRUE);
 		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+
+		Bind();
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, m_colorSampledAttachnet, 0);
+		UnBind();
+		///* Resize texture */
+		//glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, m_colorSampledAttachnet);
+		//glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, m_samples, GL_RGB, m_width, m_height, GL_TRUE);
+		//glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
 
 		/* Setup depth-stencil buffer (24 + 8 bits) */
 		glBindRenderbuffer(GL_RENDERBUFFER, m_depthStencilBuffer);
-		glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, m_width, m_height);
+		glRenderbufferStorageMultisample(GL_RENDERBUFFER, m_samples, GL_DEPTH24_STENCIL8, m_width, m_height);
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
 		/* Attach depth and stencil buffer to the framebuffer */
 		Bind();
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_depthStencilBuffer);
 		UnBind();
+
 	}
+
+	// depthmap
+	OpenGLDepthMap::OpenGLDepthMap()
+	{
+		glGenFramebuffers(1, &m_rendererID);
+		glGenTextures(1, &m_depthBuffer);
+
+		glBindTexture(GL_TEXTURE_2D, m_depthBuffer);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
+			m_width, m_height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+		Bind();
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_depthBuffer, 0);
+		glDrawBuffer(GL_NONE);
+		glReadBuffer(GL_NONE);
+		UnBind();
+	}
+
+	OpenGLDepthMap::~OpenGLDepthMap()
+	{
+		glDeleteFramebuffers(1, &m_rendererID);
+		glDeleteTextures(1, &m_depthBuffer);
+	}
+
+	void OpenGLDepthMap::Bind()
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, m_rendererID);
+		glViewport(0, 0, m_width, m_height);
+	}
+
+	void OpenGLDepthMap::UnBind()
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
+
+	void OpenGLDepthMap::Resize(uint32_t width, uint32_t height)
+	{
+	}
+
 }

@@ -12,5 +12,7 @@ namespace HAIEngine
 
 		static std::shared_ptr<FrameBuffer> Create(uint32_t width, uint32_t height);
 		static std::shared_ptr<FrameBuffer> CreateMSAAFrameBuffer(uint32_t width, uint32_t height);
+
+		static std::shared_ptr<FrameBuffer> CreateDepthMap();
 	};
 }

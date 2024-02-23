@@ -32,10 +32,10 @@ namespace HAIEngine
 	{
 		shader->Bind();
 
-		auto m_OpenGLShader = std::dynamic_pointer_cast<OpenGLShader>(shader);
+		auto openGLShader = std::dynamic_pointer_cast<OpenGLShader>(shader);
 
-		m_OpenGLShader->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
-		m_OpenGLShader->UploadUniformMat4("u_Transform", transform);
+		openGLShader->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
+		openGLShader->UploadUniformMat4("u_Transform", transform);
 
 		vertexArray->Bind();
 
@@ -44,6 +44,15 @@ namespace HAIEngine
 
 	void Renderer::Submit(const std::shared_ptr<VertexArray>& vertexArray)
 	{
+		vertexArray->Bind();
+		RenderCommand::Draw(vertexArray);
+	}
+
+	void Renderer::GenerateShadow(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
+	{
+		shader->Bind();
+		auto openGLShader = std::dynamic_pointer_cast<OpenGLShader>(shader);
+		openGLShader->UploadUniformMat4("u_transform", transform);
 		vertexArray->Bind();
 		RenderCommand::Draw(vertexArray);
 	}
