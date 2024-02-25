@@ -5,6 +5,7 @@ namespace HAIEngine
 {
 	class MeshFilter;
 	class OpenGLShader;
+	class FrameBuffer;
 
 	class MeshRenderer : public Component
 	{
@@ -12,7 +13,7 @@ namespace HAIEngine
 		MeshRenderer() : Component("MeshRenderer") {}
 		~MeshRenderer() = default;
 
-		void Draw(std::shared_ptr<OpenGLShader> shader);
+		void Draw(std::shared_ptr<OpenGLShader> shader, std::shared_ptr<FrameBuffer> depthMap);
 
 		virtual json Serialize() override;
 		virtual void DeSerialize(const json& jsonData) override;

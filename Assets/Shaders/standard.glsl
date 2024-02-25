@@ -46,17 +46,36 @@ uniform vec3 u_viewPos;
 
 float ShadowCalculation(vec4 fragPosLightSpace)
 {
-    // 执行透视除法
     vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
-    // 变换到[0,1]的范围
+    // Transform to [0,1] range
     projCoords = projCoords * 0.5 + 0.5;
-    // 取得最近点的深度(使用[0,1]范围下的fragPosLight当坐标)
+    // Get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
     float closestDepth = texture(u_shadowMap, projCoords.xy).r; 
-    // 取得当前片段在光源视角下的深度
+    // Get depth of current fragment from light's perspective
     float currentDepth = projCoords.z;
-    // 检查当前片段是否在阴影中
-    float shadow = currentDepth > closestDepth  ? 1.0 : 0.0;
-
+    // Calculate bias (based on depth map resolution and slope)
+    vec3 normal = normalize(fs_in.normal);
+    vec3 lightDir = normalize(u_lightPos - fs_in.fragPos);
+    float bias = 0.001;
+    // Check whether current frag pos is in shadow
+    // float shadow = currentDepth - bias > closestDepth  ? 1.0 : 0.0;
+    // PCF
+    float shadow = 0.0;
+    vec2 texelSize = 1.0 / textureSize(u_shadowMap, 0);
+    for(int x = -1; x <= 1; ++x)
+    {
+        for(int y = -1; y <= 1; ++y)
+        {
+            float pcfDepth = texture(u_shadowMap, projCoords.xy + vec2(x, y) * texelSize).r; 
+            shadow += currentDepth - bias > pcfDepth  ? 1.0 : 0.0;        
+        }    
+    }
+    shadow /= 9.0;
+    
+    // Keep the shadow at 0.0 when outside the far_plane region of the light's frustum.
+    if(projCoords.z > 1.0)
+        shadow = 0.0;
+        
     return shadow;
 }
 
@@ -64,11 +83,11 @@ void main()
 {
     vec3 color = texture(u_diffuseTexture, fs_in.texCoords).rgb;
     vec3 normal = normalize(fs_in.normal);
-    vec3 lightColor = vec3(1.0);
+    vec3 lightColor = vec3(0.3);
     // Ambient
-    vec3 ambient = 0.15 * color;
+    vec3 ambient = 0.3 * color;
     // Diffuse
-    vec3 lightDir = normalize(u_lightPos - fs_in.fragPos);
+    vec3 lightDir = normalize(u_lightPos);
     float diff = max(dot(lightDir, normal), 0.0);
     vec3 diffuse = diff * lightColor;
     // Specular

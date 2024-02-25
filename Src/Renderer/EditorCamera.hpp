@@ -62,7 +62,7 @@ namespace HAIEngine
             return camera;
         }
 
-        inline glm::vec3 GetCameraPosition(){ return m_position; }
+        inline glm::vec3 GetCameraPosition() const { return m_position; }
 
         void move(Direction direction, bool flag) { m_directions[direction] = flag; }
 

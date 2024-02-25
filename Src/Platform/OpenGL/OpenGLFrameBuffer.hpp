@@ -58,6 +58,7 @@ namespace HAIEngine
 		inline const uint32_t GetRenderID() const { return m_rendererID; }
 		inline const uint32_t GetTextureID() const { return m_depthBuffer; }
 		inline const std::pair<uint32_t, uint32_t> GetSize() const { return std::make_pair(m_width, m_height); }
+		void UseDepthMap(uint32_t slot);
 
 	private:
 		const uint32_t m_width = 1024, m_height = 1024;

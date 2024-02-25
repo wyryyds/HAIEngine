@@ -172,7 +172,7 @@ namespace HAIEngine
 		AssetsPipeline::LoadAllTextures();
 		// add texture
 		m_Texture = Texture2D::Create(ASSETSPATH"Textures/window.png");
-		m_specularTexture = Texture2D::Create(ASSETSPATH"Textures/container2_specular.png");
+		m_specularTexture = Texture2D::Create(ASSETSPATH"Textures/container2.png");
 		m_skybox = Texture3D::Create(ASSETSPATH"Textures/skybox/right.jpg", ASSETSPATH"Textures/skybox/left.jpg",
 			ASSETSPATH"Textures/skybox/top.jpg", ASSETSPATH"Textures/skybox/bottom.jpg",
 			ASSETSPATH"Textures/skybox/front.jpg", ASSETSPATH"Textures/skybox/back.jpg");
@@ -229,9 +229,9 @@ namespace HAIEngine
 		// test data
 		glm::mat4 lightProjection, lightView;
 		glm::mat4 lightSpaceMatrix;
-		float near_plane = -100.0f, far_plane = 7.5f;
-		lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
-		lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
+		float near_plane = -200.0f, far_plane = 200.0f;
+		lightProjection = glm::ortho(-20.0f, 20.0f, -20.0f, 20.0f, near_plane, far_plane);
+		lightView = glm::lookAt(glm::vec3(-2.0f, 4.0f, 5.0f), glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
 		lightSpaceMatrix = lightProjection * lightView;
 
 		auto shadowMapShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("shadowMapCaster"));
@@ -240,17 +240,18 @@ namespace HAIEngine
 
 		m_depthMap->Bind();
 		RenderCommand::Clear();
-		Renderer::GenerateShadow(shadowMapShader, m_testVA, glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(1.2f, 2.0f, 5.0f)), glm::vec3(1.0f)));
-		m_meshRenderer.Draw(shadowMapShader);
+		Renderer::GenerateShadow(shadowMapShader, m_LightVA, glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 0.0f, 2.0f)), glm::vec3(1.0f)));
+		Renderer::GenerateShadow(shadowMapShader, m_testVA, glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(1.2f, 0.0f, 5.0f)), glm::vec3(1.0f)));
+		shadowMapShader->Bind();
+		shadowMapShader->UploadUniformMat4("u_transform", glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, -0.5f, 1.0f)));
+		m_meshRenderer.Draw(shadowMapShader, m_depthMap);
 		m_depthMap->UnBind();
-
+		// msaa framebuffer
 		m_MSAAFrameBuffer->Bind();
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		RenderCommand::Clear();
 
 		Renderer::BeginScene(m_PerspectiveCamera->m_projection * m_PerspectiveCamera->m_view);
-		//HAIEngine::Renderer::BeginScene(scene->m_mainCamera->GetViewProjection());
-
 		// skybox
 		RenderCommand::SetDepthFunc(RenderingSetting::EDepthFunc::LESS_EQUAL);
 		auto skyboxshader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("skybox"));
@@ -262,34 +263,27 @@ namespace HAIEngine
 		Renderer::Submit(m_skyboxVA);
 		RenderCommand::SetDepthFunc(RenderingSetting::EDepthFunc::LESS);
 
-		// sample shader
-		auto lightingShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("lighting"));
-		lightingShader->Bind();
-		lightingShader->UploadUniformFloat3("lightColor", m_LightCorlor);
-		Renderer::Submit(lightingShader, m_LightVA, glm::scale(glm::translate(glm::mat4(1.0f), lightPos), glm::vec3(0.2f)));
-		/*auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("phong"));
-		sampleShader->Bind();
-		sampleShader->UploadUniformFloat("material.shininess", m_Specuness);
-		sampleShader->UploadUniformFloat3("light.position", lightPos);
-		sampleShader->UploadUniformFloat3("viewPos", m_CameraController->GetCameraPosition());
-		sampleShader->UploadUniformFloat3("light.ambient", glm::vec3{ 0.2f, 0.2f, 0.2f });
-		sampleShader->UploadUniformFloat3("light.specular", m_LightCorlor);
-		sampleShader->UploadUniformFloat3("light.diffuse", m_LightCorlor * 0.5f);*/
+		// light
+		auto standardShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("standard"));
+		standardShader->Bind();
+		standardShader->UploadUniformMat4("u_lightSpaceMatrix", lightSpaceMatrix);
+		m_specularTexture->Bind(0);
+		standardShader->UploadUniformInt("u_diffuseTexture", 0);
+		std::dynamic_pointer_cast<OpenGLDepthMap>(m_depthMap)->UseDepthMap(1);
+		standardShader->UploadUniformInt("u_shadowMap", 1);
+		standardShader->UploadUniformFloat3("u_lightPos", glm::vec3(-2.0f, 4.0f, 5.0f));
+		standardShader->UploadUniformFloat3("u_viewPos", m_CameraController->GetCameraPosition());
+		Renderer::Submit(standardShader, m_LightVA, glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 0.0f, 2.0f)), glm::vec3(1.0f)));
+		Renderer::Submit(standardShader, m_testVA, glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(1.2f, 0.0f, 5.0f)), glm::vec3(1.0f)));
 
 		auto modelShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("Model"));
 		modelShader->Bind();
-		modelShader->UploadUniformMat4("u_ViewProjection", m_PerspectiveCamera->m_projection * m_PerspectiveCamera->m_view);
-		modelShader->UploadUniformMat4("u_Transform", glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f)));
-		m_meshRenderer.Draw(modelShader);
-
-		RenderCommand::EnableBlend();
-		RenderCommand::SetBlendFunc(RenderingSetting::EBlendFunc::SRC_ALPHA, RenderingSetting::EBlendFunc::ONE_MINUS_SRC_ALPHA);
-		auto sampleShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("sampleShader"));
-		m_Texture->Bind(0);
-		sampleShader->Bind();
-		sampleShader->UploadUniformInt("texturel", 0);
-		Renderer::Submit(sampleShader, m_testVA, glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(1.2f, 2.0f, 5.0f)), glm::vec3(1.0f)));
-		RenderCommand::DisableBlend();
+		modelShader->UploadUniformMat4("u_viewProjection", m_PerspectiveCamera->m_projection * m_PerspectiveCamera->m_view);
+		modelShader->UploadUniformMat4("u_transform", glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, -0.5f, 1.0f)));
+		modelShader->UploadUniformMat4("u_lightSpaceMatrix", lightSpaceMatrix);
+		modelShader->UploadUniformFloat3("u_lightPos", glm::vec3(-2.0f, 4.0f, 5.0f));
+		modelShader->UploadUniformFloat3("u_viewPos", m_CameraController->GetCameraPosition());
+		m_meshRenderer.Draw(modelShader, m_depthMap);
 
 		RenderCommand::BlitFrameBuffer(m_MSAAFrameBuffer, m_screenFrameBuffer);
 		m_MSAAFrameBuffer->UnBind();
@@ -362,6 +356,7 @@ namespace HAIEngine
 	void EditorLayer::OnEvent(Event& e)
 	{
 	}
+
 	void EditorLayer::CheckInput(TimeStep ts)
 	{
 		if (Input::IsMouseButtonPressed(HE_MOUSE_BUTTON_RIGHT))

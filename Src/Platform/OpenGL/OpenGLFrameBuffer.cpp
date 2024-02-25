@@ -109,8 +109,8 @@ namespace HAIEngine
 		m_width = width;
 		m_height = height;
 
+		// regen textures
 		glDeleteTextures(1, &m_colorSampledAttachnet);
-
 		glGenTextures(1, &m_colorSampledAttachnet);
 		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, m_colorSampledAttachnet);
 		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, m_samples, GL_RGB, m_width, m_height, GL_TRUE);
@@ -119,10 +119,6 @@ namespace HAIEngine
 		Bind();
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, m_colorSampledAttachnet, 0);
 		UnBind();
-		///* Resize texture */
-		//glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, m_colorSampledAttachnet);
-		//glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, m_samples, GL_RGB, m_width, m_height, GL_TRUE);
-		//glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
 
 		/* Setup depth-stencil buffer (24 + 8 bits) */
 		glBindRenderbuffer(GL_RENDERBUFFER, m_depthStencilBuffer);
@@ -133,7 +129,6 @@ namespace HAIEngine
 		Bind();
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_depthStencilBuffer);
 		UnBind();
-
 	}
 
 	// depthmap
@@ -147,8 +142,10 @@ namespace HAIEngine
 			m_width, m_height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+		GLfloat borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
+		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 
 		Bind();
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_depthBuffer, 0);
@@ -176,6 +173,11 @@ namespace HAIEngine
 
 	void OpenGLDepthMap::Resize(uint32_t width, uint32_t height)
 	{
+	}
+
+	void OpenGLDepthMap::UseDepthMap(uint32_t slot)
+	{
+		glBindTextureUnit(slot, m_depthBuffer);
 	}
 
 }

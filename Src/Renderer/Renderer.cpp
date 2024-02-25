@@ -34,8 +34,8 @@ namespace HAIEngine
 
 		auto openGLShader = std::dynamic_pointer_cast<OpenGLShader>(shader);
 
-		openGLShader->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
-		openGLShader->UploadUniformMat4("u_Transform", transform);
+		openGLShader->UploadUniformMat4("u_viewProjection", m_SceneData->ViewProjectionMatrix);
+		openGLShader->UploadUniformMat4("u_transform", transform);
 
 		vertexArray->Bind();
 

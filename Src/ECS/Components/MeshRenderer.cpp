@@ -1,11 +1,13 @@
 #include "MeshRenderer.hpp"
 #include "MeshFilter.hpp"
 #include "Platform/OpenGL/OpenGLShader.hpp"
+#include <Renderer/FrameBuffer.hpp>
 #include <glad/glad.h>
+#include <Platform/OpenGL/OpenGLFrameBuffer.hpp>
 
 namespace HAIEngine
 {
-	void MeshRenderer::Draw(std::shared_ptr<OpenGLShader> shader)
+	void MeshRenderer::Draw(std::shared_ptr<OpenGLShader> shader, std::shared_ptr<FrameBuffer> depthMap)
 	{
 		auto& meshDatas = m_meshFilter->GetMeshDatas();
 		for (unsigned int i = 0; i < meshDatas.size(); ++i)
@@ -37,6 +39,11 @@ namespace HAIEngine
 				// and finally bind the texture
 				glBindTexture(GL_TEXTURE_2D, meshTextures[j].id);
 			}
+			// depth map
+			shader->Bind();
+			glActiveTexture(GL_TEXTURE0 + meshTextures.size());
+			std::dynamic_pointer_cast<OpenGLDepthMap>(depthMap)->UseDepthMap(meshTextures.size());
+			shader->UploadUniformInt("u_shadowMap", meshTextures.size());
 			// draw mesh
 			glBindVertexArray(meshDatas[i].VAO);
 			glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(meshDatas[i].GetMeshIndices().size()), GL_UNSIGNED_INT, 0);
