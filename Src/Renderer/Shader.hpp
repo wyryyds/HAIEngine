@@ -31,6 +31,6 @@ namespace HAIEngine
 
 		bool Exists(std::string_view name) const;
 	private:
-		std::unordered_map<std::string, std::shared_ptr<Shader>> m_Shaders;
+		std::unordered_map<std::string, std::shared_ptr<Shader>> m_shaders;
 	};
 }

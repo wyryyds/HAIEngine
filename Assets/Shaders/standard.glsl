@@ -83,7 +83,7 @@ void main()
 {
     vec3 color = texture(u_diffuseTexture, fs_in.texCoords).rgb;
     vec3 normal = normalize(fs_in.normal);
-    vec3 lightColor = vec3(0.3);
+    vec3 lightColor = vec3(1.0);
     // Ambient
     vec3 ambient = 0.3 * color;
     // Diffuse
@@ -100,6 +100,6 @@ void main()
     // 计算阴影
     float shadow = ShadowCalculation(fs_in.fragPosLightSpace);       
     vec3 lighting = (ambient + (1.0 - shadow) * (diffuse + specular)) * color;    
-
+    
     FragColor = vec4(lighting, 1.0f);
 } 

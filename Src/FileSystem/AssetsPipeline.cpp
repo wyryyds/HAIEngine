@@ -1,4 +1,4 @@
-#include "AssetsPipeline.hpp"
+﻿#include "AssetsPipeline.hpp"
 
 #include <filesystem>
 
@@ -6,46 +6,89 @@ namespace HAIEngine::AssetsPipeline
 {
 	void LoadAllAssets()
 	{
-		// TODO;
-		//FileSystem::GetInstance();
-	}
-
-	void LoadAllTextures()
-	{
-		// 遍历目录
-		for (const auto& entry : std::filesystem::recursive_directory_iterator(FileSystem::GetInstance().GetDirectoryPath())) {
+		for (const auto& entry : std::filesystem::recursive_directory_iterator(FileSystem::GetInstance().GetDirectoryPath()))
+		{
 			const auto& path = entry.path();
-			// 检查文件类型是否为常见的图像格式
-			if (entry.is_regular_file() &&
-				(path.extension() == ".png" ||
-					path.extension() == ".jpg" ||
-					path.extension() == ".jpeg")) {
-				// 调用你的LoadTexture函数加载图像
-				FileSystem::GetInstance().LoadTexture2D(path.stem().string(), path.string());
+			// if texture file
+			if (entry.is_regular_file() && (path.extension() == ".png" || path.extension() == ".jpg" || path.extension() == ".jpeg"))
+			{
+				LoadTexture(path.stem().string(), path.string());
+			}
+			else if (entry.is_regular_file() && (path.extension() == ".glsl")) // if shader file
+			{
+				LoadShader(path.stem().string(), path.string());
 			}
 		}
 	}
 
-	std::shared_ptr<Texture2D> LoadTexture2D(std::string name, std::string path)
+	bool LoadAllTextures()
 	{
-		return FileSystem::GetInstance().LoadTexture2D(name, path);
+		for (const auto& entry : std::filesystem::recursive_directory_iterator(FileSystem::GetInstance().GetDirectoryPath())) 
+		{
+			const auto& path = entry.path();
+			if (entry.is_regular_file() && (path.extension() == ".png" || path.extension() == ".jpg" || path.extension() == ".jpeg")) 
+			{
+				LoadTexture(path.stem().string(), path.string());
+			}
+		}
+		return true;
 	}
 
-	//std::shared_ptr<Texture3D> LoadTexture3D(std::string name, std::string path)
-	//{
-	//	//return FileSystem::GetInstance().LoadTexture3D(name, path);
-	//}
-
-	std::shared_ptr<Texture2D> FileSystem::LoadTexture2D(std::string name, std::string path)
+	bool LoadAllShaders()
 	{
-		if (IsFileLoaded(path)) return FileSystem::GetInstance().GetTexture2D(name);
+		for (const auto& entry : std::filesystem::recursive_directory_iterator(FileSystem::GetInstance().GetDirectoryPath()))
+		{
+			const auto& path = entry.path();
+			if (entry.is_regular_file() && (path.extension() == ".glsl"))
+			{
+				LoadShader(path.stem().string(), path.string());
+			}
+		}
+		return true;
+	}
+
+	std::shared_ptr<Texture2D> LoadTexture(std::string name, std::string path)
+	{
+		return FileSystem::GetInstance().LoadTexture(name, path);
+	}
+
+	std::shared_ptr<Texture2D> GetTexture(std::string_view name)
+	{
+		return FileSystem::GetInstance().GetTexture(name);
+	}
+
+	std::shared_ptr<Shader> LoadShader(std::string name, std::string path)
+	{
+		return FileSystem::GetInstance().LoadShader(name, path);
+	}
+
+	std::shared_ptr<Shader> GetShader(std::string_view name)
+	{
+		return FileSystem::GetInstance().GetShader(name);
+	}
+
+	// fileSystem
+	std::shared_ptr<Texture2D> FileSystem::LoadTexture(std::string name, std::string path)
+	{
+		if (IsFileLoaded(path)) return FileSystem::GetInstance().GetTexture(name);
 		auto texture = Texture2D::Create(path);
-		m_loaded2DTextures.insert({ name, texture });
+		m_loadedTextures.insert({ name, texture });
 		return texture;
 	}
 
-	/*std::shared_ptr<Texture3D> FileSystem::LoadTexture3D(std::string name, std::string path)
+	std::shared_ptr<Texture2D> FileSystem::GetTexture(std::string_view name)
 	{
-		
-	}*/
+		return m_loadedTextures[name.data()];
+	}
+
+	std::shared_ptr<Shader> FileSystem::LoadShader(std::string name, std::string path)
+	{
+		return m_shaderLibrary.Load(name, path);
+	}
+
+	std::shared_ptr<Shader> FileSystem::GetShader(std::string_view name)
+	{
+		return m_shaderLibrary.Get(name);
+	}
+
 }

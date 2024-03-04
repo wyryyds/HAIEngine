@@ -169,10 +169,10 @@ namespace HAIEngine
 		m_screenFrameBuffer = FrameBuffer::Create(1920.0f, 1080.0f);
 		m_depthMap = FrameBuffer::CreateDepthMap();
 
-		AssetsPipeline::LoadAllTextures();
+		AssetsPipeline::LoadAllAssets();
 		// add texture
-		m_Texture = Texture2D::Create(ASSETSPATH"Textures/window.png");
-		m_specularTexture = Texture2D::Create(ASSETSPATH"Textures/container2.png");
+		m_Texture = AssetsPipeline::GetTexture("window");// Texture2D::Create(ASSETSPATH"Textures/window.png");
+		m_specularTexture = AssetsPipeline::GetTexture("container2");
 		m_skybox = Texture3D::Create(ASSETSPATH"Textures/skybox/right.jpg", ASSETSPATH"Textures/skybox/left.jpg",
 			ASSETSPATH"Textures/skybox/top.jpg", ASSETSPATH"Textures/skybox/bottom.jpg",
 			ASSETSPATH"Textures/skybox/front.jpg", ASSETSPATH"Textures/skybox/back.jpg");
@@ -234,7 +234,7 @@ namespace HAIEngine
 		lightView = glm::lookAt(glm::vec3(-2.0f, 4.0f, 5.0f), glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
 		lightSpaceMatrix = lightProjection * lightView;
 
-		auto shadowMapShader = std::dynamic_pointer_cast<OpenGLShader>(m_ShaderLibrary.Get("shadowMapCaster"));
+		auto shadowMapShader = std::dynamic_pointer_cast<OpenGLShader>(AssetsPipeline::GetShader("shadowMapCaster"));
 		shadowMapShader->Bind();
 		shadowMapShader->UploadUniformMat4("u_lightSpaceMatrix", lightSpaceMatrix);
 

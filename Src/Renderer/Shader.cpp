@@ -36,7 +36,7 @@ namespace HAIEngine
 	void ShaderLibrary::AddShaderWithName(std::string_view name, const std::shared_ptr<Shader>& shader)
 	{
 		HE_CORE_ASSERT(!Exists(name), "Shader already exists!");
-		m_Shaders[name.data()] = shader;
+		m_shaders[name.data()] = shader;
 	}
 
 	void ShaderLibrary::AddShader(const std::shared_ptr<Shader>& shader)
@@ -62,11 +62,11 @@ namespace HAIEngine
 	std::shared_ptr<Shader> ShaderLibrary::Get(std::string_view name)
 	{
 		HE_CORE_ASSERT(Exists(name), "Shader not found!");
-		return m_Shaders[name.data()];
+		return m_shaders[name.data()];
 	}
 
 	bool ShaderLibrary::Exists(std::string_view name) const
 	{
-		return m_Shaders.find(name.data()) != m_Shaders.end();
+		return m_shaders.find(name.data()) != m_shaders.end();
 	}
 }
