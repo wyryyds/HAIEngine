@@ -195,6 +195,15 @@ namespace HAIEngine
 		scene->Load();
 
 		m_panel.SetContexts(scene);
+
+		// test timeline
+		mySequence.mFrameMin = -100;
+		mySequence.mFrameMax = 1000;
+		mySequence.myItems.push_back(MySequence::MySequenceItem{ 0, 10, 30, false });
+		mySequence.myItems.push_back(MySequence::MySequenceItem{ 1, 20, 30, true });
+		mySequence.myItems.push_back(MySequence::MySequenceItem{ 3, 12, 60, false });
+		mySequence.myItems.push_back(MySequence::MySequenceItem{ 2, 61, 90, false });
+		mySequence.myItems.push_back(MySequence::MySequenceItem{ 4, 90, 99, false });
 	}
 
 	void EditorLayer::OnAttach()
@@ -349,6 +358,31 @@ namespace HAIEngine
 		}
 		uint32_t textureID = std::dynamic_pointer_cast<OpenGLFrameBuffer>(m_screenFrameBuffer)->GetTextureID();
 		ImGui::Image(reinterpret_cast<void*>(static_cast<uintptr_t>(textureID)), ImVec2{ m_viewportSize.x, m_viewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+
+		ImGui::End();
+
+		ImGui::Begin("Sequencer");
+		// let's create the sequencer
+		static int selectedEntry = -1;
+		static int firstFrame = 0;
+		static bool expanded = true;
+		static int currentFrame = 100;
+
+		ImGui::PushItemWidth(130);
+		ImGui::InputInt("Frame Min", &mySequence.mFrameMin);
+		ImGui::SameLine();
+		ImGui::InputInt("Frame ", &currentFrame);
+		ImGui::SameLine();
+		ImGui::InputInt("Frame Max", &mySequence.mFrameMax);
+		ImGui::PopItemWidth();
+		Sequencer(&mySequence, &currentFrame, &expanded, &selectedEntry, &firstFrame, ImSequence::SEQUENCER_EDIT_STARTEND | ImSequence::SEQUENCER_ADD | ImSequence::SEQUENCER_DEL | ImSequence::SEQUENCER_COPYPASTE | ImSequence::SEQUENCER_CHANGE_FRAME);
+		// add a UI to edit that particular item
+		if (selectedEntry != -1)
+		{
+			const MySequence::MySequenceItem& item = mySequence.myItems[selectedEntry];
+			ImGui::Text("I am a %s, please edit me", SequencerItemTypeNames[item.mType]);
+			// switch (type) ....
+		}
 
 		ImGui::End();
 	}
