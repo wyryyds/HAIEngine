@@ -3,10 +3,13 @@
 #include "Core/Reflection.hpp"
 #include "Editor/GuiHelper.hpp"
 
+#define GLM_ENABLE_EXPERIMENTAL
+
 #include <glm/glm.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtx/euler_angles.hpp>
 #include <glm/gtx/quaternion.hpp>
+
 
 namespace HAIEngine
 {

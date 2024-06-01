@@ -2,6 +2,8 @@
 #include "hepch.hpp"
 #include "Platform/OpenGL/OpenGLShader.hpp"
 
+#define GLM_ENABLE_EXPERIMENTAL
+
 #include <GLFW/glfw3.h>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/ext/matrix_clip_space.hpp>
