@@ -7,35 +7,80 @@ namespace HAIEngine
 {
 	//REFLECTION(GameObject, GameObject);
 
-	GameObject::GameObject()
-		: m_name("GameObject")
+	GameObject::GameObject() : m_name("GameObject")
 	{
-		m_transform = new Transform();
-		AddComponent(m_transform);
+		m_transform = AddComponent<Transform>();
 	}
 
-	GameObject::GameObject(std::string name)
-		: m_name(name)
+	GameObject::GameObject(std::string name) : m_name(std::move(name))
 	{
-		m_transform = new Transform();
-		AddComponent(m_transform);
+		m_transform = AddComponent<Transform>();
 	}
 
-	GameObject::GameObject(std::string name, size_t guid)
-		: m_name(name)
+	GameObject::GameObject(std::string name, size_t guid) : m_name(std::move(name))
 	{
 		m_guid = guid;
-		m_transform = new Transform();
-		AddComponent(m_transform);
+		m_transform = AddComponent<Transform>();
+	}
+
+	GameObject::GameObject(const GameObject& other) : ISerializable(other), m_name(other.m_name)
+	{
+		m_transform = AddComponent<Transform>(*other.m_transform);
+		for(const auto& [compName, component] : other.m_components)
+		{
+			m_components[compName] = component->Clone();
+		}
+	}
+
+	GameObject& GameObject::operator=(const GameObject& other)
+	{
+		if(this != &other)
+		{
+			m_name = other.m_name;
+			m_transform = other.m_transform;
+			m_components.clear();
+			for (const auto& [compName, component] : other.m_components)
+			{
+				m_components[compName] = component->Clone();
+			}
+		}
+
+		return *this;
+	}
+
+	GameObject::GameObject(GameObject&& other) noexcept
+		: m_name(std::move(other.m_name)),
+		  m_transform(other.m_transform),
+		  m_components(std::move(other.m_components))
+	{
+		other.m_transform = nullptr;
+		other.m_components.clear();
+	}
+
+	GameObject& GameObject::operator=(GameObject&& other) noexcept
+	{
+		if(this != &other)
+		{
+			delete m_transform;
+			for (auto& [_, component] : m_components)
+				component.reset();
+			m_components.clear();
+
+			m_name = std::move(other.m_name);
+			m_transform = other.m_transform;
+			m_components = std::move(other.m_components);
+
+			other.m_transform = nullptr;
+			other.m_components.clear();
+		}
+		
+		return *this;
 	}
 
 	GameObject::~GameObject()
 	{
-		for (auto iter = m_components.begin(); iter != m_components.end(); ++iter)
-		{
-			delete iter->second;
-			iter = m_components.erase(iter);
-		}
+		m_transform = nullptr;
+		m_components.clear();
 	}
 
 	void GameObject::Update(TimeStep ts)
@@ -46,17 +91,17 @@ namespace HAIEngine
 
 	json GameObject::Serialize()
 	{
-		json resjson;
-		resjson["name"] = SerializeHelper::SerializeData(m_name);
-		resjson["guid"] = SerializeHelper::SerializeData(m_guid);
-		resjson["components"] = json::array();
+		json resJson;
+		resJson["name"] = SerializeHelper::SerializeData(m_name);
+		resJson["guid"] = SerializeHelper::SerializeData(m_guid);
+		resJson["components"] = json::array();
 
-		for (auto iter = m_components.begin(); iter != m_components.end(); ++iter)
+		for (auto& component : m_components)
 		{
-			resjson["components"].emplace_back(iter->second->Serialize());
+			resJson["components"].emplace_back(component.second->Serialize());
 		}
 
-		return resjson;
+		return resJson;
 	}
 
 	void GameObject::DeSerialize(const json& jsonData)
@@ -65,32 +110,34 @@ namespace HAIEngine
 		m_guid = SerializeHelper::DeSerializeData<size_t>(jsonData["guid"]);
 
 		auto& componentsData = jsonData["components"];
-		for (int i = 0; i < componentsData.size(); ++i)
+		for (const auto& componentData : componentsData)
 		{
-			auto& componentData = componentsData[i];
-			if (SerializeHelper::DeSerializeData<std::string>(componentData["type"]) == "Transform")
+			auto typeName = SerializeHelper::DeSerializeData<std::string>(componentData["type"]);
+			if (typeName == "Transform")
 			{
 				m_transform->DeSerialize(componentData);
 				continue;
 			}
-
-			auto gComponent = static_cast<Component*>(HAIEngine::ReflectionManager::GetInstance().CreateClassByName
-				(SerializeHelper::DeSerializeData<std::string>(componentData["type"])));			
-			gComponent->DeSerialize(componentData);
-			AddComponent(gComponent);
+			
+			auto component = std::unique_ptr<Component>(static_cast<Component*>(
+				HAIEngine::ReflectionManager::GetInstance().CreateClassByName(typeName)));
+			component->m_fatherGO = this;
+			component->DeSerialize(componentData);
+			
+			AddComponent(std::move(component));
 		}
 
 	}
 
-	void GameObject::AddComponent(Component* component)
-	{
-		if (m_components.find(component->m_typeName) != m_components.end())
-		{
-			LOG_Error("Gameobject had a same type component, can not add again!");
-			return;
-		}
-		component->SetFatherGO(this);
-		m_components.insert({ component->m_typeName, component });
-	}
+	// void GameObject::AddComponent(Component* component)
+	// {
+	// 	if (m_components.contains(component->m_typeName))
+	// 	{
+	// 		LOG_Error("GameObject had a same type component, can not add again!");
+	// 		return;
+	// 	}
+	// 	component->SetFatherGO(this);
+	// 	m_components.insert({ component->m_typeName, component });
+	// }
 
 }

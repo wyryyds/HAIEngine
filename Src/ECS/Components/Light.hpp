@@ -46,6 +46,7 @@ namespace HAIEngine
 		Light() : Component("Light") {}
 		Light(LightType type, const std::variant<directionParams, pointParams, spotParams>& params);
 		virtual ~Light() override = default;
+		virtual std::unique_ptr<Component> Clone() const override { return std::make_unique<Light>(*this); }
 
 		void SetAmbientIntensity(float intensity);
 		void SetIntensity(float intensity);

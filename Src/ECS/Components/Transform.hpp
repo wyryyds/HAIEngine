@@ -18,8 +18,13 @@ namespace HAIEngine
 		Transform();
 		Transform(GameObject* father);
 		Transform(glm::vec3 position, GameObject* father);
-		~Transform() = default;
-
+		Transform(const Transform& other) = default;
+		Transform& operator=(const Transform& other) = default;
+		Transform(Transform&& other) = default;
+		Transform& operator=(Transform&& other) = default;
+		virtual ~Transform() override = default;
+		virtual std::unique_ptr<Component> Clone() const override { return std::make_unique<Transform>(*this); }
+		
 		inline glm::vec3 GetPosition() const { return m_position; }
 		glm::vec3 GetFront();
 		glm::vec3 GetRight();

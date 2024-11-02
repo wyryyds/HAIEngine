@@ -77,7 +77,7 @@ namespace HAIEngine
 		~HESerializeFile() = default;
 
 		inline json& GetJsonData(){ return m_jsonData; }
-		inline void SetJsonData(const json& jsondata) { m_jsonData = jsondata; }
+		inline void SetJsonData(const json& jsonData) { m_jsonData = jsonData; }
 		void Load();
 		void Save();
 
@@ -86,17 +86,17 @@ namespace HAIEngine
 		json m_jsonData;
 	};
 
-	class ISerializeable
+	class ISerializable
 	{
 	public:
-		ISerializeable() : m_guid(GenerateGUID(this)) {}
-		virtual ~ISerializeable() = default;
+		ISerializable() : m_guid(GenerateGUID(this)) {}
+		virtual ~ISerializable() = default;
 
 		virtual json Serialize() = 0;
 		virtual void DeSerialize(const json& jsonData) = 0;
 
-		static size_t GenerateGUID(const ISerializeable* obj) {
-			return std::hash<const ISerializeable*>{}(obj);
+		static size_t GenerateGUID(const ISerializable* obj) {
+			return std::hash<const ISerializable*>{}(obj);
 		}
 		size_t GetGUID() const {
 			return m_guid;

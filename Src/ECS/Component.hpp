@@ -9,15 +9,23 @@ namespace HAIEngine
 	class GameObject;
 	class Transform;
 
-	class Component : public ISerializeable, public IGuiDisplay
+	class Component : public ISerializable, public IGuiDisplay
 	{
 	public:
-		Component(std::string typeName) : m_typeName(typeName) {};
+		Component(std::string typeName) : m_typeName(std::move(typeName)) {}
 		Component(std::string typeName, GameObject* father);
-		virtual ~Component() = default;
+		Component(const Component& other) = default;
+		Component& operator=(const Component& other) = default;
+		Component(Component&& other) = default;
+		Component& operator=(Component&& other) = default;
+		virtual ~Component() override = default;
+		virtual std::unique_ptr<Component> Clone() const { return std::make_unique<Component>(*this); }
 		virtual void OnAwake() {}
 		virtual void Update(TimeStep ts) {}
 		virtual void OnRemove() {}
+		virtual json Serialize() override;
+		virtual void DeSerialize(const json& jsonData) override {}
+		virtual void GuiDisplay() override {}
 		
 		Transform& GetTransform() const;
 		inline GameObject& GetFatherGO() const { return *m_fatherGO; }

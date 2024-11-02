@@ -8,7 +8,6 @@
 
 namespace HAIEngine
 {
-
 	json MeshFilter::Serialize()
 	{
 		return json();

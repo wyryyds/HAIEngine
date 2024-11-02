@@ -14,6 +14,8 @@ namespace HAIEngine
 	public:
 		MeshFilter() : Component("MeshFilter") { }
 		MeshFilter(std::shared_ptr<Mesh> mesh) : Component("MeshFilter"), m_mesh(mesh) { }
+		virtual ~MeshFilter() = default;
+		virtual std::unique_ptr<Component> Clone() const override { return std::make_unique<MeshFilter>(*this); }
 
 		const std::vector<MeshData>& GetMeshDatas() const { return m_mesh->GetMeshData(); }
 

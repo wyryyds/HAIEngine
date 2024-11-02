@@ -19,7 +19,7 @@ namespace HAIEngine
         : Component("Camera"), m_cameraType(type), m_cameraDatas(params)
     {
     }
-
+    
     void Camera::Update(TimeStep ts)
     {
         UpdateView();

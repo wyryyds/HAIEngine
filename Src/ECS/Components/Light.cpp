@@ -13,7 +13,7 @@ namespace HAIEngine
 		: m_lightType(type), Component("Light"), m_lightDatas(params)
 	{
 	}
-
+	
 	void Light::SetAmbientIntensity(float intensity)
 	{
 		std::visit([intensity](auto& params) { params.ambientIntensity = std::clamp(intensity, 0.0f, 1.0f); }, m_lightDatas);

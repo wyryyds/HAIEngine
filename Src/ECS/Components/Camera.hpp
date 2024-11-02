@@ -40,13 +40,14 @@ namespace HAIEngine
     public:
         Camera() : Component("Camera") {}
         Camera(CameraType type, const std::variant<orthoParams, perspectiveParams>& params);
-        ~Camera() = default;
+        virtual ~Camera() = default;
+        virtual std::unique_ptr<Component> Clone() const override { return std::make_unique<Camera>(*this); }
 
         inline glm::mat4 GetViewMatrix() const { return m_view; }
         inline glm::mat4 GetProjectionMatrix() const { return m_projection; }
         inline glm::mat4 GetViewProjection() const { return m_projection * m_view; }
-
-        void Update(TimeStep ts) override;
+        
+        virtual void Update(TimeStep ts) override;
         virtual json Serialize() override;
         virtual void DeSerialize(const json& jsondata) override;
         virtual void GuiDisplay() override;

@@ -6,7 +6,7 @@ namespace HAIEngine
 	class Camera;
 	class GameObject;
 
-	class Scene : ISerializeable
+	class Scene : ISerializable
 	{
 	public:
 		Scene(std::string_view filepath);

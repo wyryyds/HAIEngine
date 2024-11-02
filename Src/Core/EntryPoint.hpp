@@ -4,7 +4,7 @@
 
 extern HAIEngine::Application* HAIEngine::CreateApplication();
 
-int main(int argc, char** argv)
+inline int main(int argc, char** argv)
 {
 	HAIEngine::Log::Init();
 	HE_CORE_WARN("Init Log");

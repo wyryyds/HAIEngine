@@ -4,9 +4,20 @@
 namespace HAIEngine
 {
     Component::Component(std::string typeName, GameObject* father)
-        : m_typeName(typeName)
+        : m_typeName(std::move(typeName)), m_fatherGO(father)
     {
-        father->AddComponent(this);
+        if(father)
+            father->AddComponent<Component>(*this);
+    }
+
+
+    json Component::Serialize()
+    {
+        json resJson;
+        resJson["type"] = SerializeHelper::SerializeData(m_typeName);
+        resJson["guid"] = SerializeHelper::SerializeData(m_guid);
+
+        return resJson;
     }
 
     Transform& Component::GetTransform() const

@@ -11,7 +11,9 @@ namespace HAIEngine
 	{
 	public:
 		MeshRenderer() : Component("MeshRenderer") {}
-		~MeshRenderer() = default;
+		MeshRenderer(const MeshRenderer& other) : Component("MeshRenderer") {}
+		~MeshRenderer() override = default;
+		virtual std::unique_ptr<Component> Clone() const override { return std::make_unique<MeshRenderer>(*this); }
 
 		void Draw(std::shared_ptr<OpenGLShader> shader, std::shared_ptr<FrameBuffer> depthMap);
 
