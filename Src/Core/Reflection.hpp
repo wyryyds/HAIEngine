@@ -35,7 +35,7 @@ namespace HAIEngine
 	RegisterAction registerAction##className(										\
 		#className,new Reflection(#className,(CreateObjectFunc)Creator##className,ReflectionTag::##tag,Instance##className))
 
-	enum class ReflectionTag
+	enum class ReflectionTag : uint8_t
 	{
 		Component,
 		GameObject,
@@ -50,7 +50,7 @@ namespace HAIEngine
 		ReflectionTag tag;
 
 		Reflection(std::string name, CreateObjectFunc func, ReflectionTag _tag, GetInstanceFunc instance = nullptr)
-			:className(name), createFunc(func), tag(_tag), getInstance(instance)
+			:className(std::move(name)), createFunc(func), getInstance(instance), tag(_tag)
 		{
 		}
 	};
@@ -59,13 +59,13 @@ namespace HAIEngine
 	{
 	public:
 		ReflectionManager() = default;
-		void* CreateClassByName(std::string className);
-		std::shared_ptr<void> GetInstanceByName(std::string className);
+		void* CreateClassByName(std::string_view className);
+		std::shared_ptr<void> GetInstanceByName(std::string_view className);
 		const std::vector<std::string>& GetAllMember() const { return members; }
 		void RegistClass(std::string name, Reflection* method);
 
-		const std::multimap<ReflectionTag, std::string>::iterator GetMemberStartByTag(ReflectionTag tag) { return memberByTag.find(tag); }
-		const int GetMemberCountByTag(ReflectionTag tag)const { return memberByTag.count(tag); }
+		std::multimap<ReflectionTag, std::string>::iterator GetMemberStartByTag(ReflectionTag tag) { return memberByTag.find(tag); }
+		int GetMemberCountByTag(ReflectionTag tag)const { return memberByTag.count(tag); }
 
 	private:
 		std::unordered_map<std::string, Reflection*> classMap;

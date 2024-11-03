@@ -2,12 +2,12 @@
 
 #include "Platform/OpenGL/OpenGLShader.hpp"
 #include "Platform/OpenGL/OpenGLTexture.hpp"
+#include "Core/JobSystem.hpp"
 
 #include <glad/glad.h>
 #include <iostream>
 #include <stb_image.h>
-
-#include "Core/JobSystem.hpp"
+#include <assimp/postprocess.h>
 
 namespace HAIEngine
 {
@@ -27,39 +27,39 @@ namespace HAIEngine
 
 	void Mesh::SetMesh()
 	{
-		for (int i = 0; i < m_meshDatas.size(); ++i)
+		for (int i = 0; i < m_meshDataList.size(); ++i)
 		{
-			glGenVertexArrays(1, &m_meshDatas[i].VAO);
-			glGenBuffers(1, &m_meshDatas[i].VBO);
-			glGenBuffers(1, &m_meshDatas[i].EBO);
+			glGenVertexArrays(1, &m_meshDataList[i].VAO);
+			glGenBuffers(1, &m_meshDataList[i].VBO);
+			glGenBuffers(1, &m_meshDataList[i].EBO);
 
-			glBindVertexArray(m_meshDatas[i].VAO);
+			glBindVertexArray(m_meshDataList[i].VAO);
 			// load data into vertex buffers
-			glBindBuffer(GL_ARRAY_BUFFER, m_meshDatas[i].VBO);
+			glBindBuffer(GL_ARRAY_BUFFER, m_meshDataList[i].VBO);
 			// A great thing about structs is that their memory layout is sequential for all its items.
-			// The effect is that we can simply pass a pointer to the struct and it translates perfectly to a glm::vec3/2 array which
+			// The effect is that we can simply pass a pointer to the struct, and it translates perfectly to a glm::vec3/2 array which
 			// again translates to 3/2 floats which translates to a byte array.
-			glBufferData(GL_ARRAY_BUFFER, m_meshDatas[i].m_vertices.size() * sizeof(Vertex), &m_meshDatas[i].m_vertices[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_meshDataList[i].m_vertices.size() * sizeof(Vertex), &m_meshDataList[i].m_vertices[0], GL_STATIC_DRAW);
 
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_meshDatas[i].EBO);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_meshDatas[i].m_indices.size() * sizeof(unsigned int), &m_meshDatas[i].m_indices[0], GL_STATIC_DRAW);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_meshDataList[i].EBO);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_meshDataList[i].m_indices.size() * sizeof(unsigned int), &m_meshDataList[i].m_indices[0], GL_STATIC_DRAW);
 
 			// set the vertex attribute pointers
 			// vertex Positions
 			glEnableVertexAttribArray(0);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), static_cast<const void*>(nullptr));
 			// vertex normals
 			glEnableVertexAttribArray(1);
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<const void*>(offsetof(Vertex, normal)));
 			// vertex texture coords
 			glEnableVertexAttribArray(2);
-			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoords));
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<const void*>(offsetof(Vertex, texCoords)));
 			// vertex tangent
 			glEnableVertexAttribArray(3);
-			glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, tangent));
-			// vertex bitangent
+			glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<const void*>(offsetof(Vertex, tangent)));
+			// vertex bitTangent
 			glEnableVertexAttribArray(4);
-			glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, biTangent));
+			glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<const void*>(offsetof(Vertex, biTangent)));
 
 			glBindVertexArray(0);
 		}
@@ -76,7 +76,7 @@ namespace HAIEngine
 			return;
 		}
 		// retrieve the directory path of the filepath
-		directory = filepath.substr(0, filepath.find_last_of('/'));
+		m_directory = filepath.substr(0, filepath.find_last_of('/'));
 
 		// process ASSIMP's root node recursively
 		processNode(scene->mRootNode, scene);
@@ -106,7 +106,7 @@ namespace HAIEngine
 		for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 		{
 			Vertex vertex{};
-			glm::vec3 vector{}; // we declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
+			glm::vec3 vector{}; // we declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm vec3 class so we transfer the data to this placeholder glm::vec3 first.
 			// positions
 			vector.x = mesh->mVertices[i].x;
 			vector.y = mesh->mVertices[i].y;
@@ -136,7 +136,7 @@ namespace HAIEngine
 					vector.y = mesh->mTangents[i].y;
 					vector.z = mesh->mTangents[i].z;
 					vertex.tangent = vector;
-					// bitangent
+					// bitTangent
 					vector.x = mesh->mBitangents[i].x;
 					vector.y = mesh->mBitangents[i].y;
 					vector.z = mesh->mBitangents[i].z;
@@ -178,10 +178,10 @@ namespace HAIEngine
 		std::vector<MeshTexture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
 		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 		// push into 
-		m_meshDatas.push_back({ vertices, indices, textures });
+		m_meshDataList.push_back({ vertices, indices, textures });
 	}
 
-	std::vector<MeshTexture> Mesh::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
+	std::vector<MeshTexture> Mesh::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string_view typeName)
 	{
 		std::vector<MeshTexture> textures;
 		for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
@@ -190,11 +190,11 @@ namespace HAIEngine
 			mat->GetTexture(type, i, &str);
 			// check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
 			bool skip = false;
-			for (unsigned int j = 0; j < textures_loaded.size(); j++)
+			for (unsigned int j = 0; j < loadedTextures.size(); j++)
 			{
-				if (std::strcmp(textures_loaded[j].path.data(), str.C_Str()) == 0)
+				if (std::strcmp(loadedTextures[j].path.data(), str.C_Str()) == 0)
 				{
-					textures.push_back(textures_loaded[j]);
+					textures.push_back(loadedTextures[j]);
 					skip = true; // a texture with the same filepath has already been loaded, continue to next one. (optimization)
 					break;
 				}
@@ -202,11 +202,11 @@ namespace HAIEngine
 			if (!skip)
 			{   // if texture hasn't been loaded already, load it
 				MeshTexture texture;
-				texture.id = TextureFromFile(str.C_Str(), this->directory, false);
+				texture.id = TextureFromFile(str.C_Str(), this->m_directory, false);
 				texture.type = typeName;
 				texture.path = str.C_Str();
 				textures.push_back(texture);
-				textures_loaded.push_back(texture);  // store it as texture loaded for entire model, to ensure we won't unnecessary load duplicate textures.
+				loadedTextures.push_back(texture);  // store it as texture loaded for entire model, to ensure we won't unnecessarily load duplicate textures.
 			}
 		}
 		return textures;
@@ -221,8 +221,8 @@ namespace HAIEngine
 		glGenTextures(1, &textureID);
 		stbi_set_flip_vertically_on_load(0);
 		int width, height, nrComponents;
-		unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
-		if (data)
+		
+		if (unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0))
 		{
 			GLenum format{};
 			if (nrComponents == 1)

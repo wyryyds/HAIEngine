@@ -1,7 +1,6 @@
 #pragma once
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
-#include <assimp/postprocess.h>
 #include <glm/ext/vector_float2.hpp>
 #include <glm/ext/vector_float3.hpp>
 #include <string>
@@ -29,6 +28,10 @@ namespace HAIEngine
 	{
 	public:
 		MeshData(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<MeshTexture>& textures);
+		MeshData(const MeshData&) = default;
+		MeshData(MeshData&&) = default;
+		MeshData& operator=(const MeshData&) = default;
+		MeshData& operator=(MeshData&&) = default;
 		~MeshData() = default;
 
 		inline const std::vector<Vertex>& GetMeshVertices() const { return m_vertices; }
@@ -47,24 +50,28 @@ namespace HAIEngine
 	{
 	public:
 		Mesh(std::string_view filepath);
+		Mesh(const Mesh& other) = default;
+		Mesh(Mesh&& other) = default;
+		Mesh& operator=(Mesh&&) = default;
+		Mesh& operator=(const Mesh&) = default;
 		~Mesh() = default;
 		
 		void LoadMesh(std::string_view filepath);
 		void SetMesh();
 		void processNode(aiNode* node, const aiScene* scene);
 		void processMesh(aiMesh* mesh, const aiScene* scene);
-		std::vector<MeshTexture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
+		std::vector<MeshTexture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string_view typeName);
 		unsigned int TextureFromFile(const char* path, const std::string& directory, bool gamma);
 
-		inline std::vector<MeshData>& GetMeshData() { return m_meshDatas; }
+		inline std::vector<MeshData>& GetMeshData() { return m_meshDataList; }
 
 	public:
-		std::vector<MeshData> m_meshDatas;
-		std::vector<MeshTexture> textures_loaded;
+		std::vector<MeshData> m_meshDataList;
+		std::vector<MeshTexture> loadedTextures;
 
 	private:
 		std::string m_filepath;
-		std::string directory;
+		std::string m_directory;
 	};
 
 

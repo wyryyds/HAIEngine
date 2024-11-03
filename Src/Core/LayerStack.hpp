@@ -1,6 +1,4 @@
 #pragma once
-#include "Core/Core.hpp"
-
 #include <vector>
 
 namespace HAIEngine
@@ -10,13 +8,17 @@ namespace HAIEngine
 	class LayerStack
 	{
 	public:
-		LayerStack();
+		LayerStack() = default;
+		LayerStack(const LayerStack&) = default;
+		LayerStack& operator=(const LayerStack&) = default;
+		LayerStack(LayerStack&&) = default;
+		LayerStack& operator=(LayerStack&&) = default;
 		~LayerStack();
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
-		void PopLayer(Layer* layer);
-		void PopOverlay(Layer* layer);
+		void PopLayer(const Layer* layer);
+		void PopOverlay(const Layer* layer);
 
 		std::vector<Layer*>::iterator begin() { return m_layers.begin(); }
 		std::vector<Layer*>::iterator end() { return m_layers.end(); }

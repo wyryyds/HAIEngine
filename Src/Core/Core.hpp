@@ -22,9 +22,9 @@
     #define HE_CORE_ASSERT(x,...)
 #endif // HE_ENABLE_ASSERTS
 
-#define BIT(x) (1 << x)
+#define BIT(x) (1 << (x))
 
-#define HE_BIND_EVENT_FN(fn) std::bind(&fn,this,std::placeholders::_1)
+#define HE_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 
 #define ROOTPATH "../../../../"
 #define SHADERPATH "../../../../Assets/Shaders/"

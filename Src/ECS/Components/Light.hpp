@@ -5,7 +5,7 @@
 
 namespace HAIEngine
 {
-	enum class LightType
+	enum class LightType : uint8_t
 	{
 		UNDEFINED,
 		DIRECTION,
@@ -45,6 +45,10 @@ namespace HAIEngine
 	public:
 		Light() : Component("Light") {}
 		Light(LightType type, const std::variant<directionParams, pointParams, spotParams>& params);
+		Light(const Light& other) = default;
+		Light(Light&& other) noexcept = default;
+		Light& operator=(const Light& other) = default;
+		Light& operator=(Light&& other) noexcept = default;
 		virtual ~Light() override = default;
 		virtual std::unique_ptr<Component> Clone() const override { return std::make_unique<Light>(*this); }
 
@@ -56,8 +60,8 @@ namespace HAIEngine
 		float GetIntensity();
 		glm::vec3 GetColor();
 
-		const glm::vec3 GetDirectionNormal() const;
-		const float GetAttenuation(glm::vec3 position) const;
+		glm::vec3 GetDirectionNormal() const;
+		float GetAttenuation(glm::vec3 position) const;
 
 		virtual json Serialize() override;
 		virtual void DeSerialize(const json& jsonData) override;
@@ -65,7 +69,7 @@ namespace HAIEngine
 
 	public:
 		LightType m_lightType = LightType::UNDEFINED;
-		std::variant<directionParams, pointParams, spotParams> m_lightDatas;
+		std::variant<directionParams, pointParams, spotParams> m_lightData;
 	};
 
 }

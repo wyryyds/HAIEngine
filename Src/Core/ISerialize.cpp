@@ -11,12 +11,12 @@ namespace HAIEngine
 
 	void HESerializeFile::Load()
 	{
-		std::ifstream readfile(m_filepath);
-		readfile >> m_jsonData;
-		readfile.close();
+		std::ifstream readFile(m_filepath);
+		readFile >> m_jsonData;
+		readFile.close();
 	}
 
-	void HESerializeFile::Save()
+	void HESerializeFile::Save() const
 	{
 		std::ofstream file(m_filepath);
 		file << m_jsonData.dump(2);
@@ -55,7 +55,7 @@ namespace HAIEngine
 
 		return ss.str();
 	}
-
+	
 	std::string SerializeHelper::RemoveTrailingZeros(std::string_view str) {
 		size_t dotPos = str.find_last_not_of('0');
 		if (dotPos != std::string_view::npos && str[dotPos] == '.') {

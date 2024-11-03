@@ -1,6 +1,4 @@
 #pragma once
-#include "Core.hpp"
-
 #include <string>
 #include <functional>
 
@@ -23,9 +21,13 @@ namespace HAIEngine
 	class Window
 	{
 	public:
-		using EventCallbackFn = std::function<void(Event(&))>;
+		using EventCallbackFn = std::function<void(Event&)>;
 
-		Window() {}
+		Window() = default;
+		Window(const Window&) = default;
+		Window(Window&&) = default;
+		Window& operator=(const Window&) = default;
+		Window& operator=(Window&&) = default;
 		virtual ~Window() = default;
 
 		virtual void OnUpdate() = 0;
@@ -33,7 +35,7 @@ namespace HAIEngine
 		virtual uint32_t GetWidth() const = 0;
 		virtual uint32_t GetHeight() const = 0;
 
-		virtual void SetEventCallback(const EventCallbackFn& callbak) = 0;
+		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
 

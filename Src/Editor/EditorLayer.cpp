@@ -345,7 +345,7 @@ namespace HAIEngine
 			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 		}
 
-		m_panel.OnImguiRender();
+		m_panel.OnImGuiRender();
 
 		ImGui::Begin("Scene");
 

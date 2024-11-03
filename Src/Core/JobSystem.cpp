@@ -5,7 +5,7 @@
 #include <thread>    // to use std::thread
 #include <condition_variable>    // to use std::condition_variable
 #include <sstream>
-#include <assert.h>
+#include <cassert>
 
 #ifdef _WIN32
 #define NOMINMAX
@@ -114,7 +114,7 @@ namespace HAIEngine::JobSystem
 			assert(SUCCEEDED(hr));
 #endif // _WIN32
 
-			worker.detach(); // forget about this thread, let it do it's job in the infinite loop that we created above
+			worker.detach(); // forget about this thread, let it do its job in the infinite loop that we created above
 		}
 	}
 

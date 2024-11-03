@@ -10,12 +10,12 @@ namespace HAIEngine
 		SetContexts(scene);
 	}
 
-	void SceneHierarchyPanel::SetContexts(const std::shared_ptr<Scene> scene)
+	void SceneHierarchyPanel::SetContexts(const std::shared_ptr<Scene>& scene)
 	{
 		m_contexts = scene;
 	}
 
-	void SceneHierarchyPanel::OnImguiRender()
+	void SceneHierarchyPanel::OnImGuiRender()
 	{
 		ImGui::Begin("Hierarchy");
 ;
@@ -35,17 +35,17 @@ namespace HAIEngine
 		ShowProperties();
 	}
 
-	void SceneHierarchyPanel::ShowProperties()
+	void SceneHierarchyPanel::ShowProperties() const
 	{
 		ImGui::Begin("Properties");
 		
 		if (m_selectedContext != nullptr)
 		{
-			for (const auto& component : m_selectedContext->m_components)
+			for (const auto& component : m_selectedContext->m_components | std::views::values)
 			{
-				if (ImGui::TreeNodeEx(component.second->m_typeName.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
+				if (ImGui::TreeNodeEx(component->m_typeName.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
 				{
-					component.second->GuiDisplay();
+					component->GuiDisplay();
 					ImGui::TreePop();
 				}
 			}

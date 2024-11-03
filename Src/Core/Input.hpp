@@ -1,5 +1,5 @@
 #pragma once
-#include "Core.hpp"
+
 #include <utility>
 
 namespace HAIEngine
@@ -7,6 +7,13 @@ namespace HAIEngine
 	class Input
 	{
 	public:
+		Input() = default;
+		Input(const Input&) = default;
+		Input&operator=(const Input&) = default;
+		Input(Input&&) = default;
+		Input&operator=(Input&&) = default;
+		virtual ~Input() = default;
+		
 		inline static bool IsKeyPressed(int keycode) { return s_instance->IsKeyPressedImpl(keycode); }
 		inline static bool IsKeyReleased(int keycode) { return s_instance->IsKeyReleasedImpl(keycode); }
 

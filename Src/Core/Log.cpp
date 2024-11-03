@@ -1,17 +1,11 @@
 #include "Log.hpp"
+#include "spdlog/sinks/stdout_color_sinks.h"
 
 namespace HAIEngine
 {
 	std::shared_ptr<spdlog::logger> Log::s_coreLogger;
 	std::shared_ptr<spdlog::logger> Log::s_clientLogger;
-
-	Log::Log()
-	{
-	}
-
-	Log::~Log()
-	{
-	}
+	
 
 	void Log::Init()
 	{

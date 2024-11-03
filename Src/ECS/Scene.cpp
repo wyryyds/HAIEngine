@@ -6,10 +6,11 @@ namespace HAIEngine
     Scene::Scene(std::string_view filepath)
         : m_sceneName("Scene"), m_serializeFile(filepath)
     {
+        
     }
 
     Scene::Scene(std::string sceneName, std::string_view filepath)
-        : m_sceneName(sceneName), m_serializeFile(filepath)
+        : m_sceneName(std::move(sceneName)), m_serializeFile(filepath)
     {
     }
 
@@ -34,7 +35,7 @@ namespace HAIEngine
                 return go;
             }
         }
-        HE_CORE_ERROR("No sunch name GameObject!");
+        HE_CORE_ERROR("No such name GameObject!");
         return nullptr;
     }
 
@@ -54,16 +55,16 @@ namespace HAIEngine
         return sceneData;
     }
 
-    void Scene::DeSerialize(const json& jsondata)
+    void Scene::DeSerialize(const json& jsonData)
     {
-        m_sceneName = SerializeHelper::DeSerializeData<std::string>(jsondata["sceneName"]);
-        m_guid = SerializeHelper::DeSerializeData<size_t>(jsondata["guid"]);
+        m_sceneName = JsonSerializeHelper::DeSerializeData<std::string>(jsonData["sceneName"]);
+        m_guid = JsonSerializeHelper::DeSerializeData<size_t>(jsonData["guid"]);
 
-        json gameObjects = jsondata["gameObjects"];
-        for (int i = 0; i < gameObjects.size(); ++i)
+        json gameObjects = jsonData["gameObjects"];
+        for (const auto& gameObject : gameObjects)
         {
             auto go = std::make_shared<GameObject>();
-            go->DeSerialize(gameObjects[i]);
+            go->DeSerialize(gameObject);
             AddGameObject(go);
         }
     }

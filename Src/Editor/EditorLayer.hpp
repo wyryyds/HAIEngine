@@ -37,24 +37,20 @@ namespace HAIEngine
     {
         // interface with sequencer
 
-        virtual int GetFrameMin() const {
-            return mFrameMin;
-        }
-        virtual int GetFrameMax() const {
-            return mFrameMax;
-        }
-        virtual int GetItemCount() const { return (int)myItems.size(); }
+        virtual int GetFrameMin() const  override { return mFrameMin; }
+        virtual int GetFrameMax() const  override { return mFrameMax; }
+        virtual int GetItemCount() const  override { return static_cast<int>(myItems.size()); }
 
-        virtual int GetItemTypeCount() const { return sizeof(SequencerItemTypeNames) / sizeof(char*); }
-        virtual const char* GetItemTypeName(int typeIndex) const { return SequencerItemTypeNames[typeIndex]; }
-        virtual const char* GetItemLabel(int index) const
+        virtual int GetItemTypeCount() const override { return sizeof(SequencerItemTypeNames) / sizeof(char*); }
+        virtual const char* GetItemTypeName(int typeIndex) const override { return SequencerItemTypeNames[typeIndex]; }
+        virtual const char* GetItemLabel(int index) const override
         {
             static char tmps[512];
             snprintf(tmps, 512, "[%02d] %s", index, SequencerItemTypeNames[myItems[index].mType]);
             return tmps;
         }
 
-        virtual void Get(int index, int** start, int** end, int* type, unsigned int* color)
+        virtual void Get(int index, int** start, int** end, int* type, unsigned int* color) override
         {
             MySequenceItem& item = myItems[index];
             if (color)
@@ -66,11 +62,11 @@ namespace HAIEngine
             if (type)
                 *type = item.mType;
         }
-        virtual void Add(int type) { myItems.push_back(MySequenceItem{ type, 0, 10, false }); };
-        virtual void Del(int index) { myItems.erase(myItems.begin() + index); }
-        virtual void Duplicate(int index) { myItems.push_back(myItems[index]); }
+        virtual void Add(int type) override { myItems.push_back(MySequenceItem{ type, 0, 10, false }); };
+        virtual void Del(int index) override { myItems.erase(myItems.begin() + index); }
+        virtual void Duplicate(int index) override { myItems.push_back(myItems[index]); }
 
-        virtual size_t GetCustomHeight(int index) { return myItems[index].mExpanded ? 300 : 0; }
+        virtual size_t GetCustomHeight(int index) override { return myItems[index].mExpanded ? 300 : 0; }
 
         // my datas
         MySequence() : mFrameMin(0), mFrameMax(0) {}
@@ -160,7 +156,7 @@ namespace HAIEngine
 		EditorCamera* m_PerspectiveCamera;
 		std::unique_ptr<CameraController> m_CameraController;
 
-		glm::vec3 m_LightCorlor{ 1.0f, 1.0f, 1.0f };
+		glm::vec3 m_LightColor{ 1.0f, 1.0f, 1.0f };
 		glm::vec3 m_CubeColor{ 1.0f, 0.5f, 0.31f };
 		glm::vec3 lightPos{ 1.2f, 2.0f, 2.0f };
 		int m_Specuness = 64;

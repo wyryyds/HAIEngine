@@ -106,13 +106,13 @@ namespace HAIEngine
 
 	void GameObject::DeSerialize(const json& jsonData)
 	{
-		m_name = SerializeHelper::DeSerializeData<std::string>(jsonData["name"]);
-		m_guid = SerializeHelper::DeSerializeData<size_t>(jsonData["guid"]);
+		m_name = JsonSerializeHelper::DeSerializeData<std::string>(jsonData["name"]);
+		m_guid = JsonSerializeHelper::DeSerializeData<size_t>(jsonData["guid"]);
 
 		auto& componentsData = jsonData["components"];
 		for (const auto& componentData : componentsData)
 		{
-			auto typeName = SerializeHelper::DeSerializeData<std::string>(componentData["type"]);
+			auto typeName = JsonSerializeHelper::DeSerializeData<std::string>(componentData["type"]);
 			if (typeName == "Transform")
 			{
 				m_transform->DeSerialize(componentData);

@@ -1,8 +1,5 @@
 #pragma once
-#include "Core.hpp"
-
 #include "spdlog/spdlog.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
 
 #include <memory>
 
@@ -24,9 +21,7 @@ namespace HAIEngine
 	class Log
 	{
 	public:
-		Log();
-		~Log();
-
+		
 		static void Init();
 
 		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_coreLogger; }

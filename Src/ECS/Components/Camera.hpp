@@ -3,14 +3,13 @@
 
 #include <glm/glm.hpp>
 #include <memory>
-#include <unordered_map>
 #include <variant>
 
 namespace HAIEngine
 {
     class GameObject;
 
-    enum class CameraType
+    enum class CameraType : uint8_t
     {
         UNDEFINED,
         ORTHO,
@@ -33,14 +32,18 @@ namespace HAIEngine
         {
             float m_aspect{ 0.0f };
             float fov{ 60.0f };
-            float znear{ 96.0f };
-            float zfar{ 0.01f };
+            float zNear{ 96.0f };
+            float zFar{ 0.01f };
         };
 
     public:
         Camera() : Component("Camera") {}
         Camera(CameraType type, const std::variant<orthoParams, perspectiveParams>& params);
-        virtual ~Camera() = default;
+        Camera(const Camera& camera) = default;
+        Camera& operator=(const Camera& camera) = default;
+        Camera(Camera&& camera) noexcept = default;
+        Camera& operator=(Camera&& camera) noexcept = default;
+        virtual ~Camera() override = default;
         virtual std::unique_ptr<Component> Clone() const override { return std::make_unique<Camera>(*this); }
 
         inline glm::mat4 GetViewMatrix() const { return m_view; }
@@ -49,12 +52,13 @@ namespace HAIEngine
         
         virtual void Update(TimeStep ts) override;
         virtual json Serialize() override;
-        virtual void DeSerialize(const json& jsondata) override;
+        virtual void DeSerialize(const json& jsonData) override;
         virtual void GuiDisplay() override;
+        
     public:
         CameraType m_cameraType{ CameraType::UNDEFINED };
      
-        std::variant<orthoParams, perspectiveParams> m_cameraDatas;
+        std::variant<orthoParams, perspectiveParams> m_cameraData;
 
     private:
         void UpdateView();

@@ -14,18 +14,18 @@ namespace HAIEngine
 	REFLECTION(Light, Component);
 	REFLECTION(Camera, Component);
 
-	void* ReflectionManager::CreateClassByName(std::string className)
+	void* ReflectionManager::CreateClassByName(std::string_view className)
 	{
-		auto iter = classMap.find(className);
+		auto iter = classMap.find(className.data());
 		if (iter != classMap.end())
 			return iter->second->createFunc();
 
 		return nullptr;
 	}
 
-	std::shared_ptr<void> ReflectionManager::GetInstanceByName(std::string className)
+	std::shared_ptr<void> ReflectionManager::GetInstanceByName(std::string_view className)
 	{
-		auto iter = classMap.find(className);
+		auto iter = classMap.find(className.data());
 		if (iter != classMap.end())
 			return iter->second->getInstance();
 

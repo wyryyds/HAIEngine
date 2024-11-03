@@ -7,7 +7,6 @@
 
 #include <GLFW/glfw3.h>
 
-
 namespace HAIEngine
 {
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
@@ -16,7 +15,7 @@ namespace HAIEngine
 
 	Application::Application(std::string_view name)
 	{
-		HE_CORE_ASSERT(!s_instance, "Application already exists!");
+		HE_CORE_ASSERT(!s_instance, "Application already exists!")
 		s_instance = this;
 
 		m_window = std::unique_ptr<Window>(Window::Create(WindowProps(name)));
@@ -25,12 +24,8 @@ namespace HAIEngine
 
 		Renderer::Init();
 
-		m_imguiLayer = new ImGuiLayer();
-		PushOverlay(m_imguiLayer);
-	}
-
-	Application::~Application()
-	{
+		m_imGuiLayer = new ImGuiLayer();
+		PushOverlay(m_imGuiLayer);
 	}
 
 	void Application::PushLayer(Layer* layer)
@@ -70,17 +65,17 @@ namespace HAIEngine
 	{
 		while (m_running)
 		{
-			float time = glfwGetTime();
+			auto time = glfwGetTime();
 			HAIEngine::TimeStep timeStep = time - m_lastFrameTime;
 			m_lastFrameTime = time;
 
 			for (Layer* layer : m_layerStack)
 				layer->OnUpdate(timeStep);
 
-			m_imguiLayer->Begin();
+			m_imGuiLayer->Begin();
 			for (Layer* layer : m_layerStack)
 				layer->OnImGuiRender();
-			m_imguiLayer->End();
+			m_imGuiLayer->End();
 
 			m_window->OnUpdate();
 		}

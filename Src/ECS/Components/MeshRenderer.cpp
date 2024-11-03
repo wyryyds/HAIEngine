@@ -7,12 +7,33 @@
 
 namespace HAIEngine
 {
-	void MeshRenderer::Draw(std::shared_ptr<OpenGLShader> shader, std::shared_ptr<FrameBuffer> depthMap)
+	MeshRenderer::MeshRenderer(const MeshRenderer& other)
+		: Component(other)
 	{
-		auto& meshDatas = m_meshFilter->GetMeshDatas();
-		for (unsigned int i = 0; i < meshDatas.size(); ++i)
+		if(other.m_meshFilter)
+			m_meshFilter = std::make_unique<MeshFilter>(*other.m_meshFilter);
+	}
+
+	MeshRenderer& MeshRenderer::operator=(const MeshRenderer& other)
+	{
+		if(this != &other)
 		{
-			auto& meshTextures = meshDatas[i].GetMeshTextures();
+			Component::operator=(other);
+			if (other.m_meshFilter)
+				m_meshFilter = std::make_unique<MeshFilter>(*other.m_meshFilter);
+			else
+				m_meshFilter.reset();
+		}
+
+		return *this;
+	}
+	
+	void MeshRenderer::Draw(const std::shared_ptr<OpenGLShader>& shader, const std::shared_ptr<FrameBuffer>& depthMap) const
+	{
+		auto& meshDataList = m_meshFilter->GetMeshData();
+		for (const auto& meshData : meshDataList)
+		{
+			auto& meshTextures = meshData.GetMeshTextures();
 			for (unsigned int j = 0; j < meshTextures.size(); ++j)
 			{
 				unsigned int diffuseNr = 1;
@@ -45,8 +66,8 @@ namespace HAIEngine
 			std::dynamic_pointer_cast<OpenGLDepthMap>(depthMap)->UseDepthMap(meshTextures.size());
 			shader->UploadUniformInt("u_shadowMap", meshTextures.size());
 			// draw mesh
-			glBindVertexArray(meshDatas[i].VAO);
-			glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(meshDatas[i].GetMeshIndices().size()), GL_UNSIGNED_INT, 0);
+			glBindVertexArray(meshData.VAO);
+			glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(meshData.GetMeshIndices().size()), GL_UNSIGNED_INT, nullptr);
 			glBindVertexArray(0);
 			// always good practice to set everything back to defaults once configured.
 			glActiveTexture(GL_TEXTURE0);

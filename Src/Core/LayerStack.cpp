@@ -1,15 +1,12 @@
 #include "LayerStack.hpp"
+#include "Layer.hpp"
 #include "hepch.hpp"
 
 namespace HAIEngine
 {
-	LayerStack::LayerStack()
-	{	
-	}
-
 	LayerStack::~LayerStack()
 	{
-		for (Layer* layer : m_layers)
+		for (const Layer* layer : m_layers)
 			delete layer;
 	}
 
@@ -19,14 +16,14 @@ namespace HAIEngine
 		m_layerInsertIndex++;
 	}
 
-	void LayerStack::PushOverlay(Layer* overlayer)
+	void LayerStack::PushOverlay(Layer* overLayer)
 	{
-		m_layers.emplace_back(overlayer);
+		m_layers.emplace_back(overLayer);
 	}
 
-	void LayerStack::PopLayer(Layer* layer)
+	void LayerStack::PopLayer(const Layer* layer)
 	{
-		auto it = std::find(m_layers.begin(), m_layers.end(), layer);
+		auto it = std::ranges::find(m_layers, layer);
 		if (it != m_layers.end())
 		{
 			m_layers.erase(it);
@@ -34,9 +31,9 @@ namespace HAIEngine
 		}
 	}
 
-	void LayerStack::PopOverlay(Layer* overlayer)
+	void LayerStack::PopOverlay(const Layer* overLayer)
 	{
-		auto it = std::find(m_layers.begin(), m_layers.end(), overlayer);
+		auto it = std::ranges::find(m_layers, overLayer);
 		if (it != m_layers.end())
 			m_layers.erase(it);
 	}

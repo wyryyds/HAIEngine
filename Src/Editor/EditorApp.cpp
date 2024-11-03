@@ -1,3 +1,5 @@
+#pragma once
+
 #include "HAIEngine.hpp"
 #include "Core/EntryPoint.hpp"
 #include "Editor/EditorLayer.hpp"
@@ -12,10 +14,10 @@ namespace HAIEngine
 			PushLayer(new EditorLayer());
 		}
 
-		~Editor() = default;
+		virtual ~Editor() override = default;
 	};
 
-	Application* CreateApplication()
+	inline Application* CreateApplication()
 	{
 		return new Editor();
 	}

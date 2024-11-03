@@ -1,5 +1,4 @@
 #pragma once
-#include "Core/Core.hpp"
 #include "TimeStep.hpp"
 #include <string>
 
@@ -11,6 +10,10 @@ namespace HAIEngine
 	{
 	public:
 		Layer(std::string_view name = "Layer") : m_debugName(name) {}
+		Layer(const Layer& other) = default;
+		Layer(Layer&& other) = default;
+		Layer& operator=(const Layer& other) = default;
+		Layer& operator=(Layer&& other) = default;
 		virtual ~Layer() = default;
 
 		virtual void OnAttach() {}

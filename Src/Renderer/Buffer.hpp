@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/Log.hpp"
+#include "Core/Core.hpp"
 #include <cstdint>
 
 namespace HAIEngine
